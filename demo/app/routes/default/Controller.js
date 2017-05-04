@@ -39,11 +39,9 @@ export default class extends Controller {
         // However, in this case, panning would be instant,
         // whereas Google Maps panTo provides smooth panning
         // when possible.
-
     }
 
     onResetViewClick() {
         this.map.panTo(defaultCenter);
-        this.map.setZoom(defaultZoom);
     }
 };

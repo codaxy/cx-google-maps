@@ -43,6 +43,8 @@ export default (
                     mapElement={mapElement}
                     defaultCenter:bind="$page.map.center"
                     defaultZoom:bind="$page.map.zoom"
+                    center:bind="$page.map.center"
+                    zoom:bind="$page.map.zoom"
                     pipeInstance="pipeMap"
                     options={{
                         mapTypeControlOptions: {

@@ -4,8 +4,8 @@ import { Marker, MarkerClusterer, InfoBox } from "cx-google-maps";
 import { updateArray } from 'cx/data';
 import { markerPaths } from 'app/util';
 
-const steps = 30;
-const updateInterval = 500;
+const steps = 50;
+const updateInterval = 300;
 
 class Controller extends CxController {
     onInit() {

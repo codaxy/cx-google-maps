@@ -22,18 +22,18 @@ if (module.hot) {
     if (module.hot.data) store.load(module.hot.data.state);
 }
 
-//routing
+// routing
 
 Url.setBaseFromScript("app.js");
 History.connect(store, "url");
 
-//debug
+// debug
 
-Widget.resetCounter();
-Timing.enable("app-loop");
-Debug.enable("app-data");
+// Widget.resetCounter();
+// Timing.enable("app-loop");
+// Debug.enable("app-data");
 
-//app loop
+// app loop
 import Routes from "./routes";
 
 let stop = startAppLoop(document.getElementById("app"), store, Routes);
