@@ -1,9 +1,10 @@
 import { VDOM } from "cx/ui";
-import { HtmlElement, Link, Section, FlexCol } from "cx/widgets";
-import { GoogleMap, Marker, InfoBox, SearchBox } from "cx-google-maps";
+import { HtmlElement, Link, Section, FlexCol, Menu, Submenu } from "cx/widgets";
+import { GoogleMap, Marker, InfoBox, InfoWindow, SearchBox } from "cx-google-maps";
 
 import DirectionsCollection from "./DirectionsCollection";
 import MarkerCollection from "./MarkerCollection";
+import Controller from "./Controller";
 
 const containerElement = <div style={{ position: "relative", flex: 1 }} />;
 const mapElement = (
@@ -24,35 +25,60 @@ export default (
                 <p ws>
                     This library provides a
                     <a href="https://cxjs.io" target="_blank">Cx</a>
-                    wrapper around
+                    wrapper for
                     <a
                         href="https://github.com/tomchentw/react-google-maps"
                         target="_blank"
                     >
                         react-google-maps
-                    </a>.
+                    </a>, which enables Google Maps components to connect 
+                    to Cx stores and controllers.
                 </p>
             </Section>
 
             <FlexCol mod="card" style="flex: 1">
                 <GoogleMap
+                    controller={Controller}
                     containerElement={containerElement}
                     mapElement={mapElement}
-                    defaultCenter={{ lat: 40.77664177, lng: -73.96931648 }}
-                    defaultZoom={13}
+                    defaultCenter:bind="$page.map.center"
+                    defaultZoom:bind="$page.map.zoom"
+                    pipeInstance="pipeMap"
                     options={{
                         mapTypeControlOptions: {
-                            position: google.maps.ControlPosition.TOP_LEFT
+                            position: google.maps.ControlPosition.TOP_RIGHT
                         }
                     }}
                 >
+                    <Menu
+                        vertical
+                        mod="map"
+                        itemPadding="small"
+                    >
+                        <a onClick="onResetViewClick">
+                            Reset view
+                        </a>
+                    </Menu>                    
                     <SearchBox
                         controlPosition={google.maps.ControlPosition.TOP_CENTER}
-                        mod="searchbox"
+                        onPlacesChanged="onSearchPlacesChanged"
+                        pipeInstance="pipeSearchBox"
                         inputPlaceholder="Search..."
+                        inputStyle={{
+                            boxSizing: `border-box`,
+                            MozBoxSizing: `border-box`,
+                            border: `1px solid transparent`,
+                            width: `300px`,
+                            height: `32px`,
+                            marginTop: `10px`,
+                            padding: `0 12px`,
+                            borderRadius: `0px`,
+                            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+                            fontSize: `14px`,
+                            outline: `none`,
+                            textOverflow: `ellipses`,
+                        }}
                     />
-
-                    <DirectionsCollection />
                     <MarkerCollection />
                 </GoogleMap>
             </FlexCol>

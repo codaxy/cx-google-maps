@@ -1,10 +1,24 @@
-.map-infobox {
-	width: 100px;
-	text-align: center;
-	background: $header-color;
-	color: white;
-	padding: 10px;
-	border: 1px solid white;
-	border-radius: 4px;
-	position: relative;
+$info-window-bg: rgba(88, 144, 236, 0.8);
+$info-window-width: 80px;
+
+.cxm-infobox {
+  background: $info-window-bg;
+  box-sizing: border-box;
+  color: white;
+  padding: 4px;
+  box-shadow: 1px 1px 3px $info-window-bg;
+  border-radius: 5px;
+  margin-top: 15px;
+  width: $info-window-width;
+  margin-left: -($info-window-width/2);
+  text-align: center;
+  position: relative;
+  overflow: visible;
+}
+
+.cxb-menu.cxm-map {
+    position: absolute;
+    left: 0;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 7px;
 }

@@ -2,7 +2,7 @@
   "name": "cx-google-maps",
   "version": "17.5.0",
   "description": "Cx wrapper for react-google-maps",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --config demo/config/webpack.dev.js --open",
@@ -10,6 +10,7 @@
     "format": "prettier \"+(demo|src)/**/*.js\" --write --tab-width 4"
   },
   "keywords": [
+    "CxJS",
     "Cx",
     "React",
     "ReactJS",

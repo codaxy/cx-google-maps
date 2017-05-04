@@ -1,48 +1,8 @@
 import { Repeater, PureContainer, Controller as CxController } from "cx/ui";
-import { Marker, MarkerClusterer } from "cx-google-maps";
-
-const collection = [
-    {
-        id: 0,
-        color: "red",
-        path: [
-            { lat: 40.79074446, lng: -74.01120186 },
-            { lat: 40.78522072, lng: -74.01626587 },
-            { lat: 40.78366100, lng: -74.01283264 },
-            { lat: 40.78976972, lng: -74.00819778 }
-        ]
-    },
-    {
-        id: 1,
-        color: "green",
-        path: [
-            { lat: 40.77722673, lng: -73.97918701 },
-            { lat: 40.80140073, lng: -73.96081924 },
-            { lat: 40.80250525, lng: -73.96408081 },
-            { lat: 40.77859163, lng: -73.98159027 }
-        ]
-    },
-    {
-        id: 2,
-        color: "blue",
-        path: [
-            { lat: 40.76143090, lng: -73.94210815 },
-            { lat: 40.77170187, lng: -73.93301010 },
-            { lat: 40.76325119, lng: -73.91464233 },
-            { lat: 40.75362911, lng: -73.92391205 }
-        ]
-    },
-    {
-        id: 3,
-        color: "magenta",
-        path: [
-            { lat: 40.76572150, lng: -73.98227692 },
-            { lat: 40.76377126, lng: -73.97197723 },
-            { lat: 40.74985791, lng: -73.98347855 },
-            { lat: 40.75310896, lng: -73.99343491 }
-        ]
-    }
-];
+import { HtmlElement, NumberField } from "cx/widgets";
+import { Marker, MarkerClusterer, InfoBox } from "cx-google-maps";
+import { updateArray } from 'cx/data';
+import { markerPaths } from 'app/util';
 
 const steps = 30;
 const updateInterval = 500;
@@ -52,14 +12,16 @@ class Controller extends CxController {
         this.store.init("$page.frame", 0);
         this.store.init(
             "$page.markers",
-            collection.map(item => ({
+            markerPaths.map(item => ({
                 id: item.id,
                 color: item.color,
+                showTitle: item.showTitle,
                 position: item.path[0],
                 rotation: this.getRotation(item.path, 0)
             }))
         );
 
+        this.stopAnimation();
         this.startAnimation();
     }
 
@@ -69,25 +31,27 @@ class Controller extends CxController {
 
     startAnimation() {
         this.store.set(
-            "$page.markerAnimation",
+            "markersAnimation",
             setInterval(() => this.advance(), updateInterval)
         );
     }
 
     stopAnimation() {
-        let existing = this.store.get("$page.markerAnimation");
-        if (existing) clearInterval(existing);
+        let existing = this.store.get("markersAnimation");
+        if (existing) 
+            clearInterval(existing);
     }
 
     advance() {
         let frame = this.store.get("$page.frame");
-        this.store.set(
+        this.store.update(
             "$page.markers",
-            collection.map(item => ({
+            current => current.map(item => ({
                 id: item.id,
                 color: item.color,
-                position: this.getLocation(item.path, frame),
-                rotation: this.getRotation(item.path, frame)
+                showTitle: item.showTitle,
+                position: this.getLocation(markerPaths[item.id].path, frame),
+                rotation: this.getRotation(markerPaths[item.id].path, frame)
             }))
         );
 
@@ -111,6 +75,18 @@ class Controller extends CxController {
 
         return Math.atan2(path[i1].lng - path[i0].lng, path[i1].lat - path[i0].lat) * 180.0 / Math.PI;
     }
+
+    onMarkerClick(e, {store}) {
+        let id = store.get('$record.id');
+        this.toggleTitleVisibility(id);
+    }
+
+    toggleTitleVisibility(id) {
+        this.store.update('$page.markers', updateArray, marker => ({
+            ...marker,
+            showTitle: !marker.showTitle
+        }), marker => marker.id === id); // The last parameter is the filter, we don't want to toggle all the titles
+    }
 }
 
 export default (
@@ -125,6 +101,7 @@ export default (
                 <Marker
                     position:bind="$record.position"
                     noRedraw
+                    onClick="onMarkerClick"
                     icon={{
                         path: google.maps.SymbolPath.CIRCLE,
                         scale: 8,
@@ -134,7 +111,18 @@ export default (
                         fillOpacity: 0.8,
                         strokeWeight: 4
                     }}
-                />
+                >
+                    <InfoBox 
+                        mod="infobox"
+                        options={{
+                            closeBoxURL: ""
+                        }}
+                        onClick="onMarkerClick"
+                        visible:bind="$record.showTitle"
+                    >
+                        <span text:tpl="{$record.position.lat:n;4} {$record.position.lng:n;4}" />
+                    </InfoBox>
+                </Marker>
             </Repeater>
         </MarkerClusterer>
     </cx>

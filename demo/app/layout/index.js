@@ -104,8 +104,8 @@ export default (
                         </Link>
                     </dd>
                     <dd>
-                        <Link href="~/examples/animation" url:bind="url">
-                            Animation
+                        <Link href="~/examples/filtering" url:bind="url">
+                            Filtering
                         </Link>
                     </dd>
                     <dt>
