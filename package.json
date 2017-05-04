@@ -1,0 +1,57 @@
+{
+  "name": "cx-google-maps",
+  "version": "17.5.0",
+  "description": "Cx wrapper for react-google-maps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --config demo/config/webpack.dev.js --open",
+    "build:demo": "webpack --config demo/config/webpack.prod.js",
+    "format": "prettier \"+(demo|src)/**/*.js\" --write --tab-width 4"
+  },
+  "keywords": [
+    "Cx",
+    "React",
+    "ReactJS",
+    "Google Maps",
+    "Maps",
+    "google-maps",
+    "react-google-maps",
+    "location"
+  ],
+  "author": "Igor Timarac",
+  "license": "MIT",
+  "dependencies": {
+    "cx": "^17.5.7",
+    "cx-react": "^17.4.1",
+    "google-maps-infobox": "^1.1.15",
+    "lodash": "^4.17.4",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-google-maps": "^7.0.0",
+    "whatwg-fetch": "^2.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-cx-env": "^17.4.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2015-loose": "^8.0.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "copy-webpack-plugin": "^4.0.0",
+    "css-loader": "^0.28.1",
+    "extract-text-webpack-plugin": "^2.0.0-beta.2",
+    "file-loader": "^0.11.1",
+    "html-webpack-plugin": "^2.26.0",
+    "json-loader": "^0.5.4",
+    "node-sass": "^4.5.2",
+    "prettier": "^1.3.1",
+    "react-dev-utils": "^0.5.2",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.17.0",
+    "webpack": "^2.4.1",
+    "webpack-dev-server": "^2.4.4",
+    "webpack-merge": "4.1.0"
+  }
+}
