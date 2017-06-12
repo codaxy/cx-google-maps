@@ -32,7 +32,7 @@ export default class extends Controller {
         this.map.panTo(location);
             
         // We could have just make use of the :bind in the map
-        // center (see index.js) and move it like this:
+        // center (see index.js) and pan like this:
         
         // this.store.set('$page.map.center', location);
         

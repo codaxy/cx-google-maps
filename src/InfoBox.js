@@ -1,21 +1,25 @@
-import { Widget, VDOM } from "cx/ui";
-import { HtmlElement, PureContainer } from "cx/widgets";
-import { Console } from "cx/util";
-import ReactInfoBox from "react-google-maps/lib/addons/InfoBox";
+import { Widget, VDOM } from 'cx/ui';
+import { HtmlElement, PureContainer } from 'cx/widgets';
+import { Console } from 'cx/util';
+import ReactInfoBox from 'react-google-maps/lib/addons/InfoBox';
 
 class ReactInfoBoxEnhanced extends ReactInfoBox {
     componentDidMount() {
         super.componentDidMount();
 
-        let { widget } = this.props.instance;
-        if (widget.pipeInstance) widget.pipeInstance(this, this.props.instance);
+        let {instance} = this.props;
+        let {widget} = instance;
+        if (widget.pipeInstance)
+            instance.invoke("pipeInstance", this);
     }
 
     componentWillUnmount() {
         super.componentWillUnmount();
 
-        let { widget } = this.props.instance;
-        if (widget.pipeInstance) widget.pipeInstance(null, this.props.instance);
+        let {instance} = this.props;
+        let {widget} = instance;
+        if (widget.pipeInstance)
+            instance.invoke("pipeInstance", null);
     }
 }
 
@@ -31,51 +35,47 @@ export class InfoBox extends PureContainer {
 
     onInit(context, instance) {
         instance.events = this.wireEvents(instance, [
-            "onCloseClick",
-            "onContentChanged",
-            "onDomReady",
-            "onPositionChanged",
-            "onZIndexChanged"
-        ]);
+            'onCloseClick',
+            'onContentChanged',
+            'onDomReady',
+            'onPositionChanged',
+            'onZIndexChanged'
+        ]);        
     }
 
     wireEvents(instance, events) {
         var map = [];
-        events.map(name => {
+        events.map((name) => {
             if (this[name]) {
-                map[name] = e => this[name](e, instance);
+                map[name] = e => instance.invoke(name, e, instance);
             }
         });
         return map;
     }
-
+    
     render(context, instance, key) {
         var child = this.renderChildren(context, instance);
         if (Array.isArray(child)) {
             if (child.length > 1) {
-                Console.warn(
-                    "InfoBox can only contain one child. Trailing children will be ignored."
-                );
+                Console.warn('InfoBox can only contain one child. Trailing children will be ignored.');
             }
 
-            child = child[0];
+            child = child[0]; 
         }
 
-        let { data, events } = instance;
+        let {data, events} = instance;
 
         data.options = data.options || {};
         data.options.boxClass = data.classNames;
 
-        return (
-            <ReactInfoBoxEnhanced
+        return <ReactInfoBoxEnhanced
                 {...data}
                 {...events}
                 instance={instance}
                 key={key}
             >
                 {child}
-            </ReactInfoBoxEnhanced>
-        );
+            </ReactInfoBoxEnhanced>;
     }
 }
 

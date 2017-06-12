@@ -1,19 +1,23 @@
-import { Widget, VDOM, PureContainer } from "cx/ui";
-import ReactSearchBox from "react-google-maps/lib/places/SearchBox";
+import { Widget, VDOM, PureContainer } from 'cx/ui';
+import ReactSearchBox from 'react-google-maps/lib/places/SearchBox';
 
 class ReactSearchBoxEnhanced extends ReactSearchBox {
     componentDidMount() {
         super.componentDidMount();
 
-        let { widget } = this.props.instance;
-        if (widget.pipeInstance) widget.pipeInstance(this, this.props.instance);
+        let {instance} = this.props;
+        let {widget} = instance;
+        if (widget.pipeInstance)
+            instance.invoke("pipeInstance", this);
     }
 
     componentWillUnmount() {
         super.componentWillUnmount();
 
-        let { widget } = this.props.instance;
-        if (widget.pipeInstance) widget.pipeInstance(null, this.props.instance);
+        let {instance} = this.props;
+        let {widget} = instance;
+        if (widget.pipeInstance)
+            instance.invoke("pipeInstance", null);
     }
 }
 
@@ -30,29 +34,29 @@ export class SearchBox extends PureContainer {
     }
 
     onInit(context, instance) {
-        instance.events = this.wireEvents(instance, ["onPlacesChanged"]);
+        instance.events = this.wireEvents(instance, [
+            'onPlacesChanged'
+        ]);        
     }
 
     wireEvents(instance, events) {
         var map = [];
-        events.map(name => {
+        events.map((name) => {
             if (this[name]) {
-                map[name] = e => this[name](e, instance);
+                map[name] = e => instance.invoke(name, e, instance);
             }
         });
         return map;
     }
-
+    
     render(context, instance, key) {
-        return (
-            <ReactSearchBoxEnhanced
-                {...instance.data}
-                {...instance.events}
-                instance={instance}
-                key={key}
-            >
-                {this.renderChildren(context, instance)}
-            </ReactSearchBoxEnhanced>
-        );
+        return <ReactSearchBoxEnhanced
+            {...instance.data}
+            {...instance.events}
+            instance={instance}
+            key={key}
+        >
+            {this.renderChildren(context, instance)}
+        </ReactSearchBoxEnhanced>;
     }
 }

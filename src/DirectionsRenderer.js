@@ -1,21 +1,23 @@
-import { Widget, VDOM, PureContainer } from "cx/ui";
-import {
-    DirectionsRenderer as ReactDirectionsRenderer
-} from "react-google-maps/lib";
+import { Widget, VDOM, PureContainer } from 'cx/ui';
+import {DirectionsRenderer as ReactDirectionsRenderer} from 'react-google-maps/lib';
 
 class ReactDirectionsRendererEnhanced extends ReactDirectionsRenderer {
     componentDidMount() {
         super.componentDidMount();
 
-        let { widget } = this.props.instance;
-        if (widget.pipeInstance) widget.pipeInstance(this, this.props.instance);
+        let {instance} = this.props;
+        let {widget} = instance;
+        if (widget.pipeInstance)
+            instance.invoke("pipeInstance", this);
     }
 
     componentWillUnmount() {
         super.componentWillUnmount();
 
-        let { widget } = this.props.instance;
-        if (widget.pipeInstance) widget.pipeInstance(null, this.props.instance);
+        let {instance} = this.props;
+        let {widget} = instance;
+        if (widget.pipeInstance)
+            instance.invoke("pipeInstance", null);
     }
 }
 
@@ -30,29 +32,29 @@ export class DirectionsRenderer extends PureContainer {
     }
 
     onInit(context, instance) {
-        instance.events = this.wireEvents(instance, ["onDirectionsChanged"]);
+        instance.events = this.wireEvents(instance, [
+            'onDirectionsChanged'
+        ]);        
     }
 
     wireEvents(instance, events) {
         var map = [];
-        events.map(name => {
+        events.map((name) => {
             if (this[name]) {
-                map[name] = e => this[name](e, instance);
+                map[name] = e => instance.invoke(name, e, instance);
             }
         });
         return map;
     }
-
+    
     render(context, instance, key) {
-        return (
-            <ReactDirectionsRendererEnhanced
-                {...instance.data}
-                {...instance.events}
-                instance={instance}
-                key={key}
-            >
-                {this.renderChildren(context, instance)}
-            </ReactDirectionsRendererEnhanced>
-        );
+        return <ReactDirectionsRendererEnhanced
+            {...instance.data}
+            {...instance.events}
+            instance={instance}
+            key={key}
+        >
+            {this.renderChildren(context, instance)}
+        </ReactDirectionsRendererEnhanced>;
     }
 }

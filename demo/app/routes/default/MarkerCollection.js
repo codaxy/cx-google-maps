@@ -1,6 +1,6 @@
 import { Repeater, PureContainer, Controller as CxController } from "cx/ui";
 import { HtmlElement, NumberField } from "cx/widgets";
-import { Marker, MarkerClusterer, InfoBox } from "cx-google-maps";
+import { Marker, MarkerClusterer, InfoBox, Polygon } from "cx-google-maps";
 import { updateArray } from 'cx/data';
 import { markerPaths } from 'app/util';
 
@@ -20,6 +20,8 @@ class Controller extends CxController {
                 rotation: this.getRotation(item.path, 0)
             }))
         );
+
+        this.addComputable('poly', ['$page.markers'], markers => markers.map(a => a.position));
 
         this.stopAnimation();
         this.startAnimation();
@@ -98,6 +100,15 @@ export default (
             controller={Controller}
         >
             <Repeater records:bind="$page.markers" cached>
+                <Polygon 
+                    path:bind="poly"
+                    options={{
+                        strokeColor: 'green',
+                        fillColor: 'green',
+                        strokeOpacity: 0.1,
+                        fillOpacity: 0.03
+                    }}
+                 />
                 <Marker
                     position:bind="$record.position"
                     noRedraw

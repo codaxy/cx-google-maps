@@ -1,20 +1,24 @@
-import { Widget, VDOM } from "cx/ui";
-import { PureContainer } from "cx/widgets";
-import { Marker as ReactMarker } from "react-google-maps";
+import { Widget, VDOM } from 'cx/ui';
+import { PureContainer } from 'cx/widgets';
+import {Marker as ReactMarker} from 'react-google-maps';
 
 class ReactMarkerEnhanced extends ReactMarker {
     componentDidMount() {
         super.componentDidMount();
 
-        let { widget } = this.props.instance;
-        if (widget.pipeInstance) widget.pipeInstance(this, this.props.instance);
+        let {instance} = this.props;
+        let {widget} = instance;
+        if (widget.pipeInstance)
+            instance.invoke("pipeInstance", this);
     }
 
     componentWillUnmount() {
         super.componentWillUnmount();
 
-        let { widget } = this.props.instance;
-        if (widget.pipeInstance) widget.pipeInstance(null, this.props.instance);
+        let {instance} = this.props;
+        let {widget} = instance;
+        if (widget.pipeInstance)
+            instance.invoke("pipeInstance", null);
     }
 
     shouldComponentUpdate(props, state) {
@@ -45,50 +49,48 @@ export class Marker extends PureContainer {
 
     onInit(context, instance) {
         instance.events = this.wireEvents(instance, [
-            "onAnimationChanged",
-            "onClick",
-            "onClickableChanged",
-            "onCursorChanged",
-            "onDblClick",
-            "onDrag",
-            "onDragEnd",
-            "onDraggableChanged",
-            "onDragStart",
-            "onFlatChanged",
-            "onIconChanged",
-            "onMouseDown",
-            "onMouseOut",
-            "onMouseOver",
-            "onMouseUp",
-            "onPositionChanged",
-            "onRightClick",
-            "onShapeChanged",
-            "onTitleChanged",
-            "onVisibleChanged",
-            "onZindexChanged"
+            'onAnimationChanged',
+            'onClick',
+            'onClickableChanged',
+            'onCursorChanged',
+            'onDblClick',
+            'onDrag',
+            'onDragEnd',
+            'onDraggableChanged',
+            'onDragStart',
+            'onFlatChanged',
+            'onIconChanged',
+            'onMouseDown',
+            'onMouseOut',
+            'onMouseOver',
+            'onMouseUp',
+            'onPositionChanged',
+            'onRightClick',
+            'onShapeChanged',
+            'onTitleChanged',
+            'onVisibleChanged',
+            'onZindexChanged'
         ]);
     }
 
     wireEvents(instance, events) {
         var map = [];
-        events.map(name => {
+        events.map((name) => {
             if (this[name]) {
-                map[name] = e => this[name](e, instance);
+                map[name] = e => instance.invoke(name, e, instance);
             }
         });
         return map;
     }
-
+    
     render(context, instance, key) {
-        return (
-            <ReactMarkerEnhanced
-                {...instance.data}
-                {...instance.events}
-                instance={instance}
-                key={key}
+        return <ReactMarkerEnhanced
+                    {...instance.data}
+                    {...instance.events}
+                    instance={instance}
+                    key={key}
             >
                 {this.renderChildren(context, instance)}
-            </ReactMarkerEnhanced>
-        );
-    }
+            </ReactMarkerEnhanced>;
+    }  
 }

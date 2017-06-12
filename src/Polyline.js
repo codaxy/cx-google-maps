@@ -1,9 +1,9 @@
 import { Widget, VDOM } from 'cx/ui';
 import { PureContainer } from 'cx/widgets';
-import {Polygon as ReactPolygon} from 'react-google-maps';
+import {Polyline as ReactPolyline} from 'react-google-maps';
 import _ from 'lodash';
 
-class ReactPolygonEnhanced extends ReactPolygon {
+class ReactPolylineEnhanced extends ReactPolyline {
 
     componentDidMount() {
         super.componentDidMount();
@@ -57,7 +57,7 @@ class ReactPolygonEnhanced extends ReactPolygon {
     }
 }
 
-export class Polygon extends Widget {
+export class Polyline extends Widget {
     declareData() {
         super.declareData(...arguments, {
             draggable: undefined,
@@ -95,12 +95,12 @@ export class Polygon extends Widget {
     }
     
     render(context, instance, key) {
-        return <ReactPolygonEnhanced
+        return <ReactPolylineEnhanced
                     {...instance.data}
                     {...instance.events}
                     instance={instance}
                     key={key}
             >
-            </ReactPolygonEnhanced>;
+            </ReactPolylineEnhanced>;
     }  
 }

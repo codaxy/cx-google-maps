@@ -1,6 +1,60 @@
-import { HtmlElement, Link, Button } from "cx/widgets";
-import { ContentPlaceholder } from "cx/ui";
+import { HtmlElement, Link, Button, Text } from "cx/widgets";
+import { ContentPlaceholder, Repeater, FirstVisibleChildLayout } from "cx/ui";
 import Controller from "./Controller";
+
+const items = [{
+    text: 'Home',
+    url: '~/'
+}, {
+    text: 'Components',
+    items: [{
+        text: 'GoogleMap',
+        url: '~/components/google-map'
+    }, {
+        text: 'SearchBox',
+        url: '~/components/search-box'
+    }, {
+        text: 'Marker',
+        url: '~/components/marker'
+    }, {
+        text: 'MarkerClusterer',
+        url: '~/components/marker-clusterer'
+    }, {
+        text: 'Polygon',
+        url: '~/components/polygon'
+    }, {
+        text: 'Polyline',
+        url: '~/components/polyline'
+    }, {
+        text: 'KmlLayer',
+        url: '~/components/kml-layer'
+    }, {
+        text: 'InfoWindow',
+        url: '~/components/info-window'
+    }, {
+        text: 'InfoBox',
+        url: '~/components/info-box'
+    }, {
+        text: 'DirectionsRenderer',
+        url: '~/components/directions-renderer'
+    }]
+}, {
+    text: 'Examples',
+    items: [{
+        text: 'Placing markers',
+        url: '~/examples/placing-markers'
+    }, {
+        text: 'Routing',
+        url: '~/examples/routing'
+    }, {
+        text: 'Filtering',
+        url: '~/examples/filtering'
+    }]
+}, {
+    text: 'About',
+    url: '~/about'
+}]
+
 
 export default (
     <cx>
@@ -29,90 +83,17 @@ export default (
             <aside class="aside">
                 <h1>Cx Google Maps</h1>
                 <dl>
-                    <dt>
-                        <Link href="~/" url:bind="url">
-                            Home
-                        </Link>
-                    </dt>
-
-                    <dt>
-                        Components
-                    </dt>
-                    <dd>
-                        <Link href="~/components/google-map" url:bind="url">
-                            GoogleMap
-                        </Link>
-                    </dd>
-                    <dd>
-                        <Link href="~/components/search-box" url:bind="url">
-                            SearchBox
-                        </Link>
-                    </dd>
-                    <dd>
-                        <Link href="~/components/marker" url:bind="url">
-                            Marker
-                        </Link>
-                    </dd>
-                    <dd>
-                        <Link
-                            href="~/components/marker-clusterer"
-                            url:bind="url"
-                        >
-                            MarkerClusterer
-                        </Link>
-                    </dd>
-                    <dd>
-                        <Link href="~/components/polygon" url:bind="url">
-                            Polygon
-                        </Link>
-                    </dd>
-                    <dd>
-                        <Link href="~/components/kml-layer" url:bind="url">
-                            KmlLayer
-                        </Link>
-                    </dd>
-                    <dd>
-                        <Link href="~/components/info-window" url:bind="url">
-                            InfoWindow
-                        </Link>
-                    </dd>
-                    <dd>
-                        <Link href="~/components/info-box" url:bind="url">
-                            InfoBox
-                        </Link>
-                    </dd>
-                    <dd>
-                        <Link
-                            href="~/components/directions-renderer"
-                            url:bind="url"
-                        >
-                            DirectionsRenderer
-                        </Link>
-                    </dd>
-
-                    <dt>
-                        Examples
-                    </dt>
-                    <dd>
-                        <Link href="~/examples/placing-markers" url:bind="url">
-                            Placing markers
-                        </Link>
-                    </dd>
-                    <dd>
-                        <Link href="~/examples/routing" url:bind="url">
-                            Routing
-                        </Link>
-                    </dd>
-                    <dd>
-                        <Link href="~/examples/filtering" url:bind="url">
-                            Filtering
-                        </Link>
-                    </dd>
-                    <dt>
-                        <Link href="~/about" url:bind="url">
-                            About
-                        </Link>
-                    </dt>
+                    <Repeater records={items}>
+                        <dt>
+                            <Text if:expr="!{$record.url}" bind="$record.text" />                        
+                            <Link if:expr="!!{$record.url}" href:bind="$record.url" text:bind="$record.text" url:bind="url" />
+                        </dt>
+                        <Repeater records:bind="$record.items">
+                            <dd>
+                                <Link href:bind="$record.url" text:bind="$record.text" url:bind="url" />
+                            </dd>
+                        </Repeater>                        
+                    </Repeater>
                 </dl>
             </aside>
         </div>

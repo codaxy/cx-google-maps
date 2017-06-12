@@ -6,43 +6,28 @@ const webpack = require("webpack"),
     p = p => path.join(__dirname, "../", p || "");
 
 module.exports = {
-    resolve: {
-        alias: {
-            app: p("app"),
-            "cx-google-maps": p("../src")
-        }
-    },
-
     module: {
         loaders: [
             {
                 test: /\.js$/,
                 //add here any ES6 based library
-                include: /(app|cx|src)/,
+                include: /(cx|src)/,
                 loader: "babel-loader",
                 query: babelCfg
-            },
-            {
-                test: /\.(png|jpg)/,
-                loader: "file-loader"
             }
         ]
     },
     entry: {
-        vendor: ["cx-react", p("app/polyfill.js")],
-        app: [p("app/index.js")]
+        index: [p("src/index.js")]
     },
     output: {
         path: p("dist"),
         filename: "[name].js"
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: "vendor"
-        }),
-        new HtmlWebpackPlugin({
-            template: p("app/index.html"),
-            hash: true
-        })
+        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.DefinePlugin({
+            "process.env.NODE_ENV": JSON.stringify("production")
+        })        
     ]
 };
