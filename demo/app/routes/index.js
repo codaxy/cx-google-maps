@@ -6,6 +6,9 @@ import AppLayout from "../layout";
 import Default from "./default";
 import About from "./about";
 
+import GoogleMap from "./components/google-map";
+import SearchBox from "./components/search-box";
+
 export default (
     <cx>
         <Sandbox
@@ -20,6 +23,10 @@ export default (
             <Route route="~/about" url:bind="url">
                 <About />
             </Route>
+
+            <GoogleMap />
+            <SearchBox />
+
             <Section title="Page Not Found" mod="card">
                 This page doesn't exists. Please check your URL.
             </Section>

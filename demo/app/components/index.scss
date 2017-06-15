@@ -1,1 +1,10 @@
 @import "Hamburger";
+@import "ConfigTable";
+@import "CodeSnippet";
+@import "Zenburn";
+
+.cxe-import {
+    font-family: 'Consolas', monospace;
+    font-size: 0.8em;
+    float: right;
+}

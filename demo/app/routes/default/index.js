@@ -34,6 +34,14 @@ export default (
                     </a>, which enables Google Maps components to connect 
                     to Cx stores and controllers.
                 </p>
+
+                <p ws>
+                    This demo app includes documentation specific for this
+                    CxJS implementation. Please, take a look into the original documentation and demo
+                    apps for detailed information about underlying <a href="https://github.com/tomchentw/react-google-maps" target="_blank">React components</a>
+                    and various Google Maps 
+                    <a href="https://developers.google.com/maps/documentation/javascript/3.exp/reference">options, methods and events</a>.
+                </p>
             </Section>
 
             <FlexCol mod="card" style="flex: 1">
@@ -78,7 +86,7 @@ export default (
                             boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
                             fontSize: `14px`,
                             outline: `none`,
-                            textOverflow: `ellipses`,
+                            textOverflow: `ellipses`
                         }}
                     />
                     <MarkerCollection />

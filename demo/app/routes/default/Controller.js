@@ -30,15 +30,6 @@ export default class extends Controller {
 
         let location = places[0].geometry.location
         this.map.panTo(location);
-            
-        // We could have just make use of the :bind in the map
-        // center (see index.js) and pan like this:
-        
-        // this.store.set('$page.map.center', location);
-        
-        // However, in this case, panning would be instant,
-        // whereas Google Maps panTo provides smooth panning
-        // when possible.
     }
 
     onResetViewClick() {
