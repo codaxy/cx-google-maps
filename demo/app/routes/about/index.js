@@ -8,7 +8,7 @@ export default (
         <Section mod="well" title="Cx Google Maps">
             <p ws>
                 This is an application generated using <a href="https://cxjs.io/quickstart" target="_blank">Cx CLI</a>.
-                It serves as a documentation and demo application for Cx Google Maps library.
+                It serves as both a documentation and demo application for Cx Google Maps library.
             </p>
             <Link href="~/">Back</Link>
         </Section>

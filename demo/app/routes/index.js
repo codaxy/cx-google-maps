@@ -8,6 +8,11 @@ import About from "./about";
 
 import GoogleMap from "./components/google-map";
 import SearchBox from "./components/search-box";
+import Marker from "./components/marker";
+import MarkerClusterer from "./components/marker-clusterer";
+import Polygon from "./components/polygon";
+import Polyline from "./components/polyline";
+import KmlLayer from "./components/kml-layer";
 
 export default (
     <cx>
@@ -26,6 +31,11 @@ export default (
 
             <GoogleMap />
             <SearchBox />
+            <Marker />
+            <MarkerClusterer />
+            <Polygon />
+            <Polyline />
+            <KmlLayer />
 
             <Section title="Page Not Found" mod="card">
                 This page doesn't exists. Please check your URL.

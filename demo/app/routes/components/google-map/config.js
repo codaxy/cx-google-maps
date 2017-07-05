@@ -2,7 +2,7 @@ import {Md} from 'app/components';
 
 export default {
     defaultCenter: {
-        type: "config/LatLng",
+        type: "LatLng|object",
         description: <cx><Md>
             A [google.maps.LatLng](https://developers.google.com/maps/documentation/javascript/3.exp/reference#LatLng)
             config or instance object defining default center point of the map.
@@ -15,7 +15,7 @@ export default {
         </Md></cx>
     },
     center: {
-        type: "config/LatLng",
+        type: "LatLng|object",
         description: <cx><Md>
             A [google.maps.LatLng](https://developers.google.com/maps/documentation/javascript/3.exp/reference#LatLng)
             config or instance object defining current center point of the map.
@@ -36,14 +36,14 @@ export default {
         description: 'Represents the container element the map will be wrapped into.'
     },
     options: {
-        type: 'config/MapOptions',
+        type: 'MapOptions|object',
         description: <cx><Md>
             A [google.maps.MapOptions](https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapOptions)
             config or instance object passed to the underlying Map.
         </Md></cx>
     },
     pipeInstance: {
-        type: 'string/function',
+        type: 'string|function',
         description: <cx><Md>
             If set, this method will be invoked when the instance of a React `GoogleMap` component is created.
             Typically, it is in this method you will save the instance of the map, so that you can

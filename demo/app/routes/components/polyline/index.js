@@ -16,10 +16,10 @@ import {
 } from 'app/components';
 
 const info = {
-    name: 'SearchBox',
-    route: '~/components/search-box',
-    reactGoogleMapsDocs: "https://tomchentw.github.io/react-google-maps/places/search-box",
-    googleMapsDocs: "https://developers.google.com/maps/documentation/javascript/3.exp/reference#SearchBox"
+    name: 'Polyline',
+    route: '~/components/polyline',
+    reactGoogleMapsDocs: "https://tomchentw.github.io/react-google-maps/",
+    googleMapsDocs: "https://developers.google.com/maps/documentation/javascript/3.exp/reference#Polyline"
 };
 
 export default <cx>
@@ -48,52 +48,27 @@ export default <cx>
                     
                     ##### Example
                     <CodeSnippet>{`
-class Controller extends CxController {
-    ...
+this.store.init('$page.polylinePath', _.range(6)
+    .map(() => ({
+        lat: 41.77811360 + Math.random() - 0.5, 
+        lng: -87.62979820 + Math.random() - 0.5
+    })));
 
-    pipeMapInstance(instance) {
-        this.map = instance;
-    }
-
-    pipeSearchBoxInstance(instance) {
-        this.searchBox = instance;
-    }
-
-    onSearchPlacesChanged(e) {
-        let places = this.searchBox.getPlaces();
-        if (places.length < 1)
-            return;
-        
-        let location = places[0].geometry.location
-        this.map.panTo(location);
-    }
-}
+...
 
 export default <cx>
     <GoogleMap
-        pipeInstance="pipeMapInstance"
         ...
     >
-        <SearchBox
-            controlPosition={google.maps.ControlPosition.TOP_CENTER}
-            onPlacesChanged="onSearchPlacesChanged"
-            pipeInstance="pipeSearchBoxInstance"
-            inputPlaceholder="Search..."
-            inputStyle={{
-                boxSizing: 'border-box',
-                MozBoxSizing: 'border-box',
-                border: '1px solid transparent',
-                width: '300px',
-                height: '32px',
-                marginTop: '10px',
-                padding: '0 12px',
-                borderRadius: '0px',
-                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
-                fontSize: '14px',
-                outline: 'none',
-                textOverflow: 'ellipses'
+        <Polyline
+            path:bind="$page.polylinePath"
+            options={{
+                strokeColor: "green",
+                strokeOpacity: 0.9
             }}
-        />    
+            editable
+            draggable
+        />
     </GoogleMap>
 </cx>;
                     `}</CodeSnippet>

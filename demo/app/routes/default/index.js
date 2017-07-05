@@ -24,7 +24,7 @@ export default (
                 <h4>Cx Google Maps</h4>
                 <p ws>
                     This library provides a
-                    <a href="https://cxjs.io" target="_blank">Cx</a>
+                    <a href="https://cxjs.io" target="_blank">CxJS</a>
                     wrapper for
                     <a
                         href="https://github.com/tomchentw/react-google-maps"

@@ -15,23 +15,32 @@ import {
     Md 
 } from 'app/components';
 
+const info = {
+    name: 'GoogleMap',
+    route: '~/components/google-map',
+    reactGoogleMapsDocs: "https://tomchentw.github.io/react-google-maps/basics/simple-map",
+    googleMapsDocs: "https://developers.google.com/maps/documentation/javascript/3.exp/reference#Map"
+};
+
 export default <cx>
-    <Route url:bind="url" route="~/components/google-map">
+    <Route url:bind="url" route={info.route}>
         <h2 putInto="header">
-            Home
+            {info.name}
         </h2>
 
         <FlexRow style="height: 100%" spacing target="desktop">
             <Section mod="card" style="flex:1">
                 <h4>
-                    GoogleMap
-                    <span class="cxe-import">{`import { GoogleMap } from 'cx-google-maps'`}</span>
+                    {info.name}
+                    <span class="cxe-import">{`import { ${info.name} } from 'cx-google-maps'`}</span>
                 </h4>
-                
-                <Md>
-                    Cx wrapper around [GoogleMap](https://tomchentw.github.io/react-google-maps/basics/simple-map) React component. Uses
-                    `withGoogleMap` internally.
 
+                <p ws>
+                    Cx wrapper around <a href={info.reactGoogleMapsDocs} target="_blank">{info.name}</a> React component.
+                    For additional info about various options, please see <a href={info.googleMapsDocs} target="_blank">Google Maps Docs</a>.
+                </p>
+                    
+                <Md>
                     ##### Configuration
                     <ConfigTable props={config} /> 
 
