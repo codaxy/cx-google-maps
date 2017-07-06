@@ -5,6 +5,10 @@ import {
 } from 'cx/widgets';
 
 import {
+    Url
+} from 'cx/ui';
+
+import {
     GoogleMap,
     SearchBox,
     Marker
@@ -55,7 +59,7 @@ export default <cx>
         <Marker
             position:bind="$page.map.center"
             title="This is a custom icon marker with rollover text"
-            icon="/assets/img/cx.png"
+            icon={Url.resolve("~/assets/img/cx.png")}
         />    
     </GoogleMap>
 </cx>;

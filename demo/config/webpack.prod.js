@@ -39,7 +39,7 @@ var specific = {
     ],
 
     output: {
-        publicPath: "/"
+        publicPath: "."
     }
 };
 
