@@ -35,6 +35,13 @@ class Controller extends CxController {
         };
     }
 
+    onMarkerClick() {
+        Toast.create({
+            message: `Marker clicked.`,
+            timeout: 3000
+        }).open();
+    }    
+
     onInit() {
         this.store.init('$page.mapdefaults', this.getDefaults());        
         this.store.init('$page.map', this.getDefaults());        
@@ -60,6 +67,7 @@ export default <cx>
             position:bind="$page.map.center"
             title="This is a custom icon marker with rollover text"
             icon="https://codaxy.github.io/cx-google-maps/assets/img/cx.png"
+            onClick="onMarkerClick"
         />    
     </GoogleMap>
 </cx>;

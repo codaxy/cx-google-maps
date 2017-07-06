@@ -1,5 +1,5 @@
 import { VDOM } from "cx/ui";
-import { HtmlElement, Link, Section, FlexCol, Menu, Submenu } from "cx/widgets";
+import { HtmlElement, Link, Section, FlexCol, Menu, Submenu, CxCredit } from "cx/widgets";
 import { GoogleMap, Marker, InfoBox, InfoWindow, SearchBox } from "cx-google-maps";
 
 import DirectionsCollection from "./DirectionsCollection";

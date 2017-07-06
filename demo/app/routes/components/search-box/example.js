@@ -10,7 +10,6 @@ import {
 } from 'cx-google-maps';
 
 import { VDOM, Controller as CxController } from 'cx/ui';
-import config from './config';
 
 const containerElement = <div style={{ position: "relative", flex: 1 }} />;
 const mapElement =

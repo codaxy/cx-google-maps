@@ -43,6 +43,8 @@ $small-device-width: 800px;
    background: white;
    box-shadow: 0 0 1px rgba(0,0,0,.26);
    font-size: 13px;
+   overflow-y: auto;
+   -webkit-overflow-scrolling: touch;
 
    transform: translateX(-300px);
    transition: transform 0.2s linear;

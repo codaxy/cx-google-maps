@@ -1,6 +1,6 @@
 import {Md} from 'app/components';
 
-export default {
+export const config = {
     defaultCenter: {
         type: "LatLng|object",
         description: <cx><Md>
@@ -50,4 +50,44 @@ export default {
             call its methods later, for example `map.panTo(...)`. The method has signature `pipeInstance(instance)`.
         </Md></cx>
     }
+};
+
+export const events = {
+  onBoundsChanged: `bounds_changed`,
+
+  onCenterChanged: `center_changed`,
+
+  onClick: `click`,
+
+  onDblClick: `dblclick`,
+
+  onDrag: `drag`,
+
+  onDragEnd: `dragend`,
+
+  onDragStart: `dragstart`,
+
+  onHeadingChanged: `heading_changed`,
+
+  onIdle: `idle`,
+
+  onMapTypeIdChanged: `maptypeid_changed`,
+
+  onMouseMove: `mousemove`,
+
+  onMouseOut: `mouseout`,
+
+  onMouseOver: `mouseover`,
+
+  onProjectionChanged: `projection_changed`,
+
+  onResize: `resize`,
+
+  onRightClick: `rightclick`,
+
+  onTilesLoaded: `tilesloaded`,
+
+  onTiltChanged: `tilt_changed`,
+
+  onZoomChanged: `zoom_changed`,    
 };

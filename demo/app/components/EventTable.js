@@ -2,7 +2,7 @@ import { HtmlElement, PureContainer } from 'cx/widgets';
 import { Widget, VDOM } from 'cx/ui';
 import {CSS} from '../CSS';
 
-export class ConfigTable extends PureContainer {
+export class EventTable extends PureContainer {
     init() {
         super.init();
         var props = this.props || {};
@@ -27,11 +27,11 @@ export class ConfigTable extends PureContainer {
                         <td className={CSS.state({long: key.length > 16})}>
                             {name}
                         </td>
-                        <td>
-                            {p.description || 'See original library docs.'}
+                        <td if:expr="!!{p.description}">
+                            {p.description}
                         </td>
-                        <td>
-                            {p.type || p}
+                        <td if:expr="!{p.description}">
+                            Mapped from <code>{p}</code>.
                         </td>
                     </tr>
                 </cx>
@@ -45,9 +45,8 @@ export class ConfigTable extends PureContainer {
             <table>
                 <tbody>
                 <tr>
-                    <th>Property</th>
+                    <th>Event</th>
                     <th>Description</th>
-                    <th>Type</th>
                 </tr>
                 {this.renderChildren(context, instance)}
                 </tbody>

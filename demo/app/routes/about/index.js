@@ -1,4 +1,17 @@
-import { HtmlElement, Link, Section } from "cx/widgets";
+import { 
+    HtmlElement,
+    Link,
+    Section,
+    CxCredit
+} from "cx/widgets";
+
+import {
+    Url
+} from "cx/ui";
+
+import {
+    Md
+} from 'app/components';
 
 export default (
     <cx>
@@ -10,6 +23,19 @@ export default (
                 This is an application generated using <a href="https://cxjs.io/quickstart" target="_blank">Cx CLI</a>.
                 It serves as both a documentation and demo application for Cx Google Maps library.
             </p>
+
+            <br/>
+            
+            <h4><img src={Url.resolve("~/assets/img/cx.png")} /></h4>
+
+            <p ws>
+
+                <a href="https://cxjs.io" target="_blank">CxJS</a>, or simply Cx, is a feature-rich JavaScript framework for building complex web front-ends, 
+                such as BI tools, dashboards and admin apps.          
+            </p>
+
+            <br/>
+
             <Link href="~/">Back</Link>
         </Section>
     </cx>

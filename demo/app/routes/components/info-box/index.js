@@ -7,10 +7,14 @@ import {
 } from 'cx/widgets';
 
 import Example from './example';
-import config from './config';
+import {
+    config,
+    events
+} from './config';
 
 import { 
     ConfigTable, 
+    EventTable,
     CodeSnippet,
     Md 
 } from 'app/components';
@@ -38,7 +42,7 @@ export default <cx>
                 <p ws>
                     Cx wrapper around <a href={info.reactGoogleMapsDocs} target="_blank">{info.name}</a> React addon used for
                     custom-styled overlay windows (this is not supported in <code>InfoWindow</code>).
-                    For additional info about various options, please see <a href={info.googleMapsDocs} target="_blank">InfoBox addon lib</a>.
+                    For additional info about various options, available events and methods, please see <a href={info.googleMapsDocs} target="_blank">InfoBox addon lib</a>.
                 </p>
                     
                 <Md>
@@ -46,6 +50,12 @@ export default <cx>
                     <ConfigTable props={config} /> 
 
                     <br/>
+                    <br/>
+
+                    <EventTable props={events} />
+
+                    <br />
+                    <br />
                     
                     ##### Example
                     <CodeSnippet>{`

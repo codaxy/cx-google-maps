@@ -7,10 +7,14 @@ import {
 } from 'cx/widgets';
 
 import Example from './example';
-import config from './config';
+import {
+    config,
+    events
+} from './config';
 
 import { 
     ConfigTable, 
+    EventTable,
     CodeSnippet,
     Md 
 } from 'app/components';
@@ -37,13 +41,19 @@ export default <cx>
 
                 <p ws>
                     Cx wrapper around <a href={info.reactGoogleMapsDocs} target="_blank">{info.name}</a> React component addon.
-                    For additional info about various options, please see <a href={info.googleMapsDocs} target="_blank">MarkerClusterer addon lib page</a>.
+                    For additional info about various options, available events and methods, please see <a href={info.googleMapsDocs} target="_blank">MarkerClusterer addon lib page</a>.
                 </p>
                     
                 <Md>
                     ##### Configuration
                     <ConfigTable props={config} /> 
 
+                    <br/>
+                    <br/>
+                    
+                    <EventTable props={events} /> 
+
+                    <br/>
                     <br/>
                     
                     ##### Example

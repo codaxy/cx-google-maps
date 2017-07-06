@@ -7,10 +7,14 @@ import {
 } from 'cx/widgets';
 
 import Example from './example';
-import config from './config';
+import {
+    config,
+    events
+} from './config';
 
 import { 
     ConfigTable, 
+    EventTable,
     CodeSnippet,
     Md 
 } from 'app/components';
@@ -35,9 +39,9 @@ export default <cx>
                     <span class="cxe-import">{`import { ${info.name} } from 'cx-google-maps'`}</span>
                 </h4>
 
-                <p>
+                <p ws>
                     Cx wrapper around <a href={info.reactGoogleMapsDocs} target="_blank">{info.name}</a> React component.
-                    For additional info about various options, please see <a href={info.googleMapsDocs} target="_blank">Google Maps Docs</a>.
+                    For additional info about various options, available events and methods, please see <a href={info.googleMapsDocs} target="_blank">Google Maps Docs</a>.
                 </p>
                     
                 <Md>
@@ -45,9 +49,25 @@ export default <cx>
                     <ConfigTable props={config} /> 
 
                     <br/>
+                    <br/>
+
+                    <EventTable props={events} />
+
+                    <br />
+                    <br />
                     
                     ##### Example
                     <CodeSnippet>{`
+class Controller extends CxController {
+    ...
+    onMarkerClick() {
+        Toast.create({
+            message: 'Marker clicked.',
+            timeout: 3000
+        }).open();
+    }    
+}
+
 export default <cx>
     <GoogleMap
         controller={Controller}
@@ -56,7 +76,8 @@ export default <cx>
         <Marker
             position:bind="$page.map.center"
             title="This is a custom icon marker with rollover text"
-            icon={Url.absolute("~/assets/img/cx.png")}
+            icon="https://codaxy.github.io/cx-google-maps/assets/img/cx.png"
+            onClick="onMarkerClick"
         />    
     </GoogleMap>
 </cx>;
