@@ -17,6 +17,7 @@ import InfoWindow from "./components/info-window";
 import InfoBox from "./components/info-box";
 import DirectionsRenderer from "./components/directions-renderer"
 
+import FirstMap from "./examples/first-map";
 import Filtering from "./examples/filtering";
 import Routing from "./examples/routing";
 import PlacingMarkers from "./examples/placing-markers";
@@ -47,6 +48,7 @@ export default (
             <InfoBox />
             <DirectionsRenderer />
 
+            <FirstMap />
             <Filtering />
             <Routing />
             <PlacingMarkers />

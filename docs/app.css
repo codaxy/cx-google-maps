@@ -4422,7 +4422,8 @@ th.cxe-calendar-display {
 .cxb-codesnippet {
   position: relative;
   padding: 3px 5px;
-  background: #494949; }
+  background: #494949;
+  margin-bottom: 24px; }
   .cxb-codesnippet pre {
     background: transparent !important;
     padding: 0 !important;
@@ -4630,6 +4631,8 @@ pre[class*="language-"] {
   background: white;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.26);
   font-size: 13px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   transform: translateX(-300px);
   transition: transform 0.2s linear; }
   .layout.nav .aside {

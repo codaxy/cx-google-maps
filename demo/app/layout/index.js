@@ -40,7 +40,10 @@ const items = [{
     }]
 }, {
     text: 'Examples',
-    items: [{
+    items: [{ 
+        text: '2-minute start',
+        url: '~/examples/first-map'
+    },{
         text: 'Placing markers',
         url: '~/examples/placing-markers'
     }, {
