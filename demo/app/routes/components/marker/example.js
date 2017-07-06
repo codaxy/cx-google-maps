@@ -59,7 +59,7 @@ export default <cx>
         <Marker
             position:bind="$page.map.center"
             title="This is a custom icon marker with rollover text"
-            icon={Url.resolve("~/assets/img/cx.png")}
+            icon={Url.absolute("~/assets/img/cx.png")}
         />    
     </GoogleMap>
 </cx>;
