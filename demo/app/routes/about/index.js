@@ -26,7 +26,7 @@ export default (
 
             <br/>
             
-            <h4><img src={Url.resolve("~/assets/img/cx.png")} /></h4>
+            <h4><img src="https://codaxy.github.io/cx-google-maps/assets/img/cx.png" /></h4>
 
             <p ws>
 
