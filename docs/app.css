@@ -2994,19 +2994,19 @@ th.cxe-calendar-display {
         margin: 0 30px 0 30px; }
       .cxb-menu.cxs-horizontal > .cxe-menu-item.cxs-size-xlarge > .cxm-menu {
         margin: 0 40px 0 40px; }
-  .cxb-menu.cxs-vertical.cxs-xsmall-item-padding > .cxe-menu-item > .cxm-menu {
+  .cxb-menu.cxs-vertical.cxs-xsmall-item-padding .cxm-menu {
     margin: 3px 6px;
     display: block; }
-  .cxb-menu.cxs-vertical.cxs-small-item-padding > .cxe-menu-item > .cxm-menu {
+  .cxb-menu.cxs-vertical.cxs-small-item-padding .cxm-menu {
     margin: 5px 10px;
     display: block; }
-  .cxb-menu.cxs-vertical.cxs-medium-item-padding > .cxe-menu-item > .cxm-menu {
+  .cxb-menu.cxs-vertical.cxs-medium-item-padding .cxm-menu {
     margin: 10px 20px;
     display: block; }
-  .cxb-menu.cxs-vertical.cxs-large-item-padding > .cxe-menu-item > .cxm-menu {
+  .cxb-menu.cxs-vertical.cxs-large-item-padding .cxm-menu {
     margin: 15px 30px;
     display: block; }
-  .cxb-menu.cxs-vertical.cxs-xlarge-item-padding > .cxe-menu-item > .cxm-menu {
+  .cxb-menu.cxs-vertical.cxs-xlarge-item-padding .cxm-menu {
     margin: 20px 40px;
     display: block; }
   .cxb-menu .cxe-menu-item > hr {
@@ -3040,8 +3040,12 @@ th.cxe-calendar-display {
     display: block; }
   .cxb-menuitem.cxs-xsmall-padding.cxs-arrow {
     padding-right: 16px; }
+  .cxb-menuitem.cxs-xsmall-padding.cxs-icon {
+    padding-left: 16px; }
   .cxb-menuitem.cxs-xsmall-padding > .cxe-menuitem-arrow {
     right: 3px; }
+  .cxb-menuitem.cxs-xsmall-padding > .cxe-menuitem-button {
+    width: 22px; }
   .cxb-menuitem.cxs-small-padding > a,
   .cxb-menuitem.cxs-small-padding > span {
     padding: 5px 10px;
@@ -3050,8 +3054,12 @@ th.cxe-calendar-display {
     display: block; }
   .cxb-menuitem.cxs-small-padding.cxs-arrow {
     padding-right: 16px; }
+  .cxb-menuitem.cxs-small-padding.cxs-icon {
+    padding-left: 16px; }
   .cxb-menuitem.cxs-small-padding > .cxe-menuitem-arrow {
     right: 5px; }
+  .cxb-menuitem.cxs-small-padding > .cxe-menuitem-button {
+    width: 26px; }
   .cxb-menuitem.cxs-medium-padding > a,
   .cxb-menuitem.cxs-medium-padding > span {
     padding: 10px 20px;
@@ -3060,8 +3068,12 @@ th.cxe-calendar-display {
     display: block; }
   .cxb-menuitem.cxs-medium-padding.cxs-arrow {
     padding-right: 16px; }
+  .cxb-menuitem.cxs-medium-padding.cxs-icon {
+    padding-left: 16px; }
   .cxb-menuitem.cxs-medium-padding > .cxe-menuitem-arrow {
     right: 10px; }
+  .cxb-menuitem.cxs-medium-padding > .cxe-menuitem-button {
+    width: 36px; }
   .cxb-menuitem.cxs-large-padding > a,
   .cxb-menuitem.cxs-large-padding > span {
     padding: 15px 30px;
@@ -3070,8 +3082,12 @@ th.cxe-calendar-display {
     display: block; }
   .cxb-menuitem.cxs-large-padding.cxs-arrow {
     padding-right: 16px; }
+  .cxb-menuitem.cxs-large-padding.cxs-icon {
+    padding-left: 16px; }
   .cxb-menuitem.cxs-large-padding > .cxe-menuitem-arrow {
     right: 15px; }
+  .cxb-menuitem.cxs-large-padding > .cxe-menuitem-button {
+    width: 46px; }
   .cxb-menuitem.cxs-xlarge-padding > a,
   .cxb-menuitem.cxs-xlarge-padding > span {
     padding: 20px 40px;
@@ -3080,8 +3096,12 @@ th.cxe-calendar-display {
     display: block; }
   .cxb-menuitem.cxs-xlarge-padding.cxs-arrow {
     padding-right: 16px; }
+  .cxb-menuitem.cxs-xlarge-padding.cxs-icon {
+    padding-left: 16px; }
   .cxb-menuitem.cxs-xlarge-padding > .cxe-menuitem-arrow {
     right: 20px; }
+  .cxb-menuitem.cxs-xlarge-padding > .cxe-menuitem-button {
+    width: 56px; }
 
 .cxe-menuitem-arrow {
   position: absolute;
@@ -3091,6 +3111,21 @@ th.cxe-calendar-display {
   margin-top: -8px; }
   .cxs-vertical > .cxe-menuitem-arrow {
     transform: rotate(-90deg); }
+
+.cxe-menuitem-button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0; }
+
+.cxe-menuitem-icon {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-top: -8px;
+  margin-left: -8px; }
 
 .cxb-link.cxs-active {
   font-weight: bold; }
@@ -3973,11 +4008,14 @@ th.cxe-calendar-display {
   stroke: gray;
   stroke-width: 1px; }
   .cxs-draggable-x > .cxe-marker-shape {
-    cursor: ew-resize; }
+    cursor: ew-resize;
+    touch-action: none; }
   .cxs-draggable-y > .cxe-marker-shape {
-    cursor: ns-resize; }
+    cursor: ns-resize;
+    touch-action: none; }
   .cxs-draggable-xy > .cxe-marker-shape {
-    cursor: move; }
+    cursor: move;
+    touch-action: none; }
   .cxs-selectable > .cxe-marker-shape {
     cursor: pointer; }
 

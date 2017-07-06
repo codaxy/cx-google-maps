@@ -33,7 +33,7 @@ module.exports = {
         app: [p("app/index.js")]
     },
     output: {
-        path: p("dist"),
+        path: p("../docs"),
         filename: "[name].js"
     },
     plugins: [

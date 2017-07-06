@@ -33,7 +33,7 @@ var specific = {
         new CopyWebpackPlugin([
             {
                 from: path.join(__dirname, "../../assets"),
-                to: path.join(__dirname, "../dist/assets")
+                to: path.join(__dirname, "../../docs/assets")
             }
         ])
     ],
