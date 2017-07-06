@@ -42,7 +42,7 @@ npm install cx-google-maps --save
                     `}</CodeSnippet>
 
                     
-                    Since we're using Google Maps, add a script reference to Google Maps somewhere in 
+                    Since we're using Google Maps, add a script reference to it somewhere in 
                     your `app/index.html`:
 
                     <CodeSnippet>{`
