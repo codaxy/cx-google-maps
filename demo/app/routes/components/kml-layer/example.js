@@ -7,7 +7,8 @@ import {
 import {
     GoogleMap,
     SearchBox,
-    Marker
+    Marker,
+    KmlLayer
 } from 'cx-google-maps';
 
 import { VDOM, Controller as CxController } from 'cx/ui';
@@ -52,10 +53,8 @@ export default <cx>
             }
         }}
     >
-        <Marker
-            position:bind="$page.map.center"
-            title="This is a custom icon marker with rollover text"
-            icon="/assets/img/cx.png"
+        <KmlLayer
+            url="http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml"
         />    
     </GoogleMap>
 </cx>;

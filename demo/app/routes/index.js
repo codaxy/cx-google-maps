@@ -13,6 +13,13 @@ import MarkerClusterer from "./components/marker-clusterer";
 import Polygon from "./components/polygon";
 import Polyline from "./components/polyline";
 import KmlLayer from "./components/kml-layer";
+import InfoWindow from "./components/info-window";
+import InfoBox from "./components/info-box";
+import DirectionsRenderer from "./components/directions-renderer"
+
+import Filtering from "./examples/filtering";
+import Routing from "./examples/routing";
+import PlacingMarkers from "./examples/placing-markers";
 
 export default (
     <cx>
@@ -36,6 +43,13 @@ export default (
             <Polygon />
             <Polyline />
             <KmlLayer />
+            <InfoWindow />
+            <InfoBox />
+            <DirectionsRenderer />
+
+            <Filtering />
+            <Routing />
+            <PlacingMarkers />
 
             <Section title="Page Not Found" mod="card">
                 This page doesn't exists. Please check your URL.

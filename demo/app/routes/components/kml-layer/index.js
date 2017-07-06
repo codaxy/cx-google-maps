@@ -52,10 +52,8 @@ export default <cx>
     <GoogleMap
         ...
     >
-        <Marker
-            position:bind="$page.map.center"
-            title="This is a custom icon marker with rollover text"
-            icon="/assets/img/cx.png"
+        <KmlLayer
+            url="http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml"
         />    
     </GoogleMap>
 </cx>;
