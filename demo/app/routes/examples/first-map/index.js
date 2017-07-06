@@ -30,7 +30,7 @@ export default <cx>
                 </h4>
 
                 <Md>
-                    Creating Cx applications is very easy using [Cx CLI](https://cxjs.io/quickstart) tool
+                    Creating Cx applications is very easy using [Cx CLI](https://cxjs.io/quickstart) tool:
 
                     <CodeSnippet>{`
 md first-map
