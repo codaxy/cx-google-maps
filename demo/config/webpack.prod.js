@@ -3,7 +3,8 @@ var webpack = require("webpack"),
     CopyWebpackPlugin = require("copy-webpack-plugin"),
     merge = require("webpack-merge"),
     common = require("./webpack.config"),
-    path = require("path");
+    path = require("path"),
+    p = p => path.join(__dirname, "../", p || "");
 
 var sass = new ExtractTextPlugin({
     filename: "app.css",
@@ -22,6 +23,10 @@ var specific = {
                 loaders: sass.extract(["css-loader"])
             }
         ]
+    },
+
+    entry: {
+        "spa": [p("app/github-spa.js")]
     },
 
     plugins: [
