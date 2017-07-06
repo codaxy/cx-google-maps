@@ -25,10 +25,6 @@ var specific = {
         ]
     },
 
-    entry: {
-        "spa": [p("app/github-spa.js")]
-    },
-
     plugins: [
         new webpack.optimize.UglifyJsPlugin(),
         new webpack.DefinePlugin({
@@ -44,7 +40,7 @@ var specific = {
     ],
 
     output: {
-        publicPath: "."
+        publicPath: "/cx-google-maps"
     }
 };
 
