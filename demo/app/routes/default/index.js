@@ -44,7 +44,7 @@ export default (
                 </p>
             </Section>
 
-            <FlexCol mod="card" style="flex: 1; min-height: 240px">
+            <FlexCol mod="card" style="flex: 1; min-height: 400px">
                 <GoogleMap
                     controller={Controller}
                     containerElement={containerElement}
