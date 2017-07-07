@@ -32,7 +32,7 @@ export default (
             <p ws>
 
                 <a href="https://cxjs.io" target="_blank">CxJS</a>, or simply Cx, is a feature-rich JavaScript framework for building complex web front-ends, 
-                such as BI tools, dashboards and admin apps.          
+                such as BI tools, dashboards and admin apps. <a href="https://cxjs.io">See more</a>.
             </p>
 
             <br/>
