@@ -19,8 +19,8 @@ export default (
             Home
         </h2>
 
-        <FlexCol style="height: 100%; min-height: 440px" vspacing>
-            <Section mod="card">
+        <FlexCol style="height: 100%" vspacing>
+            <Section mod="card" style="min-height: 100px">
                 <h4>Cx Google Maps</h4>
                 <p ws>
                     This library provides a
@@ -44,7 +44,7 @@ export default (
                 </p>
             </Section>
 
-            <FlexCol mod="card" style="flex: 1; min-height: 320px">
+            <FlexCol mod="card" style="flex: 1; min-height: 240px">
                 <GoogleMap
                     controller={Controller}
                     containerElement={containerElement}

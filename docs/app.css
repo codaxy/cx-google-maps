@@ -4688,7 +4688,7 @@ p {
   background: white;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.26);
   border-radius: 1px;
-  -webkit-scrolling-behavior: touch; }
+  -webkit-overflow-scrolling: touch; }
 
 .cxb-menu.cxm-map {
   position: absolute;
