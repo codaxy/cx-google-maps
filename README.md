@@ -28,6 +28,13 @@ You can run the documentation/demo app locally by issuing:
 
 from the top-level folder.
 
+Demo App
+========
+
+<a href="https://codaxy.github.io/cx-google-maps/">
+	<img src="https://github.com/codaxy/cx-google-maps/blob/master/misc/screenshots/01.png" />
+</a>
+
 CxJS
 ====
 [CxJS](https://cxjs.io), or simply Cx, is a feature-rich JavaScript framework for building complex web front-ends, such as BI tools, dashboards and admin apps. Modern frameworks such as React and Angular provide an excellent base for building UI components, however, component implementation and many other topics are left to the developer. CxJS tries to fill that gap and provide the all necessary ingredients required for modern web applications.

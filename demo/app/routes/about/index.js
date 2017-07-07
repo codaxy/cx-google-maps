@@ -21,11 +21,12 @@ export default (
         <Section mod="well" title="Cx Google Maps">
             <p ws>
                 This is an application generated using <a href="https://cxjs.io/quickstart" target="_blank">Cx CLI</a>.
-                It serves as both a documentation and demo application for Cx Google Maps library.
+                It serves as both a documentation and demo application for Cx Google Maps library. All source 
+                code is available on <a href="https://github.com/codaxy/cx-google-maps" target="_blank">GitHub</a>.
             </p>
 
             <br/>
-            
+
             <h4><img src="https://codaxy.github.io/cx-google-maps/assets/img/cx.png" /></h4>
 
             <p ws>
