@@ -1,4 +1,4 @@
-import { VDOM } from "cx/ui";
+import { VDOM, ContentPlaceholder, Content } from "cx/ui";
 import { HtmlElement, Link, Section, FlexCol, Menu, Submenu, CxCredit } from "cx/widgets";
 import { GoogleMap, Marker, InfoBox, InfoWindow, SearchBox } from "cx-google-maps";
 
@@ -19,7 +19,7 @@ export default (
             Home
         </h2>
 
-        <FlexCol style="height: 100%" vspacing>
+        <FlexCol style="height: 100%; min-height: 440px" vspacing>
             <Section mod="card">
                 <h4>Cx Google Maps</h4>
                 <p ws>
