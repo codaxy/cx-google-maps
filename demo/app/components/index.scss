@@ -7,4 +7,8 @@
     font-family: 'Consolas', monospace;
     font-size: 0.65em;
     float: right;
+
+    @media(max-width: 767px) {
+        display: none;
+    }
 }

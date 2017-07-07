@@ -25,7 +25,6 @@ export default <cx>
             <Section mod="card" style="flex:1">
                 <h4>
                     {info.name}
-                    <span class="cxe-import">{`import { ${info.name} } from 'cx-google-maps'`}</span>
                 </h4>
 
                 <p ws>

@@ -44,7 +44,7 @@ export default (
                 </p>
             </Section>
 
-            <FlexCol mod="card" style="flex: 1">
+            <FlexCol mod="card" style="flex: 1; min-height: 320px">
                 <GoogleMap
                     controller={Controller}
                     containerElement={containerElement}
@@ -70,6 +70,7 @@ export default (
                         </a>
                     </Menu>                    
                     <SearchBox
+                        if={window.innerWidth >= 768}
                         controlPosition={google.maps.ControlPosition.TOP_CENTER}
                         onPlacesChanged="onSearchPlacesChanged"
                         pipeInstance="pipeSearchBox"

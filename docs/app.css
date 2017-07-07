@@ -4394,7 +4394,8 @@ th.cxe-calendar-display {
   max-width: 50em;
   margin-top: 16px;
   position: relative;
-  overflow-x: auto; }
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; }
   .cxb-configtable table {
     border-collapse: collapse;
     min-width: 100%; }
@@ -4430,7 +4431,8 @@ th.cxe-calendar-display {
     margin: 0 !important;
     border-radius: 0 !important;
     overflow-x: auto;
-    overflow-y: hidden; }
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch; }
     .cxb-codesnippet pre > code {
       padding: 0 0 0 5px;
       background: transparent;
@@ -4595,6 +4597,9 @@ pre[class*="language-"] {
   font-family: 'Consolas', monospace;
   font-size: 0.65em;
   float: right; }
+  @media (max-width: 767px) {
+    .cxe-import {
+      display: none; } }
 
 #app, .layout {
   height: 100%; }

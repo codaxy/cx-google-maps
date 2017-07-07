@@ -3,6 +3,7 @@
     margin-top: 16px;
     position: relative;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 
     table {
         border-collapse: collapse;
