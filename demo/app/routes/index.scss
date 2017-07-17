@@ -1,21 +1,3 @@
 @import 'about/index';
 @import 'default/index';
 @import 'components/index';
-
-$info-window-bg: rgba(88, 144, 236, 0.8);
-$info-window-width: 80px;
-
-.cxm-infobox {
-  background: $info-window-bg;
-  box-sizing: border-box;
-  color: white;
-  padding: 4px;
-  box-shadow: 1px 1px 3px $info-window-bg;
-  border-radius: 5px;
-  margin-top: 15px;
-  width: $info-window-width;
-  margin-left: -($info-window-width/2);
-  text-align: center;
-  position: relative;
-  overflow: visible;
-}

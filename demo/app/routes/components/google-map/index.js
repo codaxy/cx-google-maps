@@ -99,31 +99,33 @@ class Controller extends CxController {
     }
 }
 
-<GoogleMap
-    controller={Controller}
-    containerElement={containerElement}
-    mapElement={mapElement}
-    pipeInstance="pipeMapInstance"
-    defaultCenter:bind="$page.map.center"
-    defaultZoom:bind="$page.map.zoom"
-    center:bind="$page.map.center"
-    zoom:bind="$page.map.zoom"
-    options={{
-        mapTypeControlOptions: {
-            position: google.maps.ControlPosition.TOP_RIGHT
-        }
-    }}
->
-    <Menu
-        vertical
-        mod="map"
-        itemPadding="small"
+export default <cx>
+    <GoogleMap
+        controller={Controller}
+        containerElement={containerElement}
+        mapElement={mapElement}
+        pipeInstance="pipeMapInstance"
+        defaultCenter:bind="$page.map.center"
+        defaultZoom:bind="$page.map.zoom"
+        center:bind="$page.map.center"
+        zoom:bind="$page.map.zoom"
+        options={{
+            mapTypeControlOptions: {
+                position: google.maps.ControlPosition.TOP_RIGHT
+            }
+        }}
     >
-        <a onClick="onResetViewClick">
-            Reset view
-        </a>
-    </Menu>                  
-</GoogleMap>
+        <Menu
+            vertical
+            mod="map"
+            itemPadding="small"
+        >
+            <a onClick="onResetViewClick">
+                Reset view
+            </a>
+        </Menu>                  
+    </GoogleMap>
+</cx>;
                     `}</CodeSnippet>
                 </Md>
             </Section>
