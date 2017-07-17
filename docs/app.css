@@ -4695,17 +4695,3 @@ p {
   left: 0;
   background: rgba(255, 255, 255, 0.9);
   padding: 7px; }
-
-.cxm-infobox {
-  background: rgba(88, 144, 236, 0.8);
-  box-sizing: border-box;
-  color: white;
-  padding: 4px;
-  box-shadow: 1px 1px 3px rgba(88, 144, 236, 0.8);
-  border-radius: 5px;
-  margin-top: 15px;
-  width: 80px;
-  margin-left: -40px;
-  text-align: center;
-  position: relative;
-  overflow: visible; }
