@@ -5,7 +5,8 @@ import {
     Menu,
     Text,
     Toast,
-    Button
+    Button,
+    Grid
 } from 'cx/widgets';
 
 import {
@@ -39,12 +40,19 @@ class Controller extends CxController {
 
     onInit() {
         this.store.init('$page.mapdefaults', this.getDefaults());        
-        this.store.init('$page.map', this.getDefaults());   
-        this.store.init('$page.polygonPath', _.range(3)
+        this.store.init('$page.map', this.getDefaults());
+        this.store.init('$page.path', _.range(3)
             .map(() => ({
                 lat: 41.77811360 + Math.random() - 0.5, 
                 lng: -87.62979820 + Math.random() - 0.5
             })));
+    }
+
+    onRemovePoint(e, {store}) {
+        let index = store.get('$index');
+        let points = store.get('$page.path');
+        if (points.length > 3)
+            this.store.set('$page.path', points.filter((p, i) => i != index));
     }
 }
 
@@ -63,17 +71,23 @@ export default <cx>
             }
         }}
     >
-        <Menu
-            vertical
-            mod="map"
-            itemPadding="small"
-        >
-            <Repeater records:bind="$page.polygonPath">
-                <Text tpl="{$record.lat:n;8}, {$record.lng:n;8}" />
-            </Repeater>
-        </Menu>   
+        <Grid mod="map" 
+            records:bind="$page.path"
+            columns={[
+                { header: 'Latitude', field: 'lat', format: "n;8", sortable: true, align: "center" },
+                { header: 'Longitude', field: 'lng', format: "n;8", sortable: true, align: "center" },
+                { 
+                    header: '',
+                    items: <Button
+                        mod="hollow"
+                        icon="clear"
+                        disabled:expr="{$page.path.length} <= 3"
+                        onClick="onRemovePoint"/>
+                }
+            ]}>
+        </Grid>
         <Polygon
-            path:bind="$page.polygonPath"
+            path:bind="$page.path"
             options={{
                 fillColor: "red",
                 fillOpacity: 0.5,

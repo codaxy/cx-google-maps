@@ -58,7 +58,7 @@ export default <cx>
 
                     ##### Example
                     <CodeSnippet>{`
-this.store.init('$page.polygonPath', _.range(3)
+this.store.init('$page.path', _.range(3)
     .map(() => ({
         lat: 41.77811360 + Math.random() - 0.5, 
         lng: -87.62979820 + Math.random() - 0.5
@@ -71,7 +71,7 @@ export default <cx>
         ...
     >
         <Polygon
-            path:bind="$page.polygonPath"
+            path:bind="$page.path"
             options={{
                 fillColor: "red",
                 fillOpacity: 0.5,

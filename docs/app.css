@@ -4698,7 +4698,7 @@ p {
   .cxb-follow * {
     color: white; }
 
-.cxb-menu.cxm-map {
+.cxm-map {
   position: absolute;
   left: 0;
   background: rgba(255, 255, 255, 0.9);
