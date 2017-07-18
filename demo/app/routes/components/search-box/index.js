@@ -74,6 +74,11 @@ class Controller extends CxController {
         if (places.length < 1)
             return;
         
+        Toast.create({
+            message: \`Place selected: \$\{places[0].formatted_address\}\`,
+            timeout: 3000
+        }).open();        
+        
         let location = places[0].geometry.location
         this.map.panTo(location);
     }
