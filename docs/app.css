@@ -4690,6 +4690,15 @@ p {
   border-radius: 1px;
   -webkit-overflow-scrolling: touch; }
 
+.cxb-follow {
+  width: 100%;
+  text-align: right; }
+  .cxb-follow svg {
+    width: 18px;
+    height: 18px; }
+  .cxb-follow * {
+    color: white; }
+
 .cxb-menu.cxm-map {
   position: absolute;
   left: 0;

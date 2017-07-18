@@ -1,5 +1,5 @@
-import { HtmlElement, Link, Button, Text } from "cx/widgets";
-import { ContentPlaceholder, Repeater, FirstVisibleChildLayout } from "cx/ui";
+import { HtmlElement, Link, Button, Text, Icon, Tooltip } from "cx/widgets";
+import { ContentPlaceholder, Repeater, FirstVisibleChildLayout, VDOM } from "cx/ui";
 import Controller from "./Controller";
 
 const items = [{
@@ -56,8 +56,19 @@ const items = [{
 }, {
     text: 'About',
     url: '~/about'
-}]
+}];
 
+Icon.register("github", props => {
+   return <svg
+      viewBox="0 0 30 30"
+      className={props.className}
+      style={props.style}
+   >
+      <path
+         d="M19 30h-8v-4c-5.47 1.18-7-3-7-3-1-2-2-3-2-3-2-1.2 0-1 0-1 2 0 3 2 3 2 1.76 2.98 4.88 2.5 6 2 0-1 .44-2.5 1-3-4.36-.5-8-3-8-8s1-6 2-7c-.2-.5-1.04-2.3.04-5C6.04 0 8 0 10 3c1-1 4-1 5-1s4 0 5 1c2-3 3.97-3 3.97-3 1.07 2.7.23 4.5.03 5 1 1 2 2 2 7s-3.63 7.5-8 8c.56.5 1 2.2 1 3v7z"
+         fill="currentColor"/>
+   </svg>
+});
 
 export default (
     <cx>
@@ -82,6 +93,11 @@ export default (
                     }}
                 />
                 <ContentPlaceholder name="header" />
+                <div class="cxb-follow">
+                    <Link href="https://github.com/codaxy/cx-google-maps" tooltip="GitHub">
+                        <Icon name="github" />
+                    </Link>
+                </div>
             </header>
             <aside class="aside">
                 <h1>Cx Google Maps</h1>

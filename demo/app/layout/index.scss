@@ -123,3 +123,16 @@ p {
 
 }
 
+.cxb-follow {
+    width: 100%;
+    text-align: right;
+
+    svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    * {
+        color: white;
+    }
+}
