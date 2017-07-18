@@ -32,7 +32,9 @@ export default (
                     >
                         react-google-maps
                     </a>, which enables Google Maps components to connect 
-                    to Cx stores and controllers.
+                    to Cx stores and controllers. Source code of the library, including this
+                    demo is available on <a href="https://github.com/codaxy/cx-google-maps"
+                    target="_blank">GitHub</a>.
                 </p>
 
                 <p ws>
@@ -42,6 +44,7 @@ export default (
                     and various Google Maps 
                     <a href="https://developers.google.com/maps/documentation/javascript/3.exp/reference">options, methods and events</a>.
                 </p>
+
             </Section>
 
             <FlexCol mod="card" style="flex: 1; min-height: 260px">
