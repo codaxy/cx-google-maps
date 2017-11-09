@@ -1,4 +1,5 @@
 import { Widget, VDOM } from 'cx/ui';
+import { shallowEquals, debounce } from 'cx/util';
 import { PureContainer, HtmlElement } from 'cx/widgets';
 import {GoogleMap as ReactGoogleMap, withGoogleMap} from 'react-google-maps';
 import MarkerClusterer from 'react-google-maps/lib/addons/MarkerClusterer';
@@ -56,7 +57,6 @@ export class GoogleMap extends PureContainer {
         });
     }
 
-
     onInit(context, instance) {
         instance.events = this.wireEvents(instance, [
             'onBoundsChanged',
@@ -79,6 +79,32 @@ export class GoogleMap extends PureContainer {
             'onTiltChanged',
             'onZoomChanged'
         ]);
+
+        if (instance.widget.center && instance.widget.center.bind) {
+            let oldOnCenterChanged = instance.events['onCenterChanged'];
+            instance.events['onCenterChanged'] = debounce(function(...args) {
+                let c = {
+                    lat: this.getCenter().lat(), 
+                    lng: this.getCenter().lng() 
+                };
+
+                if (!shallowEquals(c, instance.data.center))
+                    instance.set('center', c);
+
+                if (oldOnCenterChanged)
+                    oldOnCenterChanged.call(this, ...args);
+            }, 50);
+        }
+
+        if (instance.widget.zoom && instance.widget.zoom.bind) {
+            let oldOnZoomChanged = instance.events['onZoomChanged'];
+            instance.events['onZoomChanged'] = debounce(function(...args) {
+                instance.set('zoom', this.getZoom());
+
+                if (oldOnZoomChanged)
+                    oldOnZoomChanged.call(this, ...args);
+            }, 50);
+        }
     }
 
     wireEvents(instance, events) {
@@ -95,7 +121,7 @@ export class GoogleMap extends PureContainer {
         return <GoogleMapWrapper 
                 containerElement={this.containerElement}
                 mapElement={this.mapElement}
-                key={key} 
+                key={key}
                 instance={instance}
             >
                 {this.renderChildren(context, instance)}

@@ -1,7 +1,10 @@
 import { Controller } from 'cx/ui';
 import { Toast } from 'cx/widgets'
 
-export const defaultCenter = { lat: 40.77664177, lng: -73.96931648 };
+export const defaultCenter = {
+    lat: 40.77664177,
+    lng: -73.96931648
+};
 export const defaultZoom = 13;
 
 export default class extends Controller {
@@ -22,7 +25,7 @@ export default class extends Controller {
         let places = this.searchBox.getPlaces();
         if (places.length < 1)
             return;
-        
+
         Toast.create({
             message: `Place selected: ${places[0].formatted_address}`,
             timeout: 3000
@@ -34,5 +37,6 @@ export default class extends Controller {
 
     onResetViewClick() {
         this.map.panTo(defaultCenter);
+        this.store.set('$page.map.zoom', defaultZoom);
     }
 };

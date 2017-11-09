@@ -1,5 +1,5 @@
 import { VDOM, ContentPlaceholder, Content } from "cx/ui";
-import { HtmlElement, Link, Section, FlexCol, Menu, Submenu, CxCredit } from "cx/widgets";
+import { HtmlElement, Link, Section, FlexCol, Menu, Submenu, Text, CxCredit } from "cx/widgets";
 import { GoogleMap, Marker, InfoBox, InfoWindow, SearchBox } from "cx-google-maps";
 
 import DirectionsCollection from "./DirectionsCollection";
@@ -52,8 +52,8 @@ export default (
                     controller={Controller}
                     containerElement={containerElement}
                     mapElement={mapElement}
-                    defaultCenter:bind="$page.map.center"
-                    defaultZoom:bind="$page.map.zoom"
+                    defaultCenter:expr="{$page.map.center}"
+                    defaultZoom:expr="{$page.map.zoom}"
                     center:bind="$page.map.center"
                     zoom:bind="$page.map.zoom"
                     pipeInstance="pipeMap"
@@ -69,7 +69,7 @@ export default (
                         itemPadding="small"
                     >
                         <a onClick="onResetViewClick">
-                            Reset view
+                            Reset view (<Text tpl="{$page.map.center.lat:n;4},{$page.map.center.lng:n;4}:{$page.map.zoom:n;4}" />)
                         </a>
                     </Menu>                    
                     <SearchBox
