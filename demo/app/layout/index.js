@@ -108,7 +108,7 @@ export default (
                             <Text if:expr="!{$record.url}" bind="$record.text" />                        
                             <Link if:expr="!!{$record.url}" href:bind="$record.url" text:bind="$record.text" url:bind="url" />
                         </dt>
-                        <Repeater records:bind="$record.items">
+                        <Repeater records:bind="$record.items" keyField="url">
                             <dd>
                                 <Link href:bind="$record.url" text:bind="$record.text" url:bind="url" />
                             </dd>

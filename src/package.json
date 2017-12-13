@@ -1,0 +1,24 @@
+{
+  "name": "cx-google-maps",
+  "version": "18.1.0",
+  "description": "CxJS wrapper for react-google-maps",
+  "main": "index.js",
+  "jsnext:main": "index.js",
+  "keywords": [
+    "CxJS",
+    "Cx",
+    "React",
+    "ReactJS",
+    "Google Maps",
+    "Maps",
+    "google-maps",
+    "react-google-maps",
+    "location"
+  ],
+  "author": "Igor Timarac",
+  "license": "MIT",
+  "dependencies": {
+    "google-maps-infobox": "^1.1.15",
+    "react-google-maps": "^7.1.0"
+  }
+}

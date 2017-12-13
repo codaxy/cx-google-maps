@@ -1,9 +1,7 @@
 {
   "name": "cx-google-maps",
-  "version": "17.11.0",
+  "private": true,
   "description": "CxJS wrapper for react-google-maps",
-  "main": "src/index.js",
-  "jsnext:main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --config demo/config/webpack.dev.js --open",
@@ -11,10 +9,6 @@
     "build:demo": "webpack --config demo/config/webpack.prod.js",
     "format": "prettier \"+(demo|src)/**/*.js\" --write --tab-width 4"
   },
-  "files": [
-    "dist/",
-    "src/"
-  ],
   "keywords": [
     "CxJS",
     "Cx",
@@ -29,12 +23,12 @@
   "author": "Igor Timarac",
   "license": "MIT",
   "dependencies": {
-    "cx": "^17.7.3",
+    "cx": "^18.1.6",
     "cx-react": "^17.4.1",
     "google-maps-infobox": "^1.1.15",
     "illuminate-js": "^0.3.0",
     "lodash": "^4.17.4",
-    "marked": "^0.3.6",
+    "marked": "^0.3.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-google-maps": "^7.1.0",
@@ -43,24 +37,25 @@
   "devDependencies": {
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
-    "babel-preset-cx-env": "^17.6.2",
+    "babel-preset-cx-env": "^17.12.1",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2015-loose": "^8.0.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "copy-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^4.2.3",
     "css-loader": "^0.28.4",
     "extract-text-webpack-plugin": "^2.1.2",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",
     "json-loader": "^0.5.4",
-    "node-sass": "^4.5.3",
-    "prettier": "^1.5.2",
+    "node-sass": "^4.7.2",
+    "prettier": "^1.9.2",
     "react-dev-utils": "^3.0.2",
     "sass-loader": "^6.0.6",
-    "style-loader": "^0.18.2",
-    "webpack": "^3.0.0",
-    "webpack-dev-server": "^2.5.0",
-    "webpack-merge": "4.1.0"
+    "style-loader": "^0.19.0",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7",
+    "webpack-merge": "4.1.1"
   }
 }
