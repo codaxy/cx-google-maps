@@ -18,7 +18,7 @@
   "author": "Igor Timarac",
   "license": "MIT",
   "dependencies": {
-    "google-maps-infobox": "^1.1.15",
-    "react-google-maps": "^7.1.0"
+    "google-maps-infobox": "^2.0.0",
+    "react-google-maps": "^9.4.5"
   }
 }

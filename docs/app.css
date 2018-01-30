@@ -3595,8 +3595,10 @@ th.cxe-calendar-display {
   transform: rotate(180deg); }
 
 .cxb-treenode {
-  padding-left: 32px;
+  padding-left: 20px;
   position: relative; }
+  .cxb-treenode.cxs-icon {
+    padding-left: 36px; }
   .cxb-treenode.cxs-level-1 {
     margin-left: 20px; }
   .cxb-treenode.cxs-level-2 {
@@ -3640,13 +3642,6 @@ th.cxe-calendar-display {
 
 .cxe-treenode-handle {
   position: absolute;
-  left: 20px;
-  top: 50%;
-  margin-left: -8px;
-  margin-top: -8px;
-  bottom: 0;
-  width: 16px;
-  height: 16px;
   font-size: 16px;
   right: 6px;
   top: 50%;
@@ -3656,17 +3651,23 @@ th.cxe-calendar-display {
   line-height: 16px;
   opacity: 0.6;
   text-align: center;
-  cursor: pointer; }
+  cursor: pointer;
+  left: 0;
+  top: 50%;
+  margin-top: -8px;
+  bottom: 0;
+  width: 32px;
+  height: 16px; }
   .cxe-treenode-handle:hover {
     opacity: 1; }
 
 .cxe-treenode-arrow {
   display: block;
   position: absolute;
-  left: 50%;
+  left: 0;
   top: 50%;
   margin-top: -8px;
-  margin-left: -22px;
+  margin-left: 0px;
   height: 16px;
   width: 16px;
   line-height: 16px;
@@ -3678,10 +3679,10 @@ th.cxe-calendar-display {
 .cxe-treenode-icon {
   display: block;
   position: absolute;
-  left: 50%;
+  left: 0;
   top: 50%;
   margin-top: -8px;
-  margin-left: -4px;
+  margin-left: 16px;
   height: 16px;
   width: 16px;
   line-height: 16px; }
