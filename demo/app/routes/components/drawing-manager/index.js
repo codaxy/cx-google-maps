@@ -20,10 +20,10 @@ import {
 } from 'app/components';
 
 const info = {
-    name: 'MarkerWithLabel',
-    route: '~/components/marker-with-label',
-    reactGoogleMapsDocs: "https://tomchentw.github.io/react-google-maps/#markerwithlabel",
-    googleMapsDocs: "https://github.com/googlemaps/v3-utility-library/tree/master/markerwithlabel"
+    name: 'DrawingManager',
+    route: '~/components/drawing-manager',
+    reactGoogleMapsDocs: "https://tomchentw.github.io/react-google-maps/#drawingmanager",
+    googleMapsDocs: "https://developers.google.com/maps/documentation/javascript/3.exp/reference#DrawingManager"
 };
 
 export default <cx>
@@ -41,7 +41,7 @@ export default <cx>
 
                 <p ws>
                     Cx wrapper around <a href={info.reactGoogleMapsDocs} target="_blank">{info.name}</a> React component.
-                    For additional info about various options, available events and methods, please see <a href={info.googleMapsDocs} target="_blank">MarkerWithLabel addon lib page</a>.
+                    For additional info about various options, available events and methods, please see <a href={info.googleMapsDocs} target="_blank">Google Maps Docs</a>.
                 </p>
 
                 <Md>
@@ -53,41 +53,34 @@ export default <cx>
 
                     <EventTable props={events} />
 
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
 
                     ##### Example
                     <CodeSnippet>{`
-class Controller extends CxController {
-    ...
-    onMarkerClick() {
-        Toast.create({
-            message: 'Marker clicked.',
-            timeout: 3000
-        }).open();
-    }
-}
+this.store.init('$page.path', _.range(3)
+    .map(() => ({
+        lat: 41.77811360 + Math.random() - 0.5,
+        lng: -87.62979820 + Math.random() - 0.5
+    })));
+
+...
 
 export default <cx>
     <GoogleMap
-        controller={Controller}
         ...
     >
-        <MarkerWithLabel
-            position:bind="$page.map.center"
-            title="This is a custom icon marker with label"
-            icon="https://codaxy.github.io/cx-google-maps/assets/img/cx.png"
-            labelAnchor={new google.maps.Point(0,0)}
-            labelStyle={{
-                backgroundColor: "rgba(20, 40, 120, 0.5)",
-                color: "white",
-                fontSize: "24px",
-                padding: "16px"
+        <Polygon
+            path:bind="$page.path"
+            options={{
+                fillColor: "red",
+                fillOpacity: 0.5,
+                strokeColor: "red",
+                strokeOpacity: 0.9,
+                draggable: true,
+                editable: true
             }}
-            onClick="onMarkerClick"
-        >
-            <div>The Label</div>
-        </MarkerWithLabel>
+        />
     </GoogleMap>
 </cx>;
                     `}</CodeSnippet>

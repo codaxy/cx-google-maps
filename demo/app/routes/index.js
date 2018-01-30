@@ -17,6 +17,9 @@ import KmlLayer from './components/kml-layer';
 import InfoWindow from './components/info-window';
 import InfoBox from './components/info-box';
 import DirectionsRenderer from './components/directions-renderer';
+import DrawingManager from './components/drawing-manager';
+import FusionTablesLayer from './components/fusion-tables-layer';
+import GroundOverlay from './components/ground-overlay';
 
 import FirstMap from './examples/first-map';
 import Filtering from './examples/filtering';
@@ -48,6 +51,9 @@ export default (
             <InfoWindow />
             <InfoBox />
             <DirectionsRenderer />
+            <DrawingManager />
+            <FusionTablesLayer />
+            <GroundOverlay />
 
             <FirstMap />
             <Filtering />

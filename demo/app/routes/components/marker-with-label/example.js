@@ -11,6 +11,7 @@ import {
 import {
     GoogleMap,
     SearchBox,
+    Marker,
     MarkerWithLabel
 } from 'cx-google-maps';
 
@@ -71,7 +72,7 @@ export default <cx>
             labelStyle={{backgroundColor: "rgba(20, 40, 120, 0.5)", color: "white", fontSize: "24px", padding: "16px"}}
             onClick="onMarkerClick"
         >
-            <div>Hello there</div>
+            <div>The Label</div>
         </MarkerWithLabel>
     </GoogleMap>
 </cx>;

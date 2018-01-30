@@ -66,7 +66,7 @@ export class MarkerWithLabel extends PureContainer {
             'onShapeChanged',
             'onTitleChanged',
             'onVisibleChanged',
-            'onZindexChanged',
+            'onZindexChanged'
         ]);
     }
 

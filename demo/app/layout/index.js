@@ -38,8 +38,17 @@ const items = [{
         text: 'InfoBox',
         url: '~/components/info-box'
     }, {
+        text: 'FusionTablesLayer',
+        url: '~/components/fusion-tables-layer'
+    }, {
+        text: 'GroundOverlay',
+        url: '~/components/ground-overlay'
+    }, {
         text: 'DirectionsRenderer',
         url: '~/components/directions-renderer'
+    }, {
+        text: 'DrawingManager',
+        url: '~/components/drawing-manager'
     }]
 }, {
     text: 'Examples',
