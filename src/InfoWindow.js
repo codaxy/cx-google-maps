@@ -1,6 +1,6 @@
-import { Widget, VDOM } from 'cx/ui';
-import { HtmlElement, PureContainer } from 'cx/widgets';
-import { Console } from 'cx/util';
+import {Widget, VDOM} from 'cx/ui';
+import {HtmlElement, PureContainer} from 'cx/widgets';
+import {Console} from 'cx/util';
 import {InfoWindow as ReactInfoWindow} from 'react-google-maps';
 
 class ReactInfoWindowEnhanced extends ReactInfoWindow {
@@ -9,8 +9,7 @@ class ReactInfoWindowEnhanced extends ReactInfoWindow {
 
         let {instance} = this.props;
         let {widget} = instance;
-        if (widget.pipeInstance)
-            instance.invoke("pipeInstance", this);
+        if (widget.pipeInstance) instance.invoke('pipeInstance', this);
     }
 
     componentWillUnmount() {
@@ -18,17 +17,16 @@ class ReactInfoWindowEnhanced extends ReactInfoWindow {
 
         let {instance} = this.props;
         let {widget} = instance;
-        if (widget.pipeInstance)
-            instance.invoke("pipeInstance", null);
+        if (widget.pipeInstance) instance.invoke('pipeInstance', null);
     }
 }
 
 export class InfoWindow extends PureContainer {
     declareData() {
         super.declareData(...arguments, {
-            options: { structured: true },
-            position: { structured: true },
-            zIndex: { structured: true }
+            options: {structured: true},
+            position: {structured: true},
+            zIndex: {structured: true},
         });
     }
 
@@ -38,37 +36,40 @@ export class InfoWindow extends PureContainer {
             'onContentChanged',
             'onDomReady',
             'onPositionChanged',
-            'onZIndexChanged'
-        ]);        
+            'onZIndexChanged',
+        ]);
     }
 
     wireEvents(instance, events) {
         var map = [];
-        events.map((name) => {
+        events.map(name => {
             if (this[name]) {
                 map[name] = e => instance.invoke(name, e, instance);
             }
         });
         return map;
     }
-    
+
     render(context, instance, key) {
         var child = this.renderChildren(context, instance);
         if (Array.isArray(child)) {
             if (child.length > 1) {
-                Console.warn('InfoWindow can only contain one child. Trailing children will be ignored.');
+                Console.warn(
+                    'InfoWindow can only contain one child. Trailing children will be ignored.',
+                );
             }
 
-            child = child[0]; 
+            child = child[0];
         }
 
-        return <ReactInfoWindowEnhanced
+        return (
+            <ReactInfoWindowEnhanced
                 {...instance.data}
                 {...instance.events}
                 instance={instance}
-                key={key}
-            >
+                key={key}>
                 {child}
-            </ReactInfoWindowEnhanced>;
+            </ReactInfoWindowEnhanced>
+        );
     }
 }

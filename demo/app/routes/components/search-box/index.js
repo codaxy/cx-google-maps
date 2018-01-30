@@ -93,22 +93,9 @@ export default <cx>
             controlPosition={google.maps.ControlPosition.TOP_CENTER}
             onPlacesChanged="onSearchPlacesChanged"
             pipeInstance="pipeSearchBoxInstance"
-            inputPlaceholder="Search..."
-            inputStyle={{
-                boxSizing: 'border-box',
-                MozBoxSizing: 'border-box',
-                border: '1px solid transparent',
-                width: '300px',
-                height: '32px',
-                marginTop: '10px',
-                padding: '0 12px',
-                borderRadius: '0px',
-                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
-                fontSize: '14px',
-                outline: 'none',
-                textOverflow: 'ellipses'
-            }}
-        />    
+        >   
+            <TextField placeholder="Search..." style={{ margin: 5, boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)' }}/>
+        </SearchBox>
     </GoogleMap>
 </cx>;
                     `}</CodeSnippet>

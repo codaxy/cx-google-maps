@@ -2,7 +2,11 @@ import { HtmlElement } from 'cx/widgets';
 import { Widget, VDOM } from 'cx/ui';
 import {removeCommonIndent} from './removeCommonIndent';
 
-import {highlight} from "illuminate-js";
+import {addLanguage, highlight} from "illuminate-js";
+import {jsx} from 'illuminate-js/lib/languages';
+console.log(jsx);
+
+addLanguage('jsx', jsx);
 
 function lazyHighlight(text, lang) {
     var cache;

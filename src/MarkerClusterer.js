@@ -1,6 +1,6 @@
 import { Widget, VDOM } from 'cx/ui';
 import { PureContainer } from 'cx/widgets';
-import ReactMarkerClusterer from 'react-google-maps/lib/addons/MarkerClusterer';
+import ReactMarkerClusterer from 'react-google-maps/lib/components/addons/MarkerClusterer';
 
 class ReactMarkerClustererEnhanced extends ReactMarkerClusterer {
     componentDidMount() {

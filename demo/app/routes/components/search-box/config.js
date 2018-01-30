@@ -15,11 +15,7 @@ export const config = {
             The area towards which to bias query predictions. Predictions are biased towards, but not restricted to, queries targeting these bounds.
         </Md></cx>
     },
-    controlPosition: 'object',
-    inputProps: 'object',
-    inputStyle: 'object',
-    inputClassName: 'string',
-    inputPlaceholder: 'string'
+    controlPosition: 'object'
 };
 
 export const events = {

@@ -1,8 +1,8 @@
-import { Widget, VDOM } from 'cx/ui';
-import { shallowEquals, debounce } from 'cx/util';
-import { PureContainer, HtmlElement } from 'cx/widgets';
+import {Widget, VDOM} from 'cx/ui';
+import {shallowEquals, debounce} from 'cx/util';
+import {PureContainer, HtmlElement} from 'cx/widgets';
 import {GoogleMap as ReactGoogleMap, withGoogleMap} from 'react-google-maps';
-import MarkerClusterer from 'react-google-maps/lib/addons/MarkerClusterer';
+import MarkerClusterer from 'react-google-maps';
 
 class ReactGoogleMapEnhanced extends ReactGoogleMap {
     componentDidMount() {
@@ -10,8 +10,7 @@ class ReactGoogleMapEnhanced extends ReactGoogleMap {
 
         let {instance} = this.props;
         let {widget} = instance;
-        if (widget.pipeInstance)
-            instance.invoke("pipeInstance", this);
+        if (widget.pipeInstance) instance.invoke('pipeInstance', this);
     }
 
     componentDidUpdate() {
@@ -19,8 +18,7 @@ class ReactGoogleMapEnhanced extends ReactGoogleMap {
 
         let {instance} = this.props;
         let {widget} = instance;
-        if (widget.pipeInstance)
-            instance.invoke("pipeInstance", this);
+        if (widget.pipeInstance) instance.invoke('pipeInstance', this);
     }
 
     componentWillUnmount() {
@@ -28,8 +26,7 @@ class ReactGoogleMapEnhanced extends ReactGoogleMap {
 
         let {instance} = this.props;
         let {widget} = instance;
-        if (widget.pipeInstance)
-            instance.invoke("pipeInstance", null);
+        if (widget.pipeInstance) instance.invoke('pipeInstance', null);
     }
 }
 
@@ -45,13 +42,13 @@ const GoogleMapWrapper = withGoogleMap(props => (
 export class GoogleMap extends PureContainer {
     declareData() {
         super.declareData(...arguments, {
-            defaultCenter: { structured: true },
+            defaultCenter: {structured: true},
             defaultZoom: undefined,
-            center: { structured: true },
+            center: {structured: true},
             heading: undefined,
             mapTypeId: undefined,
-            options: { structured: true },
-            streetView: { structured: true },
+            options: {structured: true},
+            streetView: {structured: true},
             tilt: undefined,
             zoom: undefined,
         });
@@ -77,22 +74,21 @@ export class GoogleMap extends PureContainer {
             'onRightClick',
             'onTilesLoaded',
             'onTiltChanged',
-            'onZoomChanged'
+            'onZoomChanged',
         ]);
 
         if (instance.widget.center && instance.widget.center.bind) {
             let oldOnCenterChanged = instance.events['onCenterChanged'];
             instance.events['onCenterChanged'] = debounce(function(...args) {
                 let c = {
-                    lat: this.getCenter().lat(), 
-                    lng: this.getCenter().lng() 
+                    lat: this.getCenter().lat(),
+                    lng: this.getCenter().lng(),
                 };
 
                 if (!shallowEquals(c, instance.data.center))
                     instance.set('center', c);
 
-                if (oldOnCenterChanged)
-                    oldOnCenterChanged.call(this, ...args);
+                if (oldOnCenterChanged) oldOnCenterChanged.call(this, ...args);
             }, 50);
         }
 
@@ -101,15 +97,14 @@ export class GoogleMap extends PureContainer {
             instance.events['onZoomChanged'] = debounce(function(...args) {
                 instance.set('zoom', this.getZoom());
 
-                if (oldOnZoomChanged)
-                    oldOnZoomChanged.call(this, ...args);
+                if (oldOnZoomChanged) oldOnZoomChanged.call(this, ...args);
             }, 50);
         }
     }
 
     wireEvents(instance, events) {
         var map = [];
-        events.map((name) => {
+        events.map(name => {
             if (this[name]) {
                 map[name] = e => instance.invoke(name, e, instance);
             }
@@ -118,13 +113,14 @@ export class GoogleMap extends PureContainer {
     }
 
     render(context, instance, key) {
-        return <GoogleMapWrapper 
+        return (
+            <GoogleMapWrapper
                 containerElement={this.containerElement}
                 mapElement={this.mapElement}
                 key={key}
-                instance={instance}
-            >
+                instance={instance}>
                 {this.renderChildren(context, instance)}
-            </GoogleMapWrapper>;
-    }  
+            </GoogleMapWrapper>
+        );
+    }
 }

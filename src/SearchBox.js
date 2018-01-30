@@ -1,5 +1,5 @@
 import { Widget, VDOM, PureContainer } from 'cx/ui';
-import ReactSearchBox from 'react-google-maps/lib/places/SearchBox';
+import ReactSearchBox from 'react-google-maps/lib/components/places/SearchBox';
 
 class ReactSearchBoxEnhanced extends ReactSearchBox {
     componentDidMount() {
@@ -56,7 +56,9 @@ export class SearchBox extends PureContainer {
             instance={instance}
             key={key}
         >
-            {this.renderChildren(context, instance)}
+            <div>
+                {this.renderChildren(context, instance)}
+            </div>
         </ReactSearchBoxEnhanced>;
     }
 }

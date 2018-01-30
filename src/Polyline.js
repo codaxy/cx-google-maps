@@ -1,20 +1,21 @@
-import { Widget, VDOM } from 'cx/ui';
-import { PureContainer } from 'cx/widgets';
+import {Widget, VDOM} from 'cx/ui';
+import {PureContainer} from 'cx/widgets';
 import {Polyline as ReactPolyline} from 'react-google-maps';
 import _ from 'lodash';
 
 class ReactPolylineEnhanced extends ReactPolyline {
-
     componentDidMount() {
         super.componentDidMount();
 
         let {instance} = this.props;
         let {widget, data} = instance;
-        if (widget.pipeInstance)
-            instance.invoke("pipeInstance", this);
+        if (widget.pipeInstance) instance.invoke('pipeInstance', this);
 
         if (data.editable) {
-            this.checkPathHasChanged = _.debounce(::this.checkPathHasChanged, 100);
+            this.checkPathHasChanged = _.debounce(
+                this.checkPathHasChanged.bind(this),
+                100,
+            );
             this.monitorPathChanges();
         }
     }
@@ -23,8 +24,7 @@ class ReactPolylineEnhanced extends ReactPolyline {
         super.componentDidUpdate(...arguments);
 
         //new instance of the path is available after update
-        if (this.pathWithEvents)
-            this.monitorPathChanges();
+        if (this.pathWithEvents) this.monitorPathChanges();
     }
 
     monitorPathChanges() {
@@ -32,9 +32,21 @@ class ReactPolylineEnhanced extends ReactPolyline {
 
         let path = this.getPath();
         if (path != this.pathWithEvents) {
-            google.maps.event.addListener(path, 'insert_at', this.checkPathHasChanged);
-            google.maps.event.addListener(path, 'remove_at', this.checkPathHasChanged);
-            google.maps.event.addListener(path, 'set_at', this.checkPathHasChanged);
+            google.maps.event.addListener(
+                path,
+                'insert_at',
+                this.checkPathHasChanged,
+            );
+            google.maps.event.addListener(
+                path,
+                'remove_at',
+                this.checkPathHasChanged,
+            );
+            google.maps.event.addListener(
+                path,
+                'set_at',
+                this.checkPathHasChanged,
+            );
             this.pathWithEvents = path;
         }
     }
@@ -42,7 +54,7 @@ class ReactPolylineEnhanced extends ReactPolyline {
     checkPathHasChanged() {
         var pts = this.getPath().b.map(p => ({
             lat: p.lat(),
-            lng: p.lng()
+            lng: p.lng(),
         }));
         this.props.instance.set('path', pts);
     }
@@ -52,8 +64,7 @@ class ReactPolylineEnhanced extends ReactPolyline {
 
         let {instance} = this.props;
         let {widget} = instance;
-        if (widget.pipeInstance)
-            instance.invoke("pipeInstance", null);
+        if (widget.pipeInstance) instance.invoke('pipeInstance', null);
     }
 }
 
@@ -62,9 +73,9 @@ export class Polyline extends Widget {
         super.declareData(...arguments, {
             draggable: undefined,
             editable: undefined,
-            options: { structured: true },
+            options: {structured: true},
             path: undefined,
-            paths: undefined
+            paths: undefined,
         });
     }
 
@@ -80,27 +91,28 @@ export class Polyline extends Widget {
             'onMouseOut',
             'onMouseOver',
             'onMouseUp',
-            'onRightClick'
+            'onRightClick',
         ]);
     }
 
     wireEvents(instance, events) {
         var map = [];
-        events.map((name) => {
+        events.map(name => {
             if (this[name]) {
                 map[name] = e => instance.invoke(name, e, instance);
             }
         });
         return map;
     }
-    
+
     render(context, instance, key) {
-        return <ReactPolylineEnhanced
-                    {...instance.data}
-                    {...instance.events}
-                    instance={instance}
-                    key={key}
-            >
-            </ReactPolylineEnhanced>;
-    }  
+        return (
+            <ReactPolylineEnhanced
+                {...instance.data}
+                {...instance.events}
+                instance={instance}
+                key={key}
+            />
+        );
+    }
 }
