@@ -18,10 +18,6 @@ class ReactKmlLayerEnhanced extends ReactKmlLayer {
         let {widget} = instance;
         if (widget.pipeInstance) instance.invoke('pipeInstance', null);
     }
-
-    shouldComponentUpdate(props, state) {
-        return props.instance.shouldUpdate;
-    }
 }
 
 export class KmlLayer extends PureContainer {
