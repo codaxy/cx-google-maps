@@ -17,6 +17,9 @@ const items = [{
         text: 'Marker',
         url: '~/components/marker'
     }, {
+        text: 'MarkerWithLabel',
+        url: '~/components/marker-with-label'
+    }, {
         text: 'MarkerClusterer',
         url: '~/components/marker-clusterer'
     }, {
@@ -40,7 +43,7 @@ const items = [{
     }]
 }, {
     text: 'Examples',
-    items: [{ 
+    items: [{
         text: '2-minute start',
         url: '~/examples/first-map'
     },{
@@ -105,14 +108,14 @@ export default (
                 <dl>
                     <Repeater records={items}>
                         <dt>
-                            <Text if:expr="!{$record.url}" bind="$record.text" />                        
+                            <Text if:expr="!{$record.url}" bind="$record.text" />
                             <Link if:expr="!!{$record.url}" href:bind="$record.url" text:bind="$record.text" url:bind="url" />
                         </dt>
                         <Repeater records:bind="$record.items" keyField="url">
                             <dd>
                                 <Link href:bind="$record.url" text:bind="$record.text" url:bind="url" />
                             </dd>
-                        </Repeater>                        
+                        </Repeater>
                     </Repeater>
                 </dl>
             </aside>
