@@ -38,6 +38,9 @@ const items = [{
         text: 'InfoBox',
         url: '~/components/info-box'
     }, {
+        text: 'BicyclingLayer',
+        url: '~/components/bicycling-layer'
+    }, {
         text: 'FusionTablesLayer',
         url: '~/components/fusion-tables-layer'
     }, {

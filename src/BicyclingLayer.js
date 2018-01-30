@@ -1,8 +1,8 @@
 import {Widget, VDOM} from 'cx/ui';
 import {PureContainer} from 'cx/widgets';
-import {GroundOverlay as ReactGroundOverlay} from 'react-google-maps';
+import {BicyclingLayer as ReactBicyclingLayer} from 'react-google-maps';
 
-class ReactGroundOverlayEnhanced extends ReactGroundOverlay {
+class ReactBicyclingLayerEnhanced extends ReactBicyclingLayer {
     componentDidMount() {
         super.componentDidMount();
 
@@ -20,19 +20,15 @@ class ReactGroundOverlayEnhanced extends ReactGroundOverlay {
     }
 }
 
-export class GroundOverlay extends Widget {
+export class BicyclingLayer extends Widget {
     declareData() {
         super.declareData(...arguments, {
-            url: undefined,
-            bounds: {structured: true},
-            defaultBounds: {structured: true},
-            opacitiy: undefined
+            autoUpdate: undefined
         });
     }
 
     onInit(context, instance) {
         instance.events = this.wireEvents(instance, [
-            'onDblClick',
             'onClick'
         ]);
     }
@@ -49,7 +45,7 @@ export class GroundOverlay extends Widget {
 
     render(context, instance, key) {
         return (
-            <ReactGroundOverlayEnhanced
+            <ReactBicyclingLayerEnhanced
                 {...instance.data}
                 {...instance.events}
                 instance={instance}

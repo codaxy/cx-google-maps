@@ -6,7 +6,7 @@ import {
     SearchBox,
     Marker,
     MarkerClusterer,
-    GroundOverlay,
+    BicyclingLayer,
 } from 'cx-google-maps';
 
 import {VDOM, Controller as CxController, Repeater} from 'cx/ui';
@@ -49,18 +49,7 @@ export default (
                     position: google.maps.ControlPosition.TOP_RIGHT,
                 },
             }}>
-            <GroundOverlay
-                url="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
-                bounds={new google.maps.LatLngBounds(
-                    new google.maps.LatLng(40.712216, -74.22655),
-                    new google.maps.LatLng(40.773941, -74.12544)
-                )}
-                defaultBounds={new google.maps.LatLngBounds(
-                    new google.maps.LatLng(40.712216, -74.22655),
-                    new google.maps.LatLng(40.773941, -74.12544)
-                )}
-                opacity={.5}
-            />
+            <BicyclingLayer autoUpdate />
         </GoogleMap>
     </cx>
 );

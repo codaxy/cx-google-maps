@@ -20,6 +20,7 @@ import DirectionsRenderer from './components/directions-renderer';
 import DrawingManager from './components/drawing-manager';
 import FusionTablesLayer from './components/fusion-tables-layer';
 import GroundOverlay from './components/ground-overlay';
+import BicyclingLayer from './components/bicycling-layer';
 
 import FirstMap from './examples/first-map';
 import Filtering from './examples/filtering';
@@ -59,6 +60,7 @@ export default (
             <Filtering />
             <Routing />
             <PlacingMarkers />
+            <BicyclingLayer />
 
             <Section title="Page Not Found" mod="card">
                 This page doesn't exists. Please check your URL.
