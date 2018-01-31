@@ -1,12 +1,12 @@
-import { 
-    HtmlElement, 
-    Route, 
-    FlexCol, 
+import {
+    HtmlElement,
+    Route,
+    FlexCol,
     FlexRow,
     Section
 } from 'cx/widgets';
 
-import { 
+import {
     Md,
     CodeSnippet
 } from 'app/components';
@@ -41,15 +41,30 @@ cx scaffold
 npm install cx-google-maps --save
                     `}</CodeSnippet>
 
-                    
-                    Since we're using Google Maps, add a script reference to it somewhere in 
+
+                    `cx-google-maps` library is an ES6 library, so you need to enable babel transpiler for
+                    it. Check the `config/webpack.config.js` for the line similar to:
+
+                    <CodeSnippet>{`
+//add here any ES6 based library
+include: /[\\\/](app|cx|cx-react|cx-theme-\w*)[\\\/]/,
+                    `}</CodeSnippet>
+
+                    and add `cx-google-maps` in there, so that it looks something like this:
+
+                    <CodeSnippet>{`
+include: /[\\\/](app|cx|cx-react|cx-google-maps|cx-theme-\w*)[\\\/]/,
+                    `}</CodeSnippet>
+
+
+                    Since we're using Google Maps, add a script reference to it somewhere in
                     your `app/index.html`:
 
                     <CodeSnippet>{`
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>        
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
                     `}</CodeSnippet>
 
-                    
+
                     Replace the contents of `app/routes/default/index.js` (default application page) with:
 
                     <CodeSnippet>{`
@@ -66,11 +81,12 @@ const mapElement = <div style={{ position: "absolute", left: 0, top: 0, right: 0
 class Controller extends CxController {
     onInit() {
         this.store.init('$page.map', {
+            center: {
                 lat: 41.77811360,
                 lng: -87.62979820
             },
             zoom: 12
-        });        
+        });
     }
 }
 
@@ -86,9 +102,9 @@ export default <cx>
     >
         <Marker
             position:bind="$page.map.center"
-        />    
+        />
     </GoogleMap>
-</cx>;    
+</cx>;
                     `}</CodeSnippet>
 
 
@@ -99,9 +115,20 @@ export default <cx>
 npm start
                     `}</CodeSnippet>
 
-                    and build on from there. 
+                    and build on from there.
 
-                    If you want to learn more about building CxJS applications, there's plenty of 
+
+                    Remember that, in order to use specific Google Maps Libraries, like visualization
+                    (e.g. if you use `HeatmapLayer`), or drawing (e.g. `DrawingManager`), you need to provide
+                    your key and libraries you want in the Google Maps script tag URL, like this:
+
+
+                    <CodeSnippet>{`
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=[YOUR_KEY]&libraries=drawing,visualization,geocoding,places"></script>
+                    `}</CodeSnippet>
+
+
+                    If you want to learn more about building CxJS applications, there's plenty of
                     info you can find on the [official Cx pages](https://cxjs.io/quickstart).
                 </Md>
             </Section>
@@ -109,6 +136,6 @@ npm start
             <FlexCol mod="card" style="flex: 1; min-height: 400px">
                 <Example />
             </FlexCol>
-        </FlexRow> 
+        </FlexRow>
     </Route>
 </cx>;
