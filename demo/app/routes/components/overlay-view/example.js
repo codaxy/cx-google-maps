@@ -40,6 +40,13 @@ class Controller extends CxController {
         this.store.init('$page.mapdefaults', this.getDefaults());
         this.store.init('$page.map', this.getDefaults());
     }
+
+    onOverlayBtnClick() {
+        Toast.create({
+            message: 'You clicked on a button in an overlay.',
+            timeout: 3000
+        }).open();
+    }
 }
 
 export default (
@@ -65,10 +72,12 @@ export default (
                 <div style={{
                     background: "rgba(20, 40, 120, 0.3)",
                     color: "white",
-                    padding: 40,
-                    fontSize: "16pt"
+                    padding: 20
                 }}>
-                    This is an overlay
+                    <Button text="Click this button"
+                        mod="primary"
+                        onClick="onOverlayBtnClick"
+                    />
                 </div>
             </OverlayView>
         </GoogleMap>

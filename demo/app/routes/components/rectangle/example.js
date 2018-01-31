@@ -1,21 +1,22 @@
-import {
-    HtmlElement,
-    Menu,
-    Toast
-} from 'cx/widgets';
+import _ from 'lodash';
 
-import {
-    Url
-} from 'cx/ui';
+import { 
+    HtmlElement, 
+    Menu,
+    Text,
+    Toast,
+    Button,
+    Grid
+} from 'cx/widgets';
 
 import {
     GoogleMap,
     SearchBox,
     Marker,
-    MarkerWithLabel
+    Rectangle
 } from 'cx-google-maps';
 
-import { VDOM, Controller as CxController } from 'cx/ui';
+import { VDOM, Controller as CxController, Repeater } from 'cx/ui';
 import config from './config';
 
 const containerElement = <div style={{ position: "relative", flex: 1 }} />;
@@ -26,26 +27,25 @@ const mapElement =
 ;
 
 class Controller extends CxController {
-    getDefaults() {
+    getDefaults() { 
         return {
             center: {
                 lat: 41.77811360,
                 lng: -87.62979820
             },
-            zoom: 12
+            zoom: 9
         };
     }
 
-    onMarkerClick() {
-        Toast.create({
-            message: `Marker clicked.`,
-            timeout: 3000
-        }).open();
-    }
-
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());
+        this.store.init('$page.mapdefaults', this.getDefaults());        
         this.store.init('$page.map', this.getDefaults());
+        this.store.init('$page.bounds', {
+            north: 41.77811360,
+            west: -87.62979820,
+            east: -86.62,
+            south: 41.18
+        });
     }
 }
 
@@ -64,15 +64,19 @@ export default <cx>
             }
         }}
     >
-        <MarkerWithLabel
-            position:bind="$page.map.center"
-            title="This is a custom icon marker with label"
-            icon="https://codaxy.github.io/cx-google-maps/assets/img/cx.png"
-            labelAnchor={new google.maps.Point(0,0)}
-            labelStyle={{backgroundColor: "rgba(20, 40, 120, 0.5)", color: "white", fontSize: "18px", padding: "12px"}}
-            onClick="onMarkerClick"
-        >
-            <div>cx-google-maps</div>
-        </MarkerWithLabel>
+        <Menu vertical mod="map" itemPadding="small">
+            <Text tpl="{$page.bounds.north:n;4},{$page.bounds.south:n;4}:{$page.bounds.east:n;4},{$page.bounds.west:n;4}" />
+        </Menu>
+        <Rectangle
+            bounds:bind="$page.bounds"
+            options={{
+                fillColor: "red",
+                fillOpacity: 0.5,
+                strokeColor: "red",
+                strokeOpacity: 0.9
+            }}
+            editable
+            draggable
+        />
     </GoogleMap>
 </cx>;

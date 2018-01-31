@@ -1,10 +1,10 @@
 import {Widget, VDOM} from 'cx/ui';
 import {PureContainer} from 'cx/widgets';
 import {shallowEquals, debounce} from 'cx/util';
-import {Circle as ReactCircle} from 'react-google-maps';
+import {Rectangle as ReactRectangle} from 'react-google-maps';
 import _ from 'lodash';
 
-class ReactCircleEnhanced extends ReactCircle {
+class ReactRectangleEnhanced extends ReactRectangle {
     componentDidMount() {
         super.componentDidMount();
 
@@ -26,20 +26,18 @@ class ReactCircleEnhanced extends ReactCircle {
     }
 }
 
-export class Circle extends Widget {
+export class Rectangle extends Widget {
     declareData() {
         super.declareData(...arguments, {
-            center: {structured: true},
+            bounds: {structured: true},
             draggable: undefined,
             editable: undefined,
-            options: {structured: true},
-            radius: undefined
+            options: {structured: true}
         });
     }
 
     onInit(context, instance) {
         instance.events = this.wireEvents(instance, [
-            'onCenterChanged',
             'onClick',
             'onDblClick',
             'onDrag',
@@ -50,31 +48,26 @@ export class Circle extends Widget {
             'onMouseOut',
             'onMouseOver',
             'onMouseUp',
-            'onRightClick',
-            'onRadiusChanged'
+            'onBoundsChanged',
+            'onRightClick'
         ]);
 
-        if (instance.widget.center && instance.widget.center.bind) {
-            let oldOnCenterChanged = instance.events['onCenterChanged'];
-            instance.events['onCenterChanged'] = debounce(function(...args) {
+        if (instance.widget.bounds && instance.widget.bounds.bind) {
+            let oldOnBoundsChanged = instance.events['onBoundsChanged'];
+            instance.events['onBoundsChanged'] = debounce(function(...args) {
+                console.log('bounds changed');
+                var b = this.getBounds();
                 let c = {
-                    lat: this.getCenter().lat(),
-                    lng: this.getCenter().lng(),
+                    east: b.getNorthEast().lng(),
+                    west: b.getSouthWest().lng(),
+                    north: b.getNorthEast().lat(),
+                    south: b.getSouthWest().lat(),
                 };
 
-                if (!shallowEquals(c, instance.data.center))
-                    instance.set('center', c);
+                if (!shallowEquals(c, instance.data.bounds))
+                    instance.set('bounds', c);
 
-                if (oldOnCenterChanged) oldOnCenterChanged.call(this, ...args);
-            }, 50);
-        }
-
-        if (instance.widget.radius && instance.widget.radius.bind) {
-            let oldOnRadiusChanged = instance.events['onRadiusChanged'];
-            instance.events['onRadiusChanged'] = debounce(function(...args) {
-                instance.set('radius', this.getRadius());
-
-                if (oldOnRadiusChanged) oldOnRadiusChanged.call(this, ...args);
+                if (oldOnBoundsChanged) oldOnBoundsChanged.call(this, ...args);
             }, 50);
         }
     }
@@ -91,7 +84,7 @@ export class Circle extends Widget {
 
     render(context, instance, key) {
         return (
-            <ReactCircleEnhanced
+            <ReactRectangleEnhanced
                 {...instance.data}
                 {...instance.events}
                 instance={instance}

@@ -23,6 +23,7 @@ import GroundOverlay from './components/ground-overlay';
 import BicyclingLayer from './components/bicycling-layer';
 import Circle from './components/circle';
 import OverlayView from './components/overlay-view';
+import Rectangle from './components/rectangle';
 
 import FirstMap from './examples/first-map';
 import Filtering from './examples/filtering';
@@ -59,6 +60,7 @@ export default (
             <GroundOverlay />
             <Circle />
             <OverlayView />
+            <Rectangle />
 
             <FirstMap />
             <Filtering />
