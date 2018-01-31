@@ -23,6 +23,9 @@ const items = [{
         text: 'MarkerClusterer',
         url: '~/components/marker-clusterer'
     }, {
+        text: 'Circle',
+        url: '~/components/circle'
+    }, {
         text: 'Polygon',
         url: '~/components/polygon'
     }, {

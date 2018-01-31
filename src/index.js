@@ -1,4 +1,5 @@
 export * from './BicyclingLayer';
+export * from './Circle';
 export * from './DirectionsRenderer';
 export * from './DrawingManager';
 export * from './FusionTablesLayer';

@@ -21,6 +21,7 @@ import DrawingManager from './components/drawing-manager';
 import FusionTablesLayer from './components/fusion-tables-layer';
 import GroundOverlay from './components/ground-overlay';
 import BicyclingLayer from './components/bicycling-layer';
+import Circle from './components/circle';
 
 import FirstMap from './examples/first-map';
 import Filtering from './examples/filtering';
@@ -55,6 +56,7 @@ export default (
             <DrawingManager />
             <FusionTablesLayer />
             <GroundOverlay />
+            <Circle />
 
             <FirstMap />
             <Filtering />
