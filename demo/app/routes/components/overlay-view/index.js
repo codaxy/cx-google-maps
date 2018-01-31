@@ -76,7 +76,6 @@ export default <cx>
         >
             <div style={{
                 background: "rgba(20, 40, 120, 0.3)",
-                color: "white",
                 padding: 20
             }}>
                 <Button text="Click this button"

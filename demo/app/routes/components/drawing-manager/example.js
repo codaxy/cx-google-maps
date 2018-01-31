@@ -33,6 +33,20 @@ class Controller extends CxController {
         this.store.init('$page.mapdefaults', this.getDefaults());
         this.store.init('$page.map', this.getDefaults());
     }
+
+    onMarkerComplete(e) {
+        Toast.create({
+            message: `A marker at ${e.position.lat()}, ${e.position.lng()}.`,
+            timeout: 3000
+        }).open();
+    }
+
+    onCircleComplete(e, {store}) {
+        Toast.create({
+            message: `A circle of radius ${e.radius}.`,
+            timeout: 3000
+        }).open();
+    }
 }
 
 export default (
@@ -52,9 +66,6 @@ export default (
             }}>
             <DrawingManager
                 options={{
-                    drawingControl: true,
-                    drawingControlOptions: {
-                    },
                     circleOptions: {
                         fillColor: `#ffff00`,
                         fillOpacity: 1,
@@ -63,7 +74,10 @@ export default (
                         editable: true,
                         zIndex: 1,
                     },
+                    drawingControl: true,
                 }}
+                onCircleComplete="onCircleComplete"
+                onMarkerComplete="onMarkerComplete"
             />
         </GoogleMap>
     </cx>

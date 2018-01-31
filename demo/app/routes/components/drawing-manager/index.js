@@ -58,31 +58,41 @@ export default <cx>
 
                     ##### Example
                     <CodeSnippet>{`
-this.store.init('$page.path', _.range(3)
-    .map(() => ({
-        lat: 41.77811360 + Math.random() - 0.5,
-        lng: -87.62979820 + Math.random() - 0.5
-    })));
+class Controller extends CxController {
+    ...
 
-...
-
-export default <cx>
-    <GoogleMap
+    onMarkerComplete(e) {
         ...
-    >
-        <Polygon
-            path:bind="$page.path"
-            options={{
-                fillColor: "red",
-                fillOpacity: 0.5,
-                strokeColor: "red",
-                strokeOpacity: 0.9,
-                draggable: true,
-                editable: true
-            }}
-        />
-    </GoogleMap>
-</cx>;
+    }
+
+    onCircleComplete(e, {store}) {
+        ...
+    }
+}
+
+export default (
+    <cx>
+        <GoogleMap
+            controller={Controller}
+            ... 
+        >
+            <DrawingManager options={{
+                    circleOptions: {
+                        fillColor: '#ffff00',
+                        fillOpacity: 1,
+                        strokeWeight: 5,
+                        clickable: false,
+                        editable: true,
+                        zIndex: 1,
+                    },
+                    drawingControl: true,
+                }}
+                onCircleComplete="onCircleComplete"
+                onMarkerComplete="onMarkerComplete"
+            />
+        </GoogleMap>
+    </cx>
+);
                     `}</CodeSnippet>
                 </Md>
             </Section>
