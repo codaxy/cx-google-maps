@@ -33,7 +33,7 @@ export default <cx>
                     Creating Cx applications is very easy using [Cx CLI](https://cxjs.io/quickstart) tool:
 
                     <CodeSnippet>{`
-md first-map
+mkdir first-map
 cd first-map
 npm init -y
 npm install cx-cli --global
