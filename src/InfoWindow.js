@@ -51,16 +51,9 @@ export class InfoWindow extends PureContainer {
     }
 
     render(context, instance, key) {
-        var child = this.renderChildren(context, instance);
-        if (Array.isArray(child)) {
-            if (child.length > 1) {
-                Console.warn(
-                    'InfoWindow can only contain one child. Trailing children will be ignored.',
-                );
-            }
-
-            child = child[0];
-        }
+        var children = this.renderChildren(context, instance);
+        if (children.length !== 1)
+            throw Error('InfoWindow should contain exactly one child element.');
 
         return (
             <ReactInfoWindowEnhanced
@@ -68,7 +61,7 @@ export class InfoWindow extends PureContainer {
                 {...instance.events}
                 instance={instance}
                 key={key}>
-                {child}
+                {children[0]}
             </ReactInfoWindowEnhanced>
         );
     }

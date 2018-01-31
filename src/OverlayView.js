@@ -1,14 +1,13 @@
 import {Widget, VDOM} from 'cx/ui';
-import {HtmlElement, PureContainer} from 'cx/widgets';
-import {Console} from 'cx/util';
-import ReactInfoBox from 'react-google-maps/lib/components/addons/InfoBox';
+import {PureContainer} from 'cx/widgets';
+import {OverlayView as ReactOverlayView} from 'react-google-maps';
 
-class ReactInfoBoxEnhanced extends ReactInfoBox {
+class ReactOverlayViewEnhanced extends ReactOverlayView {
     componentDidMount() {
         super.componentDidMount();
 
         let {instance} = this.props;
-        let {widget} = instance;
+        let {widget, data} = instance;
         if (widget.pipeInstance) instance.invoke('pipeInstance', this);
     }
 
@@ -21,23 +20,17 @@ class ReactInfoBoxEnhanced extends ReactInfoBox {
     }
 }
 
-export class InfoBox extends PureContainer {
+export class OverlayView extends PureContainer {
     declareData() {
         super.declareData(...arguments, {
-            content: {structured: true},
-            options: {structured: true},
+            mapPaneName: undefined,
             position: {structured: true},
-            zIndex: {structured: true},
+            bounds: {structured: true}
         });
     }
 
     onInit(context, instance) {
         instance.events = this.wireEvents(instance, [
-            'onCloseClick',
-            'onContentChanged',
-            'onDomReady',
-            'onPositionChanged',
-            'onZIndexChanged',
         ]);
     }
 
@@ -54,23 +47,18 @@ export class InfoBox extends PureContainer {
     render(context, instance, key) {
         var children = this.renderChildren(context, instance);
         if (children.length !== 1)
-            throw Error('InfoBox should contain exactly one child element.');
-
-        let {data, events} = instance;
-
-        data.options = data.options || {};
-        data.options.boxClass = data.classNames;
-
+            throw Error('OverlayView should have exactly one child element.');
         return (
-            <ReactInfoBoxEnhanced
-                {...data}
-                {...events}
+            <ReactOverlayViewEnhanced
+                {...instance.data}
+                {...instance.events}
                 instance={instance}
-                key={key}>
+                getPixelPositionOffset={this.getPixelPositionOffset}
+                key={key}
+            >
                 {children[0]}
-            </ReactInfoBoxEnhanced>
+            </ReactOverlayViewEnhanced>
         );
     }
 }
 
-InfoBox.prototype.styled = true;

@@ -22,6 +22,7 @@ import FusionTablesLayer from './components/fusion-tables-layer';
 import GroundOverlay from './components/ground-overlay';
 import BicyclingLayer from './components/bicycling-layer';
 import Circle from './components/circle';
+import OverlayView from './components/overlay-view';
 
 import FirstMap from './examples/first-map';
 import Filtering from './examples/filtering';
@@ -57,6 +58,7 @@ export default (
             <FusionTablesLayer />
             <GroundOverlay />
             <Circle />
+            <OverlayView />
 
             <FirstMap />
             <Filtering />

@@ -1,7 +1,7 @@
-import { 
-    HtmlElement, 
-    Route, 
-    FlexCol, 
+import {
+    HtmlElement,
+    Route,
+    FlexCol,
     FlexRow,
     Section
 } from 'cx/widgets';
@@ -12,18 +12,18 @@ import {
     events
 } from './config';
 
-import { 
-    ConfigTable, 
+import {
+    ConfigTable,
     EventTable,
     CodeSnippet,
-    Md 
+    Md
 } from 'app/components';
 
 const info = {
-    name: 'Circle',
-    route: '~/components/circle',
-    reactGoogleMapsDocs: "https://tomchentw.github.io/react-google-maps/#circle",
-    googleMapsDocs: "https://developers.google.com/maps/documentation/javascript/3.exp/reference#Circle"
+    name: 'OverlayView',
+    route: '~/components/overlay-view',
+    reactGoogleMapsDocs: "https://tomchentw.github.io/react-google-maps/#fusiontableslayer",
+    googleMapsDocs: "https://developers.google.com/maps/documentation/javascript/3.exp/reference#FusionTablesLayer"
 };
 
 export default <cx>
@@ -43,45 +43,54 @@ export default <cx>
                     Cx wrapper around <a href={info.reactGoogleMapsDocs} target="_blank">{info.name}</a> React component.
                     For additional info about various options, available events and methods, please see <a href={info.googleMapsDocs} target="_blank">Google Maps Docs</a>.
                 </p>
-                    
+
                 <Md>
                     ##### Configuration
-                    <ConfigTable props={config} /> 
+                    <ConfigTable props={config} />
 
                     <br/>
                     <br/>
 
-                    <EventTable props={events} /> 
+                    <EventTable props={events} />
 
                     <br/>
                     <br/>
 
                     ##### Example
                     <CodeSnippet>{`
-this.store.init('$page.circle', {
-    center: {
-        lat: 41.77811360, 
-        lng: -87.62979820
-    },
-    radius: 10000
-});
+this.store.init('$page.path', _.range(3)
+    .map(() => ({
+        lat: 41.77811360 + Math.random() - 0.5,
+        lng: -87.62979820 + Math.random() - 0.5
+    })));
+
+...
+
+const getPixelPositionOffset = (width, height) => {
+    return {
+        x: -(width / 2),
+        y: -(height / 2)
+    }
+};
 
 export default <cx>
     <GoogleMap
         ...
     >
-        <Circle
-            center:bind="$page.circle.center"
-            radius:bind="$page.circle.radius"
-            options={{
-                fillColor: "red",
-                fillOpacity: 0.5,
-                strokeColor: "red",
-                strokeOpacity: 0.9
-            }}
-            editable
-            draggable
-        />
+        <OverlayView
+            position:bind="$page.map.center"
+            mapPaneName="overlayMouseTarget"
+            getPixelPositionOffset={getPixelPositionOffset}
+        >
+            <div style={{
+                background: "rgba(20, 40, 120, 0.3)",
+                color: "white",
+                padding: 40,
+                fontSize: "16pt"
+            }}>
+                This is an overlay
+            </div>
+        </OverlayView>
     </GoogleMap>
 </cx>;
                     `}</CodeSnippet>
@@ -91,6 +100,6 @@ export default <cx>
             <FlexCol mod="card" style="flex: 1; min-height: 400px">
                 <Example />
             </FlexCol>
-        </FlexRow>    
+        </FlexRow>
     </Route>
 </cx>;

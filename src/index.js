@@ -14,3 +14,5 @@ export * from './MarkerWithLabel';
 export * from './Polygon';
 export * from './Polyline';
 export * from './SearchBox';
+export * from './OverlayView';
+

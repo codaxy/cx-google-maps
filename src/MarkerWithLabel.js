@@ -81,6 +81,10 @@ export class MarkerWithLabel extends PureContainer {
     }
 
     render(context, instance, key) {
+        var children = this.renderChildren(context, instance);
+        if (children.length !== 1)
+            throw Error('MarkerWithLabel should contain exactly one child element.');
+
         return (
             <ReactMarkerWithLabelEnhanced
                 {...instance.data}
@@ -88,7 +92,7 @@ export class MarkerWithLabel extends PureContainer {
                 instance={instance}
                 key={key}>
                 <div>
-                    {this.renderChildren(context, instance)}
+                    {children[0]}
                 </div>
             </ReactMarkerWithLabelEnhanced>
         );

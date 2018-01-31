@@ -50,6 +50,10 @@ export class SearchBox extends PureContainer {
     }
     
     render(context, instance, key) {
+        var children = this.renderChildren(context, instance);
+        if (children.length !== 1)
+            throw Error('SearchBox should have exactly one child element.');
+
         return <ReactSearchBoxEnhanced
             {...instance.data}
             {...instance.events}
@@ -57,7 +61,7 @@ export class SearchBox extends PureContainer {
             key={key}
         >
             <div>
-                {this.renderChildren(context, instance)}
+                {children[0]}
             </div>
         </ReactSearchBoxEnhanced>;
     }

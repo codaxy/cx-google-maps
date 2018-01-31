@@ -47,6 +47,9 @@ const items = [{
         text: 'FusionTablesLayer',
         url: '~/components/fusion-tables-layer'
     }, {
+        text: 'OverlayView',
+        url: '~/components/overlay-view'
+    }, {
         text: 'GroundOverlay',
         url: '~/components/ground-overlay'
     }, {
