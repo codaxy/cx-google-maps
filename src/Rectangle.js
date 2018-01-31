@@ -55,7 +55,6 @@ export class Rectangle extends Widget {
         if (instance.widget.bounds && instance.widget.bounds.bind) {
             let oldOnBoundsChanged = instance.events['onBoundsChanged'];
             instance.events['onBoundsChanged'] = debounce(function(...args) {
-                console.log('bounds changed');
                 var b = this.getBounds();
                 let c = {
                     east: b.getNorthEast().lng(),

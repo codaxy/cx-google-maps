@@ -59,6 +59,9 @@ const items = [{
         text: 'DirectionsRenderer',
         url: '~/components/directions-renderer'
     }, {
+        text: 'StreetViewPanorama',
+        url: '~/components/street-view-panorama'
+    }, {
         text: 'DrawingManager',
         url: '~/components/drawing-manager'
     }]

@@ -16,4 +16,5 @@ export * from './Polyline';
 export * from './Rectangle';
 export * from './SearchBox';
 export * from './OverlayView';
+export * from './StreetViewPanorama';
 

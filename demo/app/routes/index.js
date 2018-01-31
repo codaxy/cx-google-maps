@@ -24,6 +24,7 @@ import BicyclingLayer from './components/bicycling-layer';
 import Circle from './components/circle';
 import OverlayView from './components/overlay-view';
 import Rectangle from './components/rectangle';
+import StreetViewPanorama from './components/street-view-panorama';
 
 import FirstMap from './examples/first-map';
 import Filtering from './examples/filtering';
@@ -61,6 +62,7 @@ export default (
             <Circle />
             <OverlayView />
             <Rectangle />
+            <StreetViewPanorama />
 
             <FirstMap />
             <Filtering />
