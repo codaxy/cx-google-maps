@@ -25,6 +25,9 @@ import Circle from './components/circle';
 import OverlayView from './components/overlay-view';
 import Rectangle from './components/rectangle';
 import StreetViewPanorama from './components/street-view-panorama';
+import TrafficLayer from './components/traffic-layer';
+import HeatmapLayer from './components/heatmap-layer';
+import StandaloneSearchBox from './components/standalone-search-box';
 
 import FirstMap from './examples/first-map';
 import Filtering from './examples/filtering';
@@ -63,6 +66,9 @@ export default (
             <OverlayView />
             <Rectangle />
             <StreetViewPanorama />
+            <TrafficLayer />
+            <HeatmapLayer />
+            <StandaloneSearchBox />
 
             <FirstMap />
             <Filtering />

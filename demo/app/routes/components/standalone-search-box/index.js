@@ -20,9 +20,9 @@ import {
 } from 'app/components';
 
 const info = {
-    name: 'SearchBox',
-    route: '~/components/search-box',
-    reactGoogleMapsDocs: "https://developers.google.com/maps/documentation/javascript/3.exp/reference#SearchBox",
+    name: 'StandaloneSearchBox',
+    route: '~/components/standalone-search-box',
+    reactGoogleMapsDocs: "https://tomchentw.github.io/react-google-maps/#standalonesearchbox",
     googleMapsDocs: "https://developers.google.com/maps/documentation/javascript/3.exp/reference#SearchBox"
 };
 
@@ -59,10 +59,8 @@ export default <cx>
                     ##### Example
                     <CodeSnippet>{`
 class Controller extends CxController {
-    ...
-
-    pipeMapInstance(instance) {
-        this.map = instance;
+    onInit() {
+        this.store.set('$page.places', []);
     }
 
     pipeSearchBoxInstance(instance) {
@@ -71,38 +69,59 @@ class Controller extends CxController {
 
     onSearchPlacesChanged(e) {
         let places = this.searchBox.getPlaces();
-        if (places.length < 1)
-            return;
-        
-        Toast.create({
-            message: \`Place selected: \$\{places[0].formatted_address\}\`,
-            timeout: 3000
-        }).open();        
-        
-        let location = places[0].geometry.location
-        this.map.panTo(location);
+        if (places.length < 1) return;
+        let place = places[0];
+
+        this.store.update('$page.places', ps => {
+            return [...ps, {
+                address: place.formatted_address,
+                name: place.name,
+                query: this.store.get('$page.text')
+            }];
+        });
     }
 }
 
-export default <cx>
-    <GoogleMap
-        pipeInstance="pipeMapInstance"
-        ...
-    >
-        <SearchBox
-            controlPosition={google.maps.ControlPosition.TOP_CENTER}
-            onPlacesChanged="onSearchPlacesChanged"
-            pipeInstance="pipeSearchBoxInstance"
-        >   
-            <TextField
-                placeholder="Search..."
-                style={{
-                    margin: 5,
-                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)'
-                }}/>
-        </SearchBox>
-    </GoogleMap>
-</cx>;
+export default (
+    <cx>
+        <FlexCol 
+            class="flex-1" controller={Controller} 
+            pad>
+            <h4>Cx TextField</h4>
+            <StandaloneSearchBox
+                onPlacesChanged="onSearchPlacesChanged"
+                pipeInstance="pipeSearchBoxInstance">
+                <TextField
+                    placeholder="Search for a place..."
+                    style="width: 100%"
+                    class="flex-1 autogrow"
+                    value:bind="$page.text"
+                />
+            </StandaloneSearchBox>
+            <br/>
+            <h4>Previous searches</h4>
+            <Grid 
+                columns={[{
+                    header: 'Address',
+                    sortable: true,
+                    field: 'address'
+                }, {
+                    header: 'Name',
+                    field: 'name',
+                    sortable: true
+                }, {
+                    header: 'Query',
+                    field: 'query',
+                    sortable: true
+                }]}
+
+                emptyText="No previous searches."
+
+                records:bind="$page.places"
+            />
+        </FlexCol>
+    </cx>
+);
                     `}</CodeSnippet>
                 </Md>
             </Section>

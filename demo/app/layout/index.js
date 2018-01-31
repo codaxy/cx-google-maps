@@ -14,6 +14,9 @@ const items = [{
         text: 'SearchBox',
         url: '~/components/search-box'
     }, {
+        text: 'StandaloneSearchBox',
+        url: '~/components/standalone-search-box'
+    }, {
         text: 'Marker',
         url: '~/components/marker'
     }, {
@@ -61,6 +64,12 @@ const items = [{
     }, {
         text: 'StreetViewPanorama',
         url: '~/components/street-view-panorama'
+    }, {
+        text: 'TrafficLayer',
+        url: '~/components/traffic-layer'
+    }, {
+        text: 'HeatmapLayer',
+        url: '~/components/heatmap-layer'
     }, {
         text: 'DrawingManager',
         url: '~/components/drawing-manager'

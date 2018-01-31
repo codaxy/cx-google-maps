@@ -88,7 +88,12 @@ export default <cx>
             onPlacesChanged="onSearchPlacesChanged"
             pipeInstance="pipeSearchBoxInstance"
         >   
-            <TextField placeholder="Search..." style={{ margin: 5, boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)' }}/>
+            <TextField
+                placeholder="Search..."
+                style={{
+                    margin: 5,
+                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)'
+                }}/>
         </SearchBox>
     </GoogleMap>
 </cx>;

@@ -1,7 +1,7 @@
 import { Widget, VDOM, PureContainer } from 'cx/ui';
-import ReactSearchBox from 'react-google-maps/lib/components/places/SearchBox';
+import ReactStandaloneSearchBox from 'react-google-maps/lib/components/places/StandaloneSearchBox';
 
-class ReactSearchBoxEnhanced extends ReactSearchBox {
+class ReactStandaloneSearchBoxEnhanced extends ReactStandaloneSearchBox {
     componentDidMount() {
         super.componentDidMount();
 
@@ -21,11 +21,10 @@ class ReactSearchBoxEnhanced extends ReactSearchBox {
     }
 }
 
-export class SearchBox extends PureContainer {
+export class StandaloneSearchBox extends PureContainer {
     declareData() {
         super.declareData(...arguments, {
-            bounds: { structured: true },
-            controlPosition: { structured: true }
+            bounds: { structured: true }
         });
     }
 
@@ -47,18 +46,15 @@ export class SearchBox extends PureContainer {
     
     render(context, instance, key) {
         var children = this.renderChildren(context, instance);
-        if (children.length !== 1)
-            throw Error('SearchBox should have exactly one child element.');
-
-        return <ReactSearchBoxEnhanced
+        return <ReactStandaloneSearchBoxEnhanced
             {...instance.data}
             {...instance.events}
             instance={instance}
             key={key}
         >
             <div>
-                {children[0]}
+                {children}
             </div>
-        </ReactSearchBoxEnhanced>;
+        </ReactStandaloneSearchBoxEnhanced>;
     }
 }
