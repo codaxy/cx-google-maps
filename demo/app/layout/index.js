@@ -55,9 +55,9 @@ const items = [{
     }, {
         text: 'OverlayView',
         url: '~/components/overlay-view'
-    }, {
-        text: 'GroundOverlay',
-        url: '~/components/ground-overlay'
+    //}, {
+    //}, {text: 'GroundOverlay',
+    //}, {url: '~/components/ground-overlay'
     }, {
         text: 'DirectionsRenderer',
         url: '~/components/directions-renderer'

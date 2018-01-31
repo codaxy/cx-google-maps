@@ -37,6 +37,11 @@ export class EventTable extends PureContainer {
                 </cx>
                 this.add(r);
             }
+            else this.add(<cx>
+                <tr>
+                    <td>N/A</td>
+                </tr>
+            </cx>);
         });
     }
 

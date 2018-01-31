@@ -16,5 +16,5 @@ export const config = {
 };
 
 export const events = {
-    'N/A': `N/A`
+    'N/A': false
 };

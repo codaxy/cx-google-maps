@@ -58,21 +58,103 @@ export default <cx>
 
                     ##### Example
                     <CodeSnippet>{`
-export default <cx>
-    <GoogleMap
-        ...
-    >
-        <FusionTablesLayer
-            url="http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml"
-            options={{
-                query: {
-                    select: 'Geocodable address',
-                    from: '1mZ53Z70NsChnBMm-qEYmSDOvLXgrreLTkQUvvg',
-                },
-            }}
-        />
-    </GoogleMap>
-</cx>;
+class Controller extends CxController {
+    getDefaults() {
+        return {
+            center: {
+                lat: 41.7781136,
+                lng: -87.6297982,
+            },
+            zoom: 9,
+        };
+    }
+
+    onInit() {
+        let d = this.getDefaults();
+        this.store.init('$page.mapdefaults', d);
+        this.store.init('$page.map', d);
+        this.store.set('$page.heat', {
+            radius: 10,
+            opacity: 0.6,
+        });
+
+        this.addComputable('$page.gradient', ['$page.altGradient'], alt => {
+            return !alt ? null : [
+                'rgba(0, 255, 255, 0)',
+                'rgba(0, 255, 255, 1)',
+                'rgba(0, 191, 255, 1)',
+                'rgba(0, 127, 255, 1)',
+                'rgba(0, 63, 255, 1)',
+                'rgba(0, 0, 255, 1)',
+                'rgba(0, 0, 223, 1)',
+                'rgba(0, 0, 191, 1)',
+                'rgba(0, 0, 159, 1)',
+                'rgba(0, 0, 127, 1)',
+                'rgba(63, 0, 91, 1)',
+                'rgba(127, 0, 63, 1)',
+                'rgba(191, 0, 31, 1)',
+                'rgba(255, 0, 0, 1)'
+            ];
+        });
+
+        this.randomize();
+    }
+
+    randomize() {
+        let d = this.getDefaults();
+        let p = 0.3;
+        let points = _.map(
+            new Array(1000),
+            a =>
+                new google.maps.LatLng({
+                    lat: d.center.lat + p * Math.log(Math.random()),
+                    lng: d.center.lng - p * Math.log(Math.random()),
+                }),
+        );
+
+        this.store.set('$page.points', points);
+    }
+}
+
+export default (
+    <cx>
+        <GoogleMap
+            ...
+        >
+            <Menu vertical mod="map" itemPadding="small">
+                <div layout={LabelsLeftLayout}>
+                    <Slider
+                        label="Radius"
+                        value:bind="$page.heat.radius"
+                        minValue={1}
+                        maxValue={40}
+                    />
+                    <Slider
+                        label="Opacity"
+                        value:bind="$page.heat.opacity"
+                        minValue={0}
+                        maxValue={1}
+                    />
+                    <Checkbox
+                        value:bind="$page.altGradient"
+                    >
+                        Alt. gradient
+                    </Checkbox>
+                    <Button text="Randomize data" onClick="randomize" />
+                </div>
+            </Menu>
+
+            <HeatmapLayer
+                data:bind="$page.points"
+                options={{
+                    radius: {bind: "$page.heat.radius"},
+                    opacity: {bind: "$page.heat.opacity"},
+                    gradient: {bind: "$page.gradient"}
+                }}
+            />
+        </GoogleMap>
+    </cx>
+);
                     `}</CodeSnippet>
                 </Md>
             </Section>
