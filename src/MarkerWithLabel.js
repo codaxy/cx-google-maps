@@ -36,7 +36,7 @@ export class MarkerWithLabel extends PureContainer {
             shape: {structured: true},
             title: {structured: true},
             zIndex: undefined,
-            labelAnchor: {structured: true},
+            labelAnchor: undefined,
             labelClass: undefined,
             labelStyle: {structured: true},
             labelVisible: undefined,
@@ -91,9 +91,7 @@ export class MarkerWithLabel extends PureContainer {
                 {...instance.events}
                 instance={instance}
                 key={key}>
-                <div>
-                    {children[0]}
-                </div>
+                {children[0]}
             </ReactMarkerWithLabelEnhanced>
         );
     }

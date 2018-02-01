@@ -33,7 +33,7 @@ class Controller extends CxController {
         return {
             center: {
                 lat: 41.7781136,
-                lng: -87.6297982,
+                lng: -87.8797982,
             },
             zoom: 9,
         };
@@ -72,13 +72,13 @@ class Controller extends CxController {
 
     randomize() {
         let d = this.getDefaults();
-        let p = 0.3;
+        let p = 0.3; 
         let points = _.map(
             new Array(1000),
             a =>
                 new google.maps.LatLng({
-                    lat: d.center.lat + p * Math.log(Math.random()),
-                    lng: d.center.lng - p * Math.log(Math.random()),
+                    lat: d.center.lat + Math.sign(Math.random() - 0.5) * p * Math.log(Math.abs(Math.random())),
+                    lng: d.center.lng + Math.sign(Math.random() - 0.5) * p * Math.log(Math.abs(Math.random())),
                 }),
         );
 

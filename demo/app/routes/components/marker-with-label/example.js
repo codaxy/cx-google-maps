@@ -68,7 +68,7 @@ export default <cx>
             position:bind="$page.map.center"
             title="This is a custom icon marker with label"
             icon="https://codaxy.github.io/cx-google-maps/assets/img/cx.png"
-            labelAnchor={new google.maps.Point(0,0)}
+            labelAnchor={{x: 0, y: 0}}
             labelStyle={{backgroundColor: "rgba(20, 40, 120, 0.5)", color: "white", fontSize: "18px", padding: "12px"}}
             onClick="onMarkerClick"
         >
