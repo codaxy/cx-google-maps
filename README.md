@@ -22,12 +22,12 @@ The library contains wrappers around following `react-google-maps` components:
 - Marker
 - MarkerClusterer
 - MarkerWithLabel
+- OverlayView
 - Polygon
 - Polyline
 - Rectangle
 - SearchBox
 - StandaloneSearchBox
-- OverlayView
 - StreetViewPanorama
 - TrafficLayer
 

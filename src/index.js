@@ -12,12 +12,11 @@ export * from './KmlLayer';
 export * from './Marker';
 export * from './MarkerClusterer';
 export * from './MarkerWithLabel';
+export * from './OverlayView';
 export * from './Polygon';
 export * from './Polyline';
 export * from './Rectangle';
 export * from './SearchBox';
 export * from './StandaloneSearchBox';
-export * from './OverlayView';
 export * from './StreetViewPanorama';
 export * from './TrafficLayer';
-
