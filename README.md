@@ -36,9 +36,9 @@ Documentation
 
 You can run the documentation/demo app locally by issuing:
 
-	yarn start
+	yarn && yarn start
 
-from the top-level folder.
+from `examples/demo` folder.
 
 Demo App
 ========
