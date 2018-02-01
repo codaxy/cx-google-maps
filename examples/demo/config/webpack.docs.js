@@ -36,6 +36,12 @@ var specific = {
                 from: p("assets"),
                 to: p("../../docs/assets")
             }
+        ]),
+        new CopyWebpackPlugin([
+            {
+                from: p("app/404.html"),
+                to: p("../../docs")
+            }
         ])
     ],
 
