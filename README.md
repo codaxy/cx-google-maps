@@ -6,18 +6,30 @@ It contains a handful of useful classes for creating modern maps-aware applicato
 of it [here](http://codaxy.github.io/cx-google-maps).
 
 
-The project is still work in progress, however, it is in stable state. Out of the box, it supports following components:
+The library contains wrappers around following `react-google-maps` components: 
 
+- BicyclingLayer
+- Circle
 - DirectionsRenderer
+- DrawingManager
+- FusionTablesLayer
 - GoogleMap
+- GroundOverlay
+- HeatmapLayer
 - InfoBox
 - InfoWindow
 - KmlLayer
 - Marker
 - MarkerClusterer
+- MarkerWithLabel
 - Polygon
 - Polyline
+- Rectangle
 - SearchBox
+- StandaloneSearchBox
+- OverlayView
+- StreetViewPanorama
+- TrafficLayer
 
 Documentation
 =============

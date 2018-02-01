@@ -72,7 +72,7 @@ class Controller extends CxController {
 
     randomize() {
         let d = this.getDefaults();
-        let p = 0.3; 
+        let p = 0.1; 
         let points = _.map(
             new Array(1000),
             a =>

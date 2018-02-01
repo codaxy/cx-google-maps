@@ -9,8 +9,8 @@ export const config = {
             call its methods later. The method has signature `pipeInstance(instance)`.
         </Md></cx>
     },
-    url: 'string',
-    defaultBounds: 'object',
+    defaultUrl: 'string (non-bindable)',
+    defaultBounds: 'object (non-bindable)',
     opacity: 'number'
 };
 

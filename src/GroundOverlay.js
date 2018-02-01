@@ -23,10 +23,7 @@ class ReactGroundOverlayEnhanced extends ReactGroundOverlay {
 export class GroundOverlay extends Widget {
     declareData() {
         super.declareData(...arguments, {
-            url: undefined,
-            bounds: {structured: true},
-            defaultBounds: {structured: true},
-            opacitiy: undefined
+            opacity: undefined
         });
     }
 
@@ -52,6 +49,8 @@ export class GroundOverlay extends Widget {
             <ReactGroundOverlayEnhanced
                 {...instance.data}
                 {...instance.events}
+                defaultUrl={this.defaultUrl}
+                defaultBounds={this.defaultBounds}
                 instance={instance}
                 key={key}
             />

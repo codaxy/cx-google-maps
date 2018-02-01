@@ -58,29 +58,34 @@ export default <cx>
 
                     ##### Example
                     <CodeSnippet>{`
-this.store.init('$page.path', _.range(3)
-    .map(() => ({
-        lat: 41.77811360 + Math.random() - 0.5,
-        lng: -87.62979820 + Math.random() - 0.5
-    })));
-
-...
-
-export default <cx>
-    <GoogleMap
-        ...
-    >
-        <FusionTablesLayer
-            url="http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml"
-            options={{
-                query: {
-                    select: 'Geocodable address',
-                    from: '1mZ53Z70NsChnBMm-qEYmSDOvLXgrreLTkQUvvg',
-                },
-            }}
-        />
-    </GoogleMap>
-</cx>;
+export default (
+    <cx>
+        <GoogleMap
+            ...
+        >
+            <Menu vertical mod="map" itemPadding="small">
+                <div layout={LabelsLeftLayout}>
+                    <Slider
+                        label="Opacity"
+                        value:bind="$page.layer.opacity"
+                        minValue={0}
+                        maxValue={1}
+                    />
+                </div>
+            </Menu>
+            <GroundOverlay
+                defaultUrl="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
+                defaultBounds={{
+                    north: 40.773941,
+                    south: 40.712216,
+                    east: -74.12544,
+                    west: -74.22655,
+                }}
+                opacity:bind="$page.layer.opacity"
+            />
+        </GoogleMap>
+    </cx>
+);
                     `}</CodeSnippet>
                 </Md>
             </Section>
