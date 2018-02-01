@@ -1,69 +1,69 @@
-import {Widget, VDOM} from 'cx/ui';
-import {PureContainer} from 'cx/widgets';
-import {Marker as ReactMarker} from 'react-google-maps';
+import { Widget, VDOM } from "cx/ui";
+import { PureContainer } from "cx/widgets";
+import { Marker as ReactMarker } from "react-google-maps";
 
 class ReactMarkerEnhanced extends ReactMarker {
     componentDidMount() {
         super.componentDidMount();
 
-        let {instance} = this.props;
-        let {widget} = instance;
-        if (widget.pipeInstance) instance.invoke('pipeInstance', this);
+        let { instance } = this.props;
+        let { widget } = instance;
+        if (widget.pipeInstance) instance.invoke("pipeInstance", this);
     }
 
     componentWillUnmount() {
         super.componentWillUnmount();
 
-        let {instance} = this.props;
-        let {widget} = instance;
-        if (widget.pipeInstance) instance.invoke('pipeInstance', null);
+        let { instance } = this.props;
+        let { widget } = instance;
+        if (widget.pipeInstance) instance.invoke("pipeInstance", null);
     }
 }
 
 export class Marker extends PureContainer {
     declareData() {
         super.declareData(...arguments, {
-            animation: {structured: true},
-            attribution: {structured: true},
+            animation: { structured: true },
+            attribution: { structured: true },
             clickable: undefined,
-            cursor: {structured: true},
+            cursor: { structured: true },
             draggable: undefined,
-            icon: {structured: true},
-            label: {structured: true},
+            icon: { structured: true },
+            label: { structured: true },
             opacity: undefined,
-            options: {structured: true},
-            place: {structured: true},
-            position: {structured: true},
-            shape: {structured: true},
-            title: {structured: true},
+            options: { structured: true },
+            place: { structured: true },
+            position: { structured: true },
+            shape: { structured: true },
+            title: { structured: true },
             zIndex: undefined,
-            noRedraw: undefined,
+            noRedraw: undefined
         });
     }
 
     onInit(context, instance) {
         instance.events = this.wireEvents(instance, [
-            'onAnimationChanged',
-            'onClick',
-            'onClickableChanged',
-            'onCursorChanged',
-            'onDblClick',
-            'onDrag',
-            'onDragEnd',
-            'onDraggableChanged',
-            'onDragStart',
-            'onFlatChanged',
-            'onIconChanged',
-            'onMouseDown',
-            'onMouseOut',
-            'onMouseOver',
-            'onMouseUp',
-            'onPositionChanged',
-            'onRightClick',
-            'onShapeChanged',
-            'onTitleChanged',
-            'onVisibleChanged',
-            'onZindexChanged',
+            "onAnimationChanged",
+            "onClick",
+            "onClickableChanged",
+            "onCursorChanged",
+            "onDblClick",
+            "onDrag",
+            "onDragEnd",
+            "onDraggableChanged",
+            "onDragStart",
+            "onFlatChanged",
+            "onIconChanged",
+            "onMouseDown",
+            "onMouseOut",
+            "onMouseOver",
+            "onMouseUp",
+            "onPositionChanged",
+            "onRightClick",
+            "onShapeChanged",
+            "onTitleChanged",
+            "onVisibleChanged",
+            "onZindexChanged"
         ]);
     }
 
@@ -83,7 +83,8 @@ export class Marker extends PureContainer {
                 {...instance.data}
                 {...instance.events}
                 instance={instance}
-                key={key}>
+                key={key}
+            >
                 {this.renderChildren(context, instance)}
             </ReactMarkerEnhanced>
         );

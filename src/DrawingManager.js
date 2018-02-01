@@ -1,41 +1,41 @@
-import {Widget, VDOM} from 'cx/ui';
-import {PureContainer} from 'cx/widgets';
-import ReactDrawingManager from 'react-google-maps/lib/components/drawing/DrawingManager';
+import { Widget, VDOM } from "cx/ui";
+import { PureContainer } from "cx/widgets";
+import ReactDrawingManager from "react-google-maps/lib/components/drawing/DrawingManager";
 
 class ReactDrawingManagerEnhanced extends ReactDrawingManager {
     componentDidMount() {
         super.componentDidMount();
 
-        let {instance} = this.props;
-        let {widget, data} = instance;
-        if (widget.pipeInstance) instance.invoke('pipeInstance', this);
+        let { instance } = this.props;
+        let { widget, data } = instance;
+        if (widget.pipeInstance) instance.invoke("pipeInstance", this);
     }
 
     componentWillUnmount() {
         super.componentWillUnmount();
 
-        let {instance} = this.props;
-        let {widget} = instance;
-        if (widget.pipeInstance) instance.invoke('pipeInstance', null);
+        let { instance } = this.props;
+        let { widget } = instance;
+        if (widget.pipeInstance) instance.invoke("pipeInstance", null);
     }
 }
 
 export class DrawingManager extends Widget {
     declareData() {
         super.declareData(...arguments, {
-            drawingMode: {structured: true},
-            options: {structured: true}
+            drawingMode: { structured: true },
+            options: { structured: true }
         });
     }
 
     onInit(context, instance) {
         instance.events = this.wireEvents(instance, [
-            'onCircleComplete',
-            'onMarkerComplete',
-            'onOverlayComplete',
-            'onPolygonComplete',
-            'onPolylineComplete',
-            'onRectangleComplete'
+            "onCircleComplete",
+            "onMarkerComplete",
+            "onOverlayComplete",
+            "onPolygonComplete",
+            "onPolylineComplete",
+            "onRectangleComplete"
         ]);
     }
 

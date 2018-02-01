@@ -1,22 +1,22 @@
-import {Widget, VDOM} from 'cx/ui';
-import {PureContainer} from 'cx/widgets';
-import {TrafficLayer as ReactTrafficLayer} from 'react-google-maps';
+import { Widget, VDOM } from "cx/ui";
+import { PureContainer } from "cx/widgets";
+import { TrafficLayer as ReactTrafficLayer } from "react-google-maps";
 
 class ReactTrafficLayerEnhanced extends ReactTrafficLayer {
     componentDidMount() {
         super.componentDidMount();
 
-        let {instance} = this.props;
-        let {widget, data} = instance;
-        if (widget.pipeInstance) instance.invoke('pipeInstance', this);
+        let { instance } = this.props;
+        let { widget, data } = instance;
+        if (widget.pipeInstance) instance.invoke("pipeInstance", this);
     }
 
     componentWillUnmount() {
         super.componentWillUnmount();
 
-        let {instance} = this.props;
-        let {widget} = instance;
-        if (widget.pipeInstance) instance.invoke('pipeInstance', null);
+        let { instance } = this.props;
+        let { widget } = instance;
+        if (widget.pipeInstance) instance.invoke("pipeInstance", null);
     }
 }
 
@@ -24,13 +24,12 @@ export class TrafficLayer extends Widget {
     declareData() {
         super.declareData(...arguments, {
             autoUpdate: undefined,
-            options: {structured: true}
+            options: { structured: true }
         });
     }
 
     onInit(context, instance) {
-        instance.events = this.wireEvents(instance, [
-        ]);
+        instance.events = this.wireEvents(instance, []);
     }
 
     wireEvents(instance, events) {

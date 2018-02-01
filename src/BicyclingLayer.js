@@ -1,22 +1,22 @@
-import {Widget, VDOM} from 'cx/ui';
-import {PureContainer} from 'cx/widgets';
-import {BicyclingLayer as ReactBicyclingLayer} from 'react-google-maps';
+import { Widget, VDOM } from "cx/ui";
+import { PureContainer } from "cx/widgets";
+import { BicyclingLayer as ReactBicyclingLayer } from "react-google-maps";
 
 class ReactBicyclingLayerEnhanced extends ReactBicyclingLayer {
     componentDidMount() {
         super.componentDidMount();
 
-        let {instance} = this.props;
-        let {widget, data} = instance;
-        if (widget.pipeInstance) instance.invoke('pipeInstance', this);
+        let { instance } = this.props;
+        let { widget, data } = instance;
+        if (widget.pipeInstance) instance.invoke("pipeInstance", this);
     }
 
     componentWillUnmount() {
         super.componentWillUnmount();
 
-        let {instance} = this.props;
-        let {widget} = instance;
-        if (widget.pipeInstance) instance.invoke('pipeInstance', null);
+        let { instance } = this.props;
+        let { widget } = instance;
+        if (widget.pipeInstance) instance.invoke("pipeInstance", null);
     }
 }
 
@@ -28,9 +28,7 @@ export class BicyclingLayer extends Widget {
     }
 
     onInit(context, instance) {
-        instance.events = this.wireEvents(instance, [
-            'onClick'
-        ]);
+        instance.events = this.wireEvents(instance, ["onClick"]);
     }
 
     wireEvents(instance, events) {

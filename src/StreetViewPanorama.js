@@ -1,49 +1,49 @@
-import {Widget, VDOM} from 'cx/ui';
-import {PureContainer} from 'cx/widgets';
-import {StreetViewPanorama as ReactStreetViewPanorama} from 'react-google-maps';
-import {shallowEquals, debounce} from 'cx/util';
+import { Widget, VDOM } from "cx/ui";
+import { PureContainer } from "cx/widgets";
+import { StreetViewPanorama as ReactStreetViewPanorama } from "react-google-maps";
+import { shallowEquals, debounce } from "cx/util";
 
 class ReactStreetViewPanoramaEnhanced extends ReactStreetViewPanorama {
     componentDidMount() {
         super.componentDidMount();
 
-        let {instance} = this.props;
-        let {widget, data} = instance;
-        if (widget.pipeInstance) instance.invoke('pipeInstance', this);
+        let { instance } = this.props;
+        let { widget, data } = instance;
+        if (widget.pipeInstance) instance.invoke("pipeInstance", this);
     }
 
     componentWillUnmount() {
         super.componentWillUnmount();
 
-        let {instance} = this.props;
-        let {widget} = instance;
-        if (widget.pipeInstance) instance.invoke('pipeInstance', null);
+        let { instance } = this.props;
+        let { widget } = instance;
+        if (widget.pipeInstance) instance.invoke("pipeInstance", null);
     }
 }
 
 export class StreetViewPanorama extends PureContainer {
     declareData() {
         super.declareData(...arguments, {
-            links: {structured: true},
+            links: { structured: true },
             motionTracking: undefined,
-            options: {structured: true},
+            options: { structured: true },
             pano: undefined,
-            position: {structured: true},
-            pov: {structured: true},
+            position: { structured: true },
+            pov: { structured: true },
             zoom: undefined
         });
     }
 
     onInit(context, instance) {
         instance.events = this.wireEvents(instance, [
-            'onCloseClick',
-            'onPanoChanged',
-            'onPositionChanged',
-            'onPovChanged',
-            'onResize',
-            'onStatusChanged',
-            'onVisibleChanged',
-            'onZoomChanged'
+            "onCloseClick",
+            "onPanoChanged",
+            "onPositionChanged",
+            "onPovChanged",
+            "onResize",
+            "onStatusChanged",
+            "onVisibleChanged",
+            "onZoomChanged"
         ]);
 
         //if (instance.widget.position && instance.widget.position.bind) {
@@ -110,4 +110,3 @@ export class StreetViewPanorama extends PureContainer {
         );
     }
 }
-

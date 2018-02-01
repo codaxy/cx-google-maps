@@ -1,22 +1,22 @@
-import {Widget, VDOM} from 'cx/ui';
-import {PureContainer} from 'cx/widgets';
-import {FusionTablesLayer as ReactFusionTablesLayer} from 'react-google-maps';
+import { Widget, VDOM } from "cx/ui";
+import { PureContainer } from "cx/widgets";
+import { FusionTablesLayer as ReactFusionTablesLayer } from "react-google-maps";
 
 class ReactFusionTablesLayerEnhanced extends ReactFusionTablesLayer {
     componentDidMount() {
         super.componentDidMount();
 
-        let {instance} = this.props;
-        let {widget, data} = instance;
-        if (widget.pipeInstance) instance.invoke('pipeInstance', this);
+        let { instance } = this.props;
+        let { widget, data } = instance;
+        if (widget.pipeInstance) instance.invoke("pipeInstance", this);
     }
 
     componentWillUnmount() {
         super.componentWillUnmount();
 
-        let {instance} = this.props;
-        let {widget} = instance;
-        if (widget.pipeInstance) instance.invoke('pipeInstance', null);
+        let { instance } = this.props;
+        let { widget } = instance;
+        if (widget.pipeInstance) instance.invoke("pipeInstance", null);
     }
 }
 
@@ -24,14 +24,12 @@ export class FusionTablesLayer extends Widget {
     declareData() {
         super.declareData(...arguments, {
             url: undefined,
-            options: {structured: true}
+            options: { structured: true }
         });
     }
 
     onInit(context, instance) {
-        instance.events = this.wireEvents(instance, [
-            'onClick'
-        ]);
+        instance.events = this.wireEvents(instance, ["onClick"]);
     }
 
     wireEvents(instance, events) {

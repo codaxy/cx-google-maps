@@ -1,22 +1,22 @@
-import {Widget, VDOM} from 'cx/ui';
-import {PureContainer} from 'cx/widgets';
-import {GroundOverlay as ReactGroundOverlay} from 'react-google-maps';
+import { Widget, VDOM } from "cx/ui";
+import { PureContainer } from "cx/widgets";
+import { GroundOverlay as ReactGroundOverlay } from "react-google-maps";
 
 class ReactGroundOverlayEnhanced extends ReactGroundOverlay {
     componentDidMount() {
         super.componentDidMount();
 
-        let {instance} = this.props;
-        let {widget, data} = instance;
-        if (widget.pipeInstance) instance.invoke('pipeInstance', this);
+        let { instance } = this.props;
+        let { widget, data } = instance;
+        if (widget.pipeInstance) instance.invoke("pipeInstance", this);
     }
 
     componentWillUnmount() {
         super.componentWillUnmount();
 
-        let {instance} = this.props;
-        let {widget} = instance;
-        if (widget.pipeInstance) instance.invoke('pipeInstance', null);
+        let { instance } = this.props;
+        let { widget } = instance;
+        if (widget.pipeInstance) instance.invoke("pipeInstance", null);
     }
 }
 
@@ -28,10 +28,7 @@ export class GroundOverlay extends Widget {
     }
 
     onInit(context, instance) {
-        instance.events = this.wireEvents(instance, [
-            'onDblClick',
-            'onClick'
-        ]);
+        instance.events = this.wireEvents(instance, ["onDblClick", "onClick"]);
     }
 
     wireEvents(instance, events) {
