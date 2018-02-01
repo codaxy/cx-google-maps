@@ -4910,6 +4910,9 @@ p {
   background: rgba(255, 255, 255, 0.9);
   padding: 7px; }
 
+.cxm-card, .cxm-well {
+  min-width: 300px; }
+
 .cxm-infobox {
   background: rgba(88, 144, 236, 0.8);
   box-sizing: border-box;
