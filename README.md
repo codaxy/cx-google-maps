@@ -32,7 +32,7 @@ Demo App
 ========
 
 <a href="https://codaxy.github.io/cx-google-maps/">
-	<img src="https://github.com/codaxy/cx-google-maps/blob/master/misc/screenshots/cx-google-maps.png" />
+	<img src="https://raw.githubusercontent.com/codaxy/cx-google-maps/master/misc/screenshots/cx-google-maps.png" />
 </a>
 
 CxJS
