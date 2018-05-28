@@ -1603,8 +1603,8 @@ currently-unhandled@^0.4.1:
     array-find-index "^1.0.1"
 
 cx-google-maps@^18.2.5:
-  version "18.2.6"
-  resolved "https://registry.yarnpkg.com/cx-google-maps/-/cx-google-maps-18.2.6.tgz#e45e2d50e210a774f5bc993742560ffce9bd71ec"
+  version "18.5.0"
+  resolved "https://registry.yarnpkg.com/cx-google-maps/-/cx-google-maps-18.5.0.tgz#ef7fb44d180fc287e691a6915573f34f3edc5b5b"
   dependencies:
     react-google-maps "^9.4.5"
 
