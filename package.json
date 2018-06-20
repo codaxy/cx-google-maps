@@ -1,6 +1,6 @@
 {
   "name": "cx-google-maps",
-  "version": "18.6.0",
+  "version": "18.6.1",
   "description": "CxJS wrapper for react-google-maps",
   "main": "dist/index.js",
   "jsnext:main": "src/index.js",
