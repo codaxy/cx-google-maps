@@ -32,7 +32,7 @@ rollup
                 let distPath = path.join(__dirname, "../dist");
                 if (!fs.existsSync(distPath))
                     fs.mkdirSync(distPath);
-                fs.writeFileSync(path.join(distPath, "index.es.js"), result.code);
+                fs.writeFileSync(path.join(distPath, "index.js"), result.code);
                 //console.log(result.code);
             });
     })

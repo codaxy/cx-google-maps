@@ -2,7 +2,7 @@
   "name": "cx-google-maps",
   "version": "18.5.0",
   "description": "CxJS wrapper for react-google-maps",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "jsnext:main": "src/index.js",
   "scripts": {
     "clean": "rimraf docs",
