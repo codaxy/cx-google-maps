@@ -17,10 +17,12 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.js$/,
-            //add here any ES6 based library
+            // add here any ES6 based library
             include: /[\\\/](app|cx|cx-react|cx-google-maps|cx-theme-\w*)[\\\/]/,
+            // react-google-maps should not be built using babel
+            exclude: /react-google-maps/,
             loader: 'babel-loader',
-            query: babelCfg
+            query: babelCfg,
         }, {
            test: /\.(png|jpg)/,
            loader: 'file-loader'
@@ -46,5 +48,3 @@ module.exports = {
         })
     ]
 };
-
-

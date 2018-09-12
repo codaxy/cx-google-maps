@@ -47,13 +47,14 @@ npm install cx-google-maps --save
 
                     <CodeSnippet>{`
 //add here any ES6 based library
-include: /[\\\/](app|cx|cx-react|cx-theme-\w*)[\\\/]/,
+include: /[\\\\\\/]app|cx|cx-react|cx-theme-\\w*)[\\\\\\/]/,
                     `}</CodeSnippet>
 
                     and add `cx-google-maps` in there, so that it looks something like this:
 
                     <CodeSnippet>{`
-include: /[\\\/](app|cx|cx-react|cx-google-maps|cx-theme-\w*)[\\\/]/,
+include: /[\\\\\\/](app|cx|cx-react|cx-google-maps|cx-theme-\\w*)[\\\\\\/]/,
+exclude: /react-google-maps/,
                     `}</CodeSnippet>
 
 

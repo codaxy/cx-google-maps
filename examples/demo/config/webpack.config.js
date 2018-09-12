@@ -16,8 +16,11 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
+                // add here any ES6 based library
+                include: /[\\\/](app|cx|cx-react|cx-google-maps|cx-theme-\w*)[\\\/]/,
+                // react-google-maps should not be built using babel
+                exclude: /react-google-maps/,
                 //add here any ES6 based library
-                include: /(app|cx|cx-google-maps)/,
                 loader: "babel-loader",
                 query: babelCfg
             },
@@ -28,8 +31,8 @@ module.exports = {
         ]
     },
     entry: {
-        "vendor": ["cx-react", p("app/polyfill.js")],
-        "app": [p("app/index.js")]
+        vendor: ["cx-react", p("app/polyfill.js")],
+        app: [p("app/index.js")]
     },
     output: {
         filename: "[name].js"
