@@ -30,7 +30,7 @@ const mapElement = (
 export default (
     <cx>
         <h2 putInto="header">Home</h2>
-        
+
         <FlexCol style="height: 100%" vspacing>
             <Section mod="card" style="min-height: 80px">
                 <h4>Cx Google Maps</h4>
@@ -53,7 +53,7 @@ export default (
                         GitHub
                     </a>.
                 </p>
-                
+
                 <p ws>
                     This demo app includes documentation specific for this CxJS
                     implementation. Please, take a look into the original
@@ -70,7 +70,7 @@ export default (
                     </a>.
                 </p>
             </Section>
-            
+
             <FlexCol mod="card" style="flex: 1; min-height: 260px">
                 <GoogleMap
                     controller={Controller}
@@ -79,6 +79,7 @@ export default (
                     defaultCenter:expr="{$page.map.center}"
                     defaultZoom:expr="{$page.map.zoom}"
                     center:bind="$page.map.center"
+                    controlSize={24}
                     zoom:bind="$page.map.zoom"
                     pipeInstance="pipeMap"
                     options={{

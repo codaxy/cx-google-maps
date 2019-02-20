@@ -538,6 +538,7 @@ var GoogleMap$1 = function (_PureContainer) {
             defaultCenter: { structured: true },
             defaultZoom: undefined,
             center: { structured: true },
+            controlSize: undefined,
             heading: undefined,
             mapTypeId: undefined,
             options: { structured: true },
@@ -841,14 +842,10 @@ var InfoBox = function (_PureContainer) {
         data.options = data.options || {};
         data.options.boxClass = data.classNames;
 
-        return VDOM.createElement(
-            ReactInfoBoxEnhanced,
-            _extends({}, data, events, {
-                instance: instance,
-                key: key
-            }),
-            children[0]
-        );
+        return VDOM.createElement(ReactInfoBoxEnhanced, _extends({}, data, events, {
+            instance: instance,
+            key: key
+        }));
     };
 
     return InfoBox;

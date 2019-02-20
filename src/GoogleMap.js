@@ -46,6 +46,7 @@ export class GoogleMap extends PureContainer {
             defaultCenter: { structured: true },
             defaultZoom: undefined,
             center: { structured: true },
+            controlSize: undefined,
             heading: undefined,
             mapTypeId: undefined,
             options: { structured: true },

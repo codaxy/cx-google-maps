@@ -16,7 +16,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "core-js": "^2.5.7",
     "cx": "^18.1.6",
-    "cx-google-maps": "file:../../",
+    "cx-google-maps": "file:../..",
     "cx-react": "^17.4.1",
     "illuminate-js": "^1.0.0-alpha.2",
     "lodash": "^4.17.4",
