@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { 
-    HtmlElement, 
+import {
+    HtmlElement,
     Menu,
     Toast
 } from 'cx/widgets';
@@ -27,7 +27,7 @@ const mapElement =
 ;
 
 class Controller extends CxController {
-    getDefaults() { 
+    getDefaults() {
         return {
             center: {
                 lat: 41.77811360,
@@ -38,14 +38,14 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());        
-        this.store.init('$page.map', this.getDefaults());   
+        this.store.init('$page.mapdefaults', this.getDefaults());
+        this.store.init('$page.map', this.getDefaults());
         this.store.init('$page.markers', _.range(5)
             .map((a, i) => ({
                 id: i,
                 position: {
-                    lat: 41.77811360 + Math.random() - 0.5, 
-                    lng: -87.62979820 + Math.random() - 0.5, 
+                    lat: 41.77811360 + Math.random() - 0.5,
+                    lng: -87.62979820 + Math.random() - 0.5,
                 },
                 title: `This is marker ${i}`,
                 popup: true,
@@ -67,30 +67,30 @@ export default <cx>
         controller={Controller}
         containerElement={containerElement}
         mapElement={mapElement}
-        defaultCenter:bind="$page.map.center"
-        defaultZoom:bind="$page.map.zoom"
-        center:bind="$page.map.center"
-        zoom:bind="$page.map.zoom"
+        defaultCenter-bind="$page.map.center"
+        defaultZoom-bind="$page.map.zoom"
+        center-bind="$page.map.center"
+        zoom-bind="$page.map.zoom"
         options={{
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_RIGHT
             }
         }}
     >
-        <Repeater 
-            records:bind="$page.markers"
+        <Repeater
+            records-bind="$page.markers"
             keyField="id">
             <Marker
-                position:bind="$record.position"
+                position-bind="$record.position"
                 onClick="togglePopup"
             >
                 <InfoWindow
-                    if:bind="$record.popup"
+                    if-bind="$record.popup"
                     onCloseClick="togglePopup"
                 >
-                    <div text:bind="$record.title"></div>
+                    <div text-bind="$record.title"></div>
                 </InfoWindow>
             </Marker>
-        </Repeater>    
+        </Repeater>
     </GoogleMap>
 </cx>;

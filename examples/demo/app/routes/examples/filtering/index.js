@@ -1,13 +1,13 @@
-import { 
-    HtmlElement, 
-    Route, 
-    FlexCol, 
+import {
+    HtmlElement,
+    Route,
+    FlexCol,
     FlexRow,
     Section
 } from 'cx/widgets';
 
-import { 
-    Md 
+import {
+    Md
 } from 'app/components';
 
 const info = {
@@ -16,7 +16,7 @@ const info = {
 };
 
 export default <cx>
-    <Route url:bind="url" route={info.route}>
+    <Route url-bind="url" route={info.route}>
         <h2 putInto="header">
             {info.name}
         </h2>
@@ -31,6 +31,6 @@ export default <cx>
                     TBD
                 </p>
             </Section>
-        </FlexRow>    
+        </FlexRow>
     </Route>
 </cx>;

@@ -76,11 +76,11 @@ export default (
                     controller={Controller}
                     containerElement={containerElement}
                     mapElement={mapElement}
-                    defaultCenter:expr="{$page.map.center}"
-                    defaultZoom:expr="{$page.map.zoom}"
-                    center:bind="$page.map.center"
+                    defaultCenter-expr="{$page.map.center}"
+                    defaultZoom-expr="{$page.map.zoom}"
+                    center-bind="$page.map.center"
                     controlSize={24}
-                    zoom:bind="$page.map.zoom"
+                    zoom-bind="$page.map.zoom"
                     pipeInstance="pipeMap"
                     options={{
                         mapTypeControlOptions: {

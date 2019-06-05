@@ -9,7 +9,7 @@ const info = {
 
 export default (
     <cx>
-        <Route url:bind="url" route={info.route}>
+        <Route url-bind="url" route={info.route}>
             <h2 putInto="header">{info.name}</h2>
 
             <FlexRow style="height: 100%" spacing target="desktop">

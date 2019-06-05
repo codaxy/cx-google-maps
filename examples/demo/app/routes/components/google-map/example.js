@@ -1,10 +1,10 @@
-import { 
-    HtmlElement, 
+import {
+    HtmlElement,
     Menu
 } from 'cx/widgets';
 
 import {
-    GoogleMap 
+    GoogleMap
 } from 'cx-google-maps';
 
 import { VDOM, Controller as CxController } from 'cx/ui';
@@ -18,7 +18,7 @@ const mapElement =
 ;
 
 class Controller extends CxController {
-    getDefaults() { 
+    getDefaults() {
         return {
             center: {
                 lat: 41.87811360,
@@ -29,8 +29,8 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());        
-        this.store.init('$page.map', this.getDefaults());        
+        this.store.init('$page.mapdefaults', this.getDefaults());
+        this.store.init('$page.map', this.getDefaults());
     }
 
     pipeMapInstance(instance) {
@@ -39,15 +39,15 @@ class Controller extends CxController {
 
     onResetViewClick() {
         this.map.panTo(this.getDefaults().center);
-        
-        // We could have just make use of the :bind in the map
+
+        // We could have just make use of the -bind in the map
         // center (see index.js) and pan like this:
-        
+
         // this.store.set('$page.map', this.getDefaults());
-        
+
         // However, in this case, panning would be instant,
         // whereas Google Maps panTo provides smooth panning
-        // when possible.   
+        // when possible.
     }
 }
 
@@ -57,10 +57,10 @@ export default <cx>
         containerElement={containerElement}
         mapElement={mapElement}
         pipeInstance="pipeMapInstance"
-        defaultCenter:bind="$page.map.center"
-        defaultZoom:bind="$page.map.zoom"
-        center:bind="$page.map.center"
-        zoom:bind="$page.map.zoom"
+        defaultCenter-bind="$page.map.center"
+        defaultZoom-bind="$page.map.zoom"
+        center-bind="$page.map.center"
+        zoom-bind="$page.map.zoom"
         options={{
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_RIGHT
@@ -75,6 +75,6 @@ export default <cx>
             <a onClick="onResetViewClick">
                 Reset view
             </a>
-        </Menu>                  
+        </Menu>
     </GoogleMap>
 </cx>;

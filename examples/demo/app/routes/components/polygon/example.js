@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { 
-    HtmlElement, 
+import {
+    HtmlElement,
     Menu,
     Text,
     Toast,
@@ -28,7 +28,7 @@ const mapElement =
 ;
 
 class Controller extends CxController {
-    getDefaults() { 
+    getDefaults() {
         return {
             center: {
                 lat: 41.77811360,
@@ -39,11 +39,11 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());        
+        this.store.init('$page.mapdefaults', this.getDefaults());
         this.store.init('$page.map', this.getDefaults());
         this.store.init('$page.path', _.range(3)
             .map(() => ({
-                lat: 41.77811360 + Math.random() - 0.5, 
+                lat: 41.77811360 + Math.random() - 0.5,
                 lng: -87.62979820 + Math.random() - 0.5
             })));
     }
@@ -61,33 +61,33 @@ export default <cx>
         controller={Controller}
         containerElement={containerElement}
         mapElement={mapElement}
-        defaultCenter:bind="$page.map.center"
-        defaultZoom:bind="$page.map.zoom"
-        center:bind="$page.map.center"
-        zoom:bind="$page.map.zoom"
+        defaultCenter-bind="$page.map.center"
+        defaultZoom-bind="$page.map.zoom"
+        center-bind="$page.map.center"
+        zoom-bind="$page.map.zoom"
         options={{
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_RIGHT
             }
         }}
     >
-        <Grid mod="map" 
-            records:bind="$page.path"
+        <Grid mod="map"
+            records-bind="$page.path"
             columns={[
                 { header: 'Latitude', field: 'lat', format: "n;8", sortable: true, align: "center" },
                 { header: 'Longitude', field: 'lng', format: "n;8", sortable: true, align: "center" },
-                { 
+                {
                     header: '',
                     items: <Button
                         mod="hollow"
                         icon="clear"
-                        disabled:expr="{$page.path.length} <= 3"
+                        disabled-expr="{$page.path.length} <= 3"
                         onClick="onRemovePoint"/>
                 }
             ]}>
         </Grid>
         <Polygon
-            path:bind="$page.path"
+            path-bind="$page.path"
             options={{
                 fillColor: "red",
                 fillOpacity: 0.5,

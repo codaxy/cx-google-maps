@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { 
-    HtmlElement, 
+import {
+    HtmlElement,
     Menu,
     Text,
     Toast,
@@ -27,7 +27,7 @@ const mapElement =
 ;
 
 class Controller extends CxController {
-    getDefaults() { 
+    getDefaults() {
         return {
             center: {
                 lat: 41.77811360,
@@ -38,7 +38,7 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());        
+        this.store.init('$page.mapdefaults', this.getDefaults());
         this.store.init('$page.map', this.getDefaults());
         this.store.init('$page.bounds', {
             north: 41.77811360,
@@ -54,10 +54,10 @@ export default <cx>
         controller={Controller}
         containerElement={containerElement}
         mapElement={mapElement}
-        defaultCenter:bind="$page.map.center"
-        defaultZoom:bind="$page.map.zoom"
-        center:bind="$page.map.center"
-        zoom:bind="$page.map.zoom"
+        defaultCenter-bind="$page.map.center"
+        defaultZoom-bind="$page.map.zoom"
+        center-bind="$page.map.center"
+        zoom-bind="$page.map.zoom"
         options={{
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_RIGHT
@@ -68,7 +68,7 @@ export default <cx>
             <Text tpl="{$page.bounds.north:n;4},{$page.bounds.south:n;4}:{$page.bounds.east:n;4},{$page.bounds.west:n;4}" />
         </Menu>
         <Rectangle
-            bounds:bind="$page.bounds"
+            bounds-bind="$page.bounds"
             options={{
                 fillColor: "red",
                 fillOpacity: 0.5,

@@ -52,7 +52,7 @@ class ReactPolygonEnhanced extends ReactPolygon {
     }
 
     checkPathHasChanged() {
-        var pts = this.getPath().b.map(p => ({
+        var pts = this.getPath().getArray().map(p => ({
             lat: p.lat(),
             lng: p.lng()
         }));

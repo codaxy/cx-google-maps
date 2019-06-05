@@ -54,10 +54,10 @@ export default <cx>
         controller={Controller}
         containerElement={containerElement}
         mapElement={mapElement}
-        defaultCenter:bind="$page.map.center"
-        defaultZoom:bind="$page.map.zoom"
-        center:bind="$page.map.center"
-        zoom:bind="$page.map.zoom"
+        defaultCenter-bind="$page.map.center"
+        defaultZoom-bind="$page.map.zoom"
+        center-bind="$page.map.center"
+        zoom-bind="$page.map.zoom"
         options={{
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_RIGHT
@@ -65,7 +65,7 @@ export default <cx>
         }}
     >
         <MarkerWithLabel
-            position:bind="$page.map.center"
+            position-bind="$page.map.center"
             title="This is a custom icon marker with label"
             icon="https://codaxy.github.io/cx-google-maps/assets/img/cx.png"
             labelAnchor={{x: 0, y: 0}}

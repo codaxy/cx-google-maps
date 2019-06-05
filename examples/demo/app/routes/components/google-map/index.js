@@ -1,7 +1,7 @@
-import { 
-    HtmlElement, 
-    Route, 
-    FlexCol, 
+import {
+    HtmlElement,
+    Route,
+    FlexCol,
     FlexRow,
     Section
 } from 'cx/widgets';
@@ -12,11 +12,11 @@ import {
     events
 } from './config';
 
-import { 
-    ConfigTable, 
+import {
+    ConfigTable,
     EventTable,
     CodeSnippet,
-    Md 
+    Md
 } from 'app/components';
 
 const info = {
@@ -27,7 +27,7 @@ const info = {
 };
 
 export default <cx>
-    <Route url:bind="url" route={info.route}>
+    <Route url-bind="url" route={info.route}>
         <h2 putInto="header">
             {info.name}
         </h2>
@@ -43,10 +43,10 @@ export default <cx>
                     Cx wrapper around <a href={info.reactGoogleMapsDocs} target="_blank">{info.name}</a> React component (uses <code>withGoogleMap</code>).
                     For additional info about various options, available events and methods, please see <a href={info.googleMapsDocs} target="_blank">Google Maps Docs</a>.
                 </p>
-                    
+
                 <Md>
                     ##### Configuration
-                    <ConfigTable props={config} /> 
+                    <ConfigTable props={config} />
 
                     <br/>
                     <br/>
@@ -55,7 +55,7 @@ export default <cx>
 
                     <br />
                     <br />
-                    
+
                     ##### Example
                     <CodeSnippet>{`
 const containerElement = <div style={{ position: "relative", flex: 1 }} />;
@@ -66,7 +66,7 @@ const mapElement =
 ;
 
 class Controller extends CxController {
-    getDefaults() { 
+    getDefaults() {
         return {
             center: {
                 lat: 41.87811360,
@@ -77,8 +77,8 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());        
-        this.store.init('$page.map', this.getDefaults());        
+        this.store.init('$page.mapdefaults', this.getDefaults());
+        this.store.init('$page.map', this.getDefaults());
     }
 
     pipeMapInstance(instance) {
@@ -87,15 +87,15 @@ class Controller extends CxController {
 
     onResetViewClick() {
         this.map.panTo(this.getDefaults().center);
-        
-        // We could have just make use of the :bind in the map
+
+        // We could have just make use of the -bind in the map
         // center (see index.js) and pan like this:
-        
+
         // this.store.set('$page.map', this.getDefaults());
-        
+
         // However, in this case, panning would be instant,
         // whereas Google Maps panTo provides smooth panning
-        // when possible.        
+        // when possible.
     }
 }
 
@@ -105,10 +105,10 @@ export default <cx>
         containerElement={containerElement}
         mapElement={mapElement}
         pipeInstance="pipeMapInstance"
-        defaultCenter:bind="$page.map.center"
-        defaultZoom:bind="$page.map.zoom"
-        center:bind="$page.map.center"
-        zoom:bind="$page.map.zoom"
+        defaultCenter-bind="$page.map.center"
+        defaultZoom-bind="$page.map.zoom"
+        center-bind="$page.map.center"
+        zoom-bind="$page.map.zoom"
         options={{
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_RIGHT
@@ -123,7 +123,7 @@ export default <cx>
             <a onClick="onResetViewClick">
                 Reset view
             </a>
-        </Menu>                  
+        </Menu>
     </GoogleMap>
 </cx>;
                     `}</CodeSnippet>
@@ -133,6 +133,6 @@ export default <cx>
             <FlexCol mod="card" style="flex: 1; min-height: 400px">
                 <Example />
             </FlexCol>
-        </FlexRow>    
+        </FlexRow>
     </Route>
 </cx>;

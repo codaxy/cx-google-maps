@@ -1,5 +1,5 @@
-import { 
-    HtmlElement, 
+import {
+    HtmlElement,
     Menu,
     Toast,
     TextField
@@ -20,7 +20,7 @@ const mapElement =
 ;
 
 class Controller extends CxController {
-    getDefaults() { 
+    getDefaults() {
         return {
             center: {
                 lat: 41.87811360,
@@ -31,8 +31,8 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());        
-        this.store.init('$page.map', this.getDefaults());        
+        this.store.init('$page.mapdefaults', this.getDefaults());
+        this.store.init('$page.map', this.getDefaults());
     }
 
     pipeMapInstance(instance) {
@@ -47,7 +47,7 @@ class Controller extends CxController {
         let places = this.searchBox.getPlaces();
         if (places.length < 1)
             return;
-        
+
         Toast.create({
             message: `Place selected: ${places[0].formatted_address}`,
             timeout: 3000
@@ -55,12 +55,12 @@ class Controller extends CxController {
 
         let location = places[0].geometry.location
         this.map.panTo(location);
-            
-        // We could have just make use of the :bind in the map
+
+        // We could have just make use of the -bind in the map
         // center (see index.js) and pan like this:
-        
+
         // this.store.set('$page.map.center', location);
-        
+
         // However, in this case, panning would be instant,
         // whereas Google Maps panTo provides smooth panning
         // when possible.
@@ -73,10 +73,10 @@ export default <cx>
         containerElement={containerElement}
         mapElement={mapElement}
         pipeInstance="pipeMapInstance"
-        defaultCenter:bind="$page.map.center"
-        defaultZoom:bind="$page.map.zoom"
-        center:bind="$page.map.center"
-        zoom:bind="$page.map.zoom"
+        defaultCenter-bind="$page.map.center"
+        defaultZoom-bind="$page.map.zoom"
+        center-bind="$page.map.center"
+        zoom-bind="$page.map.zoom"
         options={{
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_RIGHT
@@ -87,7 +87,7 @@ export default <cx>
             controlPosition={google.maps.ControlPosition.TOP_CENTER}
             onPlacesChanged="onSearchPlacesChanged"
             pipeInstance="pipeSearchBoxInstance"
-        >   
+        >
             <TextField
                 placeholder="Search..."
                 style={{

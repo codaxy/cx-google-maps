@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { 
-    HtmlElement, 
+import {
+    HtmlElement,
     Menu,
     Toast
 } from 'cx/widgets';
@@ -24,7 +24,7 @@ const mapElement =
 ;
 
 class Controller extends CxController {
-    getDefaults() { 
+    getDefaults() {
         return {
             center: {
                 lat: 41.77811360,
@@ -35,14 +35,14 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());        
-        this.store.init('$page.map', this.getDefaults());   
+        this.store.init('$page.mapdefaults', this.getDefaults());
+        this.store.init('$page.map', this.getDefaults());
         this.store.init('$page.markers', _.range(200)
             .map((a, i) => ({
                 id: i,
                 position: {
-                    lat: 41.77811360 + Math.random() - 0.5, 
-                    lng: -87.62979820 + Math.random() - 0.5, 
+                    lat: 41.77811360 + Math.random() - 0.5,
+                    lng: -87.62979820 + Math.random() - 0.5,
                 },
                 title: `This is marker ${i}`,
                 heading: 360 * Math.random()
@@ -55,10 +55,10 @@ export default <cx>
         controller={Controller}
         containerElement={containerElement}
         mapElement={mapElement}
-        defaultCenter:bind="$page.map.center"
-        defaultZoom:bind="$page.map.zoom"
-        center:bind="$page.map.center"
-        zoom:bind="$page.map.zoom"
+        defaultCenter-bind="$page.map.center"
+        defaultZoom-bind="$page.map.zoom"
+        center-bind="$page.map.center"
+        zoom-bind="$page.map.zoom"
         options={{
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_RIGHT
@@ -66,12 +66,12 @@ export default <cx>
         }}
     >
         <MarkerClusterer>
-            <Repeater 
-                records:bind="$page.markers"
+            <Repeater
+                records-bind="$page.markers"
                 keyField="id">
                 <Marker
-                    position:bind="$record.position"
-                    title:bind="$record.title"
+                    position-bind="$record.position"
+                    title-bind="$record.title"
                     noRedraw
                     icon={{
                         path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
@@ -83,7 +83,7 @@ export default <cx>
                         strokeWeight: 2,
                         strokeOpacity: 1
                     }} />
-            </Repeater>    
-        </MarkerClusterer>            
+            </Repeater>
+        </MarkerClusterer>
     </GoogleMap>
 </cx>;

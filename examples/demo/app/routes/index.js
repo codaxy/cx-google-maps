@@ -37,14 +37,14 @@ import PlacingMarkers from './examples/placing-markers';
 export default (
     <cx>
         <Sandbox
-            key:bind="url"
-            storage:bind="pages"
+            key-bind="url"
+            storage-bind="pages"
             outerLayout={AppLayout}
             layout={FirstVisibleChildLayout}>
-            <Route route="~/" url:bind="url">
+            <Route route="~/" url-bind="url">
                 <Default />
             </Route>
-            <Route route="~/about" url:bind="url">
+            <Route route="~/about" url-bind="url">
                 <About />
             </Route>
 

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import { 
-    HtmlElement, 
+import {
+    HtmlElement,
     Menu,
     Text,
     Toast,
@@ -27,7 +27,7 @@ const mapElement =
 ;
 
 class Controller extends CxController {
-    getDefaults() { 
+    getDefaults() {
         return {
             center: {
                 lat: 41.77811360,
@@ -38,11 +38,11 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());        
+        this.store.init('$page.mapdefaults', this.getDefaults());
         this.store.init('$page.map', this.getDefaults());
         this.store.init('$page.circle', {
             center: {
-                lat: 41.77811360, 
+                lat: 41.77811360,
                 lng: -87.62979820
             },
             radius: 10000
@@ -55,10 +55,10 @@ export default <cx>
         controller={Controller}
         containerElement={containerElement}
         mapElement={mapElement}
-        defaultCenter:bind="$page.map.center"
-        defaultZoom:bind="$page.map.zoom"
-        center:bind="$page.map.center"
-        zoom:bind="$page.map.zoom"
+        defaultCenter-bind="$page.map.center"
+        defaultZoom-bind="$page.map.zoom"
+        center-bind="$page.map.center"
+        zoom-bind="$page.map.zoom"
         options={{
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_RIGHT
@@ -69,8 +69,8 @@ export default <cx>
             <Text tpl="{$page.circle.center.lat:n;4},{$page.circle.center.lng:n;4}:{$page.circle.radius:n;0}" />
         </Menu>
         <Circle
-            center:bind="$page.circle.center"
-            radius:bind="$page.circle.radius"
+            center-bind="$page.circle.center"
+            radius-bind="$page.circle.radius"
             options={{
                 fillColor: "red",
                 fillOpacity: 0.5,

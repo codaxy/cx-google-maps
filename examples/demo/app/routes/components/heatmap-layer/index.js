@@ -27,7 +27,7 @@ const info = {
 };
 
 export default <cx>
-    <Route url:bind="url" route={info.route}>
+    <Route url-bind="url" route={info.route}>
         <h2 putInto="header">
             {info.name}
         </h2>
@@ -125,18 +125,18 @@ export default (
                 <div layout={LabelsLeftLayout}>
                     <Slider
                         label="Radius"
-                        value:bind="$page.heat.radius"
+                        value-bind="$page.heat.radius"
                         minValue={1}
                         maxValue={40}
                     />
                     <Slider
                         label="Opacity"
-                        value:bind="$page.heat.opacity"
+                        value-bind="$page.heat.opacity"
                         minValue={0}
                         maxValue={1}
                     />
                     <Checkbox
-                        value:bind="$page.altGradient"
+                        value-bind="$page.altGradient"
                     >
                         Alt. gradient
                     </Checkbox>
@@ -145,7 +145,7 @@ export default (
             </Menu>
 
             <HeatmapLayer
-                data:bind="$page.points"
+                data-bind="$page.points"
                 options={{
                     radius: {bind: "$page.heat.radius"},
                     opacity: {bind: "$page.heat.opacity"},

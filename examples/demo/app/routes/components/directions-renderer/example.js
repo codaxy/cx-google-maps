@@ -1,5 +1,5 @@
-import { 
-    HtmlElement, 
+import {
+    HtmlElement,
     Menu,
     Toast
 } from 'cx/widgets';
@@ -22,7 +22,7 @@ const mapElement =
 ;
 
 class Controller extends CxController {
-    getDefaults() { 
+    getDefaults() {
         return {
             center: new google.maps.LatLng(41.8507300, -87.6512600),
             zoom: 12
@@ -30,9 +30,9 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());        
-        this.store.init('$page.map', this.getDefaults());        
-        this.store.init('$page.directions', null);        
+        this.store.init('$page.mapdefaults', this.getDefaults());
+        this.store.init('$page.map', this.getDefaults());
+        this.store.init('$page.directions', null);
 
         let svc = new google.maps.DirectionsService();
         svc.route({
@@ -54,10 +54,10 @@ export default <cx>
         controller={Controller}
         containerElement={containerElement}
         mapElement={mapElement}
-        defaultCenter:bind="$page.map.center"
-        defaultZoom:bind="$page.map.zoom"
-        center:bind="$page.map.center"
-        zoom:bind="$page.map.zoom"
+        defaultCenter-bind="$page.map.center"
+        defaultZoom-bind="$page.map.zoom"
+        center-bind="$page.map.center"
+        zoom-bind="$page.map.zoom"
         options={{
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_RIGHT
@@ -65,8 +65,8 @@ export default <cx>
         }}
     >
         <DirectionsRenderer
-            if:expr="!!{$page.directions}"
-            directions:bind="$page.directions"
-        />    
+            if-expr="!!{$page.directions}"
+            directions-bind="$page.directions"
+        />
     </GoogleMap>
 </cx>;

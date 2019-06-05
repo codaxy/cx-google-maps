@@ -842,10 +842,14 @@ var InfoBox = function (_PureContainer) {
         data.options = data.options || {};
         data.options.boxClass = data.classNames;
 
-        return VDOM.createElement(ReactInfoBoxEnhanced, _extends({}, data, events, {
-            instance: instance,
-            key: key
-        }));
+        return VDOM.createElement(
+            ReactInfoBoxEnhanced,
+            _extends({}, data, events, {
+                instance: instance,
+                key: key
+            }),
+            children[0]
+        );
     };
 
     return InfoBox;
@@ -1427,7 +1431,7 @@ var ReactPolygonEnhanced = function (_ReactPolygon) {
     };
 
     ReactPolygonEnhanced.prototype.checkPathHasChanged = function checkPathHasChanged() {
-        var pts = this.getPath().b.map(function (p) {
+        var pts = this.getPath().getArray().map(function (p) {
             return {
                 lat: p.lat(),
                 lng: p.lng()
@@ -1541,7 +1545,7 @@ var ReactPolylineEnhanced = function (_ReactPolyline) {
     };
 
     ReactPolylineEnhanced.prototype.checkPathHasChanged = function checkPathHasChanged() {
-        var pts = this.getPath().b.map(function (p) {
+        var pts = this.getPath().getArray().map(function (p) {
             return {
                 lat: p.lat(),
                 lng: p.lng()

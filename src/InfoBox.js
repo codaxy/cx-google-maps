@@ -68,7 +68,7 @@ export class InfoBox extends PureContainer {
                 instance={instance}
                 key={key}
             >
-                {/* {children[0]} */}
+                {children[0]}
             </ReactInfoBoxEnhanced>
         );
     }

@@ -40,7 +40,7 @@ class Controller extends CxController {
 
     stopAnimation() {
         let existing = this.store.get("markersAnimation");
-        if (existing) 
+        if (existing)
             clearInterval(existing);
     }
 
@@ -99,9 +99,9 @@ export default (
             gridSize={0}
             controller={Controller}
         >
-            <Repeater records:bind="$page.markers" cached>
-                <Polygon 
-                    path:bind="poly"
+            <Repeater records-bind="$page.markers" cached>
+                <Polygon
+                    path-bind="poly"
                     options={{
                         strokeColor: 'green',
                         fillColor: 'green',
@@ -110,7 +110,7 @@ export default (
                     }}
                  />
                 <Marker
-                    position:bind="$record.position"
+                    position-bind="$record.position"
                     noRedraw
                     onClick="onMarkerClick"
                     icon={{
@@ -123,15 +123,15 @@ export default (
                         strokeWeight: 4
                     }}
                 >
-                    <InfoBox 
+                    <InfoBox
                         mod="infobox"
                         options={{
                             closeBoxURL: ""
                         }}
                         onClick="onMarkerClick"
-                        visible:bind="$record.showTitle"
+                        visible-bind="$record.showTitle"
                     >
-                        <span text:tpl="{$record.position.lat:n;4} {$record.position.lng:n;4}" />
+                        <span text-tpl="{$record.position.lat:n;4} {$record.position.lng:n;4}" />
                     </InfoBox>
                 </Marker>
             </Repeater>

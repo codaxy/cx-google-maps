@@ -27,7 +27,7 @@ const info = {
 };
 
 export default <cx>
-    <Route url:bind="url" route={info.route}>
+    <Route url-bind="url" route={info.route}>
         <h2 putInto="header">
             {info.name}
         </h2>
@@ -74,7 +74,7 @@ export default <cx>
         ...
     >
         <MarkerWithLabel
-            position:bind="$page.map.center"
+            position-bind="$page.map.center"
             title="This is a custom icon marker with label"
             icon="https://codaxy.github.io/cx-google-maps/assets/img/cx.png"
             labelAnchor={new google.maps.Point(0,0)}

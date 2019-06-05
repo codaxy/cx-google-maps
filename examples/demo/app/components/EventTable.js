@@ -27,10 +27,10 @@ export class EventTable extends PureContainer {
                         <td className={CSS.state({long: key.length > 16})}>
                             {name}
                         </td>
-                        <td if:expr="!!{p.description}">
+                        <td if-expr="!!{p.description}">
                             {p.description}
                         </td>
-                        <td if:expr="!{p.description}">
+                        <td if-expr="!{p.description}">
                             Mapped from <code>{p}</code>.
                         </td>
                     </tr>
