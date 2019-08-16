@@ -27,7 +27,7 @@ const info = {
 };
 
 export default <cx>
-    <Route url:bind="url" route={info.route}>
+    <Route url-bind="url" route={info.route}>
         <h2 putInto="header">
             {info.name}
         </h2>
@@ -93,10 +93,10 @@ export default <cx>
         ...
     >
         <Repeater 
-            records:bind="$page.markers"
+            records-bind="$page.markers"
             keyField="id">
             <Marker
-                position:bind="$record.position"
+                position-bind="$record.position"
                 onClick="togglePopup"
                 icon={{
                     path: google.maps.SymbolPath.CIRCLE,
@@ -112,9 +112,9 @@ export default <cx>
                     options={{
                         closeBoxURL: ""
                     }}
-                    if:bind="$record.popup"
+                    if-bind="$record.popup"
                 >
-                    <span text:tpl="{$record.position.lat:n;4} {$record.position.lng:n;4}" />
+                    <span text-tpl="{$record.position.lat:n;4} {$record.position.lng:n;4}" />
                 </InfoBox>
             </Marker>
         </Repeater>    

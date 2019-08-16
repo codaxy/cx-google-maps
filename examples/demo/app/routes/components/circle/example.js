@@ -55,10 +55,10 @@ export default <cx>
         controller={Controller}
         containerElement={containerElement}
         mapElement={mapElement}
-        defaultCenter:bind="$page.map.center"
-        defaultZoom:bind="$page.map.zoom"
-        center:bind="$page.map.center"
-        zoom:bind="$page.map.zoom"
+        defaultCenter-bind="$page.map.center"
+        defaultZoom-bind="$page.map.zoom"
+        center-bind="$page.map.center"
+        zoom-bind="$page.map.zoom"
         options={{
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_RIGHT
@@ -69,8 +69,8 @@ export default <cx>
             <Text tpl="{$page.circle.center.lat:n;4},{$page.circle.center.lng:n;4}:{$page.circle.radius:n;0}" />
         </Menu>
         <Circle
-            center:bind="$page.circle.center"
-            radius:bind="$page.circle.radius"
+            center-bind="$page.circle.center"
+            radius-bind="$page.circle.radius"
             options={{
                 fillColor: "red",
                 fillOpacity: 0.5,

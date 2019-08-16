@@ -61,10 +61,10 @@ export default <cx>
         controller={Controller}
         containerElement={containerElement}
         mapElement={mapElement}
-        defaultCenter:bind="$page.map.center"
-        defaultZoom:bind="$page.map.zoom"
-        center:bind="$page.map.center"
-        zoom:bind="$page.map.zoom"
+        defaultCenter-bind="$page.map.center"
+        defaultZoom-bind="$page.map.zoom"
+        center-bind="$page.map.center"
+        zoom-bind="$page.map.zoom"
         options={{
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_RIGHT
@@ -72,7 +72,7 @@ export default <cx>
         }}
     >
         <Grid mod="map" 
-            records:bind="$page.path"
+            records-bind="$page.path"
             columns={[
                 { header: 'Latitude', field: 'lat', format: "n;8", sortable: true, align: "center" },
                 { header: 'Longitude', field: 'lng', format: "n;8", sortable: true, align: "center" },
@@ -81,13 +81,13 @@ export default <cx>
                     items: <Button
                         mod="hollow"
                         icon="clear"
-                        disabled:expr="{$page.path.length} <= 2"
+                        disabled-expr="{$page.path.length} <= 2"
                         onClick="onRemovePoint"/>
                 }
             ]}>
         </Grid>  
         <Polyline
-            path:bind="$page.path"
+            path-bind="$page.path"
             options={{
                 strokeColor: "green",
                 strokeOpacity: 0.9

@@ -27,7 +27,7 @@ const info = {
 };
 
 export default <cx>
-    <Route url:bind="url" route={info.route}>
+    <Route url-bind="url" route={info.route}>
         <h2 putInto="header">
             {info.name}
         </h2>
@@ -95,7 +95,7 @@ export default (
                     placeholder="Search for a place..."
                     style="width: 100%"
                     class="flex-1 autogrow"
-                    value:bind="$page.text"
+                    value-bind="$page.text"
                 />
             </StandaloneSearchBox>
             <br/>
@@ -117,7 +117,7 @@ export default (
 
                 emptyText="No previous searches."
 
-                records:bind="$page.places"
+                records-bind="$page.places"
             />
         </FlexCol>
     </cx>

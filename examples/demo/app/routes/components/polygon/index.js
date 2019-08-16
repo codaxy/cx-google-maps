@@ -27,7 +27,7 @@ const info = {
 };
 
 export default <cx>
-    <Route url:bind="url" route={info.route}>
+    <Route url-bind="url" route={info.route}>
         <h2 putInto="header">
             {info.name}
         </h2>
@@ -71,7 +71,7 @@ export default <cx>
         ...
     >
         <Polygon
-            path:bind="$page.path"
+            path-bind="$page.path"
             options={{
                 fillColor: "red",
                 fillOpacity: 0.5,

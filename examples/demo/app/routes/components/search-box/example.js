@@ -56,7 +56,7 @@ class Controller extends CxController {
         let location = places[0].geometry.location
         this.map.panTo(location);
             
-        // We could have just make use of the :bind in the map
+        // We could have just make use of the -bind in the map
         // center (see index.js) and pan like this:
         
         // this.store.set('$page.map.center', location);
@@ -73,10 +73,10 @@ export default <cx>
         containerElement={containerElement}
         mapElement={mapElement}
         pipeInstance="pipeMapInstance"
-        defaultCenter:bind="$page.map.center"
-        defaultZoom:bind="$page.map.zoom"
-        center:bind="$page.map.center"
-        zoom:bind="$page.map.zoom"
+        defaultCenter-bind="$page.map.center"
+        defaultZoom-bind="$page.map.zoom"
+        center-bind="$page.map.center"
+        zoom-bind="$page.map.zoom"
         options={{
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_RIGHT

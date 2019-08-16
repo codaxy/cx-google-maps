@@ -27,7 +27,7 @@ const info = {
 };
 
 export default <cx>
-    <Route url:bind="url" route={info.route}>
+    <Route url-bind="url" route={info.route}>
         <h2 putInto="header">
             {info.name}
         </h2>
@@ -95,17 +95,17 @@ export default <cx>
         ...
     >
         <Repeater 
-            records:bind="$page.markers"
+            records-bind="$page.markers"
             keyField="id">
             <Marker
-                position:bind="$record.position"
+                position-bind="$record.position"
                 onClick="togglePopup"
             >
                 <InfoWindow
-                    if:bind="$record.popup"
+                    if-bind="$record.popup"
                     onCloseClick="togglePopup"
                 >
-                    <div text:bind="$record.title"></div>
+                    <div text-bind="$record.title"></div>
                 </InfoWindow>
             </Marker>
         </Repeater>    

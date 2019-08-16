@@ -1,128 +1,108 @@
-import { Widget, VDOM } from "cx/ui";
-import { shallowEquals, debounce } from "cx/util";
-import { PureContainer, HtmlElement } from "cx/widgets";
-import { GoogleMap as ReactGoogleMap, withGoogleMap } from "react-google-maps";
-import MarkerClusterer from "react-google-maps";
+import {Container, VDOM} from 'cx/ui';
+import {attachEventCallbacks} from './attachEventCallbacks';
+import {debounce} from 'cx/util';
+import {sameLatLng} from './sameLatLng';
 
-class ReactGoogleMapEnhanced extends ReactGoogleMap {
-    componentDidMount() {
-        super.componentDidMount();
+export class GoogleMap extends Container {
+  declareData (...args) {
+    super.declareData (...args, {
+      defaultCenter: {structured: true},
+      defaultZoom: undefined,
+      center: {structured: true},
+      heading: undefined,
+      mapTypeId: undefined,
+      options: {structured: true},
+      streetView: {structured: true},
+      tilt: undefined,
+      zoom: undefined,
+    });
+  }
 
-        let { instance } = this.props;
-        let { widget } = instance;
-        if (widget.pipeInstance) instance.invoke("pipeInstance", this);
+  explore (context, instance) {
+    context.push ('googleMap', instance.map);
+    if (!instance.map) return;
+    super.explore (context, instance);
+  }
+
+  exploreCleanup (context, instance) {
+    context.pop ('googleMap');
+  }
+
+  prepareData (context, instance) {
+    super.prepareData (context, instance);
+    let {data, cached, map} = instance;
+    if (!map) return;
+
+    let {rawData} = cached;
+
+    if (!sameLatLng (data.center, rawData.center)) map.setCenter (data.center);
+
+    if (data.zoom != rawData.zoom) map.setZoom (data.zoom);
+  }
+
+  render (context, instance, key) {
+    let {data} = instance;
+    return (
+      <div
+        key={key}
+        ref={el => this.attach (el, instance)}
+        className={data.classNames}
+        style={data.style}
+      >
+        {instance.map && this.renderChildren (context, instance)}
+      </div>
+    );
+  }
+
+  attach (el, instance) {
+    if (el === instance.el) return;
+
+    if (instance.el) {
+      //instance.map.destroy ();
     }
 
-    componentDidUpdate() {
-        super.componentDidUpdate(...arguments);
+    if (el) {
+      let {widget, data} = instance;
 
-        let { instance } = this.props;
-        let { widget } = instance;
-        if (widget.pipeInstance) instance.invoke("pipeInstance", this);
+      let map = (instance.map = new google.maps.Map (el, {
+        center: data.center || data.defaultCenter,
+        zoom: data.zoom || data.defaultZoom,
+      }));
+
+      if (widget.onPipeInstance)
+        instance.invoke ('onPipeInstance', map, instance);
+
+      if (widget.center && widget.center.bind) {
+        map.addListener ('center_changed', () => {
+          let center = map.getCenter ();
+          let cdata = {lat: center.lat (), lng: center.lng ()};
+          if (sameLatLng (cdata, instance.data.center)) return;
+          instance.set ('center', cdata, true);
+        });
+      }
+
+      if (widget.zoom && widget.zoom.bind) {
+        map.addListener ('zoom_changed', () => {
+          let zoom = map.getZoom ();
+          if (instance.data.center == zoom) return;
+          instance.set ('zoom', zoom, true);
+        });
+      }
+
+      attachEventCallbacks (map, instance, {
+        click: 'onClick',
+        center_changed: 'onCenterChanged',
+        zoom_changed: 'onZoomChanged',
+      });
+
+      instance.el = el;
+
+      instance.setState ({map});
     }
-
-    componentWillUnmount() {
-        super.componentWillUnmount();
-
-        let { instance } = this.props;
-        let { widget } = instance;
-        if (widget.pipeInstance) instance.invoke("pipeInstance", null);
-    }
+  }
 }
 
-const GoogleMapWrapper = withGoogleMap(props => (
-    <ReactGoogleMapEnhanced
-        {...props.instance.data}
-        {...props.instance.events}
-        instance={props.instance}
-    >
-        {props.children}
-    </ReactGoogleMapEnhanced>
-));
-
-export class GoogleMap extends PureContainer {
-    declareData() {
-        super.declareData(...arguments, {
-            defaultCenter: { structured: true },
-            defaultZoom: undefined,
-            center: { structured: true },
-            heading: undefined,
-            mapTypeId: undefined,
-            options: { structured: true },
-            streetView: { structured: true },
-            tilt: undefined,
-            zoom: undefined
-        });
-    }
-
-    onInit(context, instance) {
-        instance.events = this.wireEvents(instance, [
-            "onBoundsChanged",
-            "onCenterChanged",
-            "onClick",
-            "onDblClick",
-            "onDrag",
-            "onDragEnd",
-            "onDragStart",
-            "onHeadingChanged",
-            "onIdle",
-            "onMapTypeIdChanged",
-            "onMouseMove",
-            "onMouseOut",
-            "onMouseOver",
-            "onProjectionChanged",
-            "onResize",
-            "onRightClick",
-            "onTilesLoaded",
-            "onTiltChanged",
-            "onZoomChanged"
-        ]);
-
-        if (instance.widget.center && instance.widget.center.bind) {
-            let oldOnCenterChanged = instance.events["onCenterChanged"];
-            instance.events["onCenterChanged"] = debounce(function(...args) {
-                let c = {
-                    lat: this.getCenter().lat(),
-                    lng: this.getCenter().lng()
-                };
-
-                if (!shallowEquals(c, instance.data.center))
-                    instance.set("center", c);
-
-                if (oldOnCenterChanged) oldOnCenterChanged.call(this, ...args);
-            }, 50);
-        }
-
-        if (instance.widget.zoom && instance.widget.zoom.bind) {
-            let oldOnZoomChanged = instance.events["onZoomChanged"];
-            instance.events["onZoomChanged"] = debounce(function(...args) {
-                instance.set("zoom", this.getZoom());
-
-                if (oldOnZoomChanged) oldOnZoomChanged.call(this, ...args);
-            }, 50);
-        }
-    }
-
-    wireEvents(instance, events) {
-        var map = [];
-        events.map(name => {
-            if (this[name]) {
-                map[name] = e => instance.invoke(name, e, instance);
-            }
-        });
-        return map;
-    }
-
-    render(context, instance, key) {
-        return (
-            <GoogleMapWrapper
-                containerElement={this.containerElement}
-                mapElement={this.mapElement}
-                key={key}
-                instance={instance}
-            >
-                {this.renderChildren(context, instance)}
-            </GoogleMapWrapper>
-        );
-    }
-}
+GoogleMap.prototype.styled = true;
+GoogleMap.prototype.baseClass = 'googlemap';
+GoogleMap.prototype.defaultCenter = {lat: -34.397, lng: 150.644};
+GoogleMap.prototype.defaultZoom = 8;

@@ -41,7 +41,7 @@ export default (
                     placeholder="Search for a place..."
                     style="width: 100%"
                     class="flex-1 autogrow"
-                    value:bind="$page.text"
+                    value-bind="$page.text"
                     clear
                 />
             </StandaloneSearchBox>
@@ -64,7 +64,7 @@ export default (
 
                 emptyText="No previous searches."
 
-                records:bind="$page.places"
+                records-bind="$page.places"
             />
         </FlexCol>
     </cx>

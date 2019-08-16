@@ -27,7 +27,7 @@ const info = {
 };
 
 export default <cx>
-    <Route url:bind="url" route={info.route}>
+    <Route url-bind="url" route={info.route}>
         <h2 putInto="header">
             {info.name}
         </h2>
@@ -67,7 +67,7 @@ export default (
                 <div layout={LabelsLeftLayout}>
                     <Slider
                         label="Opacity"
-                        value:bind="$page.layer.opacity"
+                        value-bind="$page.layer.opacity"
                         minValue={0}
                         maxValue={1}
                     />
@@ -81,7 +81,7 @@ export default (
                     east: -74.12544,
                     west: -74.22655,
                 }}
-                opacity:bind="$page.layer.opacity"
+                opacity-bind="$page.layer.opacity"
             />
         </GoogleMap>
     </cx>

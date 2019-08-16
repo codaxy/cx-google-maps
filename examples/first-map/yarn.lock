@@ -1619,9 +1619,10 @@ cx-react@^17.10.0:
   version "17.10.0"
   resolved "https://registry.yarnpkg.com/cx-react/-/cx-react-17.10.0.tgz#9ef22248f0f37aeae4450a7318c3a083d59fda8b"
 
-cx@^18.1.5:
-  version "18.6.2"
-  resolved "https://registry.yarnpkg.com/cx/-/cx-18.6.2.tgz#ee92d1b91c63478fce390af3d057234cfaa8649d"
+cx@^19.8.1:
+  version "19.8.1"
+  resolved "https://registry.yarnpkg.com/cx/-/cx-19.8.1.tgz#6be3861c2e7bd29c8dd9b5cdcd44238ed7b4ddb3"
+  integrity sha512-akMhpjoIKutFvrEITQi7Vjxtd/t9ulyLgdWm5Sme8uvIco6WQfgQtXDGJwGDEZSQhmjYj8yTziV3OUloG5+Oag==
   dependencies:
     intl-io "^0.2.11"
     route-parser "^0.0.5"

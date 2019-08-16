@@ -52,10 +52,10 @@ export default (
             controller={Controller}
             containerElement={containerElement}
             mapElement={mapElement}
-            defaultCenter:bind="$page.map.center"
-            defaultZoom:bind="$page.map.zoom"
-            center:bind="$page.map.center"
-            zoom:bind="$page.map.zoom"
+            defaultCenter-bind="$page.map.center"
+            defaultZoom-bind="$page.map.zoom"
+            center-bind="$page.map.center"
+            zoom-bind="$page.map.zoom"
             options={{
                 mapTypeControlOptions: {
                     position: google.maps.ControlPosition.TOP_RIGHT,
@@ -65,7 +65,7 @@ export default (
                 <div layout={LabelsLeftLayout}>
                     <Slider
                         label="Opacity"
-                        value:bind="$page.layer.opacity"
+                        value-bind="$page.layer.opacity"
                         minValue={0}
                         maxValue={1}
                     />
@@ -79,7 +79,7 @@ export default (
                     east: -74.12544,
                     west: -74.22655,
                 }}
-                opacity:bind="$page.layer.opacity"
+                opacity-bind="$page.layer.opacity"
             />
         </GoogleMap>
     </cx>

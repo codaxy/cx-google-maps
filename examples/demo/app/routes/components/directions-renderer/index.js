@@ -27,7 +27,7 @@ const info = {
 };
 
 export default <cx>
-    <Route url:bind="url" route={info.route}>
+    <Route url-bind="url" route={info.route}>
         <h2 putInto="header">
             {info.name}
         </h2>
@@ -86,8 +86,8 @@ export default <cx>
         ...
     >
         <DirectionsRenderer
-            if:expr="!!{$page.directions}"
-            directions:bind="$page.directions"
+            if-expr="!!{$page.directions}"
+            directions-bind="$page.directions"
         />    
     </GoogleMap>
 </cx>;

@@ -860,11 +860,11 @@ export default (
         <PureContainer controller={Controller}>
             <Repeater
                 controller={Controller}
-                records:bind="$page.directions"
+                records-bind="$page.directions"
                 cached
             >
                 <DirectionsRenderer
-                    directions:bind="$record"
+                    directions-bind="$record"
                     options={{
                         preserveViewport: true
                     }}

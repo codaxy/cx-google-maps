@@ -1,92 +1,92 @@
-import { Widget, VDOM } from "cx/ui";
-import { PureContainer } from "cx/widgets";
-import { Marker as ReactMarker } from "react-google-maps";
-
-class ReactMarkerEnhanced extends ReactMarker {
-    componentDidMount() {
-        super.componentDidMount();
-
-        let { instance } = this.props;
-        let { widget } = instance;
-        if (widget.pipeInstance) instance.invoke("pipeInstance", this);
-    }
-
-    componentWillUnmount() {
-        super.componentWillUnmount();
-
-        let { instance } = this.props;
-        let { widget } = instance;
-        if (widget.pipeInstance) instance.invoke("pipeInstance", null);
-    }
-}
+import {PureContainer} from 'cx/ui';
+import {attachEventCallbacks} from './attachEventCallbacks';
+import {sameLatLng} from './sameLatLng';
 
 export class Marker extends PureContainer {
-    declareData() {
-        super.declareData(...arguments, {
-            animation: { structured: true },
-            attribution: { structured: true },
-            clickable: undefined,
-            cursor: { structured: true },
-            draggable: undefined,
-            icon: { structured: true },
-            label: { structured: true },
-            opacity: undefined,
-            options: { structured: true },
-            place: { structured: true },
-            position: { structured: true },
-            shape: { structured: true },
-            title: { structured: true },
-            zIndex: undefined,
-            noRedraw: undefined
-        });
+  declareData () {
+    super.declareData (...arguments, {
+      animation: {structured: true},
+      attribution: {structured: true},
+      clickable: undefined,
+      cursor: {structured: true},
+      draggable: undefined,
+      icon: {structured: true},
+      label: {structured: true},
+      opacity: undefined,
+      options: {structured: true},
+      place: {structured: true},
+      position: {structured: true},
+      shape: {structured: true},
+      title: {structured: true},
+      zIndex: undefined,
+      noRedraw: undefined,
+    });
+  }
+
+  prepareData (context, instance) {
+    super.prepareData (context, instance);
+
+    let {data, cached, marker} = instance;
+    let {rawData} = cached;
+    if (!marker || !rawData) return;
+
+    if (data.position && !sameLatLng (data.position, rawData.position))
+      instance.marker.setPosition (data.position);
+  }
+
+  initMarker (context, instance) {
+    let {widget, data} = instance;
+
+    let marker = (instance.marker = new google.maps.Marker ({
+      ...data,
+      map: context.googleMap,
+    }));
+
+    if (widget.onPipeInstance)
+      instance.invoke ('onPipeInstance', marker, instance);
+
+    if (widget.position && widget.position.bind) {
+      marker.addListener ('position_changed', e => {
+        let pos = marker.getPosition ();
+        let pd = {lat: pos.lat (), lng: pos.lng ()};
+        if (!sameLatLng (pd, instance.data.position)) {
+          instance.set ('position', pd, true);
+        }
+      });
     }
 
-    onInit(context, instance) {
-        instance.events = this.wireEvents(instance, [
-            "onAnimationChanged",
-            "onClick",
-            "onClickableChanged",
-            "onCursorChanged",
-            "onDblClick",
-            "onDrag",
-            "onDragEnd",
-            "onDraggableChanged",
-            "onDragStart",
-            "onFlatChanged",
-            "onIconChanged",
-            "onMouseDown",
-            "onMouseOut",
-            "onMouseOver",
-            "onMouseUp",
-            "onPositionChanged",
-            "onRightClick",
-            "onShapeChanged",
-            "onTitleChanged",
-            "onVisibleChanged",
-            "onZindexChanged"
-        ]);
-    }
+    attachEventCallbacks (marker, instance, {
+      animation_changed: 'onAnimationChanged',
+      click: 'onClick',
+      clickable_changed: 'onClickableChanged',
+      cursor_changed: 'onCursorChanged',
+      dblclick: 'onDblClick',
+      drag: 'onDrag',
+      dragend: 'onDragEnd',
+      draggable_changed: 'onDraggableChanged',
+      dragstart: 'onDragStart',
+      flat_changed: 'onFlatChanged',
+      icon_changed: 'onIconChanged',
+      mousedown: 'onMouseDown',
+      mouseout: 'onMouseOut',
+      mouseover: 'onMouseOver',
+      mouseup: 'onMouseUp',
+      position_changed: 'onPositionChanged',
+      right_click: 'onRightClick',
+      shape_changed: 'onShapeChanged',
+      title_changed: 'onTitleChanged',
+      visible_changed: 'onVisibleChanged',
+      zindex_changed: 'onZindexChanged',
+    });
+  }
 
-    wireEvents(instance, events) {
-        var map = [];
-        events.map(name => {
-            if (this[name]) {
-                map[name] = e => instance.invoke(name, e, instance);
-            }
-        });
-        return map;
-    }
+  explore (context, instance) {
+    if (!instance.marker) this.initMarker (context, instance);
 
-    render(context, instance, key) {
-        return (
-            <ReactMarkerEnhanced
-                {...instance.data}
-                {...instance.events}
-                instance={instance}
-                key={key}
-            >
-                {this.renderChildren(context, instance)}
-            </ReactMarkerEnhanced>
-        );
-    }
+    super.explore (context, instance);
+  }
+
+  render (context, instance, key) {
+    return this.renderChildren (context, instance);
+  }
 }

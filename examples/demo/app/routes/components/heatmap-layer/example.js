@@ -92,10 +92,10 @@ export default (
             controller={Controller}
             containerElement={containerElement}
             mapElement={mapElement}
-            defaultCenter:bind="$page.map.center"
-            defaultZoom:bind="$page.map.zoom"
-            center:bind="$page.map.center"
-            zoom:bind="$page.map.zoom"
+            defaultCenter-bind="$page.map.center"
+            defaultZoom-bind="$page.map.zoom"
+            center-bind="$page.map.center"
+            zoom-bind="$page.map.zoom"
             options={{
                 mapTypeControlOptions: {
                     position: google.maps.ControlPosition.TOP_RIGHT,
@@ -105,18 +105,18 @@ export default (
                 <div layout={LabelsLeftLayout}>
                     <Slider
                         label="Radius"
-                        value:bind="$page.heat.radius"
+                        value-bind="$page.heat.radius"
                         minValue={1}
                         maxValue={40}
                     />
                     <Slider
                         label="Opacity"
-                        value:bind="$page.heat.opacity"
+                        value-bind="$page.heat.opacity"
                         minValue={0}
                         maxValue={1}
                     />
                     <Checkbox
-                        value:bind="$page.altGradient"
+                        value-bind="$page.altGradient"
                     >
                         Alt. gradient
                     </Checkbox>
@@ -125,7 +125,7 @@ export default (
             </Menu>
 
             <HeatmapLayer
-                data:bind="$page.points"
+                data-bind="$page.points"
                 options={{
                     radius: {bind: "$page.heat.radius"},
                     opacity: {bind: "$page.heat.opacity"},

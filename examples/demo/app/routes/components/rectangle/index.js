@@ -27,7 +27,7 @@ const info = {
 };
 
 export default <cx>
-    <Route url:bind="url" route={info.route}>
+    <Route url-bind="url" route={info.route}>
         <h2 putInto="header">
             {info.name}
         </h2>
@@ -72,7 +72,7 @@ export default <cx>
         ...
     >
         <Rectangle
-            bounds:bind="$page.bounds"
+            bounds-bind="$page.bounds"
             options={{
                 fillColor: "red",
                 fillOpacity: 0.5,

@@ -183,22 +183,22 @@ export default (
                     <Repeater records={items}>
                         <dt>
                             <Text
-                                if:expr="!{$record.url}"
+                                if-expr="!{$record.url}"
                                 bind="$record.text"
                             />
                             <Link
-                                if:expr="!!{$record.url}"
-                                href:bind="$record.url"
-                                text:bind="$record.text"
-                                url:bind="url"
+                                if-expr="!!{$record.url}"
+                                href-bind="$record.url"
+                                text-bind="$record.text"
+                                url-bind="url"
                             />
                         </dt>
-                        <Repeater records:bind="$record.items" keyField="url">
+                        <Repeater records-bind="$record.items" keyField="url">
                             <dd>
                                 <Link
-                                    href:bind="$record.url"
-                                    text:bind="$record.text"
-                                    url:bind="url"
+                                    href-bind="$record.url"
+                                    text-bind="$record.text"
+                                    url-bind="url"
                                 />
                             </dd>
                         </Repeater>

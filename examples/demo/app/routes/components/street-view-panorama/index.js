@@ -27,7 +27,7 @@ const info = {
 };
 
 export default <cx>
-    <Route url:bind="url" route={info.route}>
+    <Route url-bind="url" route={info.route}>
         <h2 putInto="header">
             {info.name}
         </h2>
@@ -79,8 +79,8 @@ export default <cx>
         ...
     >
         <StreetViewPanorama
-            position:bind="$page.streetview.center"
-            zoom:bind="$page.streetview.zoom">
+            position-bind="$page.streetview.center"
+            zoom-bind="$page.streetview.zoom">
             <OverlayView
                 position={{
                     lat: 49.28590291211115,
