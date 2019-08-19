@@ -1,12 +1,9 @@
 import { HtmlElement, Menu } from 'cx/widgets';
 
-import { GoogleMap } from 'cx-google-maps/src/GoogleMap';
+import { GoogleMap } from '../../../lib/GoogleMap';
 
 import { VDOM, Controller as CxController } from 'cx/ui';
 import config from './config';
-
-const containerElement = <div style={{ position: 'relative', flex: 1 }} />;
-const mapElement = <div style={{ position: 'absolute', left: 0, top: 0, right: 0, bottom: 0 }} />;
 
 class Controller extends CxController {
     getDefaults() {
@@ -46,8 +43,7 @@ export default (
     <cx>
         <GoogleMap
             controller={Controller}
-            containerElement={containerElement}
-            mapElement={mapElement}
+            style="width: 100%; height: 100%; min-height: 400px; background: red"
             pipeInstance="pipeMapInstance"
             defaultCenter-bind="$page.map.center"
             defaultZoom-bind="$page.map.zoom"

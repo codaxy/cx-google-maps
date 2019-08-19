@@ -19,8 +19,8 @@ renderer.heading = function (text, level, raw) {
     if (level == 1)
         lastH1Text = text;
 
-    /*if (level > 1)
-        return `<h${level} id="${escapedText}"><a class="anchor" href="#${escapedText}" tabindex="-1">${text}</a></h${level}>`;*/
+    if (level > 1)
+        return `<h${level} id="${escapedText}">${text}</h${level}>`;
 
     return marked.Renderer.prototype.heading.call(this, text, level, raw);
 };
