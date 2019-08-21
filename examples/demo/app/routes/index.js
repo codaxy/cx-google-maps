@@ -27,7 +27,7 @@ import Rectangle from './components/rectangle';
 // import StreetViewPanorama from './components/street-view-panorama';
 // import TrafficLayer from './components/traffic-layer';
 // import HeatmapLayer from './components/heatmap-layer';
-// import StandaloneSearchBox from './components/standalone-search-box';
+import StandaloneSearchBox from './components/standalone-search-box';
 
 // import FirstMap from './examples/first-map';
 // import Filtering from './examples/filtering';
@@ -52,6 +52,7 @@ export default (
             <GoogleMap />
 
             <SearchBox />
+            <StandaloneSearchBox />
             <Marker />
             <Rectangle />
             {/*
@@ -71,7 +72,6 @@ export default (
             <StreetViewPanorama />
             <TrafficLayer />
             <HeatmapLayer />
-            <StandaloneSearchBox />
 
             <FirstMap />
             <Filtering />

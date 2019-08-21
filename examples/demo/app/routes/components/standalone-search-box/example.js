@@ -1,8 +1,8 @@
-import {HtmlElement, Menu, Toast, TextField, FlexRow, FlexCol, Grid} from 'cx/widgets';
+import { FlexCol, Grid } from 'cx/widgets';
 
-import {StandaloneSearchBox} from 'cx-google-maps';
+import { StandaloneSearchBox } from '../../../lib';
 
-import {VDOM, Controller as CxController} from 'cx/ui';
+import { Controller as CxController } from 'cx/ui';
 
 class Controller extends CxController {
     onInit() {
@@ -30,24 +30,24 @@ class Controller extends CxController {
 
 export default (
     <cx>
-        <FlexCol 
-            class="flex-1" controller={Controller} 
+        <FlexCol
+            class="flex-1" controller={Controller}
             pad>
             <h4>Cx TextField</h4>
             <StandaloneSearchBox
                 onPlacesChanged="onSearchPlacesChanged"
-                pipeInstance="pipeSearchBoxInstance">
-                <TextField
-                    placeholder="Search for a place..."
-                    style="width: 100%"
-                    class="flex-1 autogrow"
-                    value-bind="$page.text"
-                    clear
-                />
-            </StandaloneSearchBox>
-            <br/>
+                pipeInstance="pipeSearchBoxInstance"
+                placeholder="Search for a place..."
+                style="width: 100%"
+                class="flex-1 autogrow"
+                value-bind="$page.text"
+                showClear
+                label="Search"
+                tooltip="Search"
+            />
+            <br />
             <h4>Previous searches</h4>
-            <Grid 
+            <Grid
                 columns={[{
                     header: 'Address',
                     sortable: true,

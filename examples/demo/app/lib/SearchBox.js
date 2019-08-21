@@ -7,7 +7,7 @@ export class SearchBox extends PureContainer {
             bounds: { structured: true },
             controlPosition: undefined,
             style: { structured: true },
-            placeholder: undefined
+            placeholder: undefined,
         });
     }
 
@@ -22,22 +22,22 @@ export class SearchBox extends PureContainer {
             instance.marker.setPosition(data.position);
     }
 
-    initSearchBox(input, instance) {
-        if (instance.searchBox)
+    initSearchBox(el, instance) {
+        if (instance.input === el)
             return;
 
-        this.input = input;
+        // TODO: Should we detach instance.searchBox handlers if they exist?
+
+        instance.input = el;
 
         let { widget, data } = instance;
 
-        if (!google.maps.places)
-            throw Error("GoogleMaps places API not loaded.");
+        if (!google.maps.places) throw Error('GoogleMaps places API not loaded.');
 
-        let searchBox = (instance.searchBox = new google.maps.places.SearchBox(input));
-        this.map.controls[data.controlPosition].push(input);
+        let searchBox = (instance.searchBox = new google.maps.places.SearchBox(el));
+        this.map.controls[data.controlPosition].push(el);
 
-        if (widget.pipeInstance)
-            instance.invoke('pipeInstance', searchBox, instance);
+        if (widget.pipeInstance) instance.invoke('pipeInstance', searchBox, instance);
 
         attachEventCallbacks(searchBox, instance, {
             places_changed: 'onPlacesChanged',
@@ -50,14 +50,13 @@ export class SearchBox extends PureContainer {
         let text = e.target.value;
         if (data.maxLength != null && text.length > data.maxLength) {
             text = text.substring(0, data.maxLength);
-            this.input.value = text;
+            instance.input.value = text;
         }
 
         //it's important not to set the old value as it causes weird behavior if debounce is used
         let value = text || null;
 
-        if (!instance.set('value', value, true))
-            this.input.value = data.value || '';
+        if (!instance.set('value', value, true)) instance.input.value = data.value || '';
     }
 
     explore(context, instance) {
@@ -68,22 +67,22 @@ export class SearchBox extends PureContainer {
     render(context, instance, key) {
         let { data, widget } = instance;
         let { CSS } = widget;
-        
-        return <input
-            key={key}
-            ref={el => this.initSearchBox(el, instance)}
-            className={CSS.expand(data.classNames)}
-            defaultValue={data.value}
-            id={data.id}
-            style={data.style}
-            type={widget.inputType}
-            disabled={data.disabled}
-            readOnly={data.readOnly}
-            tabIndex={data.tabIndex}
-            placeholder={data.placeholder}
-            {...data.inputAttrs}
-            onInput={e => this.onChange(e, instance)}
-            onChange={e => this.onChange(e, instance)}
-        />;
+        return (
+            <input
+                ref={el => this.initSearchBox(el, instance)}
+                className={CSS.expand(data.classNames)}
+                defaultValue={data.value}
+                id={data.id}
+                style={data.style}
+                type={widget.inputType}
+                disabled={data.disabled}
+                readOnly={data.readOnly}
+                tabIndex={data.tabIndex}
+                placeholder={data.placeholder}
+                {...data.inputAttrs}
+                onInput={e => this.onChange(e, instance)}
+                onChange={e => this.onChange(e, instance)}
+            />
+        );
     }
 }
