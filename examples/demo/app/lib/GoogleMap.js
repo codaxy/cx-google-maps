@@ -67,6 +67,8 @@ export class GoogleMap extends Container {
       let map = (instance.map = new google.maps.Map(el, {
         center: data.center || data.defaultCenter,
         zoom: data.zoom || data.defaultZoom,
+        mapTypeId: data.mapTypeId,
+        options: data.options
       }));
 
       if (widget.pipeInstance) {

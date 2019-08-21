@@ -7,8 +7,8 @@ import AppLayout from '../layout';
 import About from './about';
 
 import GoogleMap from './components/google-map';
-// import SearchBox from './components/search-box';
-// import Marker from './components/marker';
+import SearchBox from './components/search-box';
+import Marker from './components/marker';
 // import MarkerWithLabel from './components/marker-with-label';
 // import MarkerClusterer from './components/marker-clusterer';
 // import Polygon from './components/polygon';
@@ -23,7 +23,7 @@ import GoogleMap from './components/google-map';
 // import BicyclingLayer from './components/bicycling-layer';
 // import Circle from './components/circle';
 // import OverlayView from './components/overlay-view';
-// import Rectangle from './components/rectangle';
+import Rectangle from './components/rectangle';
 // import StreetViewPanorama from './components/street-view-panorama';
 // import TrafficLayer from './components/traffic-layer';
 // import HeatmapLayer from './components/heatmap-layer';
@@ -51,9 +51,10 @@ export default (
 
             <GoogleMap />
 
-            {/*
             <SearchBox />
             <Marker />
+            <Rectangle />
+            {/*
             <MarkerWithLabel />
             <MarkerClusterer />
             <Polygon />
@@ -67,7 +68,6 @@ export default (
             <GroundOverlay />
             <Circle />
             <OverlayView />
-            <Rectangle />
             <StreetViewPanorama />
             <TrafficLayer />
             <HeatmapLayer />

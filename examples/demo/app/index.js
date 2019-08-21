@@ -35,8 +35,8 @@ History.connect(store, "url");
 // debug
 
 // Widget.resetCounter();
-// Timing.enable("app-loop");
-// Debug.enable("app-data");
+Timing.enable("app-loop");
+Debug.enable("app-data");
 
 // app loop
 import Routes from "./routes";

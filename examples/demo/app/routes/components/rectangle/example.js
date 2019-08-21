@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { 
     HtmlElement, 
     Menu,
@@ -11,10 +9,8 @@ import {
 
 import {
     GoogleMap,
-    SearchBox,
-    Marker,
     Rectangle
-} from 'cx-google-maps';
+} from '../../../lib';
 
 import { VDOM, Controller as CxController, Repeater } from 'cx/ui';
 import config from './config';
@@ -52,11 +48,8 @@ class Controller extends CxController {
 export default <cx>
     <GoogleMap
         controller={Controller}
-        containerElement={containerElement}
-        mapElement={mapElement}
-        defaultCenter-bind="$page.map.center"
-        defaultZoom-bind="$page.map.zoom"
         center-bind="$page.map.center"
+        style="width: 100%; height: 100%; min-height: 400px; background: red"
         zoom-bind="$page.map.zoom"
         options={{
             mapTypeControlOptions: {

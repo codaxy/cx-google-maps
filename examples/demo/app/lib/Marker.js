@@ -1,61 +1,61 @@
-import {PureContainer} from 'cx/ui';
-import {attachEventCallbacks} from './attachEventCallbacks';
-import {sameLatLng} from './sameLatLng';
+import { PureContainer } from 'cx/ui';
+import { attachEventCallbacks } from './attachEventCallbacks';
+import { sameLatLng } from './sameLatLng';
 
 export class Marker extends PureContainer {
-  declareData () {
-    super.declareData (...arguments, {
-      animation: {structured: true},
-      attribution: {structured: true},
+  declareData() {
+    super.declareData(...arguments, {
+      animation: { structured: true },
+      attribution: { structured: true },
       clickable: undefined,
-      cursor: {structured: true},
+      cursor: { structured: true },
       draggable: undefined,
-      icon: {structured: true},
-      label: {structured: true},
+      icon: { structured: true },
+      label: { structured: true },
       opacity: undefined,
-      options: {structured: true},
-      place: {structured: true},
-      position: {structured: true},
-      shape: {structured: true},
-      title: {structured: true},
+      options: { structured: true },
+      place: { structured: true },
+      position: { structured: true },
+      shape: { structured: true },
+      title: { structured: true },
       zIndex: undefined,
       noRedraw: undefined,
     });
   }
 
-  prepareData (context, instance) {
-    super.prepareData (context, instance);
+  prepareData(context, instance) {
+    super.prepareData(context, instance);
 
-    let {data, cached, marker} = instance;
-    let {rawData} = cached;
+    let { data, cached, marker } = instance;
+    let { rawData } = cached;
     if (!marker || !rawData) return;
 
-    if (data.position && !sameLatLng (data.position, rawData.position))
-      instance.marker.setPosition (data.position);
+    if (data.position && !sameLatLng(data.position, rawData.position))
+      instance.marker.setPosition(data.position);
   }
 
-  initMarker (context, instance) {
-    let {widget, data} = instance;
+  initMarker(context, instance) {
+    let { widget, data } = instance;
 
-    let marker = (instance.marker = new google.maps.Marker ({
+    let marker = (instance.marker = new google.maps.Marker({
       ...data,
       map: context.googleMap,
     }));
 
-    if (widget.onPipeInstance)
-      instance.invoke ('onPipeInstance', marker, instance);
+    if (widget.pipeInstance)
+      instance.invoke('pipeInstance', marker, instance);
 
     if (widget.position && widget.position.bind) {
-      marker.addListener ('position_changed', e => {
-        let pos = marker.getPosition ();
-        let pd = {lat: pos.lat (), lng: pos.lng ()};
-        if (!sameLatLng (pd, instance.data.position)) {
-          instance.set ('position', pd, true);
+      marker.addListener('position_changed', e => {
+        let pos = marker.getPosition();
+        let pd = { lat: pos.lat(), lng: pos.lng() };
+        if (!sameLatLng(pd, instance.data.position)) {
+          instance.set('position', pd, true);
         }
       });
     }
 
-    attachEventCallbacks (marker, instance, {
+    attachEventCallbacks(marker, instance, {
       animation_changed: 'onAnimationChanged',
       click: 'onClick',
       clickable_changed: 'onClickableChanged',
@@ -80,13 +80,13 @@ export class Marker extends PureContainer {
     });
   }
 
-  explore (context, instance) {
-    if (!instance.marker) this.initMarker (context, instance);
+  explore(context, instance) {
+    if (!instance.marker) this.initMarker(context, instance);
 
-    super.explore (context, instance);
+    super.explore(context, instance);
   }
 
-  render (context, instance, key) {
-    return this.renderChildren (context, instance);
+  render(context, instance, key) {
+    return this.renderChildren(context, instance);
   }
 }

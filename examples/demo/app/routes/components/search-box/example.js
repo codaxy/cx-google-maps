@@ -1,5 +1,5 @@
-import { 
-    HtmlElement, 
+import {
+    HtmlElement,
     Menu,
     Toast,
     TextField
@@ -8,7 +8,7 @@ import {
 import {
     GoogleMap,
     SearchBox
-} from 'cx-google-maps';
+} from '../../../lib';
 
 import { VDOM, Controller as CxController } from 'cx/ui';
 
@@ -17,10 +17,10 @@ const mapElement =
     <div
         style={{ position: "absolute", left: 0, top: 0, right: 0, bottom: 0 }}
     />
-;
+    ;
 
 class Controller extends CxController {
-    getDefaults() { 
+    getDefaults() {
         return {
             center: {
                 lat: 41.87811360,
@@ -31,8 +31,8 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());        
-        this.store.init('$page.map', this.getDefaults());        
+        this.store.init('$page.mapdefaults', this.getDefaults());
+        this.store.init('$page.map', this.getDefaults());
     }
 
     pipeMapInstance(instance) {
@@ -47,7 +47,7 @@ class Controller extends CxController {
         let places = this.searchBox.getPlaces();
         if (places.length < 1)
             return;
-        
+
         Toast.create({
             message: `Place selected: ${places[0].formatted_address}`,
             timeout: 3000
@@ -55,12 +55,12 @@ class Controller extends CxController {
 
         let location = places[0].geometry.location
         this.map.panTo(location);
-            
+
         // We could have just make use of the -bind in the map
         // center (see index.js) and pan like this:
-        
+
         // this.store.set('$page.map.center', location);
-        
+
         // However, in this case, panning would be instant,
         // whereas Google Maps panTo provides smooth panning
         // when possible.
@@ -70,11 +70,8 @@ class Controller extends CxController {
 export default <cx>
     <GoogleMap
         controller={Controller}
-        containerElement={containerElement}
-        mapElement={mapElement}
         pipeInstance="pipeMapInstance"
-        defaultCenter-bind="$page.map.center"
-        defaultZoom-bind="$page.map.zoom"
+        style="width: 100%; height: 100%; min-height: 400px; background: red"
         center-bind="$page.map.center"
         zoom-bind="$page.map.zoom"
         options={{
@@ -87,13 +84,9 @@ export default <cx>
             controlPosition={google.maps.ControlPosition.TOP_CENTER}
             onPlacesChanged="onSearchPlacesChanged"
             pipeInstance="pipeSearchBoxInstance"
-        >   
-            <TextField
-                placeholder="Search..."
-                style={{
-                    margin: 5,
-                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)'
-                }}/>
-        </SearchBox>
+            placeholder="Search..."
+            value-bind="$page.searchValue"
+            style="padding: 5px; margin: 10px 0; border: 1px solid #ccc"
+        />
     </GoogleMap>
-</cx>;
+</cx >;

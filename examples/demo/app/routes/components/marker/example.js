@@ -1,5 +1,5 @@
-import { 
-    HtmlElement, 
+import {
+    HtmlElement,
     Menu,
     Toast
 } from 'cx/widgets';
@@ -10,9 +10,8 @@ import {
 
 import {
     GoogleMap,
-    SearchBox,
     Marker
-} from 'cx-google-maps';
+} from '../../../lib';
 
 import { VDOM, Controller as CxController } from 'cx/ui';
 import config from './config';
@@ -22,10 +21,10 @@ const mapElement =
     <div
         style={{ position: "absolute", left: 0, top: 0, right: 0, bottom: 0 }}
     />
-;
+    ;
 
 class Controller extends CxController {
-    getDefaults() { 
+    getDefaults() {
         return {
             center: {
                 lat: 41.77811360,
@@ -40,21 +39,18 @@ class Controller extends CxController {
             message: `Marker clicked.`,
             timeout: 3000
         }).open();
-    }    
+    }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());        
-        this.store.init('$page.map', this.getDefaults());        
+        this.store.init('$page.mapdefaults', this.getDefaults());
+        this.store.init('$page.map', this.getDefaults());
     }
 }
 
 export default <cx>
     <GoogleMap
+        style="width: 100%; height: 100%; min-height: 400px; background: red"
         controller={Controller}
-        containerElement={containerElement}
-        mapElement={mapElement}
-        defaultCenter-bind="$page.map.center"
-        defaultZoom-bind="$page.map.zoom"
         center-bind="$page.map.center"
         zoom-bind="$page.map.zoom"
         options={{
@@ -68,6 +64,6 @@ export default <cx>
             title="This is a custom icon marker with rollover text"
             icon="https://codaxy.github.io/cx-google-maps/assets/img/cx.png"
             onClick="onMarkerClick"
-        />    
+        />
     </GoogleMap>
 </cx>;
