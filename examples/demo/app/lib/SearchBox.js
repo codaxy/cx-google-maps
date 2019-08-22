@@ -1,25 +1,30 @@
 import { PureContainer, VDOM } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
+import { generateDefaultSetters } from './generateDefaultSetters';
+import { autoUpdate } from './autoUpdate';
 
 export class SearchBox extends PureContainer {
+    static bindableProps = {
+        bounds: { structured: true },
+        controlPosition: undefined,
+        style: { structured: true },
+        placeholder: undefined,
+    }
+
+    static propSetters = generateDefaultSetters(SearchBox.bindableProps);
+
     declareData() {
-        super.declareData(...arguments, {
-            bounds: { structured: true },
-            controlPosition: undefined,
-            style: { structured: true },
-            placeholder: undefined,
-        });
+        super.declareData(...arguments, SearchBox.bindableProps);
     }
 
     prepareData(context, instance) {
         super.prepareData(context, instance);
 
-        let { data, cached, marker } = instance;
+        let { data, cached, searchBox } = instance;
         let { rawData } = cached;
-        if (!marker || !rawData) return;
+        if (!searchBox || !rawData) return;
 
-        if (data.position && !sameLatLng(data.position, rawData.position))
-            instance.marker.setPosition(data.position);
+        autoUpdate(searchBox, data, rawData, SearchBox.bindableProps, SearchBox.propSetters);
     }
 
     initSearchBox(el, instance) {
@@ -69,6 +74,7 @@ export class SearchBox extends PureContainer {
         let { CSS } = widget;
         return (
             <input
+                key={key}
                 ref={el => this.initSearchBox(el, instance)}
                 className={CSS.expand(data.classNames)}
                 defaultValue={data.value}

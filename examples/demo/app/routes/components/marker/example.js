@@ -1,12 +1,10 @@
 import {
     HtmlElement,
     Menu,
-    Toast
+    Toast,
+    Slider,
+    ColorField
 } from 'cx/widgets';
-
-import {
-    Url
-} from 'cx/ui';
 
 import {
     GoogleMap,
@@ -14,14 +12,6 @@ import {
 } from '../../../lib';
 
 import { VDOM, Controller as CxController } from 'cx/ui';
-import config from './config';
-
-const containerElement = <div style={{ position: "relative", flex: 1 }} />;
-const mapElement =
-    <div
-        style={{ position: "absolute", left: 0, top: 0, right: 0, bottom: 0 }}
-    />
-    ;
 
 class Controller extends CxController {
     getDefaults() {
@@ -49,7 +39,7 @@ class Controller extends CxController {
 
 export default <cx>
     <GoogleMap
-        style="width: 100%; height: 100%; min-height: 400px; background: red"
+        style="width: 100%; height: 100%; min-height: 400px;"
         controller={Controller}
         center-bind="$page.map.center"
         zoom-bind="$page.map.zoom"
@@ -59,10 +49,37 @@ export default <cx>
             }
         }}
     >
+        <Menu vertical mod="map" itemPadding="small">
+            <Slider value-bind="$page.heading"
+                min={0}
+                max={360}
+            />
+            <Slider 
+                value={{ bind:"$page.opacity", defaultValue: 1 }}
+                min={0}
+                max={1}
+                defaultValue={1}
+            />
+            <ColorField 
+                value={{ bind: "$page.color", defaultValue: "#ff0000" }} />
+        </Menu>
         <Marker
             position-bind="$page.map.center"
             title="This is a custom icon marker with rollover text"
-            icon="https://codaxy.github.io/cx-google-maps/assets/img/cx.png"
+
+            icon={{
+                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                scale: 6,
+                rotation: { bind: '$page.heading' },
+                strokeColor: 'white',
+                fillColor: { bind: "$page.color" },
+                fillOpacity: 0.8,
+                anchor: new google.maps.Point(0, 2.5),
+                strokeWeight: 2
+            }}
+
+            opacity-bind="$page.opacity"
+
             onClick="onMarkerClick"
         />
     </GoogleMap>

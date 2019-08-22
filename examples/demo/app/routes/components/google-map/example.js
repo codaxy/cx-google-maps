@@ -43,7 +43,7 @@ export default (
     <cx>
         <GoogleMap
             controller={Controller}
-            style="width: 100%; height: 100%; min-height: 400px; background: red"
+            style="width: 100%; height: 100%; min-height: 400px"
             pipeInstance="pipeMapInstance"
             defaultCenter-bind="$page.map.center"
             defaultZoom-bind="$page.map.zoom"

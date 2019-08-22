@@ -1,6 +1,8 @@
 import { 
     Menu,
-    NumberField
+    NumberField,
+    ColorPicker,
+    ColorField
 } from 'cx/widgets';
 
 import {
@@ -50,13 +52,14 @@ export default <cx>
             <NumberField value-bind="$page.bounds.west" label="West" />
             <NumberField value-bind="$page.bounds.north" label="North" />
             <NumberField value-bind="$page.bounds.east" label="East" />
+            <ColorField value={{bind: "$page.color", defaultValue: "#ff0000" }} label="Color" />
         </Menu>
         <Rectangle
             bounds-bind="$page.bounds"
             options={{
-                fillColor: "red",
+                fillColor: { bind: "$page.color" },
                 fillOpacity: 0.5,
-                strokeColor: "red",
+                strokeColor: { bind: "$page.color" },
                 strokeOpacity: 0.9
             }}
             editable

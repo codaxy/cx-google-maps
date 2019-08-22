@@ -1,26 +1,31 @@
 import { PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
 import { sameLatLng } from './sameLatLng';
+import { autoUpdate } from './autoUpdate';
+import { generateDefaultSetters } from './generateDefaultSetters';
 
 export class Marker extends PureContainer {
+    static bindableProps = {
+        animation: { structured: true },
+        attribution: { structured: true },
+        clickable: undefined,
+        cursor: { structured: true },
+        draggable: undefined,
+        icon: { structured: true },
+        label: { structured: true },
+        opacity: undefined,
+        options: { structured: true },
+        position: { structured: true },
+        shape: { structured: true },
+        title: { structured: true },
+        zIndex: undefined,
+        noRedraw: undefined,
+    }
+
+    static propSetters = generateDefaultSetters(Marker.bindableProps)
+
     declareData() {
-        super.declareData(...arguments, {
-            animation: { structured: true },
-            attribution: { structured: true },
-            clickable: undefined,
-            cursor: { structured: true },
-            draggable: undefined,
-            icon: { structured: true },
-            label: { structured: true },
-            opacity: undefined,
-            options: { structured: true },
-            place: { structured: true },
-            position: { structured: true },
-            shape: { structured: true },
-            title: { structured: true },
-            zIndex: undefined,
-            noRedraw: undefined,
-        });
+        super.declareData(...arguments, Marker.bindableProps);
     }
 
     prepareData(context, instance) {
@@ -32,6 +37,10 @@ export class Marker extends PureContainer {
 
         if (data.position && !sameLatLng(data.position, rawData.position))
             marker.setPosition(data.position);
+
+        autoUpdate(marker, data, rawData, Marker.bindableProps, Marker.propSetters, { 
+            exclude: {"position": true } 
+        });
     }
 
     initMarker(context, instance) {

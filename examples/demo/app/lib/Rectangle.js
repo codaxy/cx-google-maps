@@ -1,14 +1,21 @@
 import { PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
+import { shallowEquals } from 'cx/util';
+import { generateDefaultSetters } from './generateDefaultSetters';
+import { autoUpdate } from './autoUpdate';
 
 export class Rectangle extends PureContainer {
+    static bindableProps = {
+        bounds: { structured: true },
+        draggable: undefined,
+        editable: undefined,
+        options: { structured: true },
+    }
+
+    static propSetters = generateDefaultSetters(Rectangle.bindableProps);
+
     declareData() {
-        super.declareData(...arguments, {
-            bounds: { structured: true },
-            draggable: undefined,
-            editable: undefined,
-            options: { structured: true },
-        });
+        super.declareData(...arguments, Rectangle.bindableProps);
     }
 
     prepareData(context, instance) {
@@ -18,15 +25,7 @@ export class Rectangle extends PureContainer {
         let { rawData } = cached;
         if (!rect || !rawData) return;
 
-        let ob = rawData.bounds || {};
-
-        if (
-            data.bounds &&
-            (data.bounds.north !== ob.north ||
-                data.bounds.south !== ob.south ||
-                data.bounds.east !== ob.east ||
-                data.bounds.west !== ob.west)
-        ) {
+        if (data.bounds && !shallowEquals(data.bounds, rawData.bounds || {})) {
             rect.setBounds(
                 new google.maps.LatLngBounds(
                     {
@@ -40,6 +39,10 @@ export class Rectangle extends PureContainer {
                 ),
             );
         }
+
+        autoUpdate(rect, data, rawData, Rectangle.bindableProps, Rectangle.propSetters, {
+            exclude: { "bounds": true }
+        });
     }
 
     initRectangle(context, instance) {

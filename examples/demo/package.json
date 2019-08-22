@@ -15,8 +15,11 @@
     "babel-polyfill": "^6.23.0",
     "cx": "^19.8.1",
     "cx-react": "^17.10.0",
+    "google-maps-infobox": "^2.0.0",
     "illuminate-js": "^1.0.0-alpha.2",
     "marked": "^0.7.0",
+    "marker-clusterer-plus": "^2.1.4",
+    "markerwithlabel": "^2.0.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "whatwg-fetch": "^2.0.3"
