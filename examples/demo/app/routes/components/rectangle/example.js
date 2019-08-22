@@ -27,10 +27,10 @@ class Controller extends CxController {
         this.store.init('$page.mapdefaults', this.getDefaults());        
         this.store.init('$page.map', this.getDefaults());
         this.store.init('$page.bounds', {
-            north: 41.77811360,
-            west: -87.62979820,
-            east: -86.62,
-            south: 41.18
+            south: 41.3327941600703,
+            west: -87.7012093328124,
+            north: 41.6653631162898,
+            east: -87.1720629882812,
         });
     }
 }

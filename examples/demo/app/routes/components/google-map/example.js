@@ -45,8 +45,6 @@ export default (
             controller={Controller}
             style="width: 100%; height: 100%; min-height: 400px"
             pipeInstance="pipeMapInstance"
-            defaultCenter-bind="$page.map.center"
-            defaultZoom-bind="$page.map.zoom"
             center-bind="$page.map.center"
             zoom-bind="$page.map.zoom"
             controlSize={24}

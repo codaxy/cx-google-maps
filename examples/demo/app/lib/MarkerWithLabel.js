@@ -1,10 +1,11 @@
 
-import { PureContainer } from 'cx/ui';
+import { VDOM, PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
 import { sameLatLng } from './sameLatLng';
 import { autoUpdate } from './autoUpdate';
 import { standardSetterMap } from './standardSetterMap';
 import makeMarkerWithLabel from 'markerwithlabel';
+import { registerIcon } from 'cx/src/widgets/icons/registry';
 
 const settableProps = {
     animation: { structured: true },
@@ -21,7 +22,6 @@ const settableProps = {
     icon: { structured: true },
     label: { structured: true },
     labelAnchor: { structured: true },
-    labelContent: undefined,
     labelClass: undefined,
     labelStyle: { structured: true },
     labelVisible: undefined,
@@ -115,7 +115,16 @@ export class MarkerWithLabel extends PureContainer {
         super.explore(context, instance);
     }
 
+    attach(el, instance) {
+        if (!instance.marker || instance.contentEl)
+            return;
+        
+        instance.marker.set('labelContent', instance.contentEl = el);
+    }
+
     render(context, instance, key) {
-        return this.renderChildren(context, instance);
+        return <div key={key} ref={el => this.attach(el, instance)}>
+            {this.renderChildren(context, instance)}
+        </div>
     }
 }

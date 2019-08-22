@@ -84,9 +84,10 @@ export default <cx>
                 fontSize: "24px",
                 padding: "16px"
             }}
-            labelContent="cx-google-maps"
             onClick="onMarkerClick"
-        />
+        >
+            <span>cx-google-maps</span>
+        </MarkerWithLabel>
     </GoogleMap>
 </cx>;
                     `}</CodeSnippet>

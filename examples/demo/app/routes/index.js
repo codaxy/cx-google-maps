@@ -15,7 +15,7 @@ import MarkerClusterer from './components/marker-clusterer';
 // import Polyline from './components/polyline';
 // import KmlLayer from './components/kml-layer';
 // import InfoWindow from './components/info-window';
-// import InfoBox from './components/info-box';
+import InfoBox from './components/info-box';
 // import DirectionsRenderer from './components/directions-renderer';
 // import DrawingManager from './components/drawing-manager';
 // import FusionTablesLayer from './components/fusion-tables-layer';
@@ -57,12 +57,12 @@ export default (
             <Rectangle />
             <MarkerWithLabel />
             <MarkerClusterer />
+            <InfoBox />
             {/*
             <Polygon />
             <Polyline />
             <KmlLayer />
             <InfoWindow />
-            <InfoBox />
             <DirectionsRenderer />
             <DrawingManager />
             <FusionTablesLayer />

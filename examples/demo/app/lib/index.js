@@ -5,3 +5,4 @@ export * from './StandaloneSearchBox';
 export * from './Rectangle';
 export * from './MarkerWithLabel';
 export * from './MarkerClusterer';
+export * from './InfoBox';

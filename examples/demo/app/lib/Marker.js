@@ -97,7 +97,13 @@ export class Marker extends PureContainer {
     explore(context, instance) {
         if (!instance.marker) this.initMarker(context, instance);
 
+        context.push("marker", instance.marker);
+
         super.explore(context, instance);
+    }
+
+    exploreCleanup(context) {
+        context.pop("marker");
     }
 
     render(context, instance, key) {

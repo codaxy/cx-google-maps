@@ -25,7 +25,6 @@ export const config = {
     zIndex: 'number',
     labelAnchor: 'object',
     labelClass: 'string',
-    labelContent: 'string',
     labelStyle: 'object',
     labelVisible: 'bool',
     noRedraw: {

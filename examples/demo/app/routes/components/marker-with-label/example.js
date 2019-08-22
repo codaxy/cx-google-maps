@@ -1,5 +1,5 @@
 import {
-    Toast, Menu
+    Toast, Menu, Slider
 } from 'cx/widgets';
 
 import {
@@ -7,7 +7,7 @@ import {
     MarkerWithLabel
 } from '../../../lib';
 
-import { VDOM, Controller as CxController } from 'cx/ui';
+import { VDOM, Controller as CxController, FirstVisibleChildLayout, PureContainer } from 'cx/ui';
 
 class Controller extends CxController {
     getDefaults() {
@@ -45,15 +45,22 @@ export default <cx>
             }
         }}
     >
+        <Menu vertical mod="map" itemPadding="small">
+            <Slider value-bind="$page.slider" min={0} max={100} step={1} />
+        </Menu>
         <MarkerWithLabel
             position-bind="$page.map.center"
             title="This is a custom icon marker with label"
             icon="https://codaxy.github.io/cx-google-maps/assets/img/cx.png"
-            labelContent="cx-google-maps"
+            XlabelContent="cx-google-maps"
             labelAnchor={{ x: 0, y: 0 }}
             labelStyle={{ backgroundColor: "rgba(20, 40, 120, 0.5)", color: "white", fontSize: "18px", padding: "12px" }}
             onClick="onMarkerClick"
         >
+            <PureContainer layout={FirstVisibleChildLayout}>
+                <span if-expr="{$page.slider} < 50" text-tpl="cx-google-maps {$page.slider}" />
+                <span text-tpl="spam-elgoog-xc {$page.slider}" />
+            </PureContainer>
         </MarkerWithLabel>
     </GoogleMap>
 </cx>
