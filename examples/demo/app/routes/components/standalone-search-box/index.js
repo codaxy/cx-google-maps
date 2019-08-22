@@ -90,14 +90,12 @@ export default (
             <h4>Cx TextField</h4>
             <StandaloneSearchBox
                 onPlacesChanged="onSearchPlacesChanged"
-                pipeInstance="pipeSearchBoxInstance">
-                <TextField
-                    placeholder="Search for a place..."
-                    style="width: 100%"
-                    class="flex-1 autogrow"
-                    value-bind="$page.text"
-                />
-            </StandaloneSearchBox>
+                pipeInstance="pipeSearchBoxInstance"
+                placeholder="Search for a place..."
+                style="width: 100%"
+                class="flex-1 autogrow"
+                value-bind="$page.text"
+            />
             <br/>
             <h4>Previous searches</h4>
             <Grid 

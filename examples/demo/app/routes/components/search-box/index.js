@@ -1,7 +1,7 @@
-import { 
-    HtmlElement, 
-    Route, 
-    FlexCol, 
+import {
+    HtmlElement,
+    Route,
+    FlexCol,
     FlexRow,
     Section
 } from 'cx/widgets';
@@ -12,11 +12,11 @@ import {
     events
 } from './config';
 
-import { 
-    ConfigTable, 
+import {
+    ConfigTable,
     EventTable,
     CodeSnippet,
-    Md 
+    Md
 } from 'app/components';
 
 const info = {
@@ -43,18 +43,18 @@ export default <cx>
                     Cx wrapper around <a href={info.reactGoogleMapsDocs} target="_blank">{info.name}</a> React component.
                     For additional info about various options, available events and methods, please see <a href={info.googleMapsDocs} target="_blank">Google Maps Docs</a>.
                 </p>
-                    
+
                 <Md>
                     ##### Configuration
-                    <ConfigTable props={config} /> 
+                    <ConfigTable props={config} />
 
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
 
-                    <EventTable props={events} /> 
+                    <EventTable props={events} />
 
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
 
                     ##### Example
                     <CodeSnippet>{`
@@ -93,14 +93,12 @@ export default <cx>
             controlPosition={google.maps.ControlPosition.TOP_CENTER}
             onPlacesChanged="onSearchPlacesChanged"
             pipeInstance="pipeSearchBoxInstance"
-        >   
-            <TextField
-                placeholder="Search..."
-                style={{
-                    margin: 5,
-                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)'
-                }}/>
-        </SearchBox>
+            placeholder="Search..."
+            style={{
+                margin: 5,
+                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)'
+            }}/>
+        />   
     </GoogleMap>
 </cx>;
                     `}</CodeSnippet>
@@ -110,6 +108,6 @@ export default <cx>
             <FlexCol mod="card" style="flex: 1; max-height: 600px">
                 <Example />
             </FlexCol>
-        </FlexRow>    
+        </FlexRow>
     </Route>
 </cx>;
