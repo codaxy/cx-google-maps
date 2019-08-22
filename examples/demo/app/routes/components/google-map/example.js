@@ -49,6 +49,7 @@ export default (
             defaultZoom-bind="$page.map.zoom"
             center-bind="$page.map.center"
             zoom-bind="$page.map.zoom"
+            controlSize={24}
             options={{
                 mapTypeControlOptions: {
                     position: google.maps.ControlPosition.TOP_RIGHT,

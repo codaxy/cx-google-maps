@@ -2,30 +2,32 @@ import { PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
 import { sameLatLng } from './sameLatLng';
 import { autoUpdate } from './autoUpdate';
-import { generateDefaultSetters } from './generateDefaultSetters';
+import { standardSetterMap } from './standardSetterMap';
+
+const settableProps = {
+    animation: { structured: true },
+    attribution: { structured: true },
+    clickable: undefined,
+    cursor: { structured: true },
+    draggable: undefined,
+    icon: { structured: true },
+    label: { structured: true },
+    opacity: undefined,
+    options: { structured: true },
+    position: { structured: true },
+    shape: { structured: true },
+    title: { structured: true },
+    zIndex: undefined,
+};
+
+const propSetterMap = standardSetterMap(settableProps);
 
 export class Marker extends PureContainer {
-    static bindableProps = {
-        animation: { structured: true },
-        attribution: { structured: true },
-        clickable: undefined,
-        cursor: { structured: true },
-        draggable: undefined,
-        icon: { structured: true },
-        label: { structured: true },
-        opacity: undefined,
-        options: { structured: true },
-        position: { structured: true },
-        shape: { structured: true },
-        title: { structured: true },
-        zIndex: undefined,
-        noRedraw: undefined,
-    }
-
-    static propSetters = generateDefaultSetters(Marker.bindableProps)
-
     declareData() {
-        super.declareData(...arguments, Marker.bindableProps);
+        super.declareData(...arguments, {
+            ...settableProps,
+            noRedraw: undefined
+        });
     }
 
     prepareData(context, instance) {
@@ -38,18 +40,22 @@ export class Marker extends PureContainer {
         if (data.position && !sameLatLng(data.position, rawData.position))
             marker.setPosition(data.position);
 
-        autoUpdate(marker, data, rawData, Marker.bindableProps, Marker.propSetters, { 
-            exclude: {"position": true } 
+        autoUpdate(marker, data, rawData, propSetterMap, {
+            exclude: { "position": true }
         });
     }
 
     initMarker(context, instance) {
         let { widget, data } = instance;
 
-        let marker = (instance.marker = new google.maps.Marker({
-            ...data,
-            map: context.googleMap,
-        }));
+        let marker = (instance.marker = new google.maps.Marker(data));
+
+        if (context.markerClusterer) {
+            context.markerClusterer.addMarker(marker, !!data.noRedraw)
+        }
+        else {
+            marker.setMap(context.googleMap);
+        }
 
         if (widget.pipeInstance) instance.invoke('pipeInstance', marker, instance);
 

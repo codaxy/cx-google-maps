@@ -3,3 +3,4 @@ export * from './Marker';
 export * from './SearchBox';
 export * from './StandaloneSearchBox';
 export * from './Rectangle';
+export * from './MarkerClusterer';

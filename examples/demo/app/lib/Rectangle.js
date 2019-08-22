@@ -1,21 +1,21 @@
 import { PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
 import { shallowEquals } from 'cx/util';
-import { generateDefaultSetters } from './generateDefaultSetters';
+import { standardSetterMap } from './standardSetterMap';
 import { autoUpdate } from './autoUpdate';
 
+const settableProps = {
+    bounds: { structured: true },
+    draggable: undefined,
+    editable: undefined,
+    options: { structured: true },
+};
+
+const propSetterMap = standardSetterMap(settableProps);
+
 export class Rectangle extends PureContainer {
-    static bindableProps = {
-        bounds: { structured: true },
-        draggable: undefined,
-        editable: undefined,
-        options: { structured: true },
-    }
-
-    static propSetters = generateDefaultSetters(Rectangle.bindableProps);
-
     declareData() {
-        super.declareData(...arguments, Rectangle.bindableProps);
+        super.declareData(...arguments, settableProps);
     }
 
     prepareData(context, instance) {
@@ -40,7 +40,7 @@ export class Rectangle extends PureContainer {
             );
         }
 
-        autoUpdate(rect, data, rawData, Rectangle.bindableProps, Rectangle.propSetters, {
+        autoUpdate(rect, data, rawData, propSetterMap, {
             exclude: { "bounds": true }
         });
     }

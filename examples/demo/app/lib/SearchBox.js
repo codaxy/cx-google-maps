@@ -1,20 +1,20 @@
 import { PureContainer, VDOM } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
-import { generateDefaultSetters } from './generateDefaultSetters';
+import { standardSetterMap } from './standardSetterMap';
 import { autoUpdate } from './autoUpdate';
 
+const settableProps = {
+    bounds: { structured: true },
+    controlPosition: undefined,
+    style: { structured: true },
+    placeholder: undefined,
+};
+
+const propSetterMap = standardSetterMap(settableProps);
+
 export class SearchBox extends PureContainer {
-    static bindableProps = {
-        bounds: { structured: true },
-        controlPosition: undefined,
-        style: { structured: true },
-        placeholder: undefined,
-    }
-
-    static propSetters = generateDefaultSetters(SearchBox.bindableProps);
-
     declareData() {
-        super.declareData(...arguments, SearchBox.bindableProps);
+        super.declareData(...arguments, settableProps);
     }
 
     prepareData(context, instance) {
@@ -24,7 +24,7 @@ export class SearchBox extends PureContainer {
         let { rawData } = cached;
         if (!searchBox || !rawData) return;
 
-        autoUpdate(searchBox, data, rawData, SearchBox.bindableProps, SearchBox.propSetters);
+        autoUpdate(searchBox, data, rawData, propSetterMap);
     }
 
     initSearchBox(el, instance) {

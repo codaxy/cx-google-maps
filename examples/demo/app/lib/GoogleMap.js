@@ -2,19 +2,28 @@ import { Container, VDOM } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
 import { debounce } from 'cx/util';
 import { sameLatLng } from './sameLatLng';
+import { autoUpdate } from './autoUpdate';
+import { standardSetterMap } from './standardSetterMap';
+
+const settableProps = {
+    center: { structured: true },
+    heading: undefined,
+    mapTypeId: undefined,
+    options: { structured: true },
+    streetView: { structured: true },
+    tilt: undefined,
+    zoom: undefined,
+}
+
+let propSetterMap = standardSetterMap(settableProps);
 
 export class GoogleMap extends Container {
     declareData(...args) {
         super.declareData(...args, {
+            ...settableProps,
             defaultCenter: { structured: true },
-            defaultZoom: undefined,
-            center: { structured: true },
-            heading: undefined,
-            mapTypeId: undefined,
-            options: { structured: true },
-            streetView: { structured: true },
-            tilt: undefined,
-            zoom: undefined,
+            defaultZoom: { structured: true },
+            controlSize: undefined
         });
     }
 
@@ -37,7 +46,9 @@ export class GoogleMap extends Container {
 
         if (!sameLatLng(data.center, rawData.center)) map.setCenter(data.center);
 
-        if (data.zoom != rawData.zoom) map.setZoom(data.zoom);
+        autoUpdate(map, data, rawData, propSetterMap, {
+            exclude: { "center": true }
+        });
     }
 
     render(context, instance, key) {
@@ -69,6 +80,7 @@ export class GoogleMap extends Container {
                 zoom: data.zoom || data.defaultZoom,
                 mapTypeId: data.mapTypeId,
                 options: data.options,
+                controlSize: data.controlSize
             }));
 
             if (widget.pipeInstance) {

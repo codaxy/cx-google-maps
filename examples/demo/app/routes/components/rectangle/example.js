@@ -52,14 +52,16 @@ export default <cx>
             <NumberField value-bind="$page.bounds.west" label="West" />
             <NumberField value-bind="$page.bounds.north" label="North" />
             <NumberField value-bind="$page.bounds.east" label="East" />
-            <ColorField value={{bind: "$page.color", defaultValue: "#ff0000" }} label="Color" />
+            <ColorField value={{bind: "$page.color", defaultValue: "#ff0000" }} 
+                label="Color" 
+                required />
         </Menu>
         <Rectangle
             bounds-bind="$page.bounds"
             options={{
-                fillColor: { bind: "$page.color" },
+                fillColor: { bind: "$page.color", defaultValue: "#ff0000" },
                 fillOpacity: 0.5,
-                strokeColor: { bind: "$page.color" },
+                strokeColor: { bind: "$page.color", defaultValue: "#ff0000" },
                 strokeOpacity: 0.9
             }}
             editable

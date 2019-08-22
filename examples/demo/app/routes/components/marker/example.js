@@ -61,7 +61,8 @@ export default <cx>
                 defaultValue={1}
             />
             <ColorField 
-                value={{ bind: "$page.color", defaultValue: "#ff0000" }} />
+                value={{ bind: "$page.color", defaultValue: "#ff0000" }}
+                required />
         </Menu>
         <Marker
             position-bind="$page.map.center"
@@ -72,7 +73,7 @@ export default <cx>
                 scale: 6,
                 rotation: { bind: '$page.heading' },
                 strokeColor: 'white',
-                fillColor: { bind: "$page.color" },
+                fillColor: { bind: "$page.color", defaultValue: "#ff0000" },
                 fillOpacity: 0.8,
                 anchor: new google.maps.Point(0, 2.5),
                 strokeWeight: 2

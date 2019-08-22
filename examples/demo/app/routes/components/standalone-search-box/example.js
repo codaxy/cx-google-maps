@@ -33,7 +33,7 @@ export default (
         <FlexCol
             class="flex-1" controller={Controller}
             pad>
-            <h4>Cx TextField</h4>
+            <h4>Example</h4>
             <StandaloneSearchBox
                 onPlacesChanged="onSearchPlacesChanged"
                 pipeInstance="pipeSearchBoxInstance"
@@ -42,8 +42,8 @@ export default (
                 class="flex-1 autogrow"
                 value-bind="$page.text"
                 showClear
-                label="Search"
-                tooltip="Search"
+                label="Standalone search box"
+                tooltip="This is a tooltip"
             />
             <br />
             <h4>Previous searches</h4>

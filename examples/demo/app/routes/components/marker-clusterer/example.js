@@ -1,30 +1,15 @@
-import _ from 'lodash';
-
-import { 
-    HtmlElement, 
-    Menu,
-    Toast
-} from 'cx/widgets';
-
 import {
     GoogleMap,
     SearchBox,
     Marker,
     MarkerClusterer
-} from 'cx-google-maps';
+} from '../../../lib';
 
-import { VDOM, Controller as CxController, Repeater } from 'cx/ui';
-import config from './config';
-
-const containerElement = <div style={{ position: "relative", flex: 1 }} />;
-const mapElement =
-    <div
-        style={{ position: "absolute", left: 0, top: 0, right: 0, bottom: 0 }}
-    />
-;
+import { Controller as CxController, Repeater } from 'cx/ui';
+import { Menu, Slider } from 'cx/widgets';
 
 class Controller extends CxController {
-    getDefaults() { 
+    getDefaults() {
         return {
             center: {
                 lat: 41.77811360,
@@ -35,14 +20,15 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());        
-        this.store.init('$page.map', this.getDefaults());   
-        this.store.init('$page.markers', _.range(200)
+        this.store.init('$page.gridSize', 150);
+        this.store.init('$page.mapdefaults', this.getDefaults());
+        this.store.init('$page.map', this.getDefaults());
+        this.store.init('$page.markers', Array.from(Array(200).keys())
             .map((a, i) => ({
                 id: i,
                 position: {
-                    lat: 41.77811360 + Math.random() - 0.5, 
-                    lng: -87.62979820 + Math.random() - 0.5, 
+                    lat: 41.77811360 + Math.random() - 0.5,
+                    lng: -87.62979820 + Math.random() - 0.5,
                 },
                 title: `This is marker ${i}`,
                 heading: 360 * Math.random()
@@ -53,10 +39,7 @@ class Controller extends CxController {
 export default <cx>
     <GoogleMap
         controller={Controller}
-        containerElement={containerElement}
-        mapElement={mapElement}
-        defaultCenter-bind="$page.map.center"
-        defaultZoom-bind="$page.map.zoom"
+        style="width: 100%; height: 100%; min-height: 400px;"
         center-bind="$page.map.center"
         zoom-bind="$page.map.zoom"
         options={{
@@ -65,8 +48,16 @@ export default <cx>
             }
         }}
     >
-        <MarkerClusterer>
-            <Repeater 
+        <Menu vertical mod="map" itemPadding="small">
+            <Slider value-bind="$page.gridSize"
+                min={0}
+                max={300}
+            />
+        </Menu>
+        <MarkerClusterer
+            gridSize-bind="$page.gridSize"
+        >
+            <Repeater
                 records-bind="$page.markers"
                 keyField="id">
                 <Marker
@@ -76,14 +67,14 @@ export default <cx>
                     icon={{
                         path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
                         scale: 6,
-                        rotation: {bind: '$record.heading'},
+                        rotation: { bind: '$record.heading' },
                         fillColor: 'red',
                         fillOpacity: 0.5,
                         strokeColor: 'white',
                         strokeWeight: 2,
                         strokeOpacity: 1
                     }} />
-            </Repeater>    
-        </MarkerClusterer>            
+            </Repeater>
+        </MarkerClusterer>
     </GoogleMap>
 </cx>;
