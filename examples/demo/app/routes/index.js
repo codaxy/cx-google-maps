@@ -9,7 +9,7 @@ import About from './about';
 import GoogleMap from './components/google-map';
 import SearchBox from './components/search-box';
 import Marker from './components/marker';
-// import MarkerWithLabel from './components/marker-with-label';
+import MarkerWithLabel from './components/marker-with-label';
 import MarkerClusterer from './components/marker-clusterer';
 // import Polygon from './components/polygon';
 // import Polyline from './components/polyline';
@@ -55,9 +55,9 @@ export default (
             <StandaloneSearchBox />
             <Marker />
             <Rectangle />
+            <MarkerWithLabel />
             <MarkerClusterer />
             {/*
-            <MarkerWithLabel />
             <Polygon />
             <Polyline />
             <KmlLayer />

@@ -1,29 +1,13 @@
 import {
-    HtmlElement,
-    Menu,
-    Toast
+    Toast, Menu
 } from 'cx/widgets';
 
 import {
-    Url
-} from 'cx/ui';
-
-import {
     GoogleMap,
-    SearchBox,
-    Marker,
     MarkerWithLabel
-} from 'cx-google-maps';
+} from '../../../lib';
 
 import { VDOM, Controller as CxController } from 'cx/ui';
-import config from './config';
-
-const containerElement = <div style={{ position: "relative", flex: 1 }} />;
-const mapElement =
-    <div
-        style={{ position: "absolute", left: 0, top: 0, right: 0, bottom: 0 }}
-    />
-;
 
 class Controller extends CxController {
     getDefaults() {
@@ -52,10 +36,7 @@ class Controller extends CxController {
 export default <cx>
     <GoogleMap
         controller={Controller}
-        containerElement={containerElement}
-        mapElement={mapElement}
-        defaultCenter-bind="$page.map.center"
-        defaultZoom-bind="$page.map.zoom"
+        style="width: 100%; height: 100%; min-height: 400px;"
         center-bind="$page.map.center"
         zoom-bind="$page.map.zoom"
         options={{
@@ -68,11 +49,11 @@ export default <cx>
             position-bind="$page.map.center"
             title="This is a custom icon marker with label"
             icon="https://codaxy.github.io/cx-google-maps/assets/img/cx.png"
-            labelAnchor={{x: 0, y: 0}}
-            labelStyle={{backgroundColor: "rgba(20, 40, 120, 0.5)", color: "white", fontSize: "18px", padding: "12px"}}
+            labelContent="cx-google-maps"
+            labelAnchor={{ x: 0, y: 0 }}
+            labelStyle={{ backgroundColor: "rgba(20, 40, 120, 0.5)", color: "white", fontSize: "18px", padding: "12px" }}
             onClick="onMarkerClick"
         >
-            <div>cx-google-maps</div>
         </MarkerWithLabel>
     </GoogleMap>
-</cx>;
+</cx>

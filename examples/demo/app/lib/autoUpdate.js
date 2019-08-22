@@ -10,6 +10,7 @@ export function autoUpdate(component, data, rawData, setterMap, options = {}) {
                 throw Error(`Method ${set} does not exist.`);
 
             component[set](data[prop]);
-            return true;
-        }, false);
+            changed[prop] = true;
+            return changed;
+        }, {});
 }

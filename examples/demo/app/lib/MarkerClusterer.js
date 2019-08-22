@@ -41,15 +41,17 @@ export class MarkerClusterer extends PureContainer {
         if (data.averageCenter && !sameLatLng(data.averageCenter, rawData.averageCenter))
             markerClusterer.setPosition(data.averageCenter);
 
-        // MarkerClustererPlus set methods will not cause repaint on property
+        // Some MarkerClustererPlus set methods will not cause repaint on property
         // change, so we need to perform it manually.
-        let redraw = autoUpdate(markerClusterer, data, rawData, propSetterMap, {
+        let changes = autoUpdate(markerClusterer, data, rawData, propSetterMap, {
             exclude: { "averageCenter": true }
         });
 
-        if (redraw) {
+        // TODO: Expand as needed
+        if (changes.gridSize 
+            || changes.minimumClusterSize
+        )
             markerClusterer.repaint();
-        }
     }
 
     initMarkerClusterer(context, instance) {

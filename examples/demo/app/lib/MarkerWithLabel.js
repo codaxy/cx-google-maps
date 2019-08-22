@@ -1,0 +1,121 @@
+
+import { PureContainer } from 'cx/ui';
+import { attachEventCallbacks } from './attachEventCallbacks';
+import { sameLatLng } from './sameLatLng';
+import { autoUpdate } from './autoUpdate';
+import { standardSetterMap } from './standardSetterMap';
+import makeMarkerWithLabel from 'markerwithlabel';
+
+const settableProps = {
+    animation: { structured: true },
+    attribution: { structured: true },
+    clickable: undefined,
+    cursor: { structured: true },
+    draggable: undefined,
+    icon: { structured: true },
+    label: { structured: true },
+    animation: { structured: true },
+    clickable: undefined,
+    cursor: { structured: true },
+    draggable: undefined,
+    icon: { structured: true },
+    label: { structured: true },
+    labelAnchor: { structured: true },
+    labelContent: undefined,
+    labelClass: undefined,
+    labelStyle: { structured: true },
+    labelVisible: undefined,
+    opacity: undefined,
+    options: { structured: true },
+    place: { structured: true },
+    position: { structured: true },
+    shape: { structured: true },
+    title: { structured: true },
+    zIndex: undefined,
+};
+
+const propSetterMap = standardSetterMap(settableProps);
+
+export class MarkerWithLabel extends PureContainer {
+    declareData() {
+        super.declareData(...arguments, {
+            ...settableProps,
+            noRedraw: undefined
+        });
+    }
+
+    prepareData(context, instance) {
+        super.prepareData(context, instance);
+
+        let { data, cached, marker } = instance;
+        let { rawData } = cached;
+        if (!marker || !rawData) return;
+
+        if (data.position && !sameLatLng(data.position, rawData.position))
+            marker.setPosition(data.position);
+
+        autoUpdate(marker, data, rawData, propSetterMap, {
+            exclude: { "position": true }
+        });
+    }
+
+    initMarker(context, instance) {
+        let { widget, data } = instance;
+
+        let NativeMarkerWithLabel = makeMarkerWithLabel(google.maps);
+        let marker = (instance.marker = new NativeMarkerWithLabel(data));
+
+        if (context.markerClusterer) {
+            context.markerClusterer.addMarker(marker, !!data.noRedraw)
+        }
+        else {
+            marker.setMap(context.googleMap);
+        }
+
+        if (widget.pipeInstance) instance.invoke('pipeInstance', marker, instance);
+
+        if (widget.position && widget.position.bind) {
+            marker.addListener('position_changed', e => {
+                let pos = marker.getPosition();
+                let pd = { lat: pos.lat(), lng: pos.lng() };
+                if (!sameLatLng(pd, instance.data.position)) {
+                    instance.set('position', pd, true);
+                }
+            });
+        }
+
+        attachEventCallbacks(marker, instance, {
+            animation_changed: 'onAnimationChanged',
+            click: 'onClick',
+            clickable_changed: 'onClickableChanged',
+            cursor_changed: 'onCursorChanged',
+            dblclick: 'onDblClick',
+            drag: 'onDrag',
+            dragend: 'onDragEnd',
+            draggable_changed: 'onDraggableChanged',
+            dragstart: 'onDragStart',
+            flat_changed: 'onFlatChanged',
+            icon_changed: 'onIconChanged',
+            mousedown: 'onMouseDown',
+            mouseout: 'onMouseOut',
+            mouseover: 'onMouseOver',
+            mouseup: 'onMouseUp',
+            position_changed: 'onPositionChanged',
+            right_click: 'onRightClick',
+            shape_changed: 'onShapeChanged',
+            title_changed: 'onTitleChanged',
+            visible_changed: 'onVisibleChanged',
+            zindex_changed: 'onZindexChanged',
+        });
+    }
+
+    explore(context, instance) {
+        if (!instance.marker) this.initMarker(context, instance);
+
+        super.explore(context, instance);
+    }
+
+    render(context, instance, key) {
+        return this.renderChildren(context, instance);
+    }
+}
