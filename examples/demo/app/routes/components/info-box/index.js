@@ -108,8 +108,8 @@ export default <cx>
                 }} 
             >
                 <InfoBox 
-                    mod="infobox"
                     options={{
+                        boxClass: "infobox blue"
                         closeBoxURL: ""
                     }}
                     if-bind="$record.popup"

@@ -112,22 +112,30 @@ class Input extends VDOM.Component {
     }
 
     attach(el, instance) {
-        if (instance.el === el) return;
+        if (this.input === el) return;
 
-        // TODO: Should we detach old instance.searchBox handlers if they exist?
+        if (this.input && instance.searchBox && instance.attachedEvents) {
+            instance.searchBox.unbindAll();
+            instance.attachedEvents = null;
+        }
+
         this.input = el;
 
-        let { widget, data } = instance;
+        if (el) {
+            let { widget, data } = instance;
 
-        if (!google.maps.places) throw Error('GoogleMaps places API not loaded.');
+            if (!google.maps.places)
+                throw Error('GoogleMaps places API not loaded.');
 
-        let searchBox = (instance.searchBox = new google.maps.places.SearchBox(el));
+            let searchBox = (instance.searchBox = new google.maps.places.SearchBox(el));
 
-        if (widget.pipeInstance) instance.invoke('pipeInstance', searchBox, instance);
+            if (widget.pipeInstance) 
+                instance.invoke('pipeInstance', searchBox, instance);
 
-        attachEventCallbacks(searchBox, instance, {
-            places_changed: 'onPlacesChanged',
-        });
+            instance.attachedEvents = attachEventCallbacks(searchBox, instance, {
+                places_changed: 'onPlacesChanged',
+            });
+        }
     }
 
     render() {

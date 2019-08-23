@@ -1,11 +1,13 @@
 export function attachEventCallbacks(target, instance, eventMap) {
     let { widget } = instance;
-    for (let event in eventMap) {
-        let name = eventMap[event];
-        if (widget[name]) {
-            target.addListener(event, e => {
-                instance.invoke(name, e, instance, target);
-            });
-        }
-    }
+    return Object.keys(eventMap)
+        .reduce((listeners, event) => {
+            let name = eventMap[event];
+            if (widget[name]) {
+                listeners.push(target.addListener(event, e => {
+                    instance.invoke(name, e, instance, target);
+                }));
+            }
+            return listeners;
+        }, []);
 }
