@@ -8,7 +8,7 @@ import { ConfigTable, EventTable, CodeSnippet, Md } from 'app/components';
 const info = {
     name: 'GoogleMap',
     route: '~/components/google-map',
-    reactGoogleMapsDocs: 'https://tomchentw.github.io/react-google-maps/basics/simple-map',
+    
     googleMapsDocs:
         'https://developers.google.com/maps/documentation/javascript/3.exp/reference#Map',
 };
@@ -29,10 +29,10 @@ export default (
 
                     <p ws>
                         Cx wrapper around{' '}
-                        <a href={info.reactGoogleMapsDocs} target="_blank">
-                            {info.name}
+                        <a href={info.googleMapsDocs} target="_blank">
+                            Map
                         </a>{' '}
-                        React component (uses <code>withGoogleMap</code>
+                        component (uses <code>withGoogleMap</code>
                         ). For additional info about various options, available events and methods,
                         please see{' '}
                         <a href={info.googleMapsDocs} target="_blank">
@@ -51,12 +51,6 @@ export default (
                         <br />
                         ##### Example
                         <CodeSnippet>{`
-const containerElement = <div style={{ position: "relative", flex: 1 }} />;
-const mapElement =
-    <div
-        style={{ position: "absolute", left: 0, top: 0, right: 0, bottom: 0 }}
-    />
-;
 
 class Controller extends CxController {
     getDefaults() { 
@@ -95,11 +89,8 @@ class Controller extends CxController {
 export default <cx>
     <GoogleMap
         controller={Controller}
-        containerElement={containerElement}
-        mapElement={mapElement}
+        style="width: 100%; height: 100%; min-height: 400px"
         pipeInstance="pipeMapInstance"
-        defaultCenter-bind="$page.map.center"
-        defaultZoom-bind="$page.map.zoom"
         center-bind="$page.map.center"
         zoom-bind="$page.map.zoom"
         options={{

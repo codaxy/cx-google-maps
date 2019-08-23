@@ -10,14 +10,7 @@ import {
     SearchBox
 } from '../../../lib';
 
-import { VDOM, Controller as CxController } from 'cx/ui';
-
-const containerElement = <div style={{ position: "relative", flex: 1 }} />;
-const mapElement =
-    <div
-        style={{ position: "absolute", left: 0, top: 0, right: 0, bottom: 0 }}
-    />
-    ;
+import { Controller as CxController } from 'cx/ui';
 
 class Controller extends CxController {
     getDefaults() {

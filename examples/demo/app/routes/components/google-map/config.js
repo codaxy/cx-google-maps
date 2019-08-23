@@ -27,14 +27,6 @@ export const config = {
             Current map zoom level.
         </Md></cx>
     },
-    mapElement: {
-        type: 'React component',
-        description: 'Represents the element the map will be rendered to.'
-    },
-    containerElement: {
-        type: 'React component',
-        description: 'Represents the container element the map will be wrapped into.'
-    },
     options: {
         type: 'MapOptions|object',
         description: <cx><Md>
@@ -49,6 +41,10 @@ export const config = {
             Typically, it is in this method you will save the instance of the map, so that you can
             call its methods later, for example `map.panTo(...)`. The method has signature `pipeInstance(instance)`.
         </Md></cx>
+    },
+    controlSize: {
+        type: 'number',
+        description: <cx><Md>Map control size</Md></cx>
     }
 };
 

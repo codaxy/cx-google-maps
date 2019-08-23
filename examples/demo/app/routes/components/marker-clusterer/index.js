@@ -22,7 +22,7 @@ import {
 const info = {
     name: 'MarkerClusterer',
     route: '~/components/marker-clusterer',
-    reactGoogleMapsDocs: "https://tomchentw.github.io/react-google-maps/addons/marker-clusterer",
+    
     googleMapsDocs: "https://github.com/googlemaps/js-marker-clusterer"
 };
 
@@ -40,7 +40,7 @@ export default <cx>
                 </h4>
 
                 <p ws>
-                    Cx wrapper around <a href={info.reactGoogleMapsDocs} target="_blank">{info.name}</a> React component addon.
+                    Cx wrapper around <a href={info.googleMapsDocs} target="_blank">{info.name}</a> component addon.
                     For additional info about various options, available events and methods, please see <a href={info.googleMapsDocs} target="_blank">MarkerClusterer addon lib page</a>.
                 </p>
                     

@@ -22,7 +22,7 @@ import {
 const info = {
     name: 'InfoBox',
     route: '~/components/info-box',
-    reactGoogleMapsDocs: "https://tomchentw.github.io/react-google-maps/basics/styled-map",
+    
     googleMapsDocs: "https://github.com/googlemaps/v3-utility-library/tree/master/infobox"
 };
 
@@ -40,7 +40,7 @@ export default <cx>
                 </h4>
 
                 <p ws>
-                    Cx wrapper around <a href={info.reactGoogleMapsDocs} target="_blank">{info.name}</a> React addon used for
+                    Cx wrapper around <a href={info.googleMapsDocs} target="_blank">{info.name}</a> React addon used for
                     custom-styled overlay windows (this is not supported in <code>InfoWindow</code>).
                     For additional info about various options, available events and methods, please see <a href={info.googleMapsDocs} target="_blank">InfoBox addon lib</a>.
                 </p>

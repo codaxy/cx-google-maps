@@ -21,17 +21,17 @@ import DrawingManager from './components/drawing-manager';
 import GroundOverlay from './components/ground-overlay';
 import BicyclingLayer from './components/bicycling-layer';
 import Circle from './components/circle';
-// import OverlayView from './components/overlay-view';
+import OverlayView from './components/overlay-view';
 import Rectangle from './components/rectangle';
 import StreetViewPanorama from './components/street-view-panorama';
 import TrafficLayer from './components/traffic-layer';
 import HeatmapLayer from './components/heatmap-layer';
 import StandaloneSearchBox from './components/standalone-search-box';
 
-// import FirstMap from './examples/first-map';
-// import Filtering from './examples/filtering';
-// import Routing from './examples/routing';
-// import PlacingMarkers from './examples/placing-markers';
+import FirstMap from './examples/first-map';
+import Filtering from './examples/filtering';
+import Routing from './examples/routing';
+import PlacingMarkers from './examples/placing-markers';
 
 export default (
     <cx>
@@ -69,15 +69,12 @@ export default (
             <StreetViewPanorama />
             <DirectionsRenderer />
             <InfoWindow />
-            {/*
             <OverlayView />
 
             <FirstMap />
             <Filtering />
             <Routing />
             <PlacingMarkers />
-
-            */}
 
             <Section title="Page Not Found" mod="card">
                 This page doesn't exists. Please check your URL.

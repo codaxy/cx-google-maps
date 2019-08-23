@@ -27,10 +27,10 @@ export default (
                         CxJS
                     </a>
                     wrapper for
-                    <a
-                        href="https://github.com/tomchentw/react-google-maps"
+                    <a 
+                        href="https://developers.google.com/maps/documentation/javascript/3.exp/reference"
                         target="_blank">
-                        react-google-maps
+                        Google Maps
                     </a>, which enables Google Maps components to connect to Cx
                     stores and controllers. Source code of the library,
                     including this demo is available on{' '}
@@ -46,25 +46,21 @@ export default (
                     implementation. Please, take a look into the original
                     documentation and demo apps for detailed information about
                     underlying{' '}
-                    <a
-                        href="https://github.com/tomchentw/react-google-maps"
+                    <a 
+                        href="https://developers.google.com/maps/documentation/javascript/3.exp/reference"
                         target="_blank">
-                        React components
-                    </a>
-                    and various Google Maps
-                    <a href="https://developers.google.com/maps/documentation/javascript/3.exp/reference">
-                        options, methods and events
-                    </a>.
+                        Google Maps components</a>.
                 </p>
             </Section>
 
             <FlexCol mod="card" style="flex: 1; min-height: 260px">
                 <GoogleMap
                     controller={Controller}
-                    center-bind="$page.map.center"
                     style="width: 100%; height: 100%; min-height: 400px"
+                    center-bind="$page.map.center"
                     zoom-bind="$page.map.zoom"
                     pipeInstance="pipeMap"
+                    controlSize={22}
                     options={{
                         mapTypeControlOptions: {
                             position: google.maps.ControlPosition.TOP_RIGHT,
@@ -79,15 +75,13 @@ export default (
                         if={window.innerWidth >= 768}
                         controlPosition={google.maps.ControlPosition.TOP_CENTER}
                         onPlacesChanged="onSearchPlacesChanged"
-                        pipeInstance="pipeSearchBox">
-                        <TextField
-                            placeholder="Search..."
-                            style={{
-                                margin: 5,
-                                boxShadow: '0 2px 2px rgba(0, 0, 0, 0.3)',
-                            }}
-                        />
-                    </SearchBox>
+                        pipeInstance="pipeSearchBox"
+                        placeholder="Search..."
+                        style={{
+                            margin: '5px',
+                            padding: '4px 10px'
+                        }}
+                    />
                     <MarkerCollection />
                 </GoogleMap>
             </FlexCol>

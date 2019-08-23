@@ -1,13 +1,8 @@
 //import {GoogleMap, Marker} from 'cx-google-maps';
 
-import {VDOM, Controller as CxController, bind} from 'cx/ui';
+import {Controller as CxController, bind} from 'cx/ui';
 import {GoogleMap} from '../../lib/GoogleMap';
 import {Marker} from '../../lib/Marker';
-
-const containerElement = <div style={{position: 'relative', height: '100%'}} />;
-const mapElement = (
-    <div style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}} />
-);
 
 class Controller extends CxController {
     onInit() {
@@ -48,7 +43,7 @@ export default (
         <GoogleMap
             center-bind="center"
             zoom-bind="zoom"
-            style="width: 500px; height: 500px; background: red"
+            style="width: 500px; height: 500px;"
             onClick={e => {
                 console.log(e);
             }}

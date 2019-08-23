@@ -3,7 +3,7 @@ import {
     Marker
 } from '../../../lib';
 
-import { VDOM, Controller as CxController } from 'cx/ui';
+import { Controller as CxController } from 'cx/ui';
 
 class Controller extends CxController {
     onInit() {
@@ -22,6 +22,7 @@ export default <cx>
         controller={Controller}
         center-bind="$page.map.center"
         zoom-bind="$page.map.zoom"
+        style="width: 100%; height: 100%; min-height: 400px;"
     >
         <Marker
             position-bind="$page.map.center"

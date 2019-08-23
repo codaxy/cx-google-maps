@@ -3,7 +3,6 @@ import { HtmlElement, Menu } from 'cx/widgets';
 import { GoogleMap } from '../../../lib/GoogleMap';
 
 import { VDOM, Controller as CxController } from 'cx/ui';
-import config from './config';
 
 class Controller extends CxController {
     getDefaults() {
@@ -47,7 +46,7 @@ export default (
             pipeInstance="pipeMapInstance"
             center-bind="$page.map.center"
             zoom-bind="$page.map.zoom"
-            controlSize={24}
+            controlSize={22}
             options={{
                 mapTypeControlOptions: {
                     position: google.maps.ControlPosition.TOP_RIGHT,
