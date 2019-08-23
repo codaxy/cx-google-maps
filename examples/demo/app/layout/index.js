@@ -72,10 +72,6 @@ const items = [
                 url: '~/components/bicycling-layer',
             },
             {
-                text: 'FusionTablesLayer',
-                url: '~/components/fusion-tables-layer',
-            },
-            {
                 text: 'OverlayView',
                 url: '~/components/overlay-view',
             },

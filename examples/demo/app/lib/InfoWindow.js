@@ -1,9 +1,7 @@
 import { VDOM, PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
-import { shallowEquals } from 'cx/util';
 import { standardSetterMap } from './standardSetterMap';
 import { autoUpdate } from './autoUpdate';
-import { InfoBox as GoogleMapsInfoBox } from 'google-maps-infobox';
 
 const settableProps = {
     options: { structured: true },
@@ -13,17 +11,17 @@ const settableProps = {
 
 const propSetterMap = standardSetterMap(settableProps);
 
-const open = (infoBox, anchor) => {
+const open = (infoWindow, anchor) => {
     if (anchor) {
-        infoBox.open(infoBox.getMap(), anchor)
-    } else if (infoBox.getPosition()) {
-        infoBox.open(infoBox.getMap())
+        infoWindow.open(infoWindow.getMap(), anchor)
+    } else if (infoWindow.getPosition()) {
+        infoWindow.open(infoWindow.getMap())
     } else {
-        throw Error(`You must provide either an anchor (typically render it inside a <Marker>) or a position props for <InfoBox>.`);
+        throw Error(`You must provide either an anchor (typically render it inside a <Marker>) or a position props for <InfoWindow>.`);
     }
 }
 
-export class InfoBox extends PureContainer {
+export class InfoWindow extends PureContainer {
     declareData() {
         super.declareData(...arguments, settableProps);
     }
@@ -31,33 +29,33 @@ export class InfoBox extends PureContainer {
     prepareData(context, instance) {
         super.prepareData(context, instance);
 
-        let { data, cached, infoBox } = instance;
+        let { data, cached, infoWindow } = instance;
         let { rawData } = cached;
-        if (!infoBox || !rawData) return;
+        if (!infoWindow || !rawData) return;
 
         if (data.position && !sameLatLng(data.position, rawData.position))
-            infoBox.setPosition(data.position);
+            infoWindow.setPosition(data.position);
 
-        autoUpdate(infoBox, data, rawData, propSetterMap, {
+        autoUpdate(infoWindow, data, rawData, propSetterMap, {
             exclude: { "position": true }
         });
     }
 
-    initInfoBox(context, instance) {
+    initInfoWindow(context, instance) {
         let { widget, data } = instance;
 
-        let infoBox = (instance.infoBox = new GoogleMapsInfoBox(data.options || {}));
+        let infoWindow = (instance.infoWindow = new google.maps.InfoWindow(data.options || {}));
 
-        infoBox.setMap(context.googleMap);
+        infoWindow.setMap(context.googleMap);
 
-        if (widget.pipeInstance) instance.invoke('pipeInstance', infoBox, instance);
+        if (widget.pipeInstance) instance.invoke('pipeInstance', infoWindow, instance);
 
-        // If the InfoBox is anchored, we should remember the anchor
+        // If the InfoWindow is anchored, we should remember the anchor
         instance.marker = context.marker;
 
         if (widget.position && widget.position.bind) {
-            infoBox.addListener('position_changed', e => {
-                let pos = infoBox.getPosition();
+            infoWindow.addListener('position_changed', e => {
+                let pos = infoWindow.getPosition();
                 if (!pos) 
                     return;
 
@@ -68,7 +66,7 @@ export class InfoBox extends PureContainer {
             });
         }
 
-        attachEventCallbacks(infoBox, instance, {
+        attachEventCallbacks(infoWindow, instance, {
             closeclick: 'onCloseClick',
             domready: 'onDomReady',
             content_changed: 'onContentChanged',
@@ -78,37 +76,37 @@ export class InfoBox extends PureContainer {
     }
 
     explore(context, instance) {
-        if (!instance.infoBox)
-            this.initInfoBox(context, instance);
+        if (!instance.infoWindow)
+            this.initInfoWindow(context, instance);
 
         super.explore(context, instance);
     }
 
     render(context, instance, key) {
-        return <ReactInfoBox key={key}
+        return <ReactInfoWindow key={key}
             instance={instance}>
             {this.renderChildren(context, instance)}
-        </ReactInfoBox>
+        </ReactInfoWindow>
     }
 }
 
-class ReactInfoBox extends VDOM.Component {
+class ReactInfoWindow extends VDOM.Component {
     attach(el, instance) {
-        if (!instance.infoBox || this.contentEl)
+        if (!instance.infoWindow || this.contentEl)
             return;
 
-        instance.infoBox.setContent(this.contentEl = el);
-        open(instance.infoBox, instance.marker); // instance.marker will be set if the InfoBox is anchored to a Marker
+        instance.infoWindow.setContent(this.contentEl = el);
+        open(instance.infoWindow, instance.marker); // instance.marker will be set if the InfoWindow is anchored to a Marker
 
-        this.infoBox = instance.infoBox;
+        this.infoWindow = instance.infoWindow;
     }
 
     componentWillUnmount() {
         // TODO: What should we do here in order for it to work?
-        if (!this.infoBox)
+        if (!this.infoWindow)
             return;
 
-        this.infoBox.setMap(null);
+        this.infoWindow.setMap(null);
     }
 
     render() {

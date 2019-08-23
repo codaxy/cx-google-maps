@@ -1,36 +1,23 @@
-import {VDOM, ContentPlaceholder, Content} from 'cx/ui';
+import { VDOM, ContentPlaceholder, Content } from 'cx/ui';
+import Controller from './Controller';
 import {
-    HtmlElement,
-    Link,
     Section,
     FlexCol,
     Menu,
-    Submenu,
     Text,
-    CxCredit,
     TextField,
 } from 'cx/widgets';
 import {
     GoogleMap,
-    Marker,
-    InfoBox,
-    InfoWindow,
     SearchBox,
-} from 'cx-google-maps';
+} from '../../lib';
 
-import DirectionsCollection from './DirectionsCollection';
 import MarkerCollection from './MarkerCollection';
-import Controller from './Controller';
-
-const containerElement = <div style={{position: 'relative', flex: 1}} />;
-const mapElement = (
-    <div style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}} />
-);
 
 export default (
     <cx>
         <h2 putInto="header">Home</h2>
-        
+
         <FlexCol style="height: 100%" vspacing>
             <Section mod="card" style="min-height: 80px">
                 <h4>Cx Google Maps</h4>
@@ -53,7 +40,7 @@ export default (
                         GitHub
                     </a>.
                 </p>
-                
+
                 <p ws>
                     This demo app includes documentation specific for this CxJS
                     implementation. Please, take a look into the original
@@ -70,15 +57,12 @@ export default (
                     </a>.
                 </p>
             </Section>
-            
+
             <FlexCol mod="card" style="flex: 1; min-height: 260px">
                 <GoogleMap
                     controller={Controller}
-                    containerElement={containerElement}
-                    mapElement={mapElement}
-                    defaultCenter-expr="{$page.map.center}"
-                    defaultZoom-expr="{$page.map.zoom}"
                     center-bind="$page.map.center"
+                    style="width: 100%; height: 100%; min-height: 400px"
                     zoom-bind="$page.map.zoom"
                     pipeInstance="pipeMap"
                     options={{

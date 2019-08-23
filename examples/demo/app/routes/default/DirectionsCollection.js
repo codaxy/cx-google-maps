@@ -1,5 +1,5 @@
 import { Repeater, PureContainer, Controller as CxController } from "cx/ui";
-import { DirectionsRenderer } from "cx-google-maps";
+import { DirectionsRenderer } from "../../../lib";
 
 const collection = [
     {

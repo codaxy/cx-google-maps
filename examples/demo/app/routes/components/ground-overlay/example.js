@@ -1,9 +1,4 @@
 import {
-    HtmlElement,
-    Text,
-    Toast,
-    Button,
-    Grid,
     Menu,
     Slider,
 } from 'cx/widgets';
@@ -14,19 +9,10 @@ import {
 
 import {
     GoogleMap,
-    SearchBox,
-    Marker,
-    MarkerClusterer,
     GroundOverlay,
-} from 'cx-google-maps';
+} from '../../../lib';
 
-import {VDOM, Controller as CxController, Repeater} from 'cx/ui';
-import config from './config';
-
-const containerElement = <div style={{position: 'relative', flex: 1}} />;
-const mapElement = (
-    <div style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}} />
-);
+import { VDOM, Controller as CxController } from 'cx/ui';
 
 class Controller extends CxController {
     getDefaults() {
@@ -50,17 +36,15 @@ export default (
     <cx>
         <GoogleMap
             controller={Controller}
-            containerElement={containerElement}
-            mapElement={mapElement}
-            defaultCenter-bind="$page.map.center"
-            defaultZoom-bind="$page.map.zoom"
             center-bind="$page.map.center"
             zoom-bind="$page.map.zoom"
+            style="width: 100%; height: 100%; min-height: 400px"
             options={{
                 mapTypeControlOptions: {
-                    position: google.maps.ControlPosition.TOP_RIGHT,
-                },
-            }}>
+                    position: google.maps.ControlPosition.TOP_RIGHT
+                }
+            }}
+        >
             <Menu vertical mod="map" itemPadding="small">
                 <div layout={LabelsLeftLayout}>
                     <Slider
@@ -72,8 +56,8 @@ export default (
                 </div>
             </Menu>
             <GroundOverlay
-                defaultUrl="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
-                defaultBounds={{
+                url="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
+                bounds={{
                     north: 40.773941,
                     south: 40.712216,
                     east: -74.12544,

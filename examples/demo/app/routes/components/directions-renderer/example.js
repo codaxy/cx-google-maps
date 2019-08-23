@@ -1,28 +1,12 @@
-import { 
-    HtmlElement, 
-    Menu,
-    Toast
-} from 'cx/widgets';
-
 import {
     GoogleMap,
-    SearchBox,
-    Marker,
     DirectionsRenderer
-} from 'cx-google-maps';
+} from '../../../lib';
 
 import { VDOM, Controller as CxController } from 'cx/ui';
-import config from './config';
-
-const containerElement = <div style={{ position: "relative", flex: 1 }} />;
-const mapElement =
-    <div
-        style={{ position: "absolute", left: 0, top: 0, right: 0, bottom: 0 }}
-    />
-;
 
 class Controller extends CxController {
-    getDefaults() { 
+    getDefaults() {
         return {
             center: new google.maps.LatLng(41.8507300, -87.6512600),
             zoom: 12
@@ -30,9 +14,9 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());        
-        this.store.init('$page.map', this.getDefaults());        
-        this.store.init('$page.directions', null);        
+        this.store.init('$page.mapdefaults', this.getDefaults());
+        this.store.init('$page.map', this.getDefaults());
+        this.store.init('$page.directions', null);
 
         let svc = new google.maps.DirectionsService();
         svc.route({
@@ -52,12 +36,9 @@ class Controller extends CxController {
 export default <cx>
     <GoogleMap
         controller={Controller}
-        containerElement={containerElement}
-        mapElement={mapElement}
-        defaultCenter-bind="$page.map.center"
-        defaultZoom-bind="$page.map.zoom"
         center-bind="$page.map.center"
         zoom-bind="$page.map.zoom"
+        style="width: 100%; height: 100%; min-height: 400px"
         options={{
             mapTypeControlOptions: {
                 position: google.maps.ControlPosition.TOP_RIGHT
@@ -67,6 +48,6 @@ export default <cx>
         <DirectionsRenderer
             if-expr="!!{$page.directions}"
             directions-bind="$page.directions"
-        />    
+        />
     </GoogleMap>
 </cx>;

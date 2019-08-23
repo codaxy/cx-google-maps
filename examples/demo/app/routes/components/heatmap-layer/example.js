@@ -1,32 +1,18 @@
 import _ from 'lodash';
 
 import {
-    HtmlElement,
     Menu,
-    Text,
-    Toast,
     Button,
     Slider,
-    NumberField,
-    TextField,
     Checkbox
 } from 'cx/widgets';
-import {LabelsTopLayout, LabelsLeftLayout} from 'cx/ui';
+import { LabelsLeftLayout } from 'cx/ui';
 import {
     GoogleMap,
-    SearchBox,
-    Marker,
-    MarkerClusterer,
     HeatmapLayer,
-} from 'cx-google-maps';
+} from '../../../lib';
 
-import {VDOM, Controller as CxController, Repeater} from 'cx/ui';
-import config from './config';
-
-const containerElement = <div style={{position: 'relative', flex: 1}} />;
-const mapElement = (
-    <div style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}} />
-);
+import { VDOM, Controller as CxController, Repeater } from 'cx/ui';
 
 class Controller extends CxController {
     getDefaults() {
@@ -72,7 +58,7 @@ class Controller extends CxController {
 
     randomize() {
         let d = this.getDefaults();
-        let p = 0.1; 
+        let p = 0.1;
         let points = _.map(
             new Array(1000),
             a =>
@@ -90,17 +76,15 @@ export default (
     <cx>
         <GoogleMap
             controller={Controller}
-            containerElement={containerElement}
-            mapElement={mapElement}
-            defaultCenter-bind="$page.map.center"
-            defaultZoom-bind="$page.map.zoom"
             center-bind="$page.map.center"
             zoom-bind="$page.map.zoom"
+            style="width: 100%; height: 100%; min-height: 400px"
             options={{
                 mapTypeControlOptions: {
-                    position: google.maps.ControlPosition.TOP_RIGHT,
-                },
-            }}>
+                    position: google.maps.ControlPosition.TOP_RIGHT
+                }
+            }}
+        >
             <Menu vertical mod="map" itemPadding="small">
                 <div layout={LabelsLeftLayout}>
                     <Slider
@@ -127,9 +111,9 @@ export default (
             <HeatmapLayer
                 data-bind="$page.points"
                 options={{
-                    radius: {bind: "$page.heat.radius"},
-                    opacity: {bind: "$page.heat.opacity"},
-                    gradient: {bind: "$page.gradient"}
+                    radius: { bind: "$page.heat.radius" },
+                    opacity: { bind: "$page.heat.opacity" },
+                    gradient: { bind: "$page.gradient" }
                 }}
             />
         </GoogleMap>

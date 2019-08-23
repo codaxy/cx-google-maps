@@ -1,6 +1,5 @@
-import { Repeater, PureContainer, Controller as CxController } from "cx/ui";
-import { HtmlElement, NumberField } from "cx/widgets";
-import { Marker, MarkerClusterer, InfoBox, Polygon } from "cx-google-maps";
+import { Repeater, Controller as CxController } from "cx/ui";
+import { Marker, MarkerClusterer, InfoBox, Polygon } from "../../lib";
 import { updateArray } from 'cx/data';
 import { markerPaths } from 'app/util';
 
@@ -124,8 +123,8 @@ export default (
                     }}
                 >
                     <InfoBox 
-                        mod="infobox"
                         options={{
+                            boxClass: "infobox blue",
                             closeBoxURL: ""
                         }}
                         onClick="onMarkerClick"

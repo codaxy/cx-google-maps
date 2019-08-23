@@ -3,7 +3,7 @@ import { FirstVisibleChildLayout } from 'cx/ui';
 
 import AppLayout from '../layout';
 
-//qimport Default from './default';
+import Default from './default';
 import About from './about';
 
 import GoogleMap from './components/google-map';
@@ -11,22 +11,21 @@ import SearchBox from './components/search-box';
 import Marker from './components/marker';
 import MarkerWithLabel from './components/marker-with-label';
 import MarkerClusterer from './components/marker-clusterer';
-// import Polygon from './components/polygon';
-// import Polyline from './components/polyline';
-// import KmlLayer from './components/kml-layer';
-// import InfoWindow from './components/info-window';
+import Polygon from './components/polygon';
+import Polyline from './components/polyline';
+import KmlLayer from './components/kml-layer';
+import InfoWindow from './components/info-window';
 import InfoBox from './components/info-box';
-// import DirectionsRenderer from './components/directions-renderer';
-// import DrawingManager from './components/drawing-manager';
-// import FusionTablesLayer from './components/fusion-tables-layer';
-// import GroundOverlay from './components/ground-overlay';
-// import BicyclingLayer from './components/bicycling-layer';
+import DirectionsRenderer from './components/directions-renderer';
+import DrawingManager from './components/drawing-manager';
+import GroundOverlay from './components/ground-overlay';
+import BicyclingLayer from './components/bicycling-layer';
 import Circle from './components/circle';
 // import OverlayView from './components/overlay-view';
 import Rectangle from './components/rectangle';
-// import StreetViewPanorama from './components/street-view-panorama';
-// import TrafficLayer from './components/traffic-layer';
-// import HeatmapLayer from './components/heatmap-layer';
+import StreetViewPanorama from './components/street-view-panorama';
+import TrafficLayer from './components/traffic-layer';
+import HeatmapLayer from './components/heatmap-layer';
 import StandaloneSearchBox from './components/standalone-search-box';
 
 // import FirstMap from './examples/first-map';
@@ -42,9 +41,9 @@ export default (
             outerLayout={AppLayout}
             layout={FirstVisibleChildLayout}
         >
-            {/*<Route route="~/" url-bind="url">
+            <Route route="~/" url-bind="url">
                 <Default />
-</Route>*/}
+            </Route>
             <Route route="~/about" url-bind="url">
                 <About />
             </Route>
@@ -59,25 +58,24 @@ export default (
             <MarkerClusterer />
             <InfoBox />
             <Circle />
-            {/*
             <Polygon />
             <Polyline />
             <KmlLayer />
-            <InfoWindow />
-            <DirectionsRenderer />
-            <DrawingManager />
-            <FusionTablesLayer />
-            <GroundOverlay />
-            <OverlayView />
-            <StreetViewPanorama />
+            <BicyclingLayer />
             <TrafficLayer />
             <HeatmapLayer />
+            <GroundOverlay />
+            <DrawingManager />
+            <StreetViewPanorama />
+            <DirectionsRenderer />
+            <InfoWindow />
+            {/*
+            <OverlayView />
 
             <FirstMap />
             <Filtering />
             <Routing />
             <PlacingMarkers />
-            <BicyclingLayer />
 
             */}
 

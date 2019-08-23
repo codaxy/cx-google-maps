@@ -1,21 +1,12 @@
 
-import {HtmlElement, Menu, Text, Toast, Button, Grid} from 'cx/widgets';
+import { HtmlElement, Menu, Text, Toast, Button, Grid } from 'cx/widgets';
 
 import {
     GoogleMap,
-    SearchBox,
-    Marker,
-    MarkerClusterer,
     BicyclingLayer,
-} from 'cx-google-maps';
+} from '../../../lib';
 
-import {VDOM, Controller as CxController, Repeater} from 'cx/ui';
-import config from './config';
-
-const containerElement = <div style={{position: 'relative', flex: 1}} />;
-const mapElement = (
-    <div style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}} />
-);
+import { VDOM, Controller as CxController, Repeater } from 'cx/ui';
 
 class Controller extends CxController {
     getDefaults() {
@@ -38,18 +29,16 @@ export default (
     <cx>
         <GoogleMap
             controller={Controller}
-            containerElement={containerElement}
-            mapElement={mapElement}
-            defaultCenter-bind="$page.map.center"
-            defaultZoom-bind="$page.map.zoom"
             center-bind="$page.map.center"
+            style="width: 100%; height: 100%; min-height: 400px"
             zoom-bind="$page.map.zoom"
             options={{
                 mapTypeControlOptions: {
-                    position: google.maps.ControlPosition.TOP_RIGHT,
-                },
-            }}>
-            <BicyclingLayer autoUpdate />
+                    position: google.maps.ControlPosition.TOP_RIGHT
+                }
+            }}
+        >
+            <BicyclingLayer />
         </GoogleMap>
     </cx>
 );

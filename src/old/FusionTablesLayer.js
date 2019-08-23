@@ -1,3 +1,5 @@
+// THIS COMPONENT IS DEPRECATED: https://developers.google.com/maps/documentation/javascript/fusiontableslayer
+export * from './FusionTablesLayer';
 import { Widget, VDOM } from "cx/ui";
 import { PureContainer } from "cx/widgets";
 import { FusionTablesLayer as ReactFusionTablesLayer } from "react-google-maps";
