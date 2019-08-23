@@ -6,3 +6,4 @@ export * from './Rectangle';
 export * from './MarkerWithLabel';
 export * from './MarkerClusterer';
 export * from './InfoBox';
+export * from './Circle';

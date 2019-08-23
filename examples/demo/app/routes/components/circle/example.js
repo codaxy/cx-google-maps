@@ -1,33 +1,22 @@
 import _ from 'lodash';
 
-import { 
-    HtmlElement, 
+import {
     Menu,
-    Text,
-    Toast,
-    Button,
-    Grid
+    NumberField,
+    ColorField,
+    Slider,
 } from 'cx/widgets';
 
 import {
     GoogleMap,
-    SearchBox,
-    Marker,
     Circle
-} from 'cx-google-maps';
+} from '../../../lib';
 
 import { VDOM, Controller as CxController, Repeater } from 'cx/ui';
 import config from './config';
 
-const containerElement = <div style={{ position: "relative", flex: 1 }} />;
-const mapElement =
-    <div
-        style={{ position: "absolute", left: 0, top: 0, right: 0, bottom: 0 }}
-    />
-;
-
 class Controller extends CxController {
-    getDefaults() { 
+    getDefaults() {
         return {
             center: {
                 lat: 41.77811360,
@@ -38,26 +27,22 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());        
+        this.store.init('$page.mapdefaults', this.getDefaults());
         this.store.init('$page.map', this.getDefaults());
-        this.store.init('$page.circle', {
-            center: {
-                lat: 41.77811360, 
-                lng: -87.62979820
-            },
-            radius: 10000
+        this.store.init('$page.center', {
+            lat: 41.77811360,
+            lng: -87.62979820
         });
+
+        this.store.init('$page.radius', 10000);
     }
 }
 
 export default <cx>
     <GoogleMap
         controller={Controller}
-        containerElement={containerElement}
-        mapElement={mapElement}
-        defaultCenter-bind="$page.map.center"
-        defaultZoom-bind="$page.map.zoom"
         center-bind="$page.map.center"
+        style="width: 100%; height: 100%; min-height: 400px"
         zoom-bind="$page.map.zoom"
         options={{
             mapTypeControlOptions: {
@@ -66,15 +51,19 @@ export default <cx>
         }}
     >
         <Menu vertical mod="map" itemPadding="small">
-            <Text tpl="{$page.circle.center.lat:n;4},{$page.circle.center.lng:n;4}:{$page.circle.radius:n;0}" />
+            <NumberField value-bind="$page.center.lat" />
+            <NumberField value-bind="$page.center.lng" />
+            <Slider value-bind="$page.radius" min={1} max={50000} />
+            <ColorField value={{ bind: "$page.color", defaultValue: "#ff0000" }}
+                required />
         </Menu>
         <Circle
-            center-bind="$page.circle.center"
-            radius-bind="$page.circle.radius"
+            center-bind="$page.center"
+            radius-bind="$page.radius"
             options={{
-                fillColor: "red",
+                fillColor: { bind: "$page.color", defaultValue: "#ff0000" },
                 fillOpacity: 0.5,
-                strokeColor: "red",
+                strokeColor: { bind: "$page.color", defaultValue: "#ff0000" },
                 strokeOpacity: 0.9
             }}
             editable

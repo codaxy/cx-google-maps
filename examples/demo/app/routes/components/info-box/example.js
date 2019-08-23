@@ -8,9 +8,10 @@ import {
 } from '../../../lib';
 
 import { VDOM, Controller as CxController, Repeater } from 'cx/ui';
+import { Menu, LookupField } from 'cx/widgets';
 
 class Controller extends CxController {
-    getDefaults() { 
+    getDefaults() {
         return {
             center: {
                 lat: 41.77811360,
@@ -21,20 +22,21 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());        
-        this.store.init('$page.map', this.getDefaults());   
+        this.store.init("$page.boxClass", "blue");
+        this.store.init('$page.mapdefaults', this.getDefaults());
+        this.store.init('$page.map', this.getDefaults());
         this.store.init('$page.markers', Array.from(Array(5).keys())
             .map((a, i) => ({
                 id: i,
                 position: {
-                    lat: 41.77811360 + Math.random() - 0.5, 
-                    lng: -87.62979820 + Math.random() - 0.5, 
+                    lat: 41.77811360 + Math.random() - 0.5,
+                    lng: -87.62979820 + Math.random() - 0.5,
                 },
                 popup: true
             })));
     }
 
-    togglePopup(e, {store}) {
+    togglePopup(e, { store }) {
         var id = store.get('$record.id');
         store.update('$page.markers', updateArray, m => ({
             ...m,
@@ -55,7 +57,17 @@ export default <cx>
             }
         }}
     >
-        <Repeater 
+        <Menu vertical mod="map" itemPadding="small">
+            <LookupField options={[
+                    { id: "red", text: "red" },
+                    { id: "blue", text: "blue" },
+                    { id: "green", text: "green" }
+                ]}
+                value-bind="$page.boxClass"
+                required
+            />
+        </Menu>
+        <Repeater
             records-bind="$page.markers"
             keyField="id">
             <Marker
@@ -68,18 +80,18 @@ export default <cx>
                     fillColor: "red",
                     fillOpacity: 0.8,
                     strokeWeight: 4
-                }} 
+                }}
             >
-                <InfoBox 
+                <InfoBox
                     options={{
                         closeBoxURL: "",
-                        boxClass: "cxm-infobox"
+                        boxClass: { tpl: "infobox {$page.boxClass}" }
                     }}
                     if-bind="$record.popup"
                 >
                     <span text-tpl="{$record.position.lat:n;4} {$record.position.lng:n;4}" />
                 </InfoBox>
             </Marker>
-        </Repeater>    
+        </Repeater>
     </GoogleMap>
 </cx>;

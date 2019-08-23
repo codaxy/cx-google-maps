@@ -5,7 +5,7 @@
 $info-window-bg: rgba(88, 144, 236, 0.8);
 $info-window-width: 80px;
 
-.cxm-infobox {
+.infobox {
     background: $info-window-bg;
     box-sizing: border-box;
     color: white;
@@ -18,4 +18,12 @@ $info-window-width: 80px;
     text-align: center;
     position: relative;
     overflow: visible;
+
+    &.red {
+        background: rgba(255, 88, 88, 0.8);
+    }
+
+    &.green {
+        background: rgba(88, 200, 88, 0.8);
+    }
 }

@@ -21,7 +21,7 @@ import InfoBox from './components/info-box';
 // import FusionTablesLayer from './components/fusion-tables-layer';
 // import GroundOverlay from './components/ground-overlay';
 // import BicyclingLayer from './components/bicycling-layer';
-// import Circle from './components/circle';
+import Circle from './components/circle';
 // import OverlayView from './components/overlay-view';
 import Rectangle from './components/rectangle';
 // import StreetViewPanorama from './components/street-view-panorama';
@@ -58,6 +58,7 @@ export default (
             <MarkerWithLabel />
             <MarkerClusterer />
             <InfoBox />
+            <Circle />
             {/*
             <Polygon />
             <Polyline />
@@ -67,7 +68,6 @@ export default (
             <DrawingManager />
             <FusionTablesLayer />
             <GroundOverlay />
-            <Circle />
             <OverlayView />
             <StreetViewPanorama />
             <TrafficLayer />

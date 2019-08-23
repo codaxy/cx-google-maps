@@ -45,12 +45,9 @@ export class InfoBox extends PureContainer {
     initInfoBox(context, instance) {
         let { widget, data } = instance;
 
-        let infoBox = (instance.infoBox = new GoogleMapsInfoBox({
-            ...data,
-            map: context.googleMap
-        }));
+        let infoBox = (instance.infoBox = new GoogleMapsInfoBox(data.options || {}));
 
-        infoBox.setMap(context.googleMap); // Why is this needed? Why data does not work either?
+        infoBox.setMap(context.googleMap);
 
         if (widget.pipeInstance) instance.invoke('pipeInstance', infoBox, instance);
 
@@ -66,23 +63,44 @@ export class InfoBox extends PureContainer {
     }
 
     explore(context, instance) {
-        if (!instance.infoBox) this.initInfoBox(context, instance);
+        if (!instance.infoBox)
+            this.initInfoBox(context, instance);
 
         super.explore(context, instance);
     }
 
+    render(context, instance, key) {
+        return <ReactInfoBox key={key}
+            instance={instance}>
+            {this.renderChildren(context, instance)}
+        </ReactInfoBox>
+    }
+}
+
+class ReactInfoBox extends VDOM.Component {
     attach(el, instance) {
-        if (!instance.infoBox || instance.contentEl)
+        if (!instance.infoBox || this.contentEl)
             return;
 
-        instance.infoBox.setContent(instance.contentEl = el);
+        this.infoBox = instance.infoBox;
+
+        instance.infoBox.setContent(this.contentEl = el);
         open(instance.infoBox, instance.marker);
     }
 
-    render(context, instance, key) {
-        return <div key={key}
-            ref={el => this.attach(el, instance)}>
-            {this.renderChildren(context, instance)}
+    componentWillUnmount() {
+        // TODO: What should we do here in order for it to work?
+        if (!this.infoBox)
+            return;
+
+        this.infoBox.setMap(null);
+    }
+
+    render() {
+        return <div
+            ref={el => this.attach(el, this.props.instance)}
+        >
+            {this.props.children}
         </div>
     }
 }
