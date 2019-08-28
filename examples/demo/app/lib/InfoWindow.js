@@ -6,20 +6,22 @@ import { autoUpdate } from './autoUpdate';
 const settableProps = {
     options: { structured: true },
     zIndex: { structured: true },
-    position: { structured: true }
+    position: { structured: true },
 };
 
 const propSetterMap = standardSetterMap(settableProps);
 
 const open = (infoWindow, anchor) => {
     if (anchor) {
-        infoWindow.open(infoWindow.getMap(), anchor)
+        infoWindow.open(infoWindow.getMap(), anchor);
     } else if (infoWindow.getPosition()) {
-        infoWindow.open(infoWindow.getMap())
+        infoWindow.open(infoWindow.getMap());
     } else {
-        throw Error(`You must provide either an anchor (typically render it inside a <Marker>) or a position props for <InfoWindow>.`);
+        throw Error(
+            `You must provide either an anchor (typically render it inside a <Marker>) or a position props for <InfoWindow>.`,
+        );
     }
-}
+};
 
 export class InfoWindow extends PureContainer {
     declareData() {
@@ -37,7 +39,7 @@ export class InfoWindow extends PureContainer {
             infoWindow.setPosition(data.position);
 
         autoUpdate(infoWindow, data, rawData, propSetterMap, {
-            exclude: { "position": true }
+            exclude: { position: true },
         });
     }
 
@@ -56,13 +58,18 @@ export class InfoWindow extends PureContainer {
         if (widget.position && widget.position.bind) {
             infoWindow.addListener('position_changed', e => {
                 let pos = infoWindow.getPosition();
-                if (!pos) 
-                    return;
+                if (!pos) return;
 
                 let pd = { lat: pos.lat(), lng: pos.lng() };
                 if (!sameLatLng(pd, instance.data.position)) {
                     instance.set('position', pd, true);
                 }
+            });
+        }
+
+        if (widget.visible && widget.visible.bind) {
+            infoWindow.addListener('closeclick', e => {
+                instance.set('visible', false);
             });
         }
 
@@ -76,26 +83,25 @@ export class InfoWindow extends PureContainer {
     }
 
     explore(context, instance) {
-        if (!instance.infoWindow)
-            this.initInfoWindow(context, instance);
+        if (!instance.infoWindow) this.initInfoWindow(context, instance);
 
         super.explore(context, instance);
     }
 
     render(context, instance, key) {
-        return <ReactInfoWindow key={key}
-            instance={instance}>
-            {this.renderChildren(context, instance)}
-        </ReactInfoWindow>
+        return (
+            <ReactInfoWindow key={key} instance={instance}>
+                {this.renderChildren(context, instance)}
+            </ReactInfoWindow>
+        );
     }
 }
 
 class ReactInfoWindow extends VDOM.Component {
     attach(el, instance) {
-        if (!instance.infoWindow || this.contentEl)
-            return;
+        if (!instance.infoWindow || this.contentEl) return;
 
-        instance.infoWindow.setContent(this.contentEl = el);
+        instance.infoWindow.setContent((this.contentEl = el));
         open(instance.infoWindow, instance.marker); // instance.marker will be set if the InfoWindow is anchored to a Marker
 
         this.infoWindow = instance.infoWindow;
@@ -103,17 +109,18 @@ class ReactInfoWindow extends VDOM.Component {
 
     componentWillUnmount() {
         // TODO: What should we do here in order for it to work?
-        if (!this.infoWindow)
-            return;
+        if (!this.infoWindow) return;
 
-        this.infoWindow.setMap(null);
+        //this.infoWindow.setMap(null);
     }
 
+    //two divs are required as hitting the close button on the info box
+    //removes the DOM element which causes problems for React
     render() {
-        return <div
-            ref={el => this.attach(el, this.props.instance)}
-        >
-            {this.props.children}
-        </div>
+        return (
+            <div>
+                <div ref={el => this.attach(el, this.props.instance)}>{this.props.children}</div>
+            </div>
+        );
     }
 }
