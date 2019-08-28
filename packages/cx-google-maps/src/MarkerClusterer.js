@@ -4,7 +4,6 @@ import { sameLatLng } from './sameLatLng';
 import { autoUpdate } from './autoUpdate';
 import { standardSetterMap } from './standardSetterMap';
 import MarkerClustererPlus from 'marker-clusterer-plus';
-import { Slider, Menu } from 'cx/widgets';
 
 const settableProps = {
     averageCenter: undefined,

@@ -11,7 +11,7 @@
         "url": "https://github.com/codaxy/cx-google-maps"
     },
     "scripts": {
-        "build": "microbundle --compress false --format modern,es,cjs,umd --jsx React.createElement"
+        "build": "microbundle --compress false --format modern,es,cjs,umd --jsx VDOM.createElement --external cx"
     },
     "keywords": [
         "CxJS",

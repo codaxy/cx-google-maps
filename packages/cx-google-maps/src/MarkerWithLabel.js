@@ -4,7 +4,6 @@ import { sameLatLng } from './sameLatLng';
 import { autoUpdate } from './autoUpdate';
 import { standardSetterMap } from './standardSetterMap';
 import makeMarkerWithLabel from 'markerwithlabel';
-import { registerIcon } from 'cx/src/widgets/icons/registry';
 
 const settableProps = {
     animation: { structured: true },

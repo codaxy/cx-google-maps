@@ -14,11 +14,6 @@ import { KeyCode } from 'cx/util';
 import ClearIcon from 'cx/src/widgets/icons/clear';
 import { attachEventCallbacks } from './attachEventCallbacks';
 
-// TODO: Figure out if there's a way to use TextField without the
-// need to repeat all the code from TextField.
-
-// TODO: clear button fix
-
 export class StandaloneSearchBox extends Field {
     init() {
         if (typeof this.hideClear !== 'undefined') this.showClear = !this.hideClear;
