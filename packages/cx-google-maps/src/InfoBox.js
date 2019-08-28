@@ -8,20 +8,22 @@ import { InfoBox as GoogleMapsInfoBox } from 'google-maps-infobox';
 const settableProps = {
     options: { structured: true },
     zIndex: { structured: true },
-    position: { structured: true }
+    position: { structured: true },
 };
 
 const propSetterMap = standardSetterMap(settableProps);
 
 const open = (infoBox, anchor) => {
     if (anchor) {
-        infoBox.open(infoBox.getMap(), anchor)
+        infoBox.open(infoBox.getMap(), anchor);
     } else if (infoBox.getPosition()) {
-        infoBox.open(infoBox.getMap())
+        infoBox.open(infoBox.getMap());
     } else {
-        throw Error(`You must provide either an anchor (typically render it inside a <Marker>) or a position props for <InfoBox>.`);
+        throw Error(
+            `You must provide either an anchor (typically render it inside a <Marker>) or a position props for <InfoBox>.`,
+        );
     }
-}
+};
 
 export class InfoBox extends PureContainer {
     declareData() {
@@ -39,7 +41,7 @@ export class InfoBox extends PureContainer {
             infoBox.setPosition(data.position);
 
         autoUpdate(infoBox, data, rawData, propSetterMap, {
-            exclude: { "position": true }
+            exclude: { position: true },
         });
     }
 
@@ -58,13 +60,18 @@ export class InfoBox extends PureContainer {
         if (widget.position && widget.position.bind) {
             infoBox.addListener('position_changed', e => {
                 let pos = infoBox.getPosition();
-                if (!pos) 
-                    return;
+                if (!pos) return;
 
                 let pd = { lat: pos.lat(), lng: pos.lng() };
                 if (!sameLatLng(pd, instance.data.position)) {
                     instance.set('position', pd, true);
                 }
+            });
+        }
+
+        if (widget.visible && widget.visible.bind) {
+            infoBox.addListener('closeclick', e => {
+                instance.set('visible', false);
             });
         }
 
@@ -78,44 +85,37 @@ export class InfoBox extends PureContainer {
     }
 
     explore(context, instance) {
-        if (!instance.infoBox)
-            this.initInfoBox(context, instance);
+        if (!instance.infoBox) this.initInfoBox(context, instance);
 
         super.explore(context, instance);
     }
 
     render(context, instance, key) {
-        return <ReactInfoBox key={key}
-            instance={instance}>
-            {this.renderChildren(context, instance)}
-        </ReactInfoBox>
+        return (
+            <ReactInfoBox key={key} instance={instance}>
+                {this.renderChildren(context, instance)}
+            </ReactInfoBox>
+        );
     }
 }
 
 class ReactInfoBox extends VDOM.Component {
     attach(el, instance) {
-        if (!instance.infoBox || this.contentEl)
-            return;
-
-        instance.infoBox.setContent(this.contentEl = el);
+        if (!instance.infoBox || this.contentEl) return;
+        instance.infoBox.setContent((this.contentEl = el));
         open(instance.infoBox, instance.marker); // instance.marker will be set if the InfoBox is anchored to a Marker
-
-        this.infoBox = instance.infoBox;
     }
 
     componentWillUnmount() {
-        // TODO: What should we do here in order for it to work?
-        if (!this.infoBox)
-            return;
-
-        this.infoBox.setMap(null);
+        this.props.instance.infoBox.setMap(null);
+        this.props.instance.infoBox = null;
     }
 
     render() {
-        return <div
-            ref={el => this.attach(el, this.props.instance)}
-        >
-            {this.props.children}
-        </div>
+        return (
+            <div>
+                <div ref={el => this.attach(el, this.props.instance)}>{this.props.children}</div>{' '}
+            </div>
+        );
     }
 }

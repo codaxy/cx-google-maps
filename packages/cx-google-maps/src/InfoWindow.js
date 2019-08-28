@@ -100,18 +100,13 @@ export class InfoWindow extends PureContainer {
 class ReactInfoWindow extends VDOM.Component {
     attach(el, instance) {
         if (!instance.infoWindow || this.contentEl) return;
-
         instance.infoWindow.setContent((this.contentEl = el));
         open(instance.infoWindow, instance.marker); // instance.marker will be set if the InfoWindow is anchored to a Marker
-
-        this.infoWindow = instance.infoWindow;
     }
 
     componentWillUnmount() {
-        // TODO: What should we do here in order for it to work?
-        if (!this.infoWindow) return;
-
-        //this.infoWindow.setMap(null);
+        this.props.instance.infoWindow.setMap(null);
+        this.props.instance.infoWindow = null;
     }
 
     //two divs are required as hitting the close button on the info box

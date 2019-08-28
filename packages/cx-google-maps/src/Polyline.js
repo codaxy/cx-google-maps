@@ -1,6 +1,6 @@
 import { PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
-import { shallowEquals } from 'cx/util';
+import { shallowEquals, debounce } from 'cx/util';
 import { standardSetterMap } from './standardSetterMap';
 import { autoUpdate } from './autoUpdate';
 
@@ -38,8 +38,6 @@ export class Polyline extends PureContainer {
 
         if (widget.pipeInstance) instance.invoke('pipeInstance', poly, instance);
 
-        // TODO: Monitor path changes
-
         attachEventCallbacks(poly, instance, {
             click: 'onClick',
             dblclick: 'onDblClick',
@@ -56,6 +54,27 @@ export class Polyline extends PureContainer {
 
     explore(context, instance) {
         if (!instance.poly) this.initPolyline(context, instance);
+
+        let { data } = instance;
+        if (data.editable) {
+            let path = instance.poly.getPath();
+            if (path != instance.pathWithEvents) {
+                const updatePath = debounce(() => {
+                    let pts = [];
+                    path.forEach(p => {
+                        pts.push({
+                            lat: p.lat(),
+                            lng: p.lng(),
+                        });
+                    });
+                    instance.set('path', pts);
+                }, 50);
+                path.addListener('insert_at', updatePath);
+                path.addListener('set_at', updatePath);
+                path.addListener('remove_at', updatePath);
+                instance.pathWithEvents = path;
+            }
+        }
 
         super.explore(context, instance);
     }

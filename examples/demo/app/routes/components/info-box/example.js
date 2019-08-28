@@ -35,16 +35,7 @@ class Controller extends CxController {
     }
 
     togglePopup(e, { store }) {
-        var id = store.get('$record.id');
-        store.update(
-            '$page.markers',
-            updateArray,
-            m => ({
-                ...m,
-                popup: !m.popup,
-            }),
-            m => m.id === id,
-        ); // The last parameter is the filter
+        store.toggle('$record.popup');
     }
 }
 
@@ -87,7 +78,7 @@ export default (
                 >
                     <InfoBox
                         options={{
-                            closeBoxURL: '',
+                            //closeBoxURL: '',
                             boxClass: { tpl: 'infobox {$page.boxClass}' },
                         }}
                         if-bind="$record.popup"
