@@ -1,10 +1,6 @@
-
 import { HtmlElement, Menu, Text, Toast, Button, Grid } from 'cx/widgets';
 
-import {
-    GoogleMap,
-    BicyclingLayer,
-} from '../../../lib';
+import { GoogleMap, BicyclingLayer } from 'cx-google-maps';
 
 import { VDOM, Controller as CxController, Repeater } from 'cx/ui';
 
@@ -34,8 +30,8 @@ export default (
             zoom-bind="$page.map.zoom"
             options={{
                 mapTypeControlOptions: {
-                    position: google.maps.ControlPosition.TOP_RIGHT
-                }
+                    position: google.maps.ControlPosition.TOP_RIGHT,
+                },
             }}
         >
             <BicyclingLayer />

@@ -1,16 +1,8 @@
-import {
-    Menu,
-    Slider,
-} from 'cx/widgets';
+import { Menu, Slider } from 'cx/widgets';
 
-import {
-    LabelsLeftLayout
-} from 'cx/ui';
+import { LabelsLeftLayout } from 'cx/ui';
 
-import {
-    GoogleMap,
-    GroundOverlay,
-} from '../../../lib';
+import { GoogleMap, GroundOverlay } from 'cx-google-maps';
 
 import { VDOM, Controller as CxController } from 'cx/ui';
 
@@ -41,8 +33,8 @@ export default (
             style="width: 100%; height: 100%; min-height: 400px"
             options={{
                 mapTypeControlOptions: {
-                    position: google.maps.ControlPosition.TOP_RIGHT
-                }
+                    position: google.maps.ControlPosition.TOP_RIGHT,
+                },
             }}
         >
             <Menu vertical mod="map" itemPadding="small">

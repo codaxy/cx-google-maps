@@ -1,15 +1,8 @@
 import _ from 'lodash';
 
-import {
-    Toast,
-    Button,
-} from 'cx/widgets';
+import { Toast, Button } from 'cx/widgets';
 
-import {
-    GoogleMap,
-    OverlayView,
-    StreetViewPanorama,
-} from '../../../lib';
+import { GoogleMap, OverlayView, StreetViewPanorama } from 'cx-google-maps';
 
 import { VDOM, Controller as CxController, Repeater } from 'cx/ui';
 
@@ -39,7 +32,7 @@ class Controller extends CxController {
             },
             pov: {
                 heading: 45,
-                pitch: 0
+                pitch: 0,
             },
             zoom: 1,
         };
@@ -68,8 +61,8 @@ export default (
             zoom-bind="$page.map.zoom"
             options={{
                 mapTypeControlOptions: {
-                    position: google.maps.ControlPosition.TOP_RIGHT
-                }
+                    position: google.maps.ControlPosition.TOP_RIGHT,
+                },
             }}
         >
             <StreetViewPanorama

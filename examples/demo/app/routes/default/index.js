@@ -1,16 +1,7 @@
 import { VDOM, ContentPlaceholder, Content } from 'cx/ui';
 import Controller from './Controller';
-import {
-    Section,
-    FlexCol,
-    Menu,
-    Text,
-    TextField,
-} from 'cx/widgets';
-import {
-    GoogleMap,
-    SearchBox,
-} from '../../lib';
+import { Section, FlexCol, Menu, Text, TextField } from 'cx/widgets';
+import { GoogleMap, SearchBox } from 'cx-google-maps';
 
 import MarkerCollection from './MarkerCollection';
 
@@ -27,29 +18,31 @@ export default (
                         CxJS
                     </a>
                     wrapper for
-                    <a 
-                        href="https://developers.google.com/maps/documentation/javascript/3.exp/reference"
-                        target="_blank">
-                        Google Maps
-                    </a>, which enables Google Maps components to connect to Cx
-                    stores and controllers. Source code of the library,
-                    including this demo is available on{' '}
                     <a
-                        href="https://github.com/codaxy/cx-google-maps"
-                        target="_blank">
+                        href="https://developers.google.com/maps/documentation/javascript/3.exp/reference"
+                        target="_blank"
+                    >
+                        Google Maps
+                    </a>
+                    , which enables Google Maps components to connect to Cx stores and controllers.
+                    Source code of the library, including this demo is available on{' '}
+                    <a href="https://github.com/codaxy/cx-google-maps" target="_blank">
                         GitHub
-                    </a>.
+                    </a>
+                    .
                 </p>
 
                 <p ws>
-                    This demo app includes documentation specific for this CxJS
-                    implementation. Please, take a look into the original
-                    documentation and demo apps for detailed information about
-                    underlying{' '}
-                    <a 
+                    This demo app includes documentation specific for this CxJS implementation.
+                    Please, take a look into the original documentation and demo apps for detailed
+                    information about underlying{' '}
+                    <a
                         href="https://developers.google.com/maps/documentation/javascript/3.exp/reference"
-                        target="_blank">
-                        Google Maps components</a>.
+                        target="_blank"
+                    >
+                        Google Maps components
+                    </a>
+                    .
                 </p>
             </Section>
 
@@ -65,10 +58,13 @@ export default (
                         mapTypeControlOptions: {
                             position: google.maps.ControlPosition.TOP_RIGHT,
                         },
-                    }}>
+                    }}
+                >
                     <Menu vertical mod="map" itemPadding="small">
                         <a onClick="onResetViewClick">
-                            Reset view (<Text tpl="{$page.map.center.lat:n;4},{$page.map.center.lng:n;4}:{$page.map.zoom:n;4}" />)
+                            Reset view (
+                            <Text tpl="{$page.map.center.lat:n;4},{$page.map.center.lng:n;4}:{$page.map.zoom:n;4}" />
+                            )
                         </a>
                     </Menu>
                     <SearchBox
@@ -79,7 +75,7 @@ export default (
                         placeholder="Search..."
                         style={{
                             margin: '5px',
-                            padding: '4px 10px'
+                            padding: '4px 10px',
                         }}
                     />
                     <MarkerCollection />

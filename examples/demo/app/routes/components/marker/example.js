@@ -1,15 +1,6 @@
-import {
-    HtmlElement,
-    Menu,
-    Toast,
-    Slider,
-    ColorField
-} from 'cx/widgets';
+import { HtmlElement, Menu, Toast, Slider, ColorField } from 'cx/widgets';
 
-import {
-    GoogleMap,
-    Marker
-} from '../../../lib';
+import { GoogleMap, Marker } from 'cx-google-maps';
 
 import { VDOM, Controller as CxController } from 'cx/ui';
 
@@ -17,17 +8,17 @@ class Controller extends CxController {
     getDefaults() {
         return {
             center: {
-                lat: 41.77811360,
-                lng: -87.62979820
+                lat: 41.7781136,
+                lng: -87.6297982,
             },
-            zoom: 12
+            zoom: 12,
         };
     }
 
     onMarkerClick() {
         Toast.create({
             message: `Marker clicked.`,
-            timeout: 3000
+            timeout: 3000,
         }).open();
     }
 
@@ -37,51 +28,45 @@ class Controller extends CxController {
     }
 }
 
-export default <cx>
-    <GoogleMap
-        style="width: 100%; height: 100%; min-height: 400px;"
-        controller={Controller}
-        center-bind="$page.map.center"
-        zoom-bind="$page.map.zoom"
-        options={{
-            mapTypeControlOptions: {
-                position: google.maps.ControlPosition.TOP_RIGHT
-            }
-        }}
-    >
-        <Menu vertical mod="map" itemPadding="small">
-            <Slider value-bind="$page.heading"
-                min={0}
-                max={360}
-            />
-            <Slider 
-                value={{ bind:"$page.opacity", defaultValue: 1 }}
-                min={0}
-                max={1}
-                defaultValue={1}
-            />
-            <ColorField 
-                value={{ bind: "$page.color", defaultValue: "#ff0000" }}
-                required />
-        </Menu>
-        <Marker
-            position-bind="$page.map.center"
-            title="This is a custom icon marker with rollover text"
-
-            icon={{
-                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-                scale: 6,
-                rotation: { bind: '$page.heading' },
-                strokeColor: 'white',
-                fillColor: { bind: "$page.color", defaultValue: "#ff0000" },
-                fillOpacity: 0.8,
-                anchor: new google.maps.Point(0, 2.5),
-                strokeWeight: 2
+export default (
+    <cx>
+        <GoogleMap
+            style="width: 100%; height: 100%; min-height: 400px;"
+            controller={Controller}
+            center-bind="$page.map.center"
+            zoom-bind="$page.map.zoom"
+            options={{
+                mapTypeControlOptions: {
+                    position: google.maps.ControlPosition.TOP_RIGHT,
+                },
             }}
-
-            opacity-bind="$page.opacity"
-
-            onClick="onMarkerClick"
-        />
-    </GoogleMap>
-</cx>;
+        >
+            <Menu vertical mod="map" itemPadding="small">
+                <Slider value-bind="$page.heading" min={0} max={360} />
+                <Slider
+                    value={{ bind: '$page.opacity', defaultValue: 1 }}
+                    min={0}
+                    max={1}
+                    defaultValue={1}
+                />
+                <ColorField value={{ bind: '$page.color', defaultValue: '#ff0000' }} required />
+            </Menu>
+            <Marker
+                position-bind="$page.map.center"
+                title="This is a custom icon marker with rollover text"
+                icon={{
+                    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                    scale: 6,
+                    rotation: { bind: '$page.heading' },
+                    strokeColor: 'white',
+                    fillColor: { bind: '$page.color', defaultValue: '#ff0000' },
+                    fillOpacity: 0.8,
+                    anchor: new google.maps.Point(0, 2.5),
+                    strokeWeight: 2,
+                }}
+                opacity-bind="$page.opacity"
+                onClick="onMarkerClick"
+            />
+        </GoogleMap>
+    </cx>
+);

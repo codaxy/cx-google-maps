@@ -1,7 +1,7 @@
 // We need this for easy update of the markers array
 import { updateArray } from 'cx/data';
 
-import { GoogleMap, Marker, InfoWindow } from '../../../lib';
+import { GoogleMap, Marker, InfoWindow } from 'cx-google-maps';
 
 import { VDOM, Controller as CxController, Repeater } from 'cx/ui';
 

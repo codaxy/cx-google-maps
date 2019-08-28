@@ -1,16 +1,8 @@
 import _ from 'lodash';
 
-import {
-    Menu,
-    Button,
-    Slider,
-    Checkbox
-} from 'cx/widgets';
+import { Menu, Button, Slider, Checkbox } from 'cx/widgets';
 import { LabelsLeftLayout } from 'cx/ui';
-import {
-    GoogleMap,
-    HeatmapLayer,
-} from '../../../lib';
+import { GoogleMap, HeatmapLayer } from 'cx-google-maps';
 
 import { VDOM, Controller as CxController, Repeater } from 'cx/ui';
 
@@ -35,22 +27,24 @@ class Controller extends CxController {
         });
 
         this.addComputable('$page.gradient', ['$page.altGradient'], alt => {
-            return !alt ? null : [
-                'rgba(0, 255, 255, 0)',
-                'rgba(0, 255, 255, 1)',
-                'rgba(0, 191, 255, 1)',
-                'rgba(0, 127, 255, 1)',
-                'rgba(0, 63, 255, 1)',
-                'rgba(0, 0, 255, 1)',
-                'rgba(0, 0, 223, 1)',
-                'rgba(0, 0, 191, 1)',
-                'rgba(0, 0, 159, 1)',
-                'rgba(0, 0, 127, 1)',
-                'rgba(63, 0, 91, 1)',
-                'rgba(127, 0, 63, 1)',
-                'rgba(191, 0, 31, 1)',
-                'rgba(255, 0, 0, 1)'
-            ];
+            return !alt
+                ? null
+                : [
+                      'rgba(0, 255, 255, 0)',
+                      'rgba(0, 255, 255, 1)',
+                      'rgba(0, 191, 255, 1)',
+                      'rgba(0, 127, 255, 1)',
+                      'rgba(0, 63, 255, 1)',
+                      'rgba(0, 0, 255, 1)',
+                      'rgba(0, 0, 223, 1)',
+                      'rgba(0, 0, 191, 1)',
+                      'rgba(0, 0, 159, 1)',
+                      'rgba(0, 0, 127, 1)',
+                      'rgba(63, 0, 91, 1)',
+                      'rgba(127, 0, 63, 1)',
+                      'rgba(191, 0, 31, 1)',
+                      'rgba(255, 0, 0, 1)',
+                  ];
         });
 
         this.randomize();
@@ -63,8 +57,12 @@ class Controller extends CxController {
             new Array(1000),
             a =>
                 new google.maps.LatLng({
-                    lat: d.center.lat + Math.sign(Math.random() - 0.5) * p * Math.log(Math.abs(Math.random())),
-                    lng: d.center.lng + Math.sign(Math.random() - 0.5) * p * Math.log(Math.abs(Math.random())),
+                    lat:
+                        d.center.lat +
+                        Math.sign(Math.random() - 0.5) * p * Math.log(Math.abs(Math.random())),
+                    lng:
+                        d.center.lng +
+                        Math.sign(Math.random() - 0.5) * p * Math.log(Math.abs(Math.random())),
                 }),
         );
 
@@ -81,8 +79,8 @@ export default (
             style="width: 100%; height: 100%; min-height: 400px"
             options={{
                 mapTypeControlOptions: {
-                    position: google.maps.ControlPosition.TOP_RIGHT
-                }
+                    position: google.maps.ControlPosition.TOP_RIGHT,
+                },
             }}
         >
             <Menu vertical mod="map" itemPadding="small">
@@ -99,11 +97,7 @@ export default (
                         minValue={0}
                         maxValue={1}
                     />
-                    <Checkbox
-                        value-bind="$page.altGradient"
-                    >
-                        Alt. gradient
-                    </Checkbox>
+                    <Checkbox value-bind="$page.altGradient">Alt. gradient</Checkbox>
                     <Button text="Randomize data" onClick="randomize" />
                 </div>
             </Menu>
@@ -111,9 +105,9 @@ export default (
             <HeatmapLayer
                 data-bind="$page.points"
                 options={{
-                    radius: { bind: "$page.heat.radius" },
-                    opacity: { bind: "$page.heat.opacity" },
-                    gradient: { bind: "$page.gradient" }
+                    radius: { bind: '$page.heat.radius' },
+                    opacity: { bind: '$page.heat.opacity' },
+                    gradient: { bind: '$page.gradient' },
                 }}
             />
         </GoogleMap>

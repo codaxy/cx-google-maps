@@ -2,18 +2,15 @@ import _ from 'lodash';
 
 import { Toast, Button } from 'cx/widgets';
 
-import {
-    GoogleMap,
-    OverlayView,
-} from '../../../lib';
+import { GoogleMap, OverlayView } from 'cx-google-maps';
 
 import { VDOM, Controller as CxController, Repeater } from 'cx/ui';
 
 const getPixelPositionOffset = (width, height) => {
     return {
         x: -(width / 2),
-        y: -(height / 2)
-    }
+        y: -(height / 2),
+    };
 };
 
 class Controller extends CxController {
@@ -35,7 +32,7 @@ class Controller extends CxController {
     onOverlayBtnClick() {
         Toast.create({
             message: 'You clicked on a button in an overlay.',
-            timeout: 3000
+            timeout: 3000,
         }).open();
     }
 }
@@ -51,21 +48,21 @@ export default (
                 mapTypeControlOptions: {
                     position: google.maps.ControlPosition.TOP_RIGHT,
                 },
-            }}>
+            }}
+        >
             <OverlayView
                 position-bind="$page.map.center"
                 mapPaneName="overlayMouseTarget"
                 getPixelPositionOffset={getPixelPositionOffset}
             >
-                <div style={{
-                    background: "rgba(20, 40, 120, 0.3)",
-                    color: "white",
-                    padding: 20
-                }}>
-                    <Button text="Click this button"
-                        mod="primary"
-                        onClick="onOverlayBtnClick"
-                    />
+                <div
+                    style={{
+                        background: 'rgba(20, 40, 120, 0.3)',
+                        color: 'white',
+                        padding: 20,
+                    }}
+                >
+                    <Button text="Click this button" mod="primary" onClick="onOverlayBtnClick" />
                 </div>
             </OverlayView>
         </GoogleMap>

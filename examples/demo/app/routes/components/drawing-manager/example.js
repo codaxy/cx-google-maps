@@ -1,13 +1,10 @@
 import _ from 'lodash';
 
-import {Toast, } from 'cx/widgets';
+import { Toast } from 'cx/widgets';
 
-import {
-    GoogleMap,
-    DrawingManager,
-} from '../../../lib';
+import { GoogleMap, DrawingManager } from 'cx-google-maps';
 
-import {VDOM, Controller as CxController, Repeater} from 'cx/ui';
+import { VDOM, Controller as CxController, Repeater } from 'cx/ui';
 
 class Controller extends CxController {
     getDefaults() {
@@ -28,14 +25,14 @@ class Controller extends CxController {
     onMarkerComplete(e) {
         Toast.create({
             message: `A marker at ${e.position.lat()}, ${e.position.lng()}.`,
-            timeout: 3000
+            timeout: 3000,
         }).open();
     }
 
-    onCircleComplete(e, {store}) {
+    onCircleComplete(e, { store }) {
         Toast.create({
             message: `A circle of radius ${e.radius}.`,
-            timeout: 3000
+            timeout: 3000,
         }).open();
     }
 }
@@ -49,8 +46,8 @@ export default (
             style="width: 100%; height: 100%; min-height: 400px"
             options={{
                 mapTypeControlOptions: {
-                    position: google.maps.ControlPosition.TOP_RIGHT
-                }
+                    position: google.maps.ControlPosition.TOP_RIGHT,
+                },
             }}
         >
             <DrawingManager
