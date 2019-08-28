@@ -1,0 +1,52 @@
+{
+    "name": "cx-google-maps",
+    "version": "19.9.0",
+    "description": "CxJS wrapper for react-google-maps",
+    "main": "dist/index.js",
+    "jsnext:main": "src/index.js",
+    "scripts": {
+        "clean": "rimraf docs",
+        "docs": "npm run build:docs",
+        "build:docs": "cd examples/demo && yarn && npm run build:docs",
+        "format": "prettier \"examples/demo/app/lib/**/*.js\" --write --tab-width 4",
+        "format:src": "prettier \"src/**/*.js\" --write --tab-width 4",
+        "build": "node scripts/build.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/codaxy/cx-google-maps"
+    },
+    "keywords": [
+        "CxJS",
+        "Cx",
+        "React",
+        "ReactJS",
+        "Google Maps",
+        "Maps",
+        "google-maps",
+        "react-google-maps",
+        "location"
+    ],
+    "author": "Igor Timarac <igor.timarac@codaxy.com> (https://github.com/tymarats)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/codaxy/cx-google-maps/issues"
+    },
+    "homepage": "https://codaxy.github.io/cx-google-maps",
+    "dependencies": {
+        "google-maps-infobox": "^2.0.0",
+        "marker-clusterer-plus": "^2.1.4",
+        "markerwithlabel": "^2.0.2"
+    },
+    "devDependencies": {
+        "babel-core": "^6.26.3",
+        "babel-preset-env": "^1.7.0",
+        "babel-plugin-external-helpers": "^6.22.0",
+        "babel-plugin-transform-cx-jsx": "^18.5.0",
+        "babel-plugin-transform-react-jsx": "^6.24.1",
+        "prettier": "^1.10.2",
+        "rimraf": "^2.6.2",
+        "rollup": "^0.60.7",
+        "rollup-plugin-babel": "^3.0.4"
+    }
+}

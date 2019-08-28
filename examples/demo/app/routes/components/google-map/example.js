@@ -1,6 +1,6 @@
 import { HtmlElement, Menu } from 'cx/widgets';
 
-import { GoogleMap } from '../../../lib/GoogleMap';
+import { GoogleMap } from 'cx-google-maps';
 
 import { VDOM, Controller as CxController } from 'cx/ui';
 
