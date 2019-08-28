@@ -14,7 +14,7 @@
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "cx": "^19.8.1",
-    "cx-google-maps": "^18.2.5",
+    "cx-google-maps": "^19.9.0",
     "cx-react": "^17.10.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

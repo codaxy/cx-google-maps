@@ -1,19 +1,18 @@
 Cx Google Maps
 ==============
 
-Cx Google Maps is a [CxJS](https://cxjs.io) wrapper around [react-google-maps](https://github.com/tomchentw/react-google-maps).
+Cx Google Maps is a [CxJS](https://cxjs.io) wrapper around [Google Maps](https://developers.google.com/maps/documentation/javascript/reference/).
 It contains a handful of useful classes for creating modern maps-aware applicatons with Cx. You can see a working demo 
 of it [here](http://codaxy.github.io/cx-google-maps).
 
 
-The library contains wrappers around following `react-google-maps` components: 
+The library contains wrappers around following Google Maps components: 
 
 - BicyclingLayer
 - Circle
 - DirectionsRenderer
 - DrawingManager
-- FusionTablesLayer
-- GoogleMap
+- Map
 - GroundOverlay
 - HeatmapLayer
 - InfoBox

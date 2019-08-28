@@ -1,16 +1,18 @@
 {
-    "name": "first-map",
+    "name": "cx-google-maps-demo",
+    "private": true,
     "version": "1.0.0",
-    "description": "",
+    "description": "Cx Google Maps Demo App",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "webpack-dev-server --config config/webpack.dev.js --open",
-        "build": "webpack --config config/webpack.prod.js"
+        "clean": "rimraf dist ../../docs",
+        "build": "webpack --config config/webpack.prod.js",
+        "build:docs": "webpack --config config/webpack.docs.js",
+        "start": "webpack-dev-server --config config/webpack.dev.js --open"
     },
     "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "author": "Codaxy",
+    "license": "MIT",
     "dependencies": {
         "babel-polyfill": "^6.23.0",
         "cx": "^19.8.1",

@@ -1,15 +1,14 @@
 {
     "name": "cx-google-maps",
     "version": "19.9.0",
-    "description": "CxJS wrapper for react-google-maps",
+    "description": "CxJS wrapper for Google Maps",
     "main": "dist/index.js",
     "jsnext:main": "src/index.js",
     "scripts": {
         "clean": "rimraf docs",
         "docs": "npm run build:docs",
         "build:docs": "cd examples/demo && yarn && npm run build:docs",
-        "format": "prettier \"examples/demo/app/lib/**/*.js\" --write --tab-width 4",
-        "format:src": "prettier \"src/**/*.js\" --write --tab-width 4",
+        "format": "prettier \"src/**/*.js\" --write --tab-width 4",
         "build": "node scripts/build.js"
     },
     "repository": {
@@ -24,7 +23,6 @@
         "Google Maps",
         "Maps",
         "google-maps",
-        "react-google-maps",
         "location"
     ],
     "author": "Igor Timarac <igor.timarac@codaxy.com> (https://github.com/tymarats)",

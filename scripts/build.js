@@ -6,7 +6,7 @@ const rollup = require("rollup"),
 rollup
     .rollup({
         input: "src/index.js",
-        external: ["cx/*", "react-google-maps/*", "cx/ui", "cx/widgets", "cx/util"],
+        external: ["cx/*", "cx/ui", "cx/widgets", "cx/util"],
         plugins: [
             babel({
                 presets: [
