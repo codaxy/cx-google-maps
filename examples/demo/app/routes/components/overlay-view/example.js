@@ -1,4 +1,3 @@
-import _ from 'lodash';
 
 import { Toast, Button } from 'cx/widgets';
 

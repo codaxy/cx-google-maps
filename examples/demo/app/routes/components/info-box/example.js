@@ -23,7 +23,7 @@ class Controller extends CxController {
         this.store.init('$page.map', this.getDefaults());
         this.store.init(
             '$page.markers',
-            Array.from(Array(5).keys()).map((a, i) => ({
+            Array.from(new Array(5)).map((_, i) => ({
                 id: i,
                 position: {
                     lat: 41.7781136 + Math.random() - 0.5,
@@ -78,7 +78,7 @@ export default (
                 >
                     <InfoBox
                         options={{
-                            //closeBoxURL: '',
+                            closeBoxURL: '',
                             boxClass: { tpl: 'infobox {$page.boxClass}' },
                         }}
                         if-bind="$record.popup"

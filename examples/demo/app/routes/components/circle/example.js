@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { Menu, NumberField, ColorField, Slider } from 'cx/widgets';
 
 import { GoogleMap, Circle } from 'cx-google-maps';

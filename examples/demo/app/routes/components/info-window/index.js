@@ -67,7 +67,7 @@ class Controller extends CxController {
     onInit() {
         this.store.init('$page.mapdefaults', this.getDefaults());        
         this.store.init('$page.map', this.getDefaults());   
-        this.store.init('$page.markers', _.range(5)
+        this.store.init('$page.markers', Array.from(new Array(5))
             .map((a, i) => ({
                 id: i,
                 position: {

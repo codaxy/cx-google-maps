@@ -58,7 +58,7 @@ export default <cx>
                     
                     ##### Example
                     <CodeSnippet>{`
-this.store.init('$page.markers', _.range(200)
+this.store.init('$page.markers', Array.from(new Array(200))
     .map((a, i) => ({
         id: i,
         position: {

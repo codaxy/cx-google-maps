@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { Toast, Button } from 'cx/widgets';
 
 import { GoogleMap, OverlayView, StreetViewPanorama } from 'cx-google-maps';

@@ -103,13 +103,11 @@ class Controller extends CxController {
     randomize() {
         let d = this.getDefaults();
         let p = 0.3;
-        let points = _.map(
-            new Array(1000),
-            a =>
-                new google.maps.LatLng({
-                    lat: d.center.lat + p * Math.log(Math.random()),
-                    lng: d.center.lng - p * Math.log(Math.random()),
-                }),
+        let points = Array.from(new Array(1000)).map(() =>
+            new google.maps.LatLng({
+                lat: d.center.lat + p * Math.log(Math.random()),
+                lng: d.center.lng - p * Math.log(Math.random()),
+            })
         );
 
         this.store.set('$page.points', points);

@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { Button, Grid } from 'cx/widgets';
 
 import { GoogleMap, Polygon } from 'cx-google-maps';
@@ -22,7 +20,7 @@ class Controller extends CxController {
         this.store.init('$page.map', this.getDefaults());
         this.store.init(
             '$page.path',
-            _.range(3).map(() => ({
+            Array.from(new Array(3)).map(() => ({
                 lat: 41.7781136 + Math.random() - 0.5,
                 lng: -87.6297982 + Math.random() - 0.5,
             })),

@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { GoogleMap, TrafficLayer } from 'cx-google-maps';
 
 import { VDOM, Controller as CxController, Repeater } from 'cx/ui';

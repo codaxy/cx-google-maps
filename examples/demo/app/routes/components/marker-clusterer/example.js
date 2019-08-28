@@ -20,7 +20,7 @@ class Controller extends CxController {
         this.store.init('$page.map', this.getDefaults());
         this.store.init(
             '$page.markers',
-            Array.from(Array(200).keys()).map((a, i) => ({
+            Array.from(new Array(200)).map((_, i) => ({
                 id: i,
                 position: {
                     lat: 41.7781136 + Math.random() - 0.5,

@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import { Toast } from 'cx/widgets';
 
 import { GoogleMap, DrawingManager } from 'cx-google-maps';
