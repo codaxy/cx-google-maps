@@ -1,12 +1,10 @@
-
 import { PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
 import { shallowEquals } from 'cx/util';
 import { standardSetterMap } from './standardSetterMap';
 import { autoUpdate } from './autoUpdate';
 
-const settableProps = {
-};
+const settableProps = {};
 
 const propSetterMap = standardSetterMap(settableProps);
 

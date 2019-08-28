@@ -26,7 +26,7 @@ export class Marker extends PureContainer {
     declareData() {
         super.declareData(...arguments, {
             ...settableProps,
-            noRedraw: undefined
+            noRedraw: undefined,
         });
     }
 
@@ -41,7 +41,7 @@ export class Marker extends PureContainer {
             marker.setPosition(data.position);
 
         autoUpdate(marker, data, rawData, propSetterMap, {
-            exclude: { "position": true }
+            exclude: { position: true },
         });
     }
 
@@ -51,9 +51,8 @@ export class Marker extends PureContainer {
         let marker = (instance.marker = new google.maps.Marker(data));
 
         if (context.markerClusterer) {
-            context.markerClusterer.addMarker(marker, !!data.noRedraw)
-        }
-        else {
+            context.markerClusterer.addMarker(marker, !!data.noRedraw);
+        } else {
             marker.setMap(context.googleMap);
         }
 
@@ -97,13 +96,13 @@ export class Marker extends PureContainer {
     explore(context, instance) {
         if (!instance.marker) this.initMarker(context, instance);
 
-        context.push("marker", instance.marker);
+        context.push('marker', instance.marker);
 
         super.explore(context, instance);
     }
 
     exploreCleanup(context) {
-        context.pop("marker");
+        context.pop('marker');
     }
 
     render(context, instance, key) {

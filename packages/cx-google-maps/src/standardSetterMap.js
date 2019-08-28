@@ -7,9 +7,8 @@ function pascalCase(str) {
  * @param {Object} props Object whose keys are the names of settable properties
  */
 export function standardSetterMap(props) {
-    return Object.keys(props)
-        .reduce((map, prop) => {
-             map[prop] = `set${pascalCase(prop)}`;
-             return map;
-        }, {});
+    return Object.keys(props).reduce((map, prop) => {
+        map[prop] = `set${pascalCase(prop)}`;
+        return map;
+    }, {});
 }

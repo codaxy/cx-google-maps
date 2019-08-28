@@ -124,13 +124,11 @@ class Input extends VDOM.Component {
         if (el) {
             let { widget, data } = instance;
 
-            if (!google.maps.places)
-                throw Error('GoogleMaps places API not loaded.');
+            if (!google.maps.places) throw Error('GoogleMaps places API not loaded.');
 
             let searchBox = (instance.searchBox = new google.maps.places.SearchBox(el));
 
-            if (widget.pipeInstance) 
-                instance.invoke('pipeInstance', searchBox, instance);
+            if (widget.pipeInstance) instance.invoke('pipeInstance', searchBox, instance);
 
             instance.attachedEvents = attachEventCallbacks(searchBox, instance, {
                 places_changed: 'onPlacesChanged',

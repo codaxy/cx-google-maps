@@ -1,4 +1,3 @@
-
 import { VDOM, PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
 import { sameLatLng } from './sameLatLng';
@@ -40,7 +39,7 @@ export class MarkerWithLabel extends PureContainer {
     declareData() {
         super.declareData(...arguments, {
             ...settableProps,
-            noRedraw: undefined
+            noRedraw: undefined,
         });
     }
 
@@ -55,7 +54,7 @@ export class MarkerWithLabel extends PureContainer {
             marker.setPosition(data.position);
 
         autoUpdate(marker, data, rawData, propSetterMap, {
-            exclude: { "position": true }
+            exclude: { position: true },
         });
     }
 
@@ -66,9 +65,8 @@ export class MarkerWithLabel extends PureContainer {
         let marker = (instance.marker = new NativeMarkerWithLabel(data));
 
         if (context.markerClusterer) {
-            context.markerClusterer.addMarker(marker, !!data.noRedraw)
-        }
-        else {
+            context.markerClusterer.addMarker(marker, !!data.noRedraw);
+        } else {
             marker.setMap(context.googleMap);
         }
 
@@ -116,15 +114,16 @@ export class MarkerWithLabel extends PureContainer {
     }
 
     attach(el, instance) {
-        if (!instance.marker || instance.contentEl)
-            return;
-        
-        instance.marker.set('labelContent', instance.contentEl = el);
+        if (!instance.marker || instance.contentEl) return;
+
+        instance.marker.set('labelContent', (instance.contentEl = el));
     }
 
     render(context, instance, key) {
-        return <div key={key} ref={el => this.attach(el, instance)}>
-            {this.renderChildren(context, instance)}
-        </div>
+        return (
+            <div key={key} ref={el => this.attach(el, instance)}>
+                {this.renderChildren(context, instance)}
+            </div>
+        );
     }
 }

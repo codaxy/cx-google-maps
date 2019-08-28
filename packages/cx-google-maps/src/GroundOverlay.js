@@ -1,4 +1,3 @@
-
 import { PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
 import { shallowEquals } from 'cx/util';
@@ -6,7 +5,7 @@ import { standardSetterMap } from './standardSetterMap';
 import { autoUpdate } from './autoUpdate';
 
 const settableProps = {
-    opacity: undefined
+    opacity: undefined,
 };
 
 const propSetterMap = standardSetterMap(settableProps);
@@ -19,7 +18,7 @@ export class GroundOverlay extends PureContainer {
             // TODO: make re-rendering possible
             bounds: { structured: true },
             url: undefined,
-            options: { structured: true }
+            options: { structured: true },
         });
     }
 
@@ -36,14 +35,18 @@ export class GroundOverlay extends PureContainer {
     initLayer(context, instance) {
         let { widget, data } = instance;
 
-        let layer = (instance.layer = new google.maps.GroundOverlay(data.url, data.bounds, data.options || {}));
+        let layer = (instance.layer = new google.maps.GroundOverlay(
+            data.url,
+            data.bounds,
+            data.options || {},
+        ));
         layer.setMap(context.googleMap);
 
         if (widget.pipeInstance) instance.invoke('pipeInstance', layer, instance);
 
         attachEventCallbacks(layer, instance, {
             click: 'onClick',
-            dbl_click: 'onDblClick'
+            dbl_click: 'onDblClick',
         });
     }
 

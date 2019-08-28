@@ -5,7 +5,7 @@ import { standardSetterMap } from './standardSetterMap';
 import { autoUpdate } from './autoUpdate';
 
 const settableProps = {
-    autoRefresh: undefined
+    autoRefresh: undefined,
 };
 
 const propSetterMap = standardSetterMap(settableProps);

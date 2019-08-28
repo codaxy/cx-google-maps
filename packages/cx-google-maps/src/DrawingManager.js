@@ -1,4 +1,3 @@
-
 import { PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
 import { shallowEquals } from 'cx/util';
@@ -7,7 +6,7 @@ import { autoUpdate } from './autoUpdate';
 
 const settableProps = {
     drawingMode: { structured: true },
-    options: { structured: true }
+    options: { structured: true },
 };
 
 const propSetterMap = standardSetterMap(settableProps);
@@ -36,12 +35,12 @@ export class DrawingManager extends PureContainer {
         if (widget.pipeInstance) instance.invoke('pipeInstance', layer, instance);
 
         attachEventCallbacks(layer, instance, {
-            circlecomplete: "onCircleComplete",
-            markercomplete: "onMarkerComplete",
-            overlaycomplete: "onOverlayComplete",
-            polygoncomplete: "onPolygonComplete",
-            polylinecomplete: "onPolylineComplete",
-            rectanglecomplete: "onRectangleComplete",
+            circlecomplete: 'onCircleComplete',
+            markercomplete: 'onMarkerComplete',
+            overlaycomplete: 'onOverlayComplete',
+            polygoncomplete: 'onPolygonComplete',
+            polylinecomplete: 'onPolylineComplete',
+            rectanglecomplete: 'onRectangleComplete',
         });
     }
 

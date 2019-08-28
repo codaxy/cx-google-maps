@@ -5,6 +5,13 @@
     "author": "Codaxy",
     "license": "MIT",
     "private": true,
+    "scripts": {
+        "clean": "rimraf docs",
+        "docs": "npm run build:docs",
+        "build:docs": "cd examples/demo && yarn && npm run build:docs",
+        "format": "prettier \"packages/cx-google-maps/src/**/*.js\" --write --tab-width 4",
+        "build": "node scripts/build.js"
+    },
     "workspaces": [
         "packages/cx-google-maps",
         "examples/demo"

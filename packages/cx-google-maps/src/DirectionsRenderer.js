@@ -1,4 +1,3 @@
-
 import { PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
 import { shallowEquals } from 'cx/util';
@@ -9,7 +8,7 @@ const settableProps = {
     directions: { structured: true },
     options: { structured: true },
     panel: { structured: true },
-    routeIndex: undefined
+    routeIndex: undefined,
 };
 
 const propSetterMap = standardSetterMap(settableProps);

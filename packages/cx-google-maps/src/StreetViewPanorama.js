@@ -1,4 +1,3 @@
-
 import { PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
 import { shallowEquals } from 'cx/util';
@@ -12,7 +11,7 @@ const settableProps = {
     pano: undefined,
     position: { structured: true },
     pov: { structured: true },
-    zoom: undefined
+    zoom: undefined,
 };
 
 const propSetterMap = standardSetterMap(settableProps);
@@ -24,14 +23,12 @@ export class StreetViewPanorama extends PureContainer {
 
     prepareData(context, instance) {
         super.prepareData(context, instance);
-        console.log("BEFORECHANGES", changes);
 
         let { data, cached, pano } = instance;
         let { rawData } = cached;
         if (!pano || !rawData) return;
 
         let changes = autoUpdate(pano, data, rawData, propSetterMap);
-        console.log("CHANGES", changes);
     }
 
     initPanorama(context, instance) {
@@ -57,7 +54,7 @@ export class StreetViewPanorama extends PureContainer {
             resize: 'onResize',
             status_changed: 'onStatusChanged',
             visible_changed: 'onVisibleChanged',
-            zoom_changed: 'onZoomChanged'
+            zoom_changed: 'onZoomChanged',
         });
     }
 

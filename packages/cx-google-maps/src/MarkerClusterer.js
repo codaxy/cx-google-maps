@@ -21,7 +21,7 @@ const settableProps = {
     minimumClusterSize: undefined,
     styles: undefined,
     title: undefined,
-    zoomOnClick: undefined
+    zoomOnClick: undefined,
 };
 
 const propSetterMap = standardSetterMap(settableProps);
@@ -44,21 +44,22 @@ export class MarkerClusterer extends PureContainer {
         // Some MarkerClustererPlus set methods will not cause repaint on property
         // change, so we need to perform it manually.
         let changes = autoUpdate(markerClusterer, data, rawData, propSetterMap, {
-            exclude: { "averageCenter": true }
+            exclude: { averageCenter: true },
         });
 
         // TODO: Expand as needed
-        if (changes.gridSize 
-            || changes.minimumClusterSize
-        )
-            markerClusterer.repaint();
+        if (changes.gridSize || changes.minimumClusterSize) markerClusterer.repaint();
     }
 
     initMarkerClusterer(context, instance) {
         let { widget, data } = instance;
 
         this.map = context.googleMap;
-        let markerClusterer = (instance.markerClusterer = new MarkerClustererPlus(context.googleMap, [], data));
+        let markerClusterer = (instance.markerClusterer = new MarkerClustererPlus(
+            context.googleMap,
+            [],
+            data,
+        ));
 
         if (widget.pipeInstance) instance.invoke('pipeInstance', markerClusterer, instance);
 
@@ -72,8 +73,7 @@ export class MarkerClusterer extends PureContainer {
     }
 
     explore(context, instance) {
-        if (!instance.markerClusterer)
-            this.initMarkerClusterer(context, instance);
+        if (!instance.markerClusterer) this.initMarkerClusterer(context, instance);
 
         context.push('markerClusterer', instance.markerClusterer);
 

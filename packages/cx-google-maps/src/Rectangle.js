@@ -41,7 +41,7 @@ export class Rectangle extends PureContainer {
         }
 
         autoUpdate(rect, data, rawData, propSetterMap, {
-            exclude: { "bounds": true }
+            exclude: { bounds: true },
         });
     }
 

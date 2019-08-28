@@ -10,7 +10,7 @@ const settableProps = {
     draggable: undefined,
     editable: undefined,
     options: { structured: true },
-    radius: undefined
+    radius: undefined,
 };
 
 const propSetterMap = standardSetterMap(settableProps);
@@ -27,11 +27,10 @@ export class Circle extends PureContainer {
         let { rawData } = cached;
         if (!circle || !rawData) return;
 
-        if (data.center && !sameLatLng(data.center, rawData.center))
-            circle.setCenter(data.center);
+        if (data.center && !sameLatLng(data.center, rawData.center)) circle.setCenter(data.center);
 
         autoUpdate(circle, data, rawData, propSetterMap, {
-            exclude: { "center": true }
+            exclude: { center: true },
         });
     }
 

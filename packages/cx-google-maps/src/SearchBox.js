@@ -28,8 +28,7 @@ export class SearchBox extends PureContainer {
     }
 
     initSearchBox(el, instance) {
-        if (instance.input === el)
-            return;
+        if (instance.input === el) return;
 
         if (instance.input && instance.searchBox && instance.attachedEvents) {
             instance.searchBox.unbindAll();
@@ -41,14 +40,12 @@ export class SearchBox extends PureContainer {
         if (el) {
             let { widget, data } = instance;
 
-            if (!google.maps.places) 
-                throw Error('GoogleMaps places API not loaded.');
+            if (!google.maps.places) throw Error('GoogleMaps places API not loaded.');
 
             let searchBox = (instance.searchBox = new google.maps.places.SearchBox(el));
             this.map.controls[data.controlPosition].push(el);
 
-            if (widget.pipeInstance) 
-                instance.invoke('pipeInstance', searchBox, instance);
+            if (widget.pipeInstance) instance.invoke('pipeInstance', searchBox, instance);
 
             instance.attachedEvents = attachEventCallbacks(searchBox, instance, {
                 places_changed: 'onPlacesChanged',

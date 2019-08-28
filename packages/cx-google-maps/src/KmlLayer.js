@@ -9,7 +9,7 @@ const settableProps = {
     metadata: { structured: true },
     status: undefined,
     url: { structured: true },
-    zIndex: undefined
+    zIndex: undefined,
 };
 
 const propSetterMap = standardSetterMap(settableProps);
