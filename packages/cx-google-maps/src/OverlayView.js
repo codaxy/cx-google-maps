@@ -54,10 +54,6 @@ class ReactOverlayView extends VDOM.Component {
         this.overlayView.onRemove = null;
     }
 
-    componentDidUpdate() {
-        this.adjustPosition();
-    }
-
     attach(el) {
         if (this.contentEl === el)
             return;
