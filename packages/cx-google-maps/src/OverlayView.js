@@ -1,8 +1,4 @@
 import { VDOM, PureContainer } from 'cx/ui';
-import { attachEventCallbacks } from './attachEventCallbacks';
-import { shallowEquals, getTopLevelBoundingClientRect } from 'cx/util';
-import { standardSetterMap } from './standardSetterMap';
-import { autoUpdate } from './autoUpdate';
 
 // OverlayView does not have settable properties
 
