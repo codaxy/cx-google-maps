@@ -1,24 +1,11 @@
 import {Md} from 'app/components';
 
 export const config = {
-    defaultCenter: {
-        type: "LatLng|object",
-        description: <cx><Md>
-            A [google.maps.LatLng](https://developers.google.com/maps/documentation/javascript/3.exp/reference#LatLng)
-            config or instance object defining default center point of the map.
-        </Md></cx>
-    },
-    defaultZoom: {
-        type: "number",
-        description: <cx><Md>
-            Default map zoom level.
-        </Md></cx>
-    },
     center: {
-        type: "LatLng|object",
+        type: "LatLngLiteral",
         description: <cx><Md>
-            A [google.maps.LatLng](https://developers.google.com/maps/documentation/javascript/3.exp/reference#LatLng)
-            config or instance object defining current center point of the map.
+            A [google.maps.LatLng literal](https://developers.google.com/maps/documentation/javascript/reference/coordinates#LatLngLiteral)
+            defining current center point of the map.
         </Md></cx>
     },
     zoom: {
@@ -31,7 +18,7 @@ export const config = {
         type: 'MapOptions|object',
         description: <cx><Md>
             A [google.maps.MapOptions](https://developers.google.com/maps/documentation/javascript/3.exp/reference#MapOptions)
-            config or instance object passed to the underlying Map.
+            config object passed to the underlying Map.
         </Md></cx>
     },
     pipeInstance: {

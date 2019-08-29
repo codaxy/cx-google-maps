@@ -1,5 +1,5 @@
 
-import { Toast, Button } from 'cx/widgets';
+import { Toast, Button, Menu, Slider, MenuItem } from 'cx/widgets';
 
 import { GoogleMap, OverlayView } from 'cx-google-maps';
 
@@ -19,13 +19,18 @@ class Controller extends CxController {
                 lat: 41.7781136,
                 lng: -87.6297982,
             },
-            zoom: 9,
+            zoom: 9
         };
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());
         this.store.init('$page.map', this.getDefaults());
+        this.store.init('$page.overlay', this.getDefaults());
+    }
+
+    onResetClick() {
+        this.store.set('$page.map', this.getDefaults());
+        this.store.set('$page.overlay', this.getDefaults());
     }
 
     onOverlayBtnClick() {
@@ -49,8 +54,14 @@ export default (
                 },
             }}
         >
+            <Menu mod="map" itemPadding="small">
+                <Slider value-bind="$page.overlay.center.lat" minValue={41} maxValue={42} />
+                <Slider value-bind="$page.overlay.center.lng" minValue={-88} maxValue={-87}/>
+                <a onClick="onResetClick">Reset all</a>
+            </Menu>
+
             <OverlayView
-                position-bind="$page.map.center"
+                position-bind="$page.overlay.center"
                 mapPaneName="overlayMouseTarget"
                 getPixelPositionOffset={getPixelPositionOffset}
             >

@@ -47,7 +47,6 @@ export class Circle extends PureContainer {
         if (widget.center && widget.center.bind) {
             circle.addListener('center_changed', e => {
                 let pos = circle.getCenter();
-                console.log(pos);
                 let pd = { lat: pos.lat(), lng: pos.lng() };
                 if (!sameLatLng(pd, instance.data.position)) {
                     instance.set('center', pd, true);
