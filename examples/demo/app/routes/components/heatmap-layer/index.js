@@ -22,7 +22,7 @@ import {
 const info = {
     name: 'HeatmapLayer',
     route: '~/components/heatmap-layer',
-    reactGoogleMapsDocs: "https://tomchentw.github.io/react-google-maps/#heatmaplayer",
+    
     googleMapsDocs: "https://developers.google.com/maps/documentation/javascript/3.exp/reference#HeatmapLayer"
 };
 
@@ -40,7 +40,7 @@ export default <cx>
                 </h4>
 
                 <p ws>
-                    Cx wrapper around <a href={info.reactGoogleMapsDocs} target="_blank">{info.name}</a> React component.
+                    Cx wrapper around <a href={info.googleMapsDocs} target="_blank">{info.name}</a> component.
                     For additional info about various options, available events and methods, please see <a href={info.googleMapsDocs} target="_blank">Google Maps Docs</a>.
                 </p>
 
@@ -103,13 +103,11 @@ class Controller extends CxController {
     randomize() {
         let d = this.getDefaults();
         let p = 0.3;
-        let points = _.map(
-            new Array(1000),
-            a =>
-                new google.maps.LatLng({
-                    lat: d.center.lat + p * Math.log(Math.random()),
-                    lng: d.center.lng - p * Math.log(Math.random()),
-                }),
+        let points = Array.from(new Array(1000)).map(() =>
+            new google.maps.LatLng({
+                lat: d.center.lat + p * Math.log(Math.random()),
+                lng: d.center.lng - p * Math.log(Math.random()),
+            })
         );
 
         this.store.set('$page.points', points);
@@ -159,7 +157,7 @@ export default (
                 </Md>
             </Section>
 
-            <FlexCol mod="card" style="flex: 1; min-height: 400px">
+            <FlexCol mod="card" style="flex: 1; max-height: 600px">
                 <Example />
             </FlexCol>
         </FlexRow>

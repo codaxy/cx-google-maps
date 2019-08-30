@@ -1,34 +1,14 @@
-import {
-    HtmlElement,
-    Menu,
-    Toast
-} from 'cx/widgets';
-
-import {
-    GoogleMap,
-    SearchBox,
-    Marker,
-    KmlLayer
-} from 'cx-google-maps';
+import { GoogleMap, KmlLayer } from 'cx-google-maps';
 
 import { VDOM, Controller as CxController } from 'cx/ui';
-import config from './config';
-
-const containerElement = <div style={{ position: "relative", flex: 1 }} />;
-const mapElement =
-    <div
-        style={{ position: "absolute", left: 0, top: 0, right: 0, bottom: 0 }}
-    />
-;
-
 class Controller extends CxController {
     getDefaults() {
         return {
             center: {
-                lat: 41.77811360,
-                lng: -87.62979820
+                lat: 41.7781136,
+                lng: -87.6297982,
             },
-            zoom: 12
+            zoom: 12,
         };
     }
 
@@ -38,23 +18,20 @@ class Controller extends CxController {
     }
 }
 
-export default <cx>
-    <GoogleMap
-        controller={Controller}
-        containerElement={containerElement}
-        mapElement={mapElement}
-        defaultCenter-bind="$page.map.center"
-        defaultZoom-bind="$page.map.zoom"
-        center-bind="$page.map.center"
-        zoom-bind="$page.map.zoom"
-        options={{
-            mapTypeControlOptions: {
-                position: google.maps.ControlPosition.TOP_RIGHT
-            }
-        }}
-    >
-        <KmlLayer
-            url="http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml"
-        />
-    </GoogleMap>
-</cx>;
+export default (
+    <cx>
+        <GoogleMap
+            controller={Controller}
+            center-bind="$page.map.center"
+            style="width: 100%; height: 100%; min-height: 400px"
+            zoom-bind="$page.map.zoom"
+            options={{
+                mapTypeControlOptions: {
+                    position: google.maps.ControlPosition.TOP_RIGHT,
+                },
+            }}
+        >
+            <KmlLayer url="http://googlemaps.github.io/js-v2-samples/ggeoxml/cta.kml" />
+        </GoogleMap>
+    </cx>
+);

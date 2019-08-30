@@ -22,7 +22,7 @@ import {
 const info = {
     name: 'MarkerWithLabel',
     route: '~/components/marker-with-label',
-    reactGoogleMapsDocs: "https://tomchentw.github.io/react-google-maps/#markerwithlabel",
+    
     googleMapsDocs: "https://github.com/googlemaps/v3-utility-library/tree/master/markerwithlabel"
 };
 
@@ -40,7 +40,7 @@ export default <cx>
                 </h4>
 
                 <p ws>
-                    Cx wrapper around <a href={info.reactGoogleMapsDocs} target="_blank">{info.name}</a> React component.
+                    Cx wrapper around <a href={info.googleMapsDocs} target="_blank">{info.name}</a> component.
                     For additional info about various options, available events and methods, please see <a href={info.googleMapsDocs} target="_blank">MarkerWithLabel addon lib page</a>.
                 </p>
 
@@ -86,7 +86,7 @@ export default <cx>
             }}
             onClick="onMarkerClick"
         >
-            <div>The Label</div>
+            <span>cx-google-maps</span>
         </MarkerWithLabel>
     </GoogleMap>
 </cx>;
@@ -94,7 +94,7 @@ export default <cx>
                 </Md>
             </Section>
 
-            <FlexCol mod="card" style="flex: 1; min-height: 400px">
+            <FlexCol mod="card" style="flex: 1; max-height: 600px">
                 <Example />
             </FlexCol>
         </FlexRow>

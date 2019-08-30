@@ -1,31 +1,8 @@
-import _ from 'lodash';
+import { Toast, Button } from 'cx/widgets';
 
-import {
-    HtmlElement,
-    Menu,
-    Text,
-    Toast,
-    Button,
-    Grid,
-    FlexCol,
-} from 'cx/widgets';
+import { GoogleMap, OverlayView, StreetViewPanorama } from 'cx-google-maps';
 
-import {
-    GoogleMap,
-    SearchBox,
-    OverlayView,
-    StreetViewPanorama,
-} from 'cx-google-maps';
-
-import {VDOM, Controller as CxController, Repeater} from 'cx/ui';
-import config from './config';
-
-const containerElement = <div style={{position: 'relative', flex: 1}} />;
-const mapElement = (
-    <div
-        style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}}
-    />
-);
+import { VDOM, Controller as CxController, Repeater } from 'cx/ui';
 
 const getPixelPositionOffset = (width, height) => {
     return {
@@ -53,7 +30,7 @@ class Controller extends CxController {
             },
             pov: {
                 heading: 45,
-                pitch: 0
+                pitch: 0,
             },
             zoom: 1,
         };
@@ -77,23 +54,21 @@ export default (
     <cx>
         <GoogleMap
             controller={Controller}
-            containerElement={containerElement}
-            mapElement={mapElement}
-            defaultCenter-bind="$page.map.center"
-            defaultZoom-bind="$page.map.zoom"
             center-bind="$page.map.center"
+            style="width: 100%; height: 100%; min-height: 400px"
             zoom-bind="$page.map.zoom"
             options={{
                 mapTypeControlOptions: {
                     position: google.maps.ControlPosition.TOP_RIGHT,
                 },
-            }}>
+            }}
+        >
             <StreetViewPanorama
                 position-bind="$page.streetview.center"
                 zoom-bind="$page.streetview.zoom"
                 pov-bind="$page.streetview.pov"
             >
-                <OverlayView
+                {/* <OverlayView
                     position={{
                         lat: 49.28590291211115,
                         lng: -123.11248166065218,
@@ -105,13 +80,13 @@ export default (
                         background: "rgba(20, 40, 120, 0.3)",
                         padding: 20
                     }}>
-                    <Button text="Fixed overlay"
-                        mod="primary"
-                        onClick="onOverlayBtnClick"
-                    />
-                </div>
-            </OverlayView>
-        </StreetViewPanorama>
-    </GoogleMap>
-</cx>
+                        <Button text="Fixed overlay"
+                            mod="primary"
+                            onClick="onOverlayBtnClick"
+                        />
+                    </div>
+                </OverlayView> */}
+            </StreetViewPanorama>
+        </GoogleMap>
+    </cx>
 );

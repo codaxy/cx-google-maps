@@ -1,31 +1,9 @@
-import {VDOM, ContentPlaceholder, Content} from 'cx/ui';
-import {
-    HtmlElement,
-    Link,
-    Section,
-    FlexCol,
-    Menu,
-    Submenu,
-    Text,
-    CxCredit,
-    TextField,
-} from 'cx/widgets';
-import {
-    GoogleMap,
-    Marker,
-    InfoBox,
-    InfoWindow,
-    SearchBox,
-} from 'cx-google-maps';
-
-import DirectionsCollection from './DirectionsCollection';
-import MarkerCollection from './MarkerCollection';
+import { VDOM, ContentPlaceholder, Content } from 'cx/ui';
 import Controller from './Controller';
+import { Section, FlexCol, Menu, Text, TextField } from 'cx/widgets';
+import { GoogleMap, SearchBox } from 'cx-google-maps';
 
-const containerElement = <div style={{position: 'relative', flex: 1}} />;
-const mapElement = (
-    <div style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}} />
-);
+import MarkerCollection from './MarkerCollection';
 
 export default (
     <cx>
@@ -41,70 +19,65 @@ export default (
                     </a>
                     wrapper for
                     <a
-                        href="https://github.com/tomchentw/react-google-maps"
-                        target="_blank">
-                        react-google-maps
-                    </a>, which enables Google Maps components to connect to Cx
-                    stores and controllers. Source code of the library,
-                    including this demo is available on{' '}
-                    <a
-                        href="https://github.com/codaxy/cx-google-maps"
-                        target="_blank">
+                        href="https://developers.google.com/maps/documentation/javascript/3.exp/reference"
+                        target="_blank"
+                    >
+                        Google Maps
+                    </a>
+                    , which enables Google Maps components to connect to Cx stores and controllers.
+                    Source code of the library, including this demo is available on{' '}
+                    <a href="https://github.com/codaxy/cx-google-maps" target="_blank">
                         GitHub
-                    </a>.
+                    </a>
+                    .
                 </p>
 
                 <p ws>
-                    This demo app includes documentation specific for this CxJS
-                    implementation. Please, take a look into the original
-                    documentation and demo apps for detailed information about
-                    underlying{' '}
+                    This demo app includes documentation specific for this CxJS implementation.
+                    Please, take a look into the original documentation and demo apps for detailed
+                    information about underlying{' '}
                     <a
-                        href="https://github.com/tomchentw/react-google-maps"
-                        target="_blank">
-                        React components
+                        href="https://developers.google.com/maps/documentation/javascript/3.exp/reference"
+                        target="_blank"
+                    >
+                        Google Maps components
                     </a>
-                    and various Google Maps
-                    <a href="https://developers.google.com/maps/documentation/javascript/3.exp/reference">
-                        options, methods and events
-                    </a>.
+                    .
                 </p>
             </Section>
 
             <FlexCol mod="card" style="flex: 1; min-height: 260px">
                 <GoogleMap
                     controller={Controller}
-                    containerElement={containerElement}
-                    mapElement={mapElement}
-                    defaultCenter-expr="{$page.map.center}"
-                    defaultZoom-expr="{$page.map.zoom}"
+                    style="width: 100%; height: 100%; min-height: 400px"
                     center-bind="$page.map.center"
-                    controlSize={24}
                     zoom-bind="$page.map.zoom"
                     pipeInstance="pipeMap"
+                    controlSize={22}
                     options={{
                         mapTypeControlOptions: {
                             position: google.maps.ControlPosition.TOP_RIGHT,
                         },
-                    }}>
+                    }}
+                >
                     <Menu vertical mod="map" itemPadding="small">
                         <a onClick="onResetViewClick">
-                            Reset view (<Text tpl="{$page.map.center.lat:n;4},{$page.map.center.lng:n;4}:{$page.map.zoom:n;4}" />)
+                            Reset view (
+                            <Text tpl="{$page.map.center.lat:n;4},{$page.map.center.lng:n;4}:{$page.map.zoom:n;4}" />
+                            )
                         </a>
                     </Menu>
                     <SearchBox
                         if={window.innerWidth >= 768}
                         controlPosition={google.maps.ControlPosition.TOP_CENTER}
                         onPlacesChanged="onSearchPlacesChanged"
-                        pipeInstance="pipeSearchBox">
-                        <TextField
-                            placeholder="Search..."
-                            style={{
-                                margin: 5,
-                                boxShadow: '0 2px 2px rgba(0, 0, 0, 0.3)',
-                            }}
-                        />
-                    </SearchBox>
+                        pipeInstance="pipeSearchBox"
+                        placeholder="Search..."
+                        style={{
+                            margin: '5px',
+                            padding: '4px 10px',
+                        }}
+                    />
                     <MarkerCollection />
                 </GoogleMap>
             </FlexCol>

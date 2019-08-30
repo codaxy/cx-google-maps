@@ -22,7 +22,7 @@ import {
 const info = {
     name: 'StandaloneSearchBox',
     route: '~/components/standalone-search-box',
-    reactGoogleMapsDocs: "https://tomchentw.github.io/react-google-maps/#standalonesearchbox",
+    
     googleMapsDocs: "https://developers.google.com/maps/documentation/javascript/3.exp/reference#SearchBox"
 };
 
@@ -40,7 +40,7 @@ export default <cx>
                 </h4>
 
                 <p ws>
-                    Cx wrapper around <a href={info.reactGoogleMapsDocs} target="_blank">{info.name}</a> React component.
+                    Cx wrapper around <a href={info.googleMapsDocs} target="_blank">{info.name}</a> component.
                     For additional info about various options, available events and methods, please see <a href={info.googleMapsDocs} target="_blank">Google Maps Docs</a>.
                 </p>
 
@@ -90,14 +90,12 @@ export default (
             <h4>Cx TextField</h4>
             <StandaloneSearchBox
                 onPlacesChanged="onSearchPlacesChanged"
-                pipeInstance="pipeSearchBoxInstance">
-                <TextField
-                    placeholder="Search for a place..."
-                    style="width: 100%"
-                    class="flex-1 autogrow"
-                    value-bind="$page.text"
-                />
-            </StandaloneSearchBox>
+                pipeInstance="pipeSearchBoxInstance"
+                placeholder="Search for a place..."
+                style="width: 100%"
+                class="flex-1 autogrow"
+                value-bind="$page.text"
+            />
             <br/>
             <h4>Previous searches</h4>
             <Grid
@@ -126,7 +124,7 @@ export default (
                 </Md>
             </Section>
 
-            <FlexCol mod="card" style="flex: 1; min-height: 400px">
+            <FlexCol mod="card" style="flex: 1; max-height: 600px">
                 <Example />
             </FlexCol>
         </FlexRow>

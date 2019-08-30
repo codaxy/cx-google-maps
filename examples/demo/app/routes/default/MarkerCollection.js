@@ -1,6 +1,5 @@
-import { Repeater, PureContainer, Controller as CxController } from "cx/ui";
-import { HtmlElement, NumberField } from "cx/widgets";
-import { Marker, MarkerClusterer, InfoBox, Polygon } from "cx-google-maps";
+import { Repeater, Controller as CxController } from 'cx/ui';
+import { Marker, MarkerClusterer, InfoBox, Polygon } from 'cx-google-maps';
 import { updateArray } from 'cx/data';
 import { markerPaths } from 'app/util';
 
@@ -9,16 +8,16 @@ const updateInterval = 300;
 
 class Controller extends CxController {
     onInit() {
-        this.store.init("$page.frame", 0);
+        this.store.init('$page.frame', 0);
         this.store.init(
-            "$page.markers",
+            '$page.markers',
             markerPaths.map(item => ({
                 id: item.id,
                 color: item.color,
                 showTitle: item.showTitle,
                 position: item.path[0],
-                rotation: this.getRotation(item.path, 0)
-            }))
+                rotation: this.getRotation(item.path, 0),
+            })),
         );
 
         this.addComputable('poly', ['$page.markers'], markers => markers.map(a => a.position));
@@ -32,42 +31,37 @@ class Controller extends CxController {
     }
 
     startAnimation() {
-        this.store.set(
-            "markersAnimation",
-            setInterval(() => this.advance(), updateInterval)
-        );
+        this.store.set('markersAnimation', setInterval(() => this.advance(), updateInterval));
     }
 
     stopAnimation() {
-        let existing = this.store.get("markersAnimation");
-        if (existing)
-            clearInterval(existing);
+        let existing = this.store.get('markersAnimation');
+        if (existing) clearInterval(existing);
     }
 
     advance() {
-        let frame = this.store.get("$page.frame");
-        this.store.update(
-            "$page.markers",
-            current => current.map(item => ({
+        let frame = this.store.get('$page.frame');
+        this.store.update('$page.markers', current =>
+            current.map(item => ({
                 id: item.id,
                 color: item.color,
                 showTitle: item.showTitle,
                 position: this.getLocation(markerPaths[item.id].path, frame),
-                rotation: this.getRotation(markerPaths[item.id].path, frame)
-            }))
+                rotation: this.getRotation(markerPaths[item.id].path, frame),
+            })),
         );
 
-        this.store.set("$page.frame", (frame + 1) % (steps * 4)); // 4 points for each path
+        this.store.set('$page.frame', (frame + 1) % (steps * 4)); // 4 points for each path
     }
 
     getLocation(path, frame) {
         let i0 = Math.floor(frame / steps),
             i1 = (i0 + 1) % path.length,
-            d = frame % steps / steps;
+            d = (frame % steps) / steps;
 
         return {
             lat: (1.0 - d) * path[i0].lat + d * path[i1].lat,
-            lng: (1.0 - d) * path[i0].lng + d * path[i1].lng
+            lng: (1.0 - d) * path[i0].lng + d * path[i1].lng,
         };
     }
 
@@ -75,30 +69,32 @@ class Controller extends CxController {
         let i0 = Math.floor(frame / steps),
             i1 = (i0 + 1) % path.length;
 
-        return Math.atan2(path[i1].lng - path[i0].lng, path[i1].lat - path[i0].lat) * 180.0 / Math.PI;
+        return (
+            (Math.atan2(path[i1].lng - path[i0].lng, path[i1].lat - path[i0].lat) * 180.0) / Math.PI
+        );
     }
 
-    onMarkerClick(e, {store}) {
+    onMarkerClick(e, { store }) {
         let id = store.get('$record.id');
         this.toggleTitleVisibility(id);
     }
 
     toggleTitleVisibility(id) {
-        this.store.update('$page.markers', updateArray, marker => ({
-            ...marker,
-            showTitle: !marker.showTitle
-        }), marker => marker.id === id); // The last parameter is the filter, we don't want to toggle all the titles
+        this.store.update(
+            '$page.markers',
+            updateArray,
+            marker => ({
+                ...marker,
+                showTitle: !marker.showTitle,
+            }),
+            marker => marker.id === id,
+        ); // The last parameter is the filter, we don't want to toggle all the titles
     }
 }
 
 export default (
     <cx>
-        <MarkerClusterer
-            averageCenter
-            enableRetinaIcons
-            gridSize={0}
-            controller={Controller}
-        >
+        <MarkerClusterer averageCenter enableRetinaIcons gridSize={0} controller={Controller}>
             <Repeater records-bind="$page.markers" cached>
                 <Polygon
                     path-bind="poly"
@@ -106,9 +102,9 @@ export default (
                         strokeColor: 'green',
                         fillColor: 'green',
                         strokeOpacity: 0.1,
-                        fillOpacity: 0.03
+                        fillOpacity: 0.03,
                     }}
-                 />
+                />
                 <Marker
                     position-bind="$record.position"
                     noRedraw
@@ -116,17 +112,17 @@ export default (
                     icon={{
                         path: google.maps.SymbolPath.CIRCLE,
                         scale: 8,
-                        rotation: {bind: '$record.rotation'},
-                        strokeColor: "white",
-                        fillColor: { bind: "$record.color" },
+                        rotation: { bind: '$record.rotation' },
+                        strokeColor: 'white',
+                        fillColor: { bind: '$record.color' },
                         fillOpacity: 0.8,
-                        strokeWeight: 4
+                        strokeWeight: 4,
                     }}
                 >
                     <InfoBox
-                        mod="infobox"
                         options={{
-                            closeBoxURL: ""
+                            boxClass: 'infobox blue',
+                            closeBoxURL: '',
                         }}
                         onClick="onMarkerClick"
                         visible-bind="$record.showTitle"

@@ -1,5 +1,5 @@
-import {Route, PureContainer, Section, Sandbox} from 'cx/widgets';
-import {FirstVisibleChildLayout} from 'cx/ui';
+import { Route, PureContainer, Section, Sandbox } from 'cx/widgets';
+import { FirstVisibleChildLayout } from 'cx/ui';
 
 import AppLayout from '../layout';
 
@@ -18,7 +18,6 @@ import InfoWindow from './components/info-window';
 import InfoBox from './components/info-box';
 import DirectionsRenderer from './components/directions-renderer';
 import DrawingManager from './components/drawing-manager';
-import FusionTablesLayer from './components/fusion-tables-layer';
 import GroundOverlay from './components/ground-overlay';
 import BicyclingLayer from './components/bicycling-layer';
 import Circle from './components/circle';
@@ -40,7 +39,8 @@ export default (
             key-bind="url"
             storage-bind="pages"
             outerLayout={AppLayout}
-            layout={FirstVisibleChildLayout}>
+            layout={FirstVisibleChildLayout}
+        >
             <Route route="~/" url-bind="url">
                 <Default />
             </Route>
@@ -49,32 +49,32 @@ export default (
             </Route>
 
             <GoogleMap />
+
             <SearchBox />
+            <StandaloneSearchBox />
             <Marker />
+            <Rectangle />
             <MarkerWithLabel />
             <MarkerClusterer />
+            <InfoBox />
+            <Circle />
             <Polygon />
             <Polyline />
             <KmlLayer />
-            <InfoWindow />
-            <InfoBox />
-            <DirectionsRenderer />
-            <DrawingManager />
-            <FusionTablesLayer />
-            <GroundOverlay />
-            <Circle />
-            <OverlayView />
-            <Rectangle />
-            <StreetViewPanorama />
+            <BicyclingLayer />
             <TrafficLayer />
             <HeatmapLayer />
-            <StandaloneSearchBox />
+            <GroundOverlay />
+            <DrawingManager />
+            <StreetViewPanorama />
+            <DirectionsRenderer />
+            <InfoWindow />
+            <OverlayView />
 
             <FirstMap />
             <Filtering />
             <Routing />
             <PlacingMarkers />
-            <BicyclingLayer />
 
             <Section title="Page Not Found" mod="card">
                 This page doesn't exists. Please check your URL.

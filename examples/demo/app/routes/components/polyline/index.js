@@ -22,7 +22,7 @@ import {
 const info = {
     name: 'Polyline',
     route: '~/components/polyline',
-    reactGoogleMapsDocs: "https://tomchentw.github.io/react-google-maps/",
+    
     googleMapsDocs: "https://developers.google.com/maps/documentation/javascript/3.exp/reference#Polyline"
 };
 
@@ -40,7 +40,7 @@ export default <cx>
                 </h4>
 
                 <p ws>
-                    Cx wrapper around <a href={info.reactGoogleMapsDocs} target="_blank">{info.name}</a> React component.
+                    Cx wrapper around <a href={info.googleMapsDocs} target="_blank">{info.name}</a> component.
                     For additional info about various options, available events and methods, please see <a href={info.googleMapsDocs} target="_blank">Google Maps Docs</a>.
                 </p>
 
@@ -58,7 +58,7 @@ export default <cx>
 
                     ##### Example
                     <CodeSnippet>{`
-this.store.init('$page.path', _.range(6)
+this.store.init('$page.path', Array.from(new Array(6))
     .map(() => ({
         lat: 41.77811360 + Math.random() - 0.5,
         lng: -87.62979820 + Math.random() - 0.5
@@ -85,7 +85,7 @@ export default <cx>
                 </Md>
             </Section>
 
-            <FlexCol mod="card" style="flex: 1; min-height: 400px">
+            <FlexCol mod="card" style="flex: 1; max-height: 600px">
                 <Example />
             </FlexCol>
         </FlexRow>

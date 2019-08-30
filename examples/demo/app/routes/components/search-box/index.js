@@ -22,7 +22,7 @@ import {
 const info = {
     name: 'SearchBox',
     route: '~/components/search-box',
-    reactGoogleMapsDocs: "https://developers.google.com/maps/documentation/javascript/3.exp/reference#SearchBox",
+    
     googleMapsDocs: "https://developers.google.com/maps/documentation/javascript/3.exp/reference#SearchBox"
 };
 
@@ -40,7 +40,7 @@ export default <cx>
                 </h4>
 
                 <p ws>
-                    Cx wrapper around <a href={info.reactGoogleMapsDocs} target="_blank">{info.name}</a> React component.
+                    Cx wrapper around <a href={info.googleMapsDocs} target="_blank">{info.name}</a> component.
                     For additional info about various options, available events and methods, please see <a href={info.googleMapsDocs} target="_blank">Google Maps Docs</a>.
                 </p>
 
@@ -48,13 +48,13 @@ export default <cx>
                     ##### Configuration
                     <ConfigTable props={config} />
 
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
 
                     <EventTable props={events} />
 
-                    <br/>
-                    <br/>
+                    <br />
+                    <br />
 
                     ##### Example
                     <CodeSnippet>{`
@@ -93,21 +93,19 @@ export default <cx>
             controlPosition={google.maps.ControlPosition.TOP_CENTER}
             onPlacesChanged="onSearchPlacesChanged"
             pipeInstance="pipeSearchBoxInstance"
-        >
-            <TextField
-                placeholder="Search..."
-                style={{
-                    margin: 5,
-                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)'
-                }}/>
-        </SearchBox>
+            placeholder="Search..."
+            style={{
+                margin: 5,
+                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)'
+            }}/>
+        />   
     </GoogleMap>
 </cx>;
                     `}</CodeSnippet>
                 </Md>
             </Section>
 
-            <FlexCol mod="card" style="flex: 1; min-height: 400px">
+            <FlexCol mod="card" style="flex: 1; max-height: 600px">
                 <Example />
             </FlexCol>
         </FlexRow>

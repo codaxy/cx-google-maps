@@ -19,7 +19,7 @@ export const config = {
     opacity: 'number',
     options: 'object',
     place: 'object',
-    position: 'LatLng|object',
+    position: 'object',
     shape: 'object',
     title: 'string|object',
     zIndex: 'number',

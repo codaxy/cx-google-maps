@@ -76,9 +76,6 @@ import {
 
 import { VDOM, Controller as CxController } from 'cx/ui';
 
-const containerElement = <div style={{ position: "relative", height: "100%" }} />;
-const mapElement = <div style={{ position: "absolute", left: 0, top: 0, right: 0, bottom: 0 }} />;
-
 class Controller extends CxController {
     onInit() {
         this.store.init('$page.map', {
@@ -87,23 +84,20 @@ class Controller extends CxController {
                 lng: -87.62979820
             },
             zoom: 12
-        });
+        });        
     }
 }
 
 export default <cx>
     <GoogleMap
         controller={Controller}
-        containerElement={containerElement}
-        mapElement={mapElement}
-        defaultCenter-bind="$page.map.center"
-        defaultZoom-bind="$page.map.zoom"
         center-bind="$page.map.center"
         zoom-bind="$page.map.zoom"
+        style="width: 100%; height: 100%; min-height: 400px;"
     >
         <Marker
             position-bind="$page.map.center"
-        />
+        />    
     </GoogleMap>
 </cx>;
                     `}</CodeSnippet>
@@ -134,7 +128,7 @@ npm start
                 </Md>
             </Section>
 
-            <FlexCol mod="card" style="flex: 1; min-height: 400px">
+            <FlexCol mod="card" style="flex: 1; max-height: 600px">
                 <Example />
             </FlexCol>
         </FlexRow>
