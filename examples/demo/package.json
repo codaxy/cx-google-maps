@@ -21,7 +21,7 @@
         "illuminate-js": "^1.0.0-alpha.2",
         "marked": "^0.7.0",
         "react": "^16.2.0",
-        "react-dom": "^16.2.0",
+        "react-dom": "^16.4.2",
         "whatwg-fetch": "^3.0.0"
     },
     "devDependencies": {
