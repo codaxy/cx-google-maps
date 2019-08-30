@@ -65,41 +65,34 @@ this.store.init('$page.streetview', {
     },
     zoom: 1
 });
-...
-
-const getPixelPositionOffset = (width, height) => {
-    return {
-        x: -(width / 2),
-        y: -(height / 2)
-    }
-};
 
 export default <cx>
     <GoogleMap
-        ...
+        controller={Controller}
+        center-bind="$page.map.center"
+        style="width: 100%; height: 100%; min-height: 400px"
+        zoom-bind="$page.map.zoom"
+        options={{
+            mapTypeControlOptions: {
+                position: google.maps.ControlPosition.TOP_RIGHT
+            }
+        }}
     >
+        <Marker position={{
+            lat: 49.2853171,
+            lng: -123.1119202,
+        }} />
+
         <StreetViewPanorama
             position-bind="$page.streetview.center"
-            zoom-bind="$page.streetview.zoom">
-            <OverlayView
-                position={{
-                    lat: 49.28590291211115,
-                    lng: -123.11248166065218,
-                }}
-                mapPaneName="overlayLayer"
-                getPixelPositionOffset={getPixelPositionOffset}>
-
-                <div style={{
-                    background: "rgba(20, 40, 120, 0.3)",
-                    padding: 20
-                }}>
-                <Button text="Click this button"
-                    mod="primary"
-                    onClick="onOverlayBtnClick"
-                />
-            </div>
-        </OverlayView>
-    </StreetViewPanorama>
+            zoom-bind="$page.streetview.zoom"
+            pov-bind="$page.streetview.pov"
+        >
+            <Marker position={{
+                lat: 49.28590291211115,
+                lng: -123.11248166065218,
+            }} />
+        </StreetViewPanorama>
     </GoogleMap>
 </cx>;
                     `}</CodeSnippet>

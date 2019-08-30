@@ -15,9 +15,7 @@ export const config = {
     pano: 'object',
     position: 'object',
     pov: 'object',
-    zoom: 'number',
-    bounds: 'object',
-    getPixelPositionOffset: 'function'
+    zoom: 'number'
 };
 
 export const events = {

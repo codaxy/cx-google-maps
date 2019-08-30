@@ -1,15 +1,6 @@
-import { Toast, Button } from 'cx/widgets';
-
-import { GoogleMap, OverlayView, StreetViewPanorama } from 'cx-google-maps';
+import { GoogleMap, OverlayView, StreetViewPanorama, Marker } from 'cx-google-maps';
 
 import { VDOM, Controller as CxController, Repeater } from 'cx/ui';
-
-const getPixelPositionOffset = (width, height) => {
-    return {
-        x: -(width / 2),
-        y: -(height / 2),
-    };
-};
 
 class Controller extends CxController {
     getDefaults() {
@@ -25,8 +16,8 @@ class Controller extends CxController {
     getStreetView() {
         return {
             center: {
-                lat: 49.28590291211115,
-                lng: -123.11248166065218,
+                lat: 49.2853171,
+                lng: -123.1119202,
             },
             pov: {
                 heading: 45,
@@ -37,16 +28,8 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());
         this.store.init('$page.map', this.getDefaults());
         this.store.init('$page.streetview', this.getStreetView());
-    }
-
-    onOverlayBtnClick() {
-        Toast.create({
-            message: 'You clicked on a button in an overlay.',
-            timeout: 3000,
-        }).open();
     }
 }
 
@@ -63,29 +46,20 @@ export default (
                 },
             }}
         >
+            <Marker position={{
+                lat: 49.2853171,
+                lng: -123.1119202,
+            }} />
             <StreetViewPanorama
                 position-bind="$page.streetview.center"
                 zoom-bind="$page.streetview.zoom"
                 pov-bind="$page.streetview.pov"
+                pano-bind="$page.streetview.pano"
             >
-                <OverlayView
-                    position={{
-                        lat: 49.28590291211115,
-                        lng: -123.11248166065218,
-                    }}
-                    mapPaneName="overlayLayer"
-                    getPixelPositionOffset={getPixelPositionOffset}>
-
-                    <div style={{
-                        background: "rgba(20, 40, 120, 0.3)",
-                        padding: 20
-                    }}>
-                        <Button text="Fixed overlay"
-                            mod="primary"
-                            onClick="onOverlayBtnClick"
-                        />
-                    </div>
-                </OverlayView>
+                <Marker position={{
+                    lat: 49.28590291211115,
+                    lng: -123.11248166065218,
+                }} />
             </StreetViewPanorama>
         </GoogleMap>
     </cx>

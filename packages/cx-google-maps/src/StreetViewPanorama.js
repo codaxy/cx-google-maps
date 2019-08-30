@@ -3,6 +3,7 @@ import { attachEventCallbacks } from './attachEventCallbacks';
 import { shallowEquals } from 'cx/util';
 import { standardSetterMap } from './standardSetterMap';
 import { autoUpdate } from './autoUpdate';
+import { sameLatLng } from './sameLatLng';
 
 const settableProps = {
     links: { structured: true },
@@ -28,7 +29,7 @@ export class StreetViewPanorama extends PureContainer {
         let { rawData } = cached;
         if (!pano || !rawData) return;
 
-        let changes = autoUpdate(pano, data, rawData, propSetterMap);
+        autoUpdate(pano, data, rawData, propSetterMap);
     }
 
     initPanorama(context, instance) {
@@ -44,7 +45,42 @@ export class StreetViewPanorama extends PureContainer {
 
         if (widget.pipeInstance) instance.invoke('pipeInstance', pano, instance);
 
-        // TODO: position, pov, zoom two-way binding?
+        if (widget.position && widget.position.bind) {
+            pano.addListener('position_changed', e => {
+                let pos = pano.getPosition();
+                let pd = { lat: pos.lat(), lng: pos.lng() };
+                if (!sameLatLng(pd, instance.data.position)) {
+                    instance.set('position', pd, true);
+                }
+            });
+        }
+
+        if (widget.pov && widget.pov.bind) {
+            pano.addListener('pov_changed', e => {
+                let pov = pano.getPov();
+                if (pov.heading != instance.data.heading || pov.pitch != instance.data.pitch) {
+                    instance.set('pov', pov, true);
+                }
+            });
+        }
+
+        if (widget.zoom && widget.zoom.bind) {
+            pano.addListener('zoom_changed', e => {
+                let zoom = pano.getZoom();
+                if (zoom != instance.data.zoom) {
+                    instance.set('zoom', zoom, true);
+                }
+            });
+        }
+
+        if (widget.pano && widget.pano.bind) {
+            pano.addListener('pano_changed', e => {
+                let p = pano.getPano();
+                if (p != instance.data.pano) {
+                    instance.set('pano', p, true);
+                }
+            });
+        }
 
         attachEventCallbacks(pano, instance, {
             closeclick: 'onCloseClick',
