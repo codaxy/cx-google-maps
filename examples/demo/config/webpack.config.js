@@ -16,7 +16,7 @@ module.exports = {
     },
 
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 // add here any ES6 based library
@@ -35,20 +35,19 @@ module.exports = {
         ],
     },
     entry: {
-        vendor: ['cx-react', p('app/polyfill.js')],
-        app: [p('app/index.js')],
+        app: [p('app/polyfill.js'), p('app/index.js')],
     },
     output: {
         path: p('dist'),
         filename: '[name].js',
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-        }),
         new HtmlWebpackPlugin({
             template: p('app/index.html'),
             hash: true,
         }),
     ],
+    optimization: {
+        runtimeChunk: 'single'
+    }
 };

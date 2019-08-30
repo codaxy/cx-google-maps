@@ -68,7 +68,7 @@ export default (
                 zoom-bind="$page.streetview.zoom"
                 pov-bind="$page.streetview.pov"
             >
-                {/* <OverlayView
+                <OverlayView
                     position={{
                         lat: 49.28590291211115,
                         lng: -123.11248166065218,
@@ -85,7 +85,7 @@ export default (
                             onClick="onOverlayBtnClick"
                         />
                     </div>
-                </OverlayView> */}
+                </OverlayView>
             </StreetViewPanorama>
         </GoogleMap>
     </cx>

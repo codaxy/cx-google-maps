@@ -1,48 +1,40 @@
 var webpack = require("webpack"),
-    ExtractTextPlugin = require("extract-text-webpack-plugin"),
+    MiniCssExtractPlugin = require("mini-css-extract-plugin"),
     CopyWebpackPlugin = require("copy-webpack-plugin"),
+    { CleanWebpackPlugin } = require("clean-webpack-plugin"),
     merge = require("webpack-merge"),
     common = require("./webpack.config"),
     path = require("path"),
     p = p => path.join(__dirname, "../", p || "");
 
-var sass = new ExtractTextPlugin({
-    filename: "app.css",
-    allChunks: true
-});
-
 var specific = {
+    mode: "production",
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.scss$/,
-                loaders: sass.extract(["css-loader", "sass-loader"])
+                loaders: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
             },
             {
                 test: /\.css$/,
-                loaders: sass.extract(["css-loader"])
+                loaders: [MiniCssExtractPlugin.loader, "css-loader"]
             }
         ]
     },
 
     plugins: [
-        new webpack.optimize.UglifyJsPlugin(),
         new webpack.DefinePlugin({
             "process.env.NODE_ENV": JSON.stringify("production")
         }),
-        sass,
-        new CopyWebpackPlugin([
-            {
-                from: p("assets"),
-                to: p("../../docs/assets")
-            }
-        ]),
-        new CopyWebpackPlugin([
-            {
-                from: p("app/404.html"),
-                to: p("../../docs")
-            }
-        ])
+        new MiniCssExtractPlugin({
+            filename: "[name].css",
+            chunkFilename: "[name].css"
+        }),
+        new CopyWebpackPlugin([{
+            from: p("./assets"),
+            to: p("../../docs/assets")
+        }]),
+        new CleanWebpackPlugin()
     ],
 
     output: {
