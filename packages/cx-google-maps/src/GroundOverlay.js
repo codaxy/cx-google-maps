@@ -4,18 +4,9 @@ import { shallowEquals } from 'cx/util';
 import { standardSetterMap } from './standardSetterMap';
 import { autoUpdate } from './autoUpdate';
 
-const settableProps = {
-    opacity: undefined,
-};
-
-const propSetterMap = standardSetterMap(settableProps);
-
 export class GroundOverlay extends PureContainer {
     declareData() {
         super.declareData(...arguments, {
-            ...settableProps,
-            // url, bounds and options don't have setters.
-            // TODO: make re-rendering possible
             bounds: { structured: true },
             url: undefined,
             options: { structured: true },
@@ -29,18 +20,45 @@ export class GroundOverlay extends PureContainer {
         let { rawData } = cached;
         if (!layer || !rawData) return;
 
-        autoUpdate(layer, data, rawData, propSetterMap);
+        if (data.url != rawData.url) 
+            this.repaint(context, instance);
+
+        if (data.bounds) {
+            let old = rawData.bounds || {};
+            if (data.bounds.north !== old.north || data.bounds.south !== old.south
+                || data.bounds.west != old.west || data.bounds.east !== old.east) 
+                this.repaint(context, instance);
+        }
+
+        let rawOpacity = (rawData.options || {}).opacity;
+        if (data.options && data.options.opacity !== rawOpacity)
+            layer.setOpacity(data.options.opacity);
+    }
+
+    repaint(context, instance) {
+        let layer = instance.layer;
+        layer.unbindAll();
+        this.initLayer(context, instance);
+        layer.setMap(null);
     }
 
     initLayer(context, instance) {
         let { widget, data } = instance;
 
+        if (context.googleMap)
+            instance.googleMap = context.googleMap;
+
+        let opts = data.options || {};
+        if (!opts.opacity)
+            opts.opacity = data.opacity;
+
         let layer = (instance.layer = new google.maps.GroundOverlay(
             data.url,
             data.bounds,
-            data.options || {},
+            opts
         ));
-        layer.setMap(context.googleMap);
+
+        layer.setMap(instance.googleMap);
 
         if (widget.pipeInstance) instance.invoke('pipeInstance', layer, instance);
 

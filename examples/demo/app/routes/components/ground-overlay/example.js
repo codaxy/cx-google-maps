@@ -1,4 +1,4 @@
-import { Menu, Slider } from 'cx/widgets';
+import { Menu, Slider, LookupField } from 'cx/widgets';
 
 import { LabelsLeftLayout } from 'cx/ui';
 
@@ -18,9 +18,17 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init('$page.mapdefaults', this.getDefaults());
+        this.store.init("$page.url", "https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg");
         this.store.init('$page.map', this.getDefaults());
-        this.store.init('$page.layer.opacity', 0.7);
+        this.store.init('$page.layer', {
+            bounds: {
+                north: 40.773941,
+                south: 40.712216,
+                east: -74.12544,
+                west: -74.22655,
+            },
+            opacity: 0.7
+        });
     }
 }
 
@@ -37,26 +45,56 @@ export default (
                 },
             }}
         >
+            <GroundOverlay
+                url-bind="$page.url"
+                bounds-bind="$page.layer.bounds"
+                options={{
+                    opacity: { bind: "$page.layer.opacity" },
+                    clickable: true
+                }}
+                onClick={() => alert('Click.')}
+            />
             <Menu vertical mod="map" itemPadding="small">
                 <div layout={LabelsLeftLayout}>
+                    <LookupField
+                        options={[
+                            { id: 'https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg', text: 'Newark' },
+                            { id: '', text: 'Empty' }
+                        ]}
+                        value-bind="$page.url"
+                        required
+                    />
                     <Slider
-                        label="Opacity"
+                        label="N"
+                        value-bind="$page.layer.bounds.north"
+                        min={40.75}
+                        max={40.80}
+                    />
+                    <Slider
+                        label="S"
+                        value-bind="$page.layer.bounds.south"
+                        min={40.70}
+                        max={40.73}
+                    />
+                    <Slider
+                        label="E"
+                        value-bind="$page.layer.bounds.east"
+                        min={-74.14}
+                        max={-74.10}
+                    />
+                    <Slider
+                        label="W"
+                        value-bind="$page.layer.bounds.west"
+                        min={-74.24}
+                        max={-74.20}
+                    />
+                    <Slider
                         value-bind="$page.layer.opacity"
                         minValue={0}
                         maxValue={1}
                     />
                 </div>
             </Menu>
-            <GroundOverlay
-                url="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
-                bounds={{
-                    north: 40.773941,
-                    south: 40.712216,
-                    east: -74.12544,
-                    west: -74.22655,
-                }}
-                opacity-bind="$page.layer.opacity"
-            />
         </GoogleMap>
     </cx>
 );
