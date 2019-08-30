@@ -22,7 +22,7 @@
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "whatwg-fetch": "^2.0.3",
-        "cx-google-maps": "19.9.0"
+        "cx-google-maps": "^19.9.1"
     },
     "devDependencies": {
         "babel-core": "^6.25.0",
