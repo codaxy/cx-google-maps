@@ -24,7 +24,7 @@ export default (
         <GoogleMap
             controller={Controller}
             center-bind="$page.map.center"
-            style="width: 100%; height: 100%; min-height: 400px"
+            style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; min-height: 400px"
             zoom-bind="$page.map.zoom"
             options={{
                 mapTypeControlOptions: {

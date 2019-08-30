@@ -8,7 +8,7 @@ import { ConfigTable, EventTable, CodeSnippet, Md } from 'app/components';
 const info = {
     name: 'GoogleMap',
     route: '~/components/google-map',
-    
+
     googleMapsDocs:
         'https://developers.google.com/maps/documentation/javascript/3.exp/reference#Map',
 };
@@ -74,7 +74,7 @@ class Controller extends CxController {
 
     onResetViewClick() {
         this.map.panTo(this.getDefaults().center);
-        
+
         // We could have just make use of the -bind in the map
         // center (see index.js) and pan like this:
 
@@ -89,7 +89,7 @@ class Controller extends CxController {
 export default <cx>
     <GoogleMap
         controller={Controller}
-        style="width: 100%; height: 100%; min-height: 400px"
+        style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; min-height: 400px"
         pipeInstance="pipeMapInstance"
         center-bind="$page.map.center"
         zoom-bind="$page.map.zoom"
