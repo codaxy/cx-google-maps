@@ -58,6 +58,32 @@ export default <cx>
 
                     ##### Example
                     <CodeSnippet>{`
+class Controller extends CxController {
+    getDefaults() {
+        return {
+            center: {
+                lat: 40.74,
+                lng: -74.18,
+            },
+            zoom: 12
+        };
+    }
+
+    onInit() {
+        this.store.init("$page.url", "https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg");
+        this.store.init('$page.map', this.getDefaults());
+        this.store.init('$page.layer', {
+            bounds: {
+                north: 40.773941,
+                south: 40.712216,
+                east: -74.12544,
+                west: -74.22655,
+            },
+            opacity: 0.7
+        });
+    }
+}
+
 export default (
     <cx>
         <GoogleMap
@@ -74,14 +100,13 @@ export default (
                 </div>
             </Menu>
             <GroundOverlay
-                defaultUrl="https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
-                defaultBounds={{
-                    north: 40.773941,
-                    south: 40.712216,
-                    east: -74.12544,
-                    west: -74.22655,
+                url-bind="$page.url"
+                bounds-bind="$page.layer.bounds"
+                options={{
+                    opacity: { bind: "$page.layer.opacity" },
+                    clickable: true
                 }}
-                opacity-bind="$page.layer.opacity"
+                onClick={() => alert('Click.')}
             />
         </GoogleMap>
     </cx>
