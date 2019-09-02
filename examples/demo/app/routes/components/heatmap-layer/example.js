@@ -62,8 +62,6 @@ class Controller extends CxController {
             }),
         );
 
-        console.log(points, "POINTS ============");
-
         this.store.set('$page.points', points);
     }
 }

@@ -4,7 +4,6 @@ import {removeCommonIndent} from './removeCommonIndent';
 
 import {addLanguage, highlight} from "illuminate-js";
 import {jsx} from 'illuminate-js/lib/languages';
-console.log(jsx);
 
 addLanguage('jsx', jsx);
 
