@@ -2,8 +2,8 @@ Cx Google Maps
 ==============
 
 Cx Google Maps is a [CxJS](https://cxjs.io) wrapper around [Google Maps](https://developers.google.com/maps/documentation/javascript/reference/).
-It contains a handful of useful classes for creating modern maps-aware applicatons with Cx. You can see a working demo 
-of it [here](http://codaxy.github.io/cx-google-maps).
+It contains a handful of useful classes for creating modern maps-aware applications with Cx. You can see a working demo 
+of it [here](https://maps.cxjs.io)
 
 
 The library contains wrappers around following Google Maps components: 
@@ -42,7 +42,7 @@ from `examples/demo` folder.
 Demo App
 ========
 
-<a href="https://codaxy.github.io/cx-google-maps/">
+<a href="https://maps.cxjs.io">
 	<img src="https://raw.githubusercontent.com/codaxy/cx-google-maps/master/misc/screenshots/cx-google-maps.png" />
 </a>
 
