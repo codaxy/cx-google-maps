@@ -33,6 +33,10 @@ var specific = {
         new CopyWebpackPlugin([{
             from: p("./assets"),
             to: p("../../docs/assets")
+        }, {
+            from: path.resolve(__dirname, './netlify.redirects'),
+            to: p("../../docs/_redirects"),
+            toType: 'file'
         }]),
         new CleanWebpackPlugin()
     ],
