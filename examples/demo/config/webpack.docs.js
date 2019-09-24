@@ -39,7 +39,7 @@ var specific = {
 
     output: {
         path: p("../../docs"),
-        publicPath: "/cx-google-maps"
+        publicPath: "/"
     }
 };
 
