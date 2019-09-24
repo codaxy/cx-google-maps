@@ -1,4 +1,4 @@
-import { Toast, Menu, Slider } from 'cx/widgets';
+import { Toast, Menu, Slider, Button, MenuItem } from 'cx/widgets';
 
 import { GoogleMap, MarkerWithLabel } from 'cx-google-maps';
 
@@ -23,8 +23,13 @@ class Controller extends CxController {
     }
 
     onInit() {
+        this.store.init("$page.showMarker", true);
         this.store.init('$page.mapdefaults', this.getDefaults());
         this.store.init('$page.map', this.getDefaults());
+    }
+
+    toggleMarker() {
+        this.store.toggle("$page.showMarker");
     }
 }
 
@@ -43,26 +48,28 @@ export default (
         >
             <Menu vertical mod="map" itemPadding="small">
                 <Slider value-bind="$page.slider" min={0} max={100} step={1} />
+                <MenuItem onClick="toggleMarker">Toggle Visibility</MenuItem>
             </Menu>
-            <MarkerWithLabel
-                position-bind="$page.map.center"
-                title="This is a custom icon marker with label"
-                icon="https://codaxy.github.io/cx-google-maps/assets/img/cx.png"
-                XlabelContent="cx-google-maps"
-                labelAnchor={{ x: 0, y: 0 }}
-                labelStyle={{
-                    backgroundColor: 'rgba(20, 40, 120, 0.5)',
-                    color: 'white',
-                    fontSize: '18px',
-                    padding: '12px',
-                }}
-                onClick="onMarkerClick"
-            >
-                <PureContainer layout={FirstVisibleChildLayout}>
-                    <span if-expr="{$page.slider} < 50" text-tpl="cx-google-maps {$page.slider}" />
-                    <span text-tpl="spam-elgoog-xc {$page.slider}" />
-                </PureContainer>
-            </MarkerWithLabel>
+            <PureContainer if-bind="$page.showMarker">
+                <MarkerWithLabel
+                    position-bind="$page.map.center"
+                    title="This is a custom icon marker with label"
+                    icon="https://codaxy.github.io/cx-google-maps/assets/img/cx.png"
+                    labelAnchor={{ x: 0, y: 0 }}
+                    labelStyle={{
+                        backgroundColor: 'rgba(20, 40, 120, 0.5)',
+                        color: 'white',
+                        fontSize: '18px',
+                        padding: '12px',
+                    }}
+                    onClick="onMarkerClick"
+                >
+                    <PureContainer layout={FirstVisibleChildLayout}>
+                        <span if-expr="{$page.slider} < 50" text-tpl="cx-google-maps {$page.slider}" />
+                        <span text-tpl="spam-elgoog-xc {$page.slider}" />
+                    </PureContainer>
+                </MarkerWithLabel>
+            </PureContainer>
         </GoogleMap>
     </cx>
 );
