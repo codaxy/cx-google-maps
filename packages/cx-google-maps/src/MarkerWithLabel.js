@@ -104,6 +104,10 @@ export class MarkerWithLabel extends PureContainer {
             visible_changed: 'onVisibleChanged',
             zindex_changed: 'onZindexChanged',
         });
+
+        instance.subscribeOnDestroy(() => {
+            marker.setMap(null);
+        });
     }
 
     explore(context, instance) {
@@ -120,8 +124,10 @@ export class MarkerWithLabel extends PureContainer {
 
     render(context, instance, key) {
         return (
-            <div key={key} ref={el => this.attach(el, instance)}>
-                {this.renderChildren(context, instance)}
+            <div key={key}>
+                <div ref={el => this.attach(el, instance)}>
+                    {this.renderChildren(context, instance)}
+                </div>
             </div>
         );
     }

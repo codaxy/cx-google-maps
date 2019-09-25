@@ -1,6 +1,6 @@
 import { Toast, Menu, Slider, Button, MenuItem } from 'cx/widgets';
 
-import { GoogleMap, MarkerWithLabel } from 'cx-google-maps';
+import { GoogleMap, MarkerWithLabel, Marker } from 'cx-google-maps';
 
 import { VDOM, Controller as CxController, FirstVisibleChildLayout, PureContainer } from 'cx/ui';
 
@@ -23,13 +23,13 @@ class Controller extends CxController {
     }
 
     onInit() {
-        this.store.init("$page.showMarker", true);
+        this.store.init('$page.showMarker', true);
         this.store.init('$page.mapdefaults', this.getDefaults());
         this.store.init('$page.map', this.getDefaults());
     }
 
     toggleMarker() {
-        this.store.toggle("$page.showMarker");
+        this.store.toggle('$page.showMarker');
     }
 }
 
@@ -65,7 +65,10 @@ export default (
                     onClick="onMarkerClick"
                 >
                     <PureContainer layout={FirstVisibleChildLayout}>
-                        <span if-expr="{$page.slider} < 50" text-tpl="cx-google-maps {$page.slider}" />
+                        <span
+                            if-expr="{$page.slider} < 50"
+                            text-tpl="cx-google-maps {$page.slider}"
+                        />
                         <span text-tpl="spam-elgoog-xc {$page.slider}" />
                     </PureContainer>
                 </MarkerWithLabel>
