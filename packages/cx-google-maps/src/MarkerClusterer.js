@@ -69,6 +69,10 @@ export class MarkerClusterer extends PureContainer {
             mouseout: 'onMouseOut',
             mouseover: 'onMouseOver',
         });
+
+        instance.subscribeOnDestroy(() => {
+            markerClusterer.setMap(null);
+        });
     }
 
     explore(context, instance) {

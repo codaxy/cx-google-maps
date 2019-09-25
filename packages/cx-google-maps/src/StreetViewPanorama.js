@@ -92,6 +92,10 @@ export class StreetViewPanorama extends PureContainer {
             visible_changed: 'onVisibleChanged',
             zoom_changed: 'onZoomChanged',
         });
+
+        instance.subscribeOnDestroy(() => {
+            pano.setVisible(false);
+        });
     }
 
     explore(context, instance) {

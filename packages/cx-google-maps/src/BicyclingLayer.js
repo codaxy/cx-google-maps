@@ -36,6 +36,10 @@ export class BicyclingLayer extends PureContainer {
         attachEventCallbacks(layer, instance, {
             click: 'onClick',
         });
+
+        instance.subscribeOnDestroy(() => {
+            layer.setMap(null);
+        });
     }
 
     explore(context, instance) {

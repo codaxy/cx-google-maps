@@ -96,6 +96,10 @@ export class Rectangle extends PureContainer {
             bounds_changed: 'onBoundsChanged',
             right_click: 'onRightClick',
         });
+
+        instance.subscribeOnDestroy(() => {
+            rect.setMap(null);
+        });
     }
 
     explore(context, instance) {

@@ -38,6 +38,10 @@ export class TrafficLayer extends PureContainer {
         attachEventCallbacks(layer, instance, {
             click: 'onClick',
         });
+
+        instance.subscribeOnDestroy(() => {
+            layer.setMap(null);
+        });
     }
 
     explore(context, instance) {

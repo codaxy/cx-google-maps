@@ -44,6 +44,10 @@ export class KmlLayer extends PureContainer {
             defaultviewport_changed: 'onDefaultViewportChanged',
             status_changed: 'onStatusChanged',
         });
+
+        instance.subscribeOnDestroy(() => {
+            layer.setMap(null);
+        });
     }
 
     explore(context, instance) {

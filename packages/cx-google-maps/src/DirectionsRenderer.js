@@ -41,6 +41,10 @@ export class DirectionsRenderer extends PureContainer {
         attachEventCallbacks(layer, instance, {
             directions_changed: 'onDirectionsChanged',
         });
+
+        instance.subscribeOnDestroy(() => {
+            layer.setMap(null);
+        });
     }
 
     explore(context, instance) {

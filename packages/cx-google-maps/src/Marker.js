@@ -91,6 +91,10 @@ export class Marker extends PureContainer {
             visible_changed: 'onVisibleChanged',
             zindex_changed: 'onZindexChanged',
         });
+
+        instance.subscribeOnDestroy(() => {
+            marker.setMap(null);
+        });
     }
 
     explore(context, instance) {

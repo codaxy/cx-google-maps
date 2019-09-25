@@ -40,6 +40,10 @@ export class HeatmapLayer extends PureContainer {
         attachEventCallbacks(layer, instance, {
             click: 'onClick',
         });
+
+        instance.subscribeOnDestroy(() => {
+            layer.setMap(null);
+        });
     }
 
     explore(context, instance) {

@@ -51,6 +51,10 @@ export class Polygon extends PureContainer {
             mouseup: 'onMouseUp',
             right_click: 'onRightClick',
         });
+
+        instance.subscribeOnDestroy(() => {
+            poly.setMap(null);
+        });
     }
 
     explore(context, instance) {

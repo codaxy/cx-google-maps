@@ -77,6 +77,10 @@ export class Circle extends PureContainer {
             radius_changed: 'onRadiusChanged',
             right_click: 'onRightClick',
         });
+
+        instance.subscribeOnDestroy(() => {
+            circle.setMap(null);
+        });
     }
 
     explore(context, instance) {

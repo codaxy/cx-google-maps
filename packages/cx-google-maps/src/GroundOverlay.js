@@ -66,6 +66,10 @@ export class GroundOverlay extends PureContainer {
             click: 'onClick',
             dbl_click: 'onDblClick',
         });
+
+        instance.subscribeOnDestroy(() => {
+            layer.setMap(null);
+        });
     }
 
     explore(context, instance) {

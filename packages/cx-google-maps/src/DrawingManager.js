@@ -42,6 +42,10 @@ export class DrawingManager extends PureContainer {
             polylinecomplete: 'onPolylineComplete',
             rectanglecomplete: 'onRectangleComplete',
         });
+
+        instance.subscribeOnDestroy(() => {
+            layer.setMap(null);
+        });
     }
 
     explore(context, instance) {
