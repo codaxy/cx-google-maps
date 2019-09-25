@@ -46,8 +46,9 @@ export class MarkerClusterer extends PureContainer {
             exclude: { averageCenter: true },
         });
 
-        // TODO: Expand as needed
-        if (changes.gridSize || changes.minimumClusterSize) markerClusterer.repaint();
+        // TODO: See if any changes should be omitted from repaint
+        if (changes && Object.keys(changes).length)
+            markerClusterer.repaint();
     }
 
     initMarkerClusterer(context, instance) {
