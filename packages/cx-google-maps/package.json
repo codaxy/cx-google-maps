@@ -1,6 +1,6 @@
 {
     "name": "cx-google-maps",
-    "version": "19.9.2",
+    "version": "19.9.3",
     "description": "CxJS wrapper for Google Maps",
     "source": "src/index.js",
     "main": "dist/index.js",
