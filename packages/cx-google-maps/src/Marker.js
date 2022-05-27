@@ -85,7 +85,7 @@ export class Marker extends PureContainer {
             mouseover: 'onMouseOver',
             mouseup: 'onMouseUp',
             position_changed: 'onPositionChanged',
-            right_click: 'onRightClick',
+            rightclick: 'onRightClick',
             shape_changed: 'onShapeChanged',
             title_changed: 'onTitleChanged',
             visible_changed: 'onVisibleChanged',
