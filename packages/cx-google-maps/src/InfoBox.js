@@ -1,6 +1,5 @@
 import { VDOM, PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
-import { shallowEquals } from 'cx/util';
 import { standardSetterMap } from './standardSetterMap';
 import { autoUpdate } from './autoUpdate';
 import { InfoBox as GoogleMapsInfoBox } from 'google-maps-infobox';
@@ -58,7 +57,7 @@ export class InfoBox extends PureContainer {
         instance.marker = context.marker;
 
         if (widget.position && widget.position.bind) {
-            infoBox.addListener('position_changed', e => {
+            infoBox.addListener('position_changed', (e) => {
                 let pos = infoBox.getPosition();
                 if (!pos) return;
 
@@ -70,7 +69,7 @@ export class InfoBox extends PureContainer {
         }
 
         if (widget.visible && widget.visible.bind) {
-            infoBox.addListener('closeclick', e => {
+            infoBox.addListener('closeclick', (e) => {
                 instance.set('visible', false);
             });
         }
@@ -114,7 +113,7 @@ class ReactInfoBox extends VDOM.Component {
     render() {
         return (
             <div>
-                <div ref={el => this.attach(el, this.props.instance)}>{this.props.children}</div>{' '}
+                <div ref={(el) => this.attach(el, this.props.instance)}>{this.props.children}</div>{' '}
             </div>
         );
     }

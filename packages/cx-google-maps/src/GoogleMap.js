@@ -1,6 +1,5 @@
 import { Container, VDOM } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
-import { debounce } from 'cx/util';
 import { sameLatLng } from './sameLatLng';
 import { autoUpdate } from './autoUpdate';
 import { standardSetterMap } from './standardSetterMap';
@@ -56,7 +55,7 @@ export class GoogleMap extends Container {
         return (
             <div
                 key={key}
-                ref={el => this.attach(el, instance)}
+                ref={(el) => this.attach(el, instance)}
                 className={data.classNames}
                 style={data.style}
             >

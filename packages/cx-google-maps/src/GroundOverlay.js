@@ -1,8 +1,5 @@
 import { PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
-import { shallowEquals } from 'cx/util';
-import { standardSetterMap } from './standardSetterMap';
-import { autoUpdate } from './autoUpdate';
 
 export class GroundOverlay extends PureContainer {
     declareData() {
@@ -20,13 +17,16 @@ export class GroundOverlay extends PureContainer {
         let { rawData } = cached;
         if (!layer || !rawData) return;
 
-        if (data.url != rawData.url) 
-            this.repaint(context, instance);
+        if (data.url != rawData.url) this.repaint(context, instance);
 
         if (data.bounds) {
             let old = rawData.bounds || {};
-            if (data.bounds.north !== old.north || data.bounds.south !== old.south
-                || data.bounds.west != old.west || data.bounds.east !== old.east) 
+            if (
+                data.bounds.north !== old.north ||
+                data.bounds.south !== old.south ||
+                data.bounds.west != old.west ||
+                data.bounds.east !== old.east
+            )
                 this.repaint(context, instance);
         }
 
@@ -45,18 +45,12 @@ export class GroundOverlay extends PureContainer {
     initLayer(context, instance) {
         let { widget, data } = instance;
 
-        if (context.googleMap)
-            instance.googleMap = context.googleMap;
+        if (context.googleMap) instance.googleMap = context.googleMap;
 
         let opts = data.options || {};
-        if (!opts.opacity)
-            opts.opacity = data.opacity;
+        if (!opts.opacity) opts.opacity = data.opacity;
 
-        let layer = (instance.layer = new google.maps.GroundOverlay(
-            data.url,
-            data.bounds,
-            opts
-        ));
+        let layer = (instance.layer = new google.maps.GroundOverlay(data.url, data.bounds, opts));
 
         layer.setMap(instance.googleMap);
 

@@ -72,7 +72,7 @@ export class MarkerWithLabel extends PureContainer {
         if (widget.pipeInstance) instance.invoke('pipeInstance', marker, instance);
 
         if (widget.position && widget.position.bind) {
-            marker.addListener('position_changed', e => {
+            marker.addListener('position_changed', (e) => {
                 let pos = marker.getPosition();
                 let pd = { lat: pos.lat(), lng: pos.lng() };
                 if (!sameLatLng(pd, instance.data.position)) {
@@ -125,7 +125,7 @@ export class MarkerWithLabel extends PureContainer {
     render(context, instance, key) {
         return (
             <div key={key}>
-                <div ref={el => this.attach(el, instance)}>
+                <div ref={(el) => this.attach(el, instance)}>
                     {this.renderChildren(context, instance)}
                 </div>
             </div>

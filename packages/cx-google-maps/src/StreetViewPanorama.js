@@ -1,6 +1,5 @@
 import { PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
-import { shallowEquals } from 'cx/util';
 import { standardSetterMap } from './standardSetterMap';
 import { autoUpdate } from './autoUpdate';
 import { sameLatLng } from './sameLatLng';
@@ -46,7 +45,7 @@ export class StreetViewPanorama extends PureContainer {
         if (widget.pipeInstance) instance.invoke('pipeInstance', pano, instance);
 
         if (widget.position && widget.position.bind) {
-            pano.addListener('position_changed', e => {
+            pano.addListener('position_changed', (e) => {
                 let pos = pano.getPosition();
                 let pd = { lat: pos.lat(), lng: pos.lng() };
                 if (!sameLatLng(pd, instance.data.position)) {
@@ -56,7 +55,7 @@ export class StreetViewPanorama extends PureContainer {
         }
 
         if (widget.pov && widget.pov.bind) {
-            pano.addListener('pov_changed', e => {
+            pano.addListener('pov_changed', (e) => {
                 let pov = pano.getPov();
                 if (pov.heading != instance.data.heading || pov.pitch != instance.data.pitch) {
                     instance.set('pov', pov, true);
@@ -65,7 +64,7 @@ export class StreetViewPanorama extends PureContainer {
         }
 
         if (widget.zoom && widget.zoom.bind) {
-            pano.addListener('zoom_changed', e => {
+            pano.addListener('zoom_changed', (e) => {
                 let zoom = pano.getZoom();
                 if (zoom != instance.data.zoom) {
                     instance.set('zoom', zoom, true);
@@ -74,7 +73,7 @@ export class StreetViewPanorama extends PureContainer {
         }
 
         if (widget.pano && widget.pano.bind) {
-            pano.addListener('pano_changed', e => {
+            pano.addListener('pano_changed', (e) => {
                 let p = pano.getPano();
                 if (p != instance.data.pano) {
                     instance.set('pano', p, true);

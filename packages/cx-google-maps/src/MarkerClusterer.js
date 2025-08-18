@@ -47,8 +47,7 @@ export class MarkerClusterer extends PureContainer {
         });
 
         // TODO: See if any changes should be omitted from repaint
-        if (changes && Object.keys(changes).length)
-            markerClusterer.repaint();
+        if (changes && Object.keys(changes).length) markerClusterer.repaint();
     }
 
     initMarkerClusterer(context, instance) {

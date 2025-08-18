@@ -56,7 +56,7 @@ export class InfoWindow extends PureContainer {
         instance.marker = context.marker;
 
         if (widget.position && widget.position.bind) {
-            infoWindow.addListener('position_changed', e => {
+            infoWindow.addListener('position_changed', (e) => {
                 let pos = infoWindow.getPosition();
                 if (!pos) return;
 
@@ -68,7 +68,7 @@ export class InfoWindow extends PureContainer {
         }
 
         if (widget.visible && widget.visible.bind) {
-            infoWindow.addListener('closeclick', e => {
+            infoWindow.addListener('closeclick', (e) => {
                 instance.set('visible', false);
             });
         }
@@ -114,7 +114,7 @@ class ReactInfoWindow extends VDOM.Component {
     render() {
         return (
             <div>
-                <div ref={el => this.attach(el, this.props.instance)}>{this.props.children}</div>
+                <div ref={(el) => this.attach(el, this.props.instance)}>{this.props.children}</div>
             </div>
         );
     }
