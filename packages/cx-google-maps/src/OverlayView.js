@@ -5,32 +5,29 @@ import { VDOM, PureContainer } from 'cx/ui';
 export class OverlayView extends PureContainer {
     declareData() {
         super.declareData(arguments, {
-            "mapPaneName": undefined,
-            "position": { structured: true }
+            mapPaneName: undefined,
+            position: { structured: true },
         });
     }
 
     initOverlay(context, instance) {
         instance.googleMap = context.googleMap;
-        if (instance.widget.pipeInstance)
-            instance.invoke('pipeInstance', instance);
+        if (instance.widget.pipeInstance) instance.invoke('pipeInstance', instance);
     }
 
     explore(context, instance) {
-        if (!instance.googleMap)
-            this.initOverlay(context, instance);
+        if (!instance.googleMap) this.initOverlay(context, instance);
 
         super.explore(context, instance);
     }
 
     render(context, instance, key) {
         let { data } = instance;
-        return <ReactOverlayView
-            key={key}
-            instance={instance}
-            {...data}>
-            {this.renderChildren(context, instance)}
-        </ReactOverlayView>
+        return (
+            <ReactOverlayView key={key} instance={instance} {...data}>
+                {this.renderChildren(context, instance)}
+            </ReactOverlayView>
+        );
     }
 }
 
@@ -51,21 +48,18 @@ class ReactOverlayView extends VDOM.Component {
     }
 
     attach(el) {
-        if (this.contentEl === el)
-            return;
+        if (this.contentEl === el) return;
 
         this.contentEl = el;
 
         this.adjustPosition();
     }
 
-    onAdd() {
-    }
+    onAdd() {}
 
     draw() {
         let { mapPaneName } = this.props;
-        if (!mapPaneName)
-            throw Error("OverlayView must have mapPaneName set.");
+        if (!mapPaneName) throw Error('OverlayView must have mapPaneName set.');
 
         let panes = this.overlayView.getPanes();
 
@@ -75,31 +69,31 @@ class ReactOverlayView extends VDOM.Component {
     }
 
     adjustPosition() {
-        if (!this.contentEl || !this.overlayView)
-            return;
+        if (!this.contentEl || !this.overlayView) return;
 
         let projection = this.overlayView.getProjection();
-        if (!projection)
-            return;
+        if (!projection) return;
 
         let { position } = this.props;
         let { getPixelPositionOffset = () => ({ x: 0, y: 0 }) } = this.props.instance.widget;
 
-        let offset = getPixelPositionOffset(this.contentEl.offsetWidth, this.contentEl.offsetHeight),
+        let offset = getPixelPositionOffset(
+                this.contentEl.offsetWidth,
+                this.contentEl.offsetHeight,
+            ),
             divPixel = projection.fromLatLngToDivPixel(new google.maps.LatLng(position));
 
         this.contentEl.style.top = `${divPixel.y + offset.y}px`;
         this.contentEl.style.left = `${divPixel.x + offset.x}px`;
     }
 
-    onRemove() {
-    }
+    onRemove() {}
 
     render() {
-        return <div
-            style={{ position: "absolute" }}
-            ref={el => this.attach(el)}>
-            {this.props.children}
-        </div>
+        return (
+            <div style={{ position: 'absolute' }} ref={(el) => this.attach(el)}>
+                {this.props.children}
+            </div>
+        );
     }
 }

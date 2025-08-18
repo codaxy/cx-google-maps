@@ -56,7 +56,7 @@ export class Rectangle extends PureContainer {
         if (widget.pipeInstance) instance.invoke('pipeInstance', rect, instance);
 
         if (widget.bounds && widget.bounds.bind) {
-            rect.addListener('bounds_changed', e => {
+            rect.addListener('bounds_changed', (e) => {
                 let res = rect.getBounds(),
                     sw = res.getSouthWest(),
                     ne = res.getNorthEast();

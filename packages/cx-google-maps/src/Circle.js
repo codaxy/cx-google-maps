@@ -1,6 +1,5 @@
 import { PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
-import { shallowEquals } from 'cx/util';
 import { standardSetterMap } from './standardSetterMap';
 import { autoUpdate } from './autoUpdate';
 import { sameLatLng } from './sameLatLng';
@@ -45,7 +44,7 @@ export class Circle extends PureContainer {
         if (widget.pipeInstance) instance.invoke('pipeInstance', circle, instance);
 
         if (widget.center && widget.center.bind) {
-            circle.addListener('center_changed', e => {
+            circle.addListener('center_changed', (e) => {
                 let pos = circle.getCenter();
                 let pd = { lat: pos.lat(), lng: pos.lng() };
                 if (!sameLatLng(pd, instance.data.position)) {
@@ -55,7 +54,7 @@ export class Circle extends PureContainer {
         }
 
         if (widget.radius && widget.radius.bind) {
-            circle.addListener('radius_changed', e => {
+            circle.addListener('radius_changed', (e) => {
                 let radius = circle.getRadius();
                 if (radius !== instance.data.radius) {
                     instance.set('radius', radius, true);

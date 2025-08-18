@@ -140,7 +140,7 @@ class Input extends VDOM.Component {
             <div
                 className={CSS.element(baseClass, 'left-icon')}
                 onMouseDown={preventDefault}
-                onClick={e => this.onChange(e, 'enter')}
+                onClick={(e) => this.onChange(e, 'enter')}
             >
                 {Icon.render(data.icon, { className: CSS.element(baseClass, 'icon') })}
             </div>
@@ -156,8 +156,8 @@ class Input extends VDOM.Component {
                 insideButton = (
                     <div
                         className={CSS.element(baseClass, 'clear')}
-                        onMouseDown={e => e.preventDefault()}
-                        onClick={e => this.onClearClick(e)}
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={(e) => this.onClearClick(e)}
                     >
                         <ClearIcon className={CSS.element(baseClass, 'icon')} />
                     </div>
@@ -185,7 +185,7 @@ class Input extends VDOM.Component {
                 onTouchStart={stopPropagation}
             >
                 <input
-                    ref={el => this.attach(el, instance)}
+                    ref={(el) => this.attach(el, instance)}
                     className={CSS.element(baseClass, 'input')}
                     defaultValue={data.value}
                     id={data.id}
@@ -196,13 +196,13 @@ class Input extends VDOM.Component {
                     tabIndex={data.tabIndex}
                     placeholder={data.placeholder}
                     {...data.inputAttrs}
-                    onMouseMove={e => this.onMouseMove(e)}
-                    onMouseLeave={e => this.onMouseLeave(e)}
-                    onInput={e => this.onChange(e, 'input')}
-                    onChange={e => this.onChange(e, 'change')}
-                    onKeyDown={e => this.onKeyDown(e)}
-                    onFocus={e => this.onFocus(e)}
-                    onBlur={e => this.onBlur(e)}
+                    onMouseMove={(e) => this.onMouseMove(e)}
+                    onMouseLeave={(e) => this.onMouseLeave(e)}
+                    onInput={(e) => this.onChange(e, 'input')}
+                    onChange={(e) => this.onChange(e, 'change')}
+                    onKeyDown={(e) => this.onKeyDown(e)}
+                    onFocus={(e) => this.onFocus(e)}
+                    onBlur={(e) => this.onBlur(e)}
                     onClick={stopPropagation}
                 />
                 {insideButton}

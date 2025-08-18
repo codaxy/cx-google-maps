@@ -1,6 +1,6 @@
 export function autoUpdate(component, data, rawData, setterMap, options = {}) {
     return Object.keys(setterMap)
-        .filter(prop => !(options.exclude || {})[prop])
+        .filter((prop) => !(options.exclude || {})[prop])
         .reduce((changed, prop) => {
             if (data[prop] === rawData[prop]) return changed;
 

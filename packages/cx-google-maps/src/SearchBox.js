@@ -79,7 +79,7 @@ export class SearchBox extends PureContainer {
         return (
             <input
                 key={key}
-                ref={el => this.initSearchBox(el, instance)}
+                ref={(el) => this.initSearchBox(el, instance)}
                 className={CSS.expand(data.classNames)}
                 defaultValue={data.value}
                 id={data.id}
@@ -90,8 +90,8 @@ export class SearchBox extends PureContainer {
                 tabIndex={data.tabIndex}
                 placeholder={data.placeholder}
                 {...data.inputAttrs}
-                onInput={e => this.onChange(e, instance)}
-                onChange={e => this.onChange(e, instance)}
+                onInput={(e) => this.onChange(e, instance)}
+                onChange={(e) => this.onChange(e, instance)}
             />
         );
     }

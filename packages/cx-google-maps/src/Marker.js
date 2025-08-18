@@ -59,7 +59,7 @@ export class Marker extends PureContainer {
         if (widget.pipeInstance) instance.invoke('pipeInstance', marker, instance);
 
         if (widget.position && widget.position.bind) {
-            marker.addListener('position_changed', e => {
+            marker.addListener('position_changed', (e) => {
                 let pos = marker.getPosition();
                 let pd = { lat: pos.lat(), lng: pos.lng() };
                 if (!sameLatLng(pd, instance.data.position)) {

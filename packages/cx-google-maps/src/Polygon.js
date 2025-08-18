@@ -1,6 +1,6 @@
 import { PureContainer } from 'cx/ui';
 import { attachEventCallbacks } from './attachEventCallbacks';
-import { shallowEquals, debounce } from 'cx/util';
+import { debounce } from 'cx/util';
 import { standardSetterMap } from './standardSetterMap';
 import { autoUpdate } from './autoUpdate';
 
@@ -65,7 +65,7 @@ export class Polygon extends PureContainer {
             if (path != instance.pathWithEvents) {
                 const updatePath = debounce(() => {
                     let pts = [];
-                    path.forEach(p => {
+                    path.forEach((p) => {
                         pts.push({
                             lat: p.lat(),
                             lng: p.lng(),

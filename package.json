@@ -11,5 +11,8 @@
     "workspaces": [
         "packages/cx-google-maps",
         "examples/demo"
-    ]
+    ],
+    "devDependencies": {
+        "@types/google.maps": "^3.58.1"
+    }
 }

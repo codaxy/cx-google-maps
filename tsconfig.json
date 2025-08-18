@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "types": ["google.maps"],
+    "skipLibCheck": true,
+    "moduleResolution": "node"
+  }
+}

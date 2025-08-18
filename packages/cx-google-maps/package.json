@@ -2,17 +2,12 @@
     "name": "cx-google-maps",
     "version": "19.9.4",
     "description": "CxJS wrapper for Google Maps",
-    "source": "src/index.js",
-    "main": "dist/index.js",
-    "module": "dist/index.module.js",
-    "umd:main": "src/index.umd.js",
     "repository": {
         "type": "git",
         "url": "https://github.com/codaxy/cx-google-maps"
     },
-    "scripts": {
-        "build": "microbundle --compress false --format modern,es,cjs,umd --jsx VDOM.createElement --external cx"
-    },
+    "main": "src/index.js",
+    "types": "src/index.d.ts",
     "keywords": [
         "CxJS",
         "Cx",
@@ -33,12 +28,5 @@
         "google-maps-infobox": "^2.0.0",
         "marker-clusterer-plus": "^2.1.4",
         "markerwithlabel": "^2.0.2"
-    },
-    "devDependencies": {
-        "microbundle": "^0.12.0-next.6",
-        "prettier": "^1.10.2",
-        "rimraf": "^3.0.0",
-        "rollup": "^1.20.3",
-        "rollup-plugin-babel": "^4.3.3"
     }
 }
