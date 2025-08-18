@@ -6,6 +6,7 @@
         "type": "git",
         "url": "https://github.com/codaxy/cx-google-maps"
     },
+    "main": "src/index.js",
     "types": "src/index.d.ts",
     "keywords": [
         "CxJS",
