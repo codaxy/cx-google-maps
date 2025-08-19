@@ -19,7 +19,7 @@
         "cx-google-maps": "^19.9.1",
         "cx-react": "^17.10.0",
         "illuminate-js": "^1.0.0-alpha.2",
-        "marked": "^0.7.0",
+        "marked": "^4.0.10",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "whatwg-fetch": "^3.0.0"
